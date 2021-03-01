@@ -6,10 +6,144 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 15 Apr 2020 01:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 01 Mar 2021 11:53:30 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Word</title>
+      <link>https://wangwei9160.github.io/post/word/</link>
+      <pubDate>Mon, 01 Mar 2021 11:53:30 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/word/</guid>
+      
+        <description>&lt;h1 id=&#34;英语单词-or-小短文&#34;&gt;英语单词 or 小短文&lt;/h1&gt;
+&lt;h3 id=&#34;210301&#34;&gt;21.03.01&lt;/h3&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>STL</title>
+      <link>https://wangwei9160.github.io/post/stl/</link>
+      <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/stl/</guid>
+      
+        <description>&lt;h1 id=&#34;自己的轻量级stl库&#34;&gt;自己的轻量级STL库&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;只实现部分STL库文件，增加对STL库的理解。作为自己的新手用途会逐步进行完善。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;size_t ： 定义在cstdef头文件中，是一个与机器相关的unsigned类型，其大小足以存储内存中对象的大小。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;allocator&#34;&gt;allocator&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存是原始的、未构造的。&lt;/li&gt;
+&lt;li&gt;当一个allocator对象分配内存时，allocator会根据给定的对象类型来确定恰当的内存大小和对齐位置：
+&lt;blockquote&gt;
+&lt;p&gt;allocator&lt;!-- raw HTML omitted --&gt; alloc;            //可以分配string的allocator对象
+auto const p = alloc.allocate(n);   //分配n个未初始化的string&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;写法&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;allocator &amp;lt; T &amp;gt; a&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;定义了一个名为a的allocator对象，为类型T的对象分配内存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;a.allocate(n)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;分配一段原始的、未构造的内存，保存n个类型为T的对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;a.deallocate(p,n)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;释放从T*指针p中地址开始的内存，这块内存保存了n个类为T的对象；T必须是一个先前由allocate返回的指针，n必须是p创建时所要求的大小。在调用之前必须对每个这块内存中创建的对象调用destory&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;a.construct(p,args)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;T*类型指针p，指向原始内存，arg被传递给类型为T的构造函数，用来构造一个对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;a.destroy(p)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;T*类型指针p，对p指向的对象进行析构函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;allocator&lt;!-- raw HTML omitted --&gt; alloc;         &lt;br&gt;
+auto const p = alloc.allocate(n);&lt;br&gt;
+auto q = p ;                      // q指向最后构造的元素之后的位置&lt;br&gt;
+alloc.construct(q++);             // *q为空字符串  &lt;br&gt;
+alloc.construct(q++, 10 , &amp;lsquo;c&amp;rsquo;);   //*q为cccccccccc&lt;br&gt;
+alloc.construct(q++ , &amp;ldquo;hi&amp;rdquo; ) ;    //*q为hi!&lt;br&gt;
+while (q != p)  alloc.destory(&amp;ndash;q); // 释放真正构造的string
+alloc.deallocator(p,n);&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;预计自己写的allocator类&#34;&gt;预计自己写的allocator类&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;函数&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;大体思路&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;allocate&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;默认生成一个&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;allocate(n)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;生成多个,n&amp;gt;=0,特判0的情况&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dellocate(p)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;默认释放一个&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dellocate(p,n)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;如标准类&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;construct(p)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;构造一个默认为空的&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;construct(p,T&amp;amp;)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;创建一个对象，方式是调用T的有参构造函数，参数为传过来的值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;construct(p,T)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;创建一个对象，方式是调用T的有参构造函数，参数为传过来的值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;construct(p,Args)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;带参数列表的构造&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;destroy(p)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;对p所指的对象进行析构函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;destroy(p,n)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;对p所指的对象进行析构函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>codeforces</title>

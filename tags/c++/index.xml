@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>c&#43;&#43; on Awei</title>
+    <link>https://wangwei9160.github.io/tags/c&#43;&#43;/</link>
+    <description>Recent content in c&#43;&#43; on Awei</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 28 Feb 2021 17:47:04 +0800</lastBuildDate>
+    
+	<atom:link href="https://wangwei9160.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>STL</title>
+      <link>https://wangwei9160.github.io/post/stl/</link>
+      <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/stl/</guid>
+      <description>自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。作为自己的新手用途会逐步进行完善。 size_t ： 定义在cstdef头文件中，是一个与</description>
+    </item>
+    
+  </channel>
+</rss>
