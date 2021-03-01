@@ -6,25 +6,10 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 28 Feb 2021 17:47:04 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 15 Apr 2020 01:00:00 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>STL</title>
-      <link>https://wangwei9160.github.io/post/stl/</link>
-      <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
-      
-      <guid>https://wangwei9160.github.io/post/stl/</guid>
-      
-        <description>&lt;h1 id=&#34;自己的轻量级stl库&#34;&gt;自己的轻量级STL库&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;只实现部分STL库文件，增加对STL库的理解。作为自己的新手用途会逐步进行完善。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-      
-    </item>
     
     <item>
       <title>codeforces</title>
