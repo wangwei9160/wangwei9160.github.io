@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步进行完善。 size_t ： 定义在cstdef头文件中，是一个与机器相关的unsi" />
+  <meta name="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,22 +60,22 @@
 
 
 <meta property="og:title" content="STL" />
-<meta property="og:description" content="自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步进行完善。 size_t ： 定义在cstdef头文件中，是一个与机器相关的unsi" />
+<meta property="og:description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://wangwei9160.github.io/post/stl/" />
 <meta property="article:published_time" content="2021-02-28T17:47:04+08:00" />
 <meta property="article:modified_time" content="2021-02-28T17:47:04+08:00" />
 <meta itemprop="name" content="STL">
-<meta itemprop="description" content="自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步进行完善。 size_t ： 定义在cstdef头文件中，是一个与机器相关的unsi">
+<meta itemprop="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步">
 <meta itemprop="datePublished" content="2021-02-28T17:47:04&#43;08:00" />
 <meta itemprop="dateModified" content="2021-02-28T17:47:04&#43;08:00" />
-<meta itemprop="wordCount" content="1958">
+<meta itemprop="wordCount" content="2895">
 
 
 
 <meta itemprop="keywords" content="c&#43;&#43;," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="STL"/>
-<meta name="twitter:description" content="自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步进行完善。 size_t ： 定义在cstdef头文件中，是一个与机器相关的unsi"/>
+<meta name="twitter:description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -326,8 +326,8 @@
           2021-02-28
         </time>
         
-        <span class="more-meta"> 约 1958 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span class="more-meta"> 约 2895 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
 
         
         
@@ -344,9 +344,8 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#顺序容器">顺序容器</a>
       <ul>
-        <li><a href="#顺序容器vectordequelistforward_listarraystring">顺序容器：vector,deque,list,forward_list,array,string</a></li>
         <li><a href="#容器操作">容器操作</a></li>
       </ul>
     </li>
@@ -362,7 +361,11 @@
 
     
     <div class="post-content">
-      <h1 id="自己的轻量级stl库">自己的轻量级STL库</h1>
+      <h1 id="前言">前言</h1>
+<ul>
+<li>内容参考自c++ primer 第五版和网上的一些资料。仅供自己学习参考使用。</li>
+</ul>
+<h1 id="自己的轻量级stl库">自己的轻量级STL库</h1>
 <ul>
 <li>
 <p>只实现部分STL库文件，增加对STL库的理解。会逐步进行完善。</p>
@@ -371,11 +374,21 @@
 <p>size_t ： 定义在cstdef头文件中，是一个与机器相关的unsigned类型，其大小足以存储内存中对象的大小。</p>
 </li>
 </ul>
-<h3 id="顺序容器vectordequelistforward_listarraystring">顺序容器：vector,deque,list,forward_list,array,string</h3>
+<h2 id="顺序容器">顺序容器</h2>
 <ul>
-<li>string和vector。由于元素是连续存储的，由元素的下标来计算其地址是非常快的。为保持连续存储，添加一个元素可能要分配额外的存储空间。</li>
-<li>list和forward_list。是令容器任何位置的添加和删除操作都很快速。作为代价，这两个容器不支持元素的随机访问：为访问一个元素，只能遍历整个容器。与vector,deque,array相比，这两个容器的额外内存开销也很大。</li>
-<li>deque。与vector和string类似，deque支持快速的随机访问，中间位置添加或删除元素的代价很大。但是，两端添加或删除元素很快，与list和forward_list的速度相当。</li>
+<li>顺序容器包括：<strong>vector,deque,list,forward_list,array,string</strong></li>
+<li><strong>string</strong>和<strong>vector</strong>。由于元素是连续存储的，由元素的下标来计算其地址是非常快的。为保持连续存储，添加一个元素可能要分配额外的存储空间。</li>
+<li><strong>list</strong>和<strong>forward_list</strong>。是令容器任何位置的添加和删除操作都很快速。作为代价，这两个容器不支持元素的随机访问：为访问一个元素，只能遍历整个容器。与vector,deque,array相比，这两个容器的额外内存开销也很大。</li>
+<li><strong>deque</strong>。与vector和string类似，deque支持快速的随机访问，中间位置添加或删除元素的代价很大。但是，两端添加或删除元素很快，与list和forward_list的速度相当。</li>
+<li><strong>assign</strong>操作 （仅顺序容器）。允许我们从一个不同但相容的类型赋值，或者从容器的一个子序列赋值。assign操作用参数所指定的元素（的拷贝）替换左边容器中的所有元素。
+<blockquote>
+<p>list<!-- raw HTML omitted --> names;
+vector&lt;const char*&gt; oldstyle;
+names.assign(oldstyle.cbegin(),oldstyle.cend());
+list<!-- raw HTML omitted --> slist1(1);//1个元素，为空string。
+slist1.assign(10,&ldquo;Hiya!&quot;);//10个元素，每个都是&quot;Hiya!&rdquo;</p>
+</blockquote>
+</li>
 </ul>
 <table>
 <thead>
@@ -612,6 +625,48 @@
 </tr>
 </tbody>
 </table>
+<h5 id="vector对象是如何增长的">vector对象是如何增长的:</h5>
+<table>
+<thead>
+<tr>
+<th>容器大小管理操作</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shrink_to_fit只适用于vector、string和deque</td>
+<td></td>
+</tr>
+<tr>
+<td>capacity和reserve只适用于vector和string</td>
+<td></td>
+</tr>
+<tr>
+<td>c.shrink_to_fit</td>
+<td>将capacity()减少为与size()相同大小</td>
+</tr>
+<tr>
+<td>c.capacity()</td>
+<td>不重新分配内存空间的话，c可以保存多少元素</td>
+</tr>
+<tr>
+<td>c.reserve(n)</td>
+<td>分配至少能容纳n个元素的内存空间</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>capacity和size。容器的size是指已经保存的元素的数目；而capacity则是不分配新的内存空间的前提下它最多可以保存多少元素。在标准库的实现中，每次添加1个元素，共添加24个元素，会使capacity变为32.</li>
+<li>调用shrink_to_fit只是一个请求，标准库并不保证退还内存。</li>
+<li>每个vector实现都可以选择自己的内存分配策略。但是必须遵守的一条原则是：只有当<strong>迫不得已</strong>时才可以分配新的内存空间。所有实现都应遵循一个原则：确保用push_back向vector添加元素的操作有高效率。从技术角度说，就是通过在一个初始为空的vector上调用n次push_back来创建一个n个元素的vector，所花费的时间不能超过n的常数倍。</li>
+</ul>
+<h5 id="容器适配器">容器适配器</h5>
+<ul>
+<li>除了顺序容器外，标准库还定义了三个顺序容器适配器：stack、queue和priority_queue。<strong>适配器</strong>是标准库中的一个通用概念。本质上，一个适配器是一种机制，能使某种事物的行为看起来像另外一种事物一样。</li>
+<li>默认情况下，stack和queue是基于<strong>deque</strong>实现的，priority_queue是在<strong>vector</strong>基础上实现的。</li>
+<li>对于一个给定的适配器，可以使用哪些容器是有限制的。所有适配器都要求容器具有添加和删除元素的能力。因此，适配器不能构造在array直伤。</li>
+</ul>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <h2 id="allocator">allocator</h2>

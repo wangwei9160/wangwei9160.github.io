@@ -26,7 +26,7 @@
       <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/stl/</guid>
-      <description>自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步进行完善。 size_t ： 定义在cstdef头文件中，是一个与机器相关的unsi</description>
+      <description>前言 内容参考自c++ primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步</description>
     </item>
     
     <item>

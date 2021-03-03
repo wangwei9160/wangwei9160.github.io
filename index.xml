@@ -31,7 +31,11 @@
       
       <guid>https://wangwei9160.github.io/post/stl/</guid>
       
-        <description>&lt;h1 id=&#34;自己的轻量级stl库&#34;&gt;自己的轻量级STL库&lt;/h1&gt;
+        <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;内容参考自c++ primer 第五版和网上的一些资料。仅供自己学习参考使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;自己的轻量级stl库&#34;&gt;自己的轻量级STL库&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;只实现部分STL库文件，增加对STL库的理解。会逐步进行完善。&lt;/p&gt;
@@ -40,11 +44,21 @@
 &lt;p&gt;size_t ： 定义在cstdef头文件中，是一个与机器相关的unsigned类型，其大小足以存储内存中对象的大小。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;顺序容器vectordequelistforward_listarraystring&#34;&gt;顺序容器：vector,deque,list,forward_list,array,string&lt;/h3&gt;
+&lt;h2 id=&#34;顺序容器&#34;&gt;顺序容器&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;string和vector。由于元素是连续存储的，由元素的下标来计算其地址是非常快的。为保持连续存储，添加一个元素可能要分配额外的存储空间。&lt;/li&gt;
-&lt;li&gt;list和forward_list。是令容器任何位置的添加和删除操作都很快速。作为代价，这两个容器不支持元素的随机访问：为访问一个元素，只能遍历整个容器。与vector,deque,array相比，这两个容器的额外内存开销也很大。&lt;/li&gt;
-&lt;li&gt;deque。与vector和string类似，deque支持快速的随机访问，中间位置添加或删除元素的代价很大。但是，两端添加或删除元素很快，与list和forward_list的速度相当。&lt;/li&gt;
+&lt;li&gt;顺序容器包括：&lt;strong&gt;vector,deque,list,forward_list,array,string&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;string&lt;/strong&gt;和&lt;strong&gt;vector&lt;/strong&gt;。由于元素是连续存储的，由元素的下标来计算其地址是非常快的。为保持连续存储，添加一个元素可能要分配额外的存储空间。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;list&lt;/strong&gt;和&lt;strong&gt;forward_list&lt;/strong&gt;。是令容器任何位置的添加和删除操作都很快速。作为代价，这两个容器不支持元素的随机访问：为访问一个元素，只能遍历整个容器。与vector,deque,array相比，这两个容器的额外内存开销也很大。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;deque&lt;/strong&gt;。与vector和string类似，deque支持快速的随机访问，中间位置添加或删除元素的代价很大。但是，两端添加或删除元素很快，与list和forward_list的速度相当。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;assign&lt;/strong&gt;操作 （仅顺序容器）。允许我们从一个不同但相容的类型赋值，或者从容器的一个子序列赋值。assign操作用参数所指定的元素（的拷贝）替换左边容器中的所有元素。
+&lt;blockquote&gt;
+&lt;p&gt;list&lt;!-- raw HTML omitted --&gt; names;
+vector&amp;lt;const char*&amp;gt; oldstyle;
+names.assign(oldstyle.cbegin(),oldstyle.cend());
+list&lt;!-- raw HTML omitted --&gt; slist1(1);//1个元素，为空string。
+slist1.assign(10,&amp;ldquo;Hiya!&amp;quot;);//10个元素，每个都是&amp;quot;Hiya!&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -281,6 +295,48 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;h5 id=&#34;vector对象是如何增长的&#34;&gt;vector对象是如何增长的:&lt;/h5&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;容器大小管理操作&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;shrink_to_fit只适用于vector、string和deque&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;capacity和reserve只适用于vector和string&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;c.shrink_to_fit&lt;/td&gt;
+&lt;td&gt;将capacity()减少为与size()相同大小&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;c.capacity()&lt;/td&gt;
+&lt;td&gt;不重新分配内存空间的话，c可以保存多少元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;c.reserve(n)&lt;/td&gt;
+&lt;td&gt;分配至少能容纳n个元素的内存空间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;capacity和size。容器的size是指已经保存的元素的数目；而capacity则是不分配新的内存空间的前提下它最多可以保存多少元素。在标准库的实现中，每次添加1个元素，共添加24个元素，会使capacity变为32.&lt;/li&gt;
+&lt;li&gt;调用shrink_to_fit只是一个请求，标准库并不保证退还内存。&lt;/li&gt;
+&lt;li&gt;每个vector实现都可以选择自己的内存分配策略。但是必须遵守的一条原则是：只有当&lt;strong&gt;迫不得已&lt;/strong&gt;时才可以分配新的内存空间。所有实现都应遵循一个原则：确保用push_back向vector添加元素的操作有高效率。从技术角度说，就是通过在一个初始为空的vector上调用n次push_back来创建一个n个元素的vector，所花费的时间不能超过n的常数倍。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;容器适配器&#34;&gt;容器适配器&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;除了顺序容器外，标准库还定义了三个顺序容器适配器：stack、queue和priority_queue。&lt;strong&gt;适配器&lt;/strong&gt;是标准库中的一个通用概念。本质上，一个适配器是一种机制，能使某种事物的行为看起来像另外一种事物一样。&lt;/li&gt;
+&lt;li&gt;默认情况下，stack和queue是基于&lt;strong&gt;deque&lt;/strong&gt;实现的，priority_queue是在&lt;strong&gt;vector&lt;/strong&gt;基础上实现的。&lt;/li&gt;
+&lt;li&gt;对于一个给定的适配器，可以使用哪些容器是有限制的。所有适配器都要求容器具有添加和删除元素的能力。因此，适配器不能构造在array直伤。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;!-- raw HTML omitted --&gt;
 &lt;!-- raw HTML omitted --&gt;
 &lt;h2 id=&#34;allocator&#34;&gt;allocator&lt;/h2&gt;
