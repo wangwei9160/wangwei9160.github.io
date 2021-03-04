@@ -69,7 +69,7 @@
 <meta itemprop="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步">
 <meta itemprop="datePublished" content="2021-02-28T17:47:04&#43;08:00" />
 <meta itemprop="dateModified" content="2021-02-28T17:47:04&#43;08:00" />
-<meta itemprop="wordCount" content="2895">
+<meta itemprop="wordCount" content="4221">
 
 
 
@@ -326,8 +326,8 @@
           2021-02-28
         </time>
         
-        <span class="more-meta"> 约 2895 字 </span>
-          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span class="more-meta"> 约 4221 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
 
         
         
@@ -347,6 +347,11 @@
     <li><a href="#顺序容器">顺序容器</a>
       <ul>
         <li><a href="#容器操作">容器操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#泛型算法">泛型算法</a>
+      <ul>
+        <li></li>
       </ul>
     </li>
     <li><a href="#allocator">allocator</a>
@@ -372,6 +377,18 @@
 </li>
 <li>
 <p>size_t ： 定义在cstdef头文件中，是一个与机器相关的unsigned类型，其大小足以存储内存中对象的大小。</p>
+</li>
+<li>
+<p>大多数算法都定义在头文件algorithm中。标准库还在头文件numeric中定义了一组数值泛型算法。一般情况下，这些算法并不直接操作容器，而是遍历由两个迭代器指定的一个元素范围来进行操作。</p>
+<ul>
+<li>例如，查找int类型的vector中是否包含一个特定值，可以使用find函数。
+<blockquote>
+<p>int val = 1;
+auto result = find( vec.cbegin() , vec.cend() , val );</p>
+</blockquote>
+</li>
+<li>由于find操作的是迭代器，因此我们可以用同样的find函数在任何容器中查找值。</li>
+</ul>
 </li>
 </ul>
 <h2 id="顺序容器">顺序容器</h2>
@@ -669,6 +686,47 @@ slist1.assign(10,&ldquo;Hiya!&quot;);//10个元素，每个都是&quot;Hiya!&rdq
 </ul>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
+<h2 id="泛型算法">泛型算法</h2>
+<ul>
+<li>为弄清算法如何用于不同类型的容器，分析find是如何在未排序的元素序列中查找一个指定元素。
+<ol>
+<li>访问序列中的首元素。</li>
+<li>比较此元素与我们要查找的值。</li>
+<li>如果此元素与我们要查找的值匹配，find返回标识此元素的值。</li>
+<li>否则，find前进到下一个元素，重复执行步骤2和3.</li>
+<li>如果到达序列尾部，find应停止。</li>
+<li>如果find到达序列尾部，它应该返回一个指出元素未找到的值。此值和步骤3返回的值必须具有相容的类型。</li>
+</ol>
+<ul>
+<li>这些步骤都不需要依赖于容器所保存的元素类型。因此，只要有一个迭代器就可以用来访问元素，find就完全不依赖于容器的类型。</li>
+<li>迭代器令算法不依赖于容器，但算法依赖于元素类型的操作。只需要迭代器就可以进行除了上述第二步之外的所有操作。但第二步中我们需要使用元素类型上的操作，find需要用到元素类型的==运算符完成每个元素与给定值的比较。在大多数的算法提供了一种方法，允许我们使用自定义的操作来代替默认的运算符。</li>
+</ul>
+</li>
+</ul>
+<h5 id="谓词">谓词</h5>
+<ul>
+<li>谓词是一个可调用的表达式，其返回结果是一个能用作条件的值。标准库算法所使用的的谓词分为两类：<strong>一元谓词</strong>(unary predicate，意味着他们只接受单一参数)和<strong>二元谓词</strong>(binary prediacate,意味着它们有两个参数)。接受谓词参数的算法对输入序列中的元素调用谓词。因此，元素类型必须能转换为谓词的参数类型。
+<ul>
+<li>接受一个二元谓词参数的sort版本用这个谓词代替&lt;来比较元素。我们提供给sort的谓词必须满足在关键字类型上定义一个<strong>严格弱序</strong>(strict weak ordering)。可以讲严格弱序看做'&lsquo;小于等于&rsquo;',虽然实际上定义的操作可能是一个复杂的函数。无论我们怎样定义比较函数，它必须具备如下基本性质：
+<ul>
+<li>两个关键字不能同时“小于等于”对方.</li>
+<li>如果k1&quot;小于等于&quot;k2,且k2&quot;小于等于&quot;k3,那么k1必须&quot;小于等于&quot;k3.</li>
+<li>如果存在两个关键字，任何一个都不&quot;小于等于&quot;另一个,那么我们称这两个关键字是&quot;等价&quot;的.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="lambda表达式">lambda表达式</h5>
+<ul>
+<li>我们可以向一个算法传递任何类型的可调用对象。对于一个对象或一个表达式，如果可以对其使用调用运算符，则称它为可调用的。即，如果e是一个可调用的表达式，则我们可以便携代码e(args)，其中args是一个逗号分隔的一个或多个参数的列表。</li>
+<li>一个lambda表达式表示一个可调用的代码单元。我们可以将其理解为一个未命名的内联函数。与任何函数类似，一个lambda具有一个返回类型、一个参数列表和一个函数体。但与函数不同，lambda可能定义在函数内部。一个lambda表达式具有如下形式：
+<blockquote>
+<p>[ capture list ] ( parameter list ) -&gt; return type { function body }
+auto f = [] {return 42;}</p>
+</blockquote>
+</li>
+</ul>
 <h2 id="allocator">allocator</h2>
 <ul>
 <li>标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存是原始的、未构造的。</li>

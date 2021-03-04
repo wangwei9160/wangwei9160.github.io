@@ -43,6 +43,18 @@
 &lt;li&gt;
 &lt;p&gt;size_t ： 定义在cstdef头文件中，是一个与机器相关的unsigned类型，其大小足以存储内存中对象的大小。&lt;/p&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;大多数算法都定义在头文件algorithm中。标准库还在头文件numeric中定义了一组数值泛型算法。一般情况下，这些算法并不直接操作容器，而是遍历由两个迭代器指定的一个元素范围来进行操作。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;例如，查找int类型的vector中是否包含一个特定值，可以使用find函数。
+&lt;blockquote&gt;
+&lt;p&gt;int val = 1;
+auto result = find( vec.cbegin() , vec.cend() , val );&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;由于find操作的是迭代器，因此我们可以用同样的find函数在任何容器中查找值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;顺序容器&#34;&gt;顺序容器&lt;/h2&gt;
 &lt;ul&gt;
@@ -339,6 +351,47 @@ slist1.assign(10,&amp;ldquo;Hiya!&amp;quot;);//10个元素，每个都是&amp;qu
 &lt;/ul&gt;
 &lt;!-- raw HTML omitted --&gt;
 &lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;泛型算法&#34;&gt;泛型算法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;为弄清算法如何用于不同类型的容器，分析find是如何在未排序的元素序列中查找一个指定元素。
+&lt;ol&gt;
+&lt;li&gt;访问序列中的首元素。&lt;/li&gt;
+&lt;li&gt;比较此元素与我们要查找的值。&lt;/li&gt;
+&lt;li&gt;如果此元素与我们要查找的值匹配，find返回标识此元素的值。&lt;/li&gt;
+&lt;li&gt;否则，find前进到下一个元素，重复执行步骤2和3.&lt;/li&gt;
+&lt;li&gt;如果到达序列尾部，find应停止。&lt;/li&gt;
+&lt;li&gt;如果find到达序列尾部，它应该返回一个指出元素未找到的值。此值和步骤3返回的值必须具有相容的类型。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;这些步骤都不需要依赖于容器所保存的元素类型。因此，只要有一个迭代器就可以用来访问元素，find就完全不依赖于容器的类型。&lt;/li&gt;
+&lt;li&gt;迭代器令算法不依赖于容器，但算法依赖于元素类型的操作。只需要迭代器就可以进行除了上述第二步之外的所有操作。但第二步中我们需要使用元素类型上的操作，find需要用到元素类型的==运算符完成每个元素与给定值的比较。在大多数的算法提供了一种方法，允许我们使用自定义的操作来代替默认的运算符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;谓词&#34;&gt;谓词&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;谓词是一个可调用的表达式，其返回结果是一个能用作条件的值。标准库算法所使用的的谓词分为两类：&lt;strong&gt;一元谓词&lt;/strong&gt;(unary predicate，意味着他们只接受单一参数)和&lt;strong&gt;二元谓词&lt;/strong&gt;(binary prediacate,意味着它们有两个参数)。接受谓词参数的算法对输入序列中的元素调用谓词。因此，元素类型必须能转换为谓词的参数类型。
+&lt;ul&gt;
+&lt;li&gt;接受一个二元谓词参数的sort版本用这个谓词代替&amp;lt;来比较元素。我们提供给sort的谓词必须满足在关键字类型上定义一个&lt;strong&gt;严格弱序&lt;/strong&gt;(strict weak ordering)。可以讲严格弱序看做&#39;&amp;lsquo;小于等于&amp;rsquo;&#39;,虽然实际上定义的操作可能是一个复杂的函数。无论我们怎样定义比较函数，它必须具备如下基本性质：
+&lt;ul&gt;
+&lt;li&gt;两个关键字不能同时“小于等于”对方.&lt;/li&gt;
+&lt;li&gt;如果k1&amp;quot;小于等于&amp;quot;k2,且k2&amp;quot;小于等于&amp;quot;k3,那么k1必须&amp;quot;小于等于&amp;quot;k3.&lt;/li&gt;
+&lt;li&gt;如果存在两个关键字，任何一个都不&amp;quot;小于等于&amp;quot;另一个,那么我们称这两个关键字是&amp;quot;等价&amp;quot;的.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;lambda表达式&#34;&gt;lambda表达式&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;我们可以向一个算法传递任何类型的可调用对象。对于一个对象或一个表达式，如果可以对其使用调用运算符，则称它为可调用的。即，如果e是一个可调用的表达式，则我们可以便携代码e(args)，其中args是一个逗号分隔的一个或多个参数的列表。&lt;/li&gt;
+&lt;li&gt;一个lambda表达式表示一个可调用的代码单元。我们可以将其理解为一个未命名的内联函数。与任何函数类似，一个lambda具有一个返回类型、一个参数列表和一个函数体。但与函数不同，lambda可能定义在函数内部。一个lambda表达式具有如下形式：
+&lt;blockquote&gt;
+&lt;p&gt;[ capture list ] ( parameter list ) -&amp;gt; return type { function body }
+auto f = [] {return 42;}&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;allocator&#34;&gt;allocator&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存是原始的、未构造的。&lt;/li&gt;
