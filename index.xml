@@ -392,6 +392,58 @@ auto f = [] {return 42;}&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h5 id=&#34;参数绑定&#34;&gt;参数绑定&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;对于那种只在一两个地方使用的简单操作，lambda表达式是最有用的。&lt;/li&gt;
+&lt;li&gt;如果lambda的捕获列表为空，通常可以用函数来代替它。但是对于捕获局部变量的lambda，用函数来替换它就不是那么容易了。例如，我们用在find_if调用中的lambda比较一个string和一个给定大小可以使用
+&lt;blockquote&gt;
+&lt;p&gt;bool check_size(const string &amp;amp;s,string::size_type sz){
+return s.size() &amp;gt;= sz;
+}&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;但是，我们不用能这个函数作为find_if的一个参数。find_if接受一个一元谓词，因此传递给find_if的可调用对象必须接受单一参数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;标准库bind函数&#34;&gt;标准库bind函数&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;我们可以使用bind函数，它定义在头文件functional中。可以将bind函数看作一个通用的函数适配器，它接受一个可调用对象，生成一个新的可调用对象来&amp;quot;适应&amp;quot;原对象的参数列表。调用bind的一般形式为
+&lt;ul&gt;
+&lt;li&gt;auto newCallable = bind(callable , arg_list)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;其中，newCallable本身是一个可调用对象，arg_list是一个逗号分隔的参数列表，对应给定的callable的参数。arg_list中的参数可能包含形如_n的名字，其中n是一个整数。这些参数是&amp;quot;占位符&amp;rdquo;，表示newCallable的参数，它们占据了传递给newCallable的参数的位置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;bind的参数&#34;&gt;bind的参数：&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;我们可以用bind修正参数的值。更一般的，可以用bind绑定给定可调用对象中的参数或重新安排其顺序。
+&lt;ul&gt;
+&lt;li&gt;
+&lt;blockquote&gt;
+&lt;p&gt;auto g = bind(f , a , b , _2 , c , _1);&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;生成一个新的可调用对象，它有两个参数，分别用占位符_2和_1表示。这个新的可调用对象将它自己的参数作为第三个和第五个参数传递给f。f的第一个、第二个和第四个分别被绑定在给定值a、b和c上。&lt;/li&gt;
+&lt;li&gt;传递给g的参数按位置绑定到占位符。第一个参数绑定到_1，第二个参数绑定到_2.因此，当我们调用g时，其第一个参数将被传递给f作为最后一个参数，第二个 参数将被传递给f作为第三个参数。这个bind调用会将
+&lt;ul&gt;
+&lt;li&gt;g(_1 , _2)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;映射为
+&lt;ul&gt;
+&lt;li&gt;f(a , b, _2 , c, _1);&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;调用g(X , Y ) 会调用 f(a, b, X, c, Y)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;例如用bind重排参数顺序&#34;&gt;例如用bind重排参数顺序：&lt;/h6&gt;
+&lt;blockquote&gt;
+&lt;p&gt;按单词长度由短到长排序
+sort(words.begin(),words.end(), isShorter);
+按单词长度由长到短排序
+sort(words.begin(),words.end(), bind(isShorter, _2, _1));&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;allocator&#34;&gt;allocator&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存是原始的、未构造的。&lt;/li&gt;

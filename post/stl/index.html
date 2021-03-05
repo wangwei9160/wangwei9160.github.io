@@ -69,7 +69,7 @@
 <meta itemprop="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步">
 <meta itemprop="datePublished" content="2021-02-28T17:47:04&#43;08:00" />
 <meta itemprop="dateModified" content="2021-02-28T17:47:04&#43;08:00" />
-<meta itemprop="wordCount" content="4221">
+<meta itemprop="wordCount" content="5071">
 
 
 
@@ -326,8 +326,8 @@
           2021-02-28
         </time>
         
-        <span class="more-meta"> 约 4221 字 </span>
-          <span class="more-meta"> 预计阅读 9 分钟 </span>
+        <span class="more-meta"> 约 5071 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
 
         
         
@@ -727,6 +727,58 @@ auto f = [] {return 42;}</p>
 </blockquote>
 </li>
 </ul>
+<h5 id="参数绑定">参数绑定</h5>
+<ul>
+<li>对于那种只在一两个地方使用的简单操作，lambda表达式是最有用的。</li>
+<li>如果lambda的捕获列表为空，通常可以用函数来代替它。但是对于捕获局部变量的lambda，用函数来替换它就不是那么容易了。例如，我们用在find_if调用中的lambda比较一个string和一个给定大小可以使用
+<blockquote>
+<p>bool check_size(const string &amp;s,string::size_type sz){
+return s.size() &gt;= sz;
+}</p>
+</blockquote>
+</li>
+<li>但是，我们不用能这个函数作为find_if的一个参数。find_if接受一个一元谓词，因此传递给find_if的可调用对象必须接受单一参数。</li>
+</ul>
+<h6 id="标准库bind函数">标准库bind函数</h6>
+<ul>
+<li>我们可以使用bind函数，它定义在头文件functional中。可以将bind函数看作一个通用的函数适配器，它接受一个可调用对象，生成一个新的可调用对象来&quot;适应&quot;原对象的参数列表。调用bind的一般形式为
+<ul>
+<li>auto newCallable = bind(callable , arg_list)</li>
+</ul>
+</li>
+<li>其中，newCallable本身是一个可调用对象，arg_list是一个逗号分隔的参数列表，对应给定的callable的参数。arg_list中的参数可能包含形如_n的名字，其中n是一个整数。这些参数是&quot;占位符&rdquo;，表示newCallable的参数，它们占据了传递给newCallable的参数的位置。</li>
+</ul>
+<h6 id="bind的参数">bind的参数：</h6>
+<ul>
+<li>我们可以用bind修正参数的值。更一般的，可以用bind绑定给定可调用对象中的参数或重新安排其顺序。
+<ul>
+<li>
+<blockquote>
+<p>auto g = bind(f , a , b , _2 , c , _1);</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>生成一个新的可调用对象，它有两个参数，分别用占位符_2和_1表示。这个新的可调用对象将它自己的参数作为第三个和第五个参数传递给f。f的第一个、第二个和第四个分别被绑定在给定值a、b和c上。</li>
+<li>传递给g的参数按位置绑定到占位符。第一个参数绑定到_1，第二个参数绑定到_2.因此，当我们调用g时，其第一个参数将被传递给f作为最后一个参数，第二个 参数将被传递给f作为第三个参数。这个bind调用会将
+<ul>
+<li>g(_1 , _2)</li>
+</ul>
+</li>
+<li>映射为
+<ul>
+<li>f(a , b, _2 , c, _1);</li>
+</ul>
+</li>
+<li>调用g(X , Y ) 会调用 f(a, b, X, c, Y)</li>
+</ul>
+<h6 id="例如用bind重排参数顺序">例如用bind重排参数顺序：</h6>
+<blockquote>
+<p>按单词长度由短到长排序
+sort(words.begin(),words.end(), isShorter);
+按单词长度由长到短排序
+sort(words.begin(),words.end(), bind(isShorter, _2, _1));</p>
+</blockquote>
 <h2 id="allocator">allocator</h2>
 <ul>
 <li>标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存是原始的、未构造的。</li>
