@@ -69,7 +69,7 @@
 <meta itemprop="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步">
 <meta itemprop="datePublished" content="2021-02-28T17:47:04&#43;08:00" />
 <meta itemprop="dateModified" content="2021-02-28T17:47:04&#43;08:00" />
-<meta itemprop="wordCount" content="5071">
+<meta itemprop="wordCount" content="8175">
 
 
 
@@ -326,8 +326,8 @@
           2021-02-28
         </time>
         
-        <span class="more-meta"> 约 5071 字 </span>
-          <span class="more-meta"> 预计阅读 11 分钟 </span>
+        <span class="more-meta"> 约 8175 字 </span>
+          <span class="more-meta"> 预计阅读 17 分钟 </span>
 
         
         
@@ -352,6 +352,7 @@
     <li><a href="#泛型算法">泛型算法</a>
       <ul>
         <li></li>
+        <li><a href="#迭代器">迭代器</a></li>
       </ul>
     </li>
     <li><a href="#allocator">allocator</a>
@@ -384,7 +385,7 @@
 <li>例如，查找int类型的vector中是否包含一个特定值，可以使用find函数。
 <blockquote>
 <p>int val = 1;
-auto result = find( vec.cbegin() , vec.cend() , val );</p>
+auto result = find( vec.cbegin() , vec.cend () , val );</p>
 </blockquote>
 </li>
 <li>由于find操作的是迭代器，因此我们可以用同样的find函数在任何容器中查找值。</li>
@@ -401,7 +402,7 @@ auto result = find( vec.cbegin() , vec.cend() , val );</p>
 <blockquote>
 <p>list<!-- raw HTML omitted --> names;
 vector&lt;const char*&gt; oldstyle;
-names.assign(oldstyle.cbegin(),oldstyle.cend());
+names.assign(oldstyle.cbegin(),oldstyle.cend ());
 list<!-- raw HTML omitted --> slist1(1);//1个元素，为空string。
 slist1.assign(10,&ldquo;Hiya!&quot;);//10个元素，每个都是&quot;Hiya!&rdquo;</p>
 </blockquote>
@@ -607,11 +608,11 @@ slist1.assign(10,&ldquo;Hiya!&quot;);//10个元素，每个都是&quot;Hiya!&rdq
 </thead>
 <tbody>
 <tr>
-<td>c.begin(),c.end()</td>
+<td>c.begin(),c.end ()</td>
 <td>返回指向c的首元素和尾元素之后位置的迭代器</td>
 </tr>
 <tr>
-<td>c.cbegin(),c.cend()</td>
+<td>c.cbegin(),c.cend ()</td>
 <td>返回const_iterator</td>
 </tr>
 </tbody>
@@ -633,11 +634,11 @@ slist1.assign(10,&ldquo;Hiya!&quot;);//10个元素，每个都是&quot;Hiya!&rdq
 <td>不能修改元素的逆序迭代器</td>
 </tr>
 <tr>
-<td>c.rbegin(),c.rend()</td>
+<td>c.rbegin(),c.rend ()</td>
 <td>返回指向c的尾元素和首元素之前位置的迭代器</td>
 </tr>
 <tr>
-<td>c.crbegin(),c.crend()</td>
+<td>c.crbegin(),c.crend ()</td>
 <td>返回const_reverse_iterator</td>
 </tr>
 </tbody>
@@ -684,8 +685,6 @@ slist1.assign(10,&ldquo;Hiya!&quot;);//10个元素，每个都是&quot;Hiya!&rdq
 <li>默认情况下，stack和queue是基于<strong>deque</strong>实现的，priority_queue是在<strong>vector</strong>基础上实现的。</li>
 <li>对于一个给定的适配器，可以使用哪些容器是有限制的。所有适配器都要求容器具有添加和删除元素的能力。因此，适配器不能构造在array直伤。</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
 <h2 id="泛型算法">泛型算法</h2>
 <ul>
 <li>为弄清算法如何用于不同类型的容器，分析find是如何在未排序的元素序列中查找一个指定元素。
@@ -775,10 +774,290 @@ return s.size() &gt;= sz;
 <h6 id="例如用bind重排参数顺序">例如用bind重排参数顺序：</h6>
 <blockquote>
 <p>按单词长度由短到长排序
-sort(words.begin(),words.end(), isShorter);
+sort(words.begin(),words.end (), isShorter);
 按单词长度由长到短排序
-sort(words.begin(),words.end(), bind(isShorter, _2, _1));</p>
+sort(words.begin(),words.end (), bind(isShorter, _2, _1));</p>
 </blockquote>
+<h3 id="迭代器">迭代器</h3>
+<ul>
+<li>标准库在iterator中定义了额外几种迭代器。
+<ul>
+<li><strong>插入迭代器（insert iterator）</strong>：这些迭代器被绑定在一个容器上，可用来向容器插入元素。</li>
+<li><strong>流迭代器（stream iterator）</strong>：这些迭代器被绑定到输入或输出流上，可用来遍历所相关联的io流。</li>
+<li><strong>反向迭代器（reverse iterator）</strong>：这些迭代器向后而不是向前移动。除了forward_list之外的标准库容器都有反向迭代器。</li>
+<li><strong>移动迭代器（move iterator）</strong>：这些专用的迭代器不是拷贝其中的元素，而是移动它们。</li>
+</ul>
+</li>
+</ul>
+<h5 id="插入迭代器">插入迭代器</h5>
+<ul>
+<li>
+<p>插入器是一种迭代器适配器。它接受一个容器，生成一个迭代器，能实现向给定容器添加元素。</p>
+<ul>
+<li>插入器有三种类型，差异在于元素插入的位置：</li>
+<li><strong>back_inserter</strong>创建一个使用push_back的迭代器。</li>
+<li><strong>front_inserter</strong>创建一个使用push_front的迭代器。</li>
+<li><strong>inserter</strong>创建一个使用insert的迭代器。此函数接受第二个参数，这个参数必须是一个指向给定容器的迭代器。元素将被插入到给定迭代器所表示的元素之前。
+当调用inserter(c , iter)时，我们得到一个迭代器，接下来使用它时，会讲元素插入到iter原来指向的元素之前的位置。即，如果it是由inserter生成的迭代器，则赋值语句：</li>
+</ul>
+<blockquote>
+<p>*it = val;</p>
+</blockquote>
+<p>与下面的语句效果一样：</p>
+<blockquote>
+<p>it = c.insert(it, val);
+++it;</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="iostream迭代器">iostream迭代器</h5>
+<p>虽然iostream类型不是容器，但标准库定义了可以用于这些IO类型对象的迭代器，istream_iterator读取输入流，ostream_iterator向一个输出流写数据。</p>
+<h6 id="istream_iterator">istream_iterator</h6>
+<table>
+<thead>
+<tr>
+<th>istream_iterator操作</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>istream_iterator<!-- raw HTML omitted --> in(is)</td>
+<td>in从输入流is读取类型为T的值</td>
+</tr>
+<tr>
+<td>istream_iterator<!-- raw HTML omitted --> end</td>
+<td>读取类型为T的值的istream_iterator迭代器，表示尾后位置</td>
+</tr>
+<tr>
+<td>in1 == in2 或 in1!=in2</td>
+<td>in1和in2必须读取相同类型。如果它们都是尾后迭代器，或绑定到相同的输入，则两者相等</td>
+</tr>
+<tr>
+<td>*in</td>
+<td>返回从流中读取的值</td>
+</tr>
+<tr>
+<td>in-&gt;mem</td>
+<td>与(*in).mem的含义相同</td>
+</tr>
+<tr>
+<td>++in,in++</td>
+<td>使用元素类型所定义的&raquo;运算符从输入流中读取下一个值。</td>
+</tr>
+</tbody>
+</table>
+<h6 id="ostream_iterator">ostream_iterator</h6>
+<table>
+<thead>
+<tr>
+<th>ostream_iterator操作</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ostream_iterator<!-- raw HTML omitted --> out(os)</td>
+<td>out将类型为T的值写到输出流os中</td>
+</tr>
+<tr>
+<td>ostream_iterator<!-- raw HTML omitted --> out(os,d)</td>
+<td>out将类型为T的值写到输出流os中，每个值后面都输出一个d.d指向一个空字符结尾的字符数组</td>
+</tr>
+<tr>
+<td>out = val</td>
+<td>用&laquo;运算符将val写入到out所绑定的ostream中。val的类型必须与out可写的类型兼容</td>
+</tr>
+<tr>
+<td>*out,++out,out++</td>
+<td>这些运算符是存在的，但不对out做任何事情。每个运算符都返回out</td>
+</tr>
+</tbody>
+</table>
+<h5 id="反向迭代器">反向迭代器</h5>
+<ul>
+<li>反向迭代器就是在容器中从尾元素向首元素反向移动的迭代器。对于反向迭代器，递增操作的含义变为：递增一个反向迭代器（++it）会移动到前一个元素；递减一个迭代器（&ndash;it）会移动到下一个元素。</li>
+<li>我们可以通过调用rbegin、rend 、crbegin和crend 成员函数来获得反向迭代器。</li>
+</ul>
+<h5 id="泛型算法结构">泛型算法结构</h5>
+<ul>
+<li>任何算法的最基本的特性是它要求其迭代器提供哪些操作。算法锁要求的迭代器操作可以分为5个<strong>迭代器类别</strong>(iterator category)。每个算法都会对它的每个迭代器参数指明需提供哪些迭代器。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>迭代器类别</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入迭代器</td>
+<td>只读，不写；单遍扫描，只能递增</td>
+</tr>
+<tr>
+<td>输出迭代器</td>
+<td>只写，不读；单遍扫描，只能递增</td>
+</tr>
+<tr>
+<td>前向迭代器</td>
+<td>可读写；多遍扫描，只能递增</td>
+</tr>
+<tr>
+<td>双向迭代器</td>
+<td>可读读；多遍扫描，可增可减</td>
+</tr>
+<tr>
+<td>随机访问迭代器</td>
+<td>可读写；多遍扫描，支持全部迭代器运算</td>
+</tr>
+</tbody>
+</table>
+<h6 id="输入迭代器">输入迭代器</h6>
+<ul>
+<li>可以读取序列中的元素。一个输入迭代器必须支持：
+<ul>
+<li>用于比较两个迭代器相等和不相等运算符（==、!=）</li>
+<li>用于推进迭代器的前置和后置递增运算（++）</li>
+<li>用于读取元素的解引用运算符（*）；解引用只会出现在赋值运算符的右侧</li>
+<li>箭头运算符（-&gt;），等价于(*it).member，即，解引用迭代器，并提取对象的成员
+输入迭代器只用于顺序访问。输入迭代器只能用于单遍扫描。
+算法find和accumlate要求输入迭代器；而istream_iterator是一种输入迭代器。</li>
+</ul>
+</li>
+</ul>
+<h6 id="输出迭代器">输出迭代器</h6>
+<ul>
+<li>可以看作输入迭代器功能上的补集——只写而不读元素。一个输出迭代器必须支持：
+<ul>
+<li>用于推进迭代器的前置和后置递增运算（++）</li>
+<li>解引用运算符（*）,只出现在赋值运算符的左侧（向一个已经解引用的输出迭代器赋值，就是将值写入它所指向的元素）
+我们只能向一个输出迭代器赋值一次。输出迭代器只能用于单遍扫描算法。用作目的位置的迭代器通常都是输出迭代器。
+copy函数的第三个删除就是输出迭代器。ostream_iterator类型也是输出迭代器</li>
+</ul>
+</li>
+</ul>
+<h6 id="前向迭代器">前向迭代器</h6>
+<ul>
+<li>可以读写元素。前向迭代器的特点：
+<ul>
+<li>只能在序列中沿一个方向移动。前向迭代器支持输入和输出迭代器的操作，而且可以多次读写同一个元素。可以保存前向迭代器的状态，使用前向迭代器的算法可以对序列进行多遍扫描。
+算法replace要求前向迭代器，forward_list上的迭代器是前向迭代器。</li>
+</ul>
+</li>
+</ul>
+<h6 id="双向迭代器">双向迭代器：</h6>
+<ul>
+<li>可以正向/反向读写序列中的元素。双向迭代器除了支持前向迭代器的操作外，还支持：
+<ul>
+<li>前置和后置递减运算符（&ndash;）。
+算法reverse要求双向迭代器，除了forward_list之外，其他标准库都提供符合双向迭代器要求的迭代器。</li>
+</ul>
+</li>
+</ul>
+<h6 id="随机访问迭代器">随机访问迭代器：</h6>
+<ul>
+<li>提供在常量时间内访问序列中任意元素的能力。不仅支持双向迭代器的所有功能，还支持：
+<ul>
+<li>用于比较两个迭代器相对位置的关系运算符（&lt;、&lt;=、&gt;和&gt;=）</li>
+<li>迭代器和一个整数值的加减运算（+、+=、-和-=）,计算结果是迭代器在序列中前进（或后退）给定整数个元素后的位置</li>
+<li>用于两个迭代器上的减法运算符（-）,得到两个迭代器的距离</li>
+<li>下标运算符（iter[n]）与*(iter[n])等价
+算法sort要求随机访问迭代器。array、deque、string和vector的迭代器都是随机访问迭代器，用于访问内置数组元素的指针也是。</li>
+</ul>
+</li>
+</ul>
+<h6 id="常用的容器支持的迭代器类别">常用的容器支持的迭代器类别</h6>
+<ul>
+<li>只有顺序容器和关联容器才支持迭代器遍历。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">容器</th>
+<th align="center">支持的迭代器类别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">vector</td>
+<td align="center">随机访问迭代器</td>
+</tr>
+<tr>
+<td align="left">deque</td>
+<td align="center">随机访问迭代器</td>
+</tr>
+<tr>
+<td align="left">list</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="left">set</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="left">multiset</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="left">map</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="left">multimap</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="left">stack、queue、priority_queue</td>
+<td align="center">不支持</td>
+</tr>
+</tbody>
+</table>
+<h6 id="算法形参模式">算法形参模式</h6>
+<ul>
+<li>
+<p>在任何其他算法分类上，还有一组参数规范。大多数算法具有如下4种形式之一：</p>
+<blockquote>
+<p>alg(beg , end , other args);
+alg(beg , end , dest , other args);
+alg(beg , end , beg2 , other args);
+alg(beg , end , beg2 , end2 , other args);</p>
+</blockquote>
+<p>其中alg是算法的名字，beg和end表示算法所操作的输入范围。dest、beg2和end2，都是迭代器参数，如果用到了这些迭代器参数，它们分别承担指定目的位置和第二个范围角色。除了这些迭代器参数，一些算法还接受额外的、非迭代器的特定参数。</p>
+</li>
+</ul>
+<h6 id="_if版本的算法">_if版本的算法</h6>
+<ul>
+<li>接受一个元素的算法通常有另一个不同名字的版本，此版本接受一个谓词代替元素值。接受谓词参数的算法都有附加_if的前缀：
+<blockquote>
+<p>//查找输入范围中val第一次出现的位置
+find(beg , end , val );
+//查找第一个令pred为真的元素
+find_if(beg , end , pred );
+这两个算法提供了命名上的差异的版本，而非重载版本。</p>
+</blockquote>
+</li>
+</ul>
+<h6 id="_copy版本的算法">_copy版本的算法</h6>
+<ul>
+<li>
+<p>默认情况下，重排元素的算法将重排后的元素写回到给定的输入序列中。这些算法还提供另一个版本，将元素写到一个指定的输出目的位置。写到额外目的空间的算法都在名字后面附加一个_copy：</p>
+<blockquote>
+<p>//反转输入范围中元素的顺序
+reverse(beg , end )
+//将元素按逆序拷贝到dest
+reverse_copy(beg , end , dest )</p>
+</blockquote>
+<p>还有一些算法同时提供_copy和_if版本。这些版本接受一个目的位置迭代器和一个谓词：</p>
+<blockquote>
+<p>//从v1中删除奇数元素
+remove_if(v1.begin() , v1.end() , []( int i) { return i%2; } ) ;
+//将偶数元素从v1拷贝到v2;v1不变
+remove_copy_if(v1.begin() , v1.end() , back_inserter(v2) , []( int i) { return i%2 ;} );</p>
+</blockquote>
+<p>在第一个调用中，从输入序列中将奇数元素删除。在第二个调用中，将非奇数元素从输入范围拷贝到v2中。</p>
+</li>
+</ul>
 <h2 id="allocator">allocator</h2>
 <ul>
 <li>标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存是原始的、未构造的。</li>
