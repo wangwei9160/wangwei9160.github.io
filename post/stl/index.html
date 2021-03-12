@@ -69,7 +69,7 @@
 <meta itemprop="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步">
 <meta itemprop="datePublished" content="2021-02-28T17:47:04&#43;08:00" />
 <meta itemprop="dateModified" content="2021-02-28T17:47:04&#43;08:00" />
-<meta itemprop="wordCount" content="8175">
+<meta itemprop="wordCount" content="8516">
 
 
 
@@ -326,7 +326,7 @@
           2021-02-28
         </time>
         
-        <span class="more-meta"> 约 8175 字 </span>
+        <span class="more-meta"> 约 8516 字 </span>
           <span class="more-meta"> 预计阅读 17 分钟 </span>
 
         
@@ -355,9 +355,11 @@
         <li><a href="#迭代器">迭代器</a></li>
       </ul>
     </li>
-    <li><a href="#allocator">allocator</a>
+    <li><a href="#关联容器">关联容器</a>
       <ul>
         <li></li>
+        <li><a href="#pair">pair</a></li>
+        <li><a href="#关联容器操作">关联容器操作</a></li>
       </ul>
     </li>
   </ul>
@@ -390,6 +392,18 @@ auto result = find( vec.cbegin() , vec.cend () , val );</p>
 </li>
 <li>由于find操作的是迭代器，因此我们可以用同样的find函数在任何容器中查找值。</li>
 </ul>
+</li>
+<li>
+<p>decltype:如果明确知道返回的函数是哪一个，就能使用decltype简化书写函数指针返回类型的过程。</p>
+<ul>
+<li>例如，假设两个函数返回类型都是string::size_type，并且各有两个const string&amp;类型的形参，此时我们可以便携第三个函数，它接受一个string类型的参数，返回一个指针，该指针指向前两个函数中的一个。</li>
+</ul>
+<blockquote>
+<p>string::size_type sumLength(const string&amp; , const string&amp;);
+string::size_type largerLength(const string&amp; , const string&amp;);
+decltype(sumLength) *getFcn(const string&amp;);</p>
+</blockquote>
+<p>将decltype作用于某个函数时，它返回函数类型而不是指针类型。因此，我们显示地加上*以表示我们需要返回指针，而不是函数本身。</p>
 </li>
 </ul>
 <h2 id="顺序容器">顺序容器</h2>
@@ -1058,104 +1072,58 @@ remove_copy_if(v1.begin() , v1.end() , back_inserter(v2) , []( int i) { return i
 <p>在第一个调用中，从输入序列中将奇数元素删除。在第二个调用中，将非奇数元素从输入范围拷贝到v2中。</p>
 </li>
 </ul>
-<h2 id="allocator">allocator</h2>
+<h2 id="关联容器">关联容器</h2>
 <ul>
-<li>标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存是原始的、未构造的。</li>
-<li>当一个allocator对象分配内存时，allocator会根据给定的对象类型来确定恰当的内存大小和对齐位置：
-<blockquote>
-<p>allocator<!-- raw HTML omitted --> alloc;            //可以分配string的allocator对象
-auto const p = alloc.allocate(n);   //分配n个未初始化的string</p>
-</blockquote>
-</li>
+<li>关联容器支持高效的关键字查找和访问。两个主要的关联容器类型是<strong>map</strong> 和 <strong>set</strong>。</li>
+<li>关联容器支持普通容器的操作。不支持顺序容器位置相关的操作。关联容器是根据关键字存储的。
+|关联容器类型 |    |
+| :&ndash;    | :-:  |
+| <strong>按关键字有序保存元素</strong> |  |
+| map | 关联数组：保存关键字-值对 |
+| set | 关键字即值，只保存关键字的容器 |
+| mulitmap | 关键字可重复出现的map |
+| multiset | 关键字可重复出现的set |
+| <strong>无序集合</strong> |  |
+| unordered_map | 用哈希函数组织的map |
+| unordered_set | 用哈希函数组织的set |
+| unordered_mulitmap | 哈希组织的map；关键字可以重复出现 |
+| unordered_multiset | 哈希组织的set；关键字可以重复出现 |</li>
 </ul>
+<h4 id="有序容器的关键字类型">有序容器的关键字类型</h4>
+<ul>
+<li>可以向一个算法提供我们自己定义的比较操作，与之类似，也可以提供自己定义的操作来代替关键字上的&lt;运算符。所提供的操作必须在关键字类型上定义一个<strong>严格弱序</strong>。可以讲严格弱序看作&quot;小于等于&rdquo;。</li>
+</ul>
+<h4 id="使用关键字类型的比较函数">使用关键字类型的比较函数</h4>
+<ul>
+<li>用来组织一个容器中元素的操作的类型也是该容器类型的一部分。为了制定使用自定义的操作，必须在定义关联容器类型时提供此操作的类型。
+在定义时我们必须提供两个类型：关键字类型，以及比较操作类型——函数指针类型。</li>
+</ul>
+<h3 id="pair">pair</h3>
+<ul>
+<li>pair是一个标准库类型，它定义在头文件utility中。</li>
+<li>一个pair保存两个数据成员。类似容器，pair是一个用来生成特定类型的模板。当创建一个pair时，必须提供两个类型名，pair的数据成员将具有对应的类型。</li>
+<li>pair的数据成员是public的。两个成员分别命名为first和second。用普通的成员访问符号来访问它们。可以用make_pair来生成pair对象。</li>
+</ul>
+<h3 id="关联容器操作">关联容器操作</h3>
 <table>
 <thead>
 <tr>
-<th align="left">写法</th>
-<th align="center">解释</th>
+<th align="left">关联容器额外的类型别名</th>
+<th align="center"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">allocator &lt; T &gt; a</td>
-<td align="center">定义了一个名为a的allocator对象，为类型T的对象分配内存</td>
+<td align="left">key_value</td>
+<td align="center">此容器类型的关键字类型</td>
 </tr>
 <tr>
-<td align="left">a.allocate(n)</td>
-<td align="center">分配一段原始的、未构造的内存，保存n个类型为T的对象</td>
+<td align="left">mapped_type</td>
+<td align="center">每个关键字关联的类型；只适用于map</td>
 </tr>
 <tr>
-<td align="left">a.deallocate(p,n)</td>
-<td align="center">释放从T*指针p中地址开始的内存，这块内存保存了n个类为T的对象；T必须是一个先前由allocate返回的指针，n必须是p创建时所要求的大小。在调用之前必须对每个这块内存中创建的对象调用destory</td>
-</tr>
-<tr>
-<td align="left">a.construct(p,args)</td>
-<td align="center">T*类型指针p，指向原始内存，arg被传递给类型为T的构造函数，用来构造一个对象</td>
-</tr>
-<tr>
-<td align="left">a.destroy(p)</td>
-<td align="center">T*类型指针p，对p指向的对象进行析构函数</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>allocator<!-- raw HTML omitted --> alloc;         <br>
-auto const p = alloc.allocate(n);<br>
-auto q = p ;                      // q指向最后构造的元素之后的位置<br>
-alloc.construct(q++);             // *q为空字符串  <br>
-alloc.construct(q++, 10 , &lsquo;c&rsquo;);   //*q为cccccccccc<br>
-alloc.construct(q++ , &ldquo;hi&rdquo; ) ;    //*q为hi!<br>
-while (q != p)  alloc.destory(&ndash;q); // 释放真正构造的string
-alloc.deallocator(p,n);</p>
-</blockquote>
-<h4 id="预计自己写的allocator类">预计自己写的allocator类</h4>
-<table>
-<thead>
-<tr>
-<th align="left">函数</th>
-<th align="center">大体思路</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">allocate</td>
-<td align="center">默认生成一个</td>
-</tr>
-<tr>
-<td align="left">allocate(n)</td>
-<td align="center">生成多个,n&gt;=0,特判0的情况</td>
-</tr>
-<tr>
-<td align="left">dellocate(p)</td>
-<td align="center">默认释放一个</td>
-</tr>
-<tr>
-<td align="left">dellocate(p,n)</td>
-<td align="center">如标准类</td>
-</tr>
-<tr>
-<td align="left">construct(p)</td>
-<td align="center">构造一个默认为空的</td>
-</tr>
-<tr>
-<td align="left">construct(p,T&amp;)</td>
-<td align="center">创建一个对象，方式是调用T的有参构造函数，参数为传过来的值</td>
-</tr>
-<tr>
-<td align="left">construct(p,T)</td>
-<td align="center">创建一个对象，方式是调用T的有参构造函数，参数为传过来的值</td>
-</tr>
-<tr>
-<td align="left">construct(p,Args)</td>
-<td align="center">带参数列表的构造</td>
-</tr>
-<tr>
-<td align="left">destroy(p)</td>
-<td align="center">对p所指的对象进行析构函数</td>
-</tr>
-<tr>
-<td align="left">destroy(p,n)</td>
-<td align="center">对p所指的对象进行析构函数</td>
+<td align="left">value_type</td>
+<td align="center">对于set，与key_type相同；对于map，为pair&lt;const key_type , mapped_type&gt;</td>
 </tr>
 </tbody>
 </table>

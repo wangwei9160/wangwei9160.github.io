@@ -6,10 +6,122 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 01 Mar 2021 11:53:30 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 12 Mar 2021 11:34:39 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Allocator</title>
+      <link>https://wangwei9160.github.io/post/allocator/</link>
+      <pubDate>Fri, 12 Mar 2021 11:34:39 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/allocator/</guid>
+      
+        <description>&lt;h2 id=&#34;allocator&#34;&gt;allocator&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存是原始的、未构造的。&lt;/li&gt;
+&lt;li&gt;当一个allocator对象分配内存时，allocator会根据给定的对象类型来确定恰当的内存大小和对齐位置：
+&lt;blockquote&gt;
+&lt;p&gt;allocator&lt;!-- raw HTML omitted --&gt; alloc;            //可以分配string的allocator对象
+auto const p = alloc.allocate(n);   //分配n个未初始化的string&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;写法&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;allocator &amp;lt; T &amp;gt; a&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;定义了一个名为a的allocator对象，为类型T的对象分配内存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;a.allocate(n)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;分配一段原始的、未构造的内存，保存n个类型为T的对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;a.deallocate(p,n)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;释放从T*指针p中地址开始的内存，这块内存保存了n个类为T的对象；T必须是一个先前由allocate返回的指针，n必须是p创建时所要求的大小。在调用之前必须对每个这块内存中创建的对象调用destory&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;a.construct(p,args)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;T*类型指针p，指向原始内存，arg被传递给类型为T的构造函数，用来构造一个对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;a.destroy(p)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;T*类型指针p，对p指向的对象进行析构函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;allocator&lt;!-- raw HTML omitted --&gt; alloc;         &lt;br&gt;
+auto const p = alloc.allocate(n);&lt;br&gt;
+auto q = p ;                      // q指向最后构造的元素之后的位置&lt;br&gt;
+alloc.construct(q++);             // *q为空字符串  &lt;br&gt;
+alloc.construct(q++, 10 , &amp;lsquo;c&amp;rsquo;);   //*q为cccccccccc&lt;br&gt;
+alloc.construct(q++ , &amp;ldquo;hi&amp;rdquo; ) ;    //*q为hi!&lt;br&gt;
+while (q != p)  alloc.destory(&amp;ndash;q); // 释放真正构造的string
+alloc.deallocator(p,n);&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;预计自己写的allocator类&#34;&gt;预计自己写的allocator类&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;函数&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;大体思路&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;allocate&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;默认生成一个&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;allocate(n)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;生成多个,n&amp;gt;=0,特判0的情况&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dellocate(p)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;默认释放一个&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;dellocate(p,n)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;如标准类&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;construct(p)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;构造一个默认为空的&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;construct(p,T&amp;amp;)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;创建一个对象，方式是调用T的有参构造函数，参数为传过来的值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;construct(p,T)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;创建一个对象，方式是调用T的有参构造函数，参数为传过来的值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;construct(p,Args)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;带参数列表的构造&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;destroy(p)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;对p所指的对象进行析构函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;destroy(p,n)&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;对p所指的对象进行析构函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>Word</title>
@@ -54,6 +166,18 @@ auto result = find( vec.cbegin() , vec.cend () , val );&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;由于find操作的是迭代器，因此我们可以用同样的find函数在任何容器中查找值。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;decltype:如果明确知道返回的函数是哪一个，就能使用decltype简化书写函数指针返回类型的过程。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;例如，假设两个函数返回类型都是string::size_type，并且各有两个const string&amp;amp;类型的形参，此时我们可以便携第三个函数，它接受一个string类型的参数，返回一个指针，该指针指向前两个函数中的一个。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;string::size_type sumLength(const string&amp;amp; , const string&amp;amp;);
+string::size_type largerLength(const string&amp;amp; , const string&amp;amp;);
+decltype(sumLength) *getFcn(const string&amp;amp;);&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;将decltype作用于某个函数时，它返回函数类型而不是指针类型。因此，我们显示地加上*以表示我们需要返回指针，而不是函数本身。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;顺序容器&#34;&gt;顺序容器&lt;/h2&gt;
@@ -722,104 +846,58 @@ remove_copy_if(v1.begin() , v1.end() , back_inserter(v2) , []( int i) { return i
 &lt;p&gt;在第一个调用中，从输入序列中将奇数元素删除。在第二个调用中，将非奇数元素从输入范围拷贝到v2中。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;allocator&#34;&gt;allocator&lt;/h2&gt;
+&lt;h2 id=&#34;关联容器&#34;&gt;关联容器&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存是原始的、未构造的。&lt;/li&gt;
-&lt;li&gt;当一个allocator对象分配内存时，allocator会根据给定的对象类型来确定恰当的内存大小和对齐位置：
-&lt;blockquote&gt;
-&lt;p&gt;allocator&lt;!-- raw HTML omitted --&gt; alloc;            //可以分配string的allocator对象
-auto const p = alloc.allocate(n);   //分配n个未初始化的string&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
+&lt;li&gt;关联容器支持高效的关键字查找和访问。两个主要的关联容器类型是&lt;strong&gt;map&lt;/strong&gt; 和 &lt;strong&gt;set&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;关联容器支持普通容器的操作。不支持顺序容器位置相关的操作。关联容器是根据关键字存储的。
+|关联容器类型 |    |
+| :&amp;ndash;    | :-:  |
+| &lt;strong&gt;按关键字有序保存元素&lt;/strong&gt; |  |
+| map | 关联数组：保存关键字-值对 |
+| set | 关键字即值，只保存关键字的容器 |
+| mulitmap | 关键字可重复出现的map |
+| multiset | 关键字可重复出现的set |
+| &lt;strong&gt;无序集合&lt;/strong&gt; |  |
+| unordered_map | 用哈希函数组织的map |
+| unordered_set | 用哈希函数组织的set |
+| unordered_mulitmap | 哈希组织的map；关键字可以重复出现 |
+| unordered_multiset | 哈希组织的set；关键字可以重复出现 |&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h4 id=&#34;有序容器的关键字类型&#34;&gt;有序容器的关键字类型&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;可以向一个算法提供我们自己定义的比较操作，与之类似，也可以提供自己定义的操作来代替关键字上的&amp;lt;运算符。所提供的操作必须在关键字类型上定义一个&lt;strong&gt;严格弱序&lt;/strong&gt;。可以讲严格弱序看作&amp;quot;小于等于&amp;rdquo;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;使用关键字类型的比较函数&#34;&gt;使用关键字类型的比较函数&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;用来组织一个容器中元素的操作的类型也是该容器类型的一部分。为了制定使用自定义的操作，必须在定义关联容器类型时提供此操作的类型。
+在定义时我们必须提供两个类型：关键字类型，以及比较操作类型——函数指针类型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;pair&#34;&gt;pair&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;pair是一个标准库类型，它定义在头文件utility中。&lt;/li&gt;
+&lt;li&gt;一个pair保存两个数据成员。类似容器，pair是一个用来生成特定类型的模板。当创建一个pair时，必须提供两个类型名，pair的数据成员将具有对应的类型。&lt;/li&gt;
+&lt;li&gt;pair的数据成员是public的。两个成员分别命名为first和second。用普通的成员访问符号来访问它们。可以用make_pair来生成pair对象。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关联容器操作&#34;&gt;关联容器操作&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;写法&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;解释&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;关联容器额外的类型别名&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;allocator &amp;lt; T &amp;gt; a&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;定义了一个名为a的allocator对象，为类型T的对象分配内存&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;key_value&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;此容器类型的关键字类型&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;a.allocate(n)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;分配一段原始的、未构造的内存，保存n个类型为T的对象&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;mapped_type&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;每个关键字关联的类型；只适用于map&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;a.deallocate(p,n)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;释放从T*指针p中地址开始的内存，这块内存保存了n个类为T的对象；T必须是一个先前由allocate返回的指针，n必须是p创建时所要求的大小。在调用之前必须对每个这块内存中创建的对象调用destory&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;a.construct(p,args)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;T*类型指针p，指向原始内存，arg被传递给类型为T的构造函数，用来构造一个对象&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;a.destroy(p)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;T*类型指针p，对p指向的对象进行析构函数&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;blockquote&gt;
-&lt;p&gt;allocator&lt;!-- raw HTML omitted --&gt; alloc;         &lt;br&gt;
-auto const p = alloc.allocate(n);&lt;br&gt;
-auto q = p ;                      // q指向最后构造的元素之后的位置&lt;br&gt;
-alloc.construct(q++);             // *q为空字符串  &lt;br&gt;
-alloc.construct(q++, 10 , &amp;lsquo;c&amp;rsquo;);   //*q为cccccccccc&lt;br&gt;
-alloc.construct(q++ , &amp;ldquo;hi&amp;rdquo; ) ;    //*q为hi!&lt;br&gt;
-while (q != p)  alloc.destory(&amp;ndash;q); // 释放真正构造的string
-alloc.deallocator(p,n);&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&#34;预计自己写的allocator类&#34;&gt;预计自己写的allocator类&lt;/h4&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;函数&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;大体思路&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;allocate&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;默认生成一个&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;allocate(n)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;生成多个,n&amp;gt;=0,特判0的情况&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;dellocate(p)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;默认释放一个&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;dellocate(p,n)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;如标准类&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;construct(p)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;构造一个默认为空的&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;construct(p,T&amp;amp;)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;创建一个对象，方式是调用T的有参构造函数，参数为传过来的值&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;construct(p,T)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;创建一个对象，方式是调用T的有参构造函数，参数为传过来的值&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;construct(p,Args)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;带参数列表的构造&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;destroy(p)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;对p所指的对象进行析构函数&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;destroy(p,n)&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;对p所指的对象进行析构函数&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;value_type&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;对于set，与key_type相同；对于map，为pair&amp;lt;const key_type , mapped_type&amp;gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
