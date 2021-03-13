@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 12 Mar 2021 11:34:39 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Mar 2021 13:27:30 +0800</lastBuildDate>
     
 	<atom:link href="https://wangwei9160.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Git</title>
+      <link>https://wangwei9160.github.io/post/git/</link>
+      <pubDate>Sat, 13 Mar 2021 13:27:30 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/git/</guid>
+      <description>github repository 使用github创建仓库时的步骤，windows 创建仓库 1、 new repository 在github界面选择new一个repository 2、设置Reposi</description>
+    </item>
     
     <item>
       <title>Allocator</title>

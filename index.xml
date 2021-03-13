@@ -6,10 +6,72 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 12 Mar 2021 11:34:39 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Mar 2021 13:27:30 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Git</title>
+      <link>https://wangwei9160.github.io/post/git/</link>
+      <pubDate>Sat, 13 Mar 2021 13:27:30 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/git/</guid>
+      
+        <description>&lt;h1 id=&#34;github-repository&#34;&gt;github repository&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;使用github创建仓库时的步骤，windows&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;创建仓库&#34;&gt;创建仓库&lt;/h2&gt;
+&lt;h3 id=&#34;1-new-repository&#34;&gt;1、 new repository&lt;/h3&gt;
+&lt;p&gt;在github界面选择new一个repository&lt;/p&gt;
+&lt;h3 id=&#34;2设置repository信息&#34;&gt;2、设置Repository信息&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;设置Repository name、Description（可不填）&lt;/li&gt;
+&lt;li&gt;为初始化仓库的信息文件。（可不添加）&lt;/li&gt;
+&lt;li&gt;Add a README file ： 添加说明文件MEADME.md。直接使用Description中的内容作为文件的内容，也可以在创建仓库后仓库主界面选择Add file，Create new file中添加MEADME.md&lt;/li&gt;
+&lt;li&gt;Add .gitignore ： 在使用git的过程中有些日志文件、临时文件、编译产生的中间文件不需要纳入git的管理，可以再gitignore中列出要忽略的文件模式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3create-repository&#34;&gt;3、Create repository&lt;/h3&gt;
+&lt;p&gt;点击Create repository&lt;/p&gt;
+&lt;h2 id=&#34;4进到repository主界面&#34;&gt;4、进到repository主界面&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;创建结束自动跳转(大概会github不崩的话)&lt;/li&gt;
+&lt;li&gt;可以通过访问 github.com/xxxx/name
+xxxx 是自己的github用户名，name是repository的name&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5点击code-查看信息&#34;&gt;5、点击code 查看信息&lt;/h3&gt;
+&lt;p&gt;点击code 可以查看到https、ssh、github CLI&lt;/p&gt;
+&lt;h3 id=&#34;6在本地创建一个目录&#34;&gt;6、在本地创建一个目录&lt;/h3&gt;
+&lt;p&gt;提前部署好git&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在自己的主机上想要的位置存放这个仓库的更新内容以及推送更新，在响应的位置上右键选择Git Bash Here.&lt;/li&gt;
+&lt;li&gt;git clone &lt;a href=&#34;https://github.com/xxxx/name.git&#34;&gt;https://github.com/xxxx/name.git&lt;/a&gt;
+xxxx 是github用户名，name是repository的name&lt;/li&gt;
+&lt;li&gt;cd name
+通过cd 进入到本地的仓库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;7-添加想添加的文件&#34;&gt;7、 添加想添加的文件&lt;/h3&gt;
+&lt;h3 id=&#34;8-使用git&#34;&gt;8、 使用git&lt;/h3&gt;
+&lt;p&gt;通过cd进入到name目录&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;cd xx/xx/name&lt;/li&gt;
+&lt;li&gt;git add .&lt;/li&gt;
+&lt;li&gt;git commit -m &amp;ldquo;new&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;git push -u origin main
+在新建仓库分支是main。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;维护repository&#34;&gt;维护repository&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;git add .&lt;/li&gt;
+&lt;li&gt;git commit -m &amp;ldquo;new&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;git push -u origin main
+在新建仓库分支是main。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>Allocator</title>

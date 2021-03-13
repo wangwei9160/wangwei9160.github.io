@@ -2,21 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://wangwei9160.github.io/post/allocator/</loc>
-    <lastmod>2021-03-12T11:34:39+08:00</lastmod>
+    <loc>https://wangwei9160.github.io/</loc>
+    <lastmod>2021-03-13T13:27:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://wangwei9160.github.io/</loc>
-    <lastmod>2021-03-12T11:34:39+08:00</lastmod>
+    <loc>https://wangwei9160.github.io/post/git/</loc>
+    <lastmod>2021-03-13T13:27:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://wangwei9160.github.io/post/</loc>
+    <lastmod>2021-03-13T13:27:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangwei9160.github.io/post/allocator/</loc>
     <lastmod>2021-03-12T11:34:39+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
