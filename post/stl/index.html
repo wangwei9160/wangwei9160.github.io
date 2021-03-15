@@ -69,11 +69,11 @@
 <meta itemprop="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步">
 <meta itemprop="datePublished" content="2021-02-28T17:47:04&#43;08:00" />
 <meta itemprop="dateModified" content="2021-02-28T17:47:04&#43;08:00" />
-<meta itemprop="wordCount" content="8516">
+<meta itemprop="wordCount" content="9931">
 
 
 
-<meta itemprop="keywords" content="c&#43;&#43;," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="STL," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="STL"/>
 <meta name="twitter:description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步"/>
 
@@ -326,8 +326,8 @@
           2021-02-28
         </time>
         
-        <span class="more-meta"> 约 8516 字 </span>
-          <span class="more-meta"> 预计阅读 17 分钟 </span>
+        <span class="more-meta"> 约 9931 字 </span>
+          <span class="more-meta"> 预计阅读 20 分钟 </span>
 
         
         
@@ -404,6 +404,9 @@ string::size_type largerLength(const string&amp; , const string&amp;);
 decltype(sumLength) *getFcn(const string&amp;);</p>
 </blockquote>
 <p>将decltype作用于某个函数时，它返回函数类型而不是指针类型。因此，我们显示地加上*以表示我们需要返回指针，而不是函数本身。</p>
+</li>
+<li>
+<p>at成员函数 ： at成员函数类似于下标运算符，但如果下标越界，at会抛出一个out_of_range异常。</p>
 </li>
 </ul>
 <h2 id="顺序容器">顺序容器</h2>
@@ -1127,6 +1130,101 @@ remove_copy_if(v1.begin() , v1.end() , back_inserter(v2) , []( int i) { return i
 </tr>
 </tbody>
 </table>
+<ul>
+<li>对于set类型，key_type和value_type是一样的；set中保存的值就是关键字。在map中，元素是关键字-值对。即，每个元素是一个pair对象，包含一个关键字和一个关联的值。</li>
+</ul>
+<h4 id="关联容器迭代器">关联容器迭代器</h4>
+<ul>
+<li>当解引用一个关联容器迭代器时，我们会得到一个类型为容器的value_type的值的引用。对于map而言，value_type是一个pair类型，其first成员保存const的关键字，second成员保存值。</li>
+</ul>
+<p><strong>set的迭代器是const的</strong></p>
+<ul>
+<li>虽然set类型同时定义了iterator和const_iterator类型，但两种类型都只允许只读访问set中的元素。与不能改变一个map元素的关键字一样，一个set中的关键字也是const的。可以用一个set迭代器来读取元素的值，但不能修改。</li>
+</ul>
+<h4 id="map的下标操作">map的下标操作</h4>
+<ul>
+<li>map和unordered_map容器提供了下标运算符和at函数。set类型不支持下标。multimap和unordered_multimap不能进行下标操作，可能有多个值与一个关键字相关联。</li>
+</ul>
+<h4 id="访问元素">访问元素</h4>
+<table>
+<thead>
+<tr>
+<th align="left">关联容器额外的类型别名</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">lower_bound和upper_bound不适用于无序容器</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">下标和at操作只适用于非const的map和unordered_map</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">c.find(k)</td>
+<td align="center">返回一个迭代器，指向第一个关键字为k的元素，若k不在容器中，则返回尾后迭代器。</td>
+</tr>
+<tr>
+<td align="left">c.count(k)</td>
+<td align="center">返回关键字等于k的元素的数量。对于不允许重复关键字的容器，返回值永远是0或1</td>
+</tr>
+<tr>
+<td align="left">c.lower_bound(k)</td>
+<td align="center">返回一个迭代器，指向第一个关键字<strong>不小于</strong>k的元素</td>
+</tr>
+<tr>
+<td align="left">c.upper_bound(k)</td>
+<td align="center">返回一个迭代器，指向第一个关键字<strong>大于</strong>k的元素</td>
+</tr>
+<tr>
+<td align="left">c.equal_range(k)</td>
+<td align="center">返回一个迭代器pair，表示关键字等于k的元素的范围。若k不存在，pair的两个成员均等于c.end()</td>
+</tr>
+</tbody>
+</table>
+<h5 id="对map使用find代替下标">对map使用find代替下标</h5>
+<ul>
+<li>对map和unordered_map类型，使用下标操作可能会导致：如果关键字未在map中，下标操作会插入一个具有给定关键字的元素。在指向知道给定关键字是否在map中，应当使用find。</li>
+</ul>
+<h5 id="multimap或multiset中查找元素">multimap或multiset中查找元素</h5>
+<ul>
+<li>对于允许重复关键字的容器来说，在容器中可能有很多元素具有给定的关键字。如果一个multimap或multiset中有多个元素具有给定关键字，则这些元素在容器中会相邻存储。可以通过以下步骤实现找到所有的映射。
+<ul>
+<li>
+<p>1、使用count和find实现</p>
+<ul>
+<li>可以通过count找到给定关键字的数量</li>
+<li>通过find得到一个迭代器指向第一个关键字</li>
+<li>循环次数为count的返回值，读取所有的映射</li>
+</ul>
+</li>
+<li>
+<p>2、还可以通过面向迭代器的方法解决这个问题。</p>
+<ul>
+<li>如果查找的元素具有容器中最大的关键字，则此关键字的upper_bound返回尾后迭代器。如果关键字不存在，且大于容器中任何关键字，则lowe_bound返回的也是尾后迭代器。可以通过如下循环实现读取</li>
+</ul>
+<blockquote>
+<p>for ( auto beg = x.lowe_bound(id) , end = x.upper_bound(id) ; beg != end ; ++beg )</p>
+</blockquote>
+<ul>
+<li>此处代码与count和find能完成相同的工作，但更直接。</li>
+</ul>
+</li>
+<li>
+<p>3、equal_range函数</p>
+<ul>
+<li>直接调用equal_range即可。此函数接受一个关键字，返回一个迭代器。若关键字存在，则第一个迭代器指向第一个与关键字匹配的元素，第二个迭代器指向最后一个匹配元素之后的位置。若未找到匹配元素，则两个迭代器都指向关键字可以插入的位置</li>
+</ul>
+<blockquote>
+<p>for (auto pos = x.equal_range(id) ; pos.first != pos.second ; ++pos.first)
+与使用upper_bound和lower_bound功能一直，但没有使用局部变量。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -1157,7 +1255,7 @@ remove_copy_if(v1.begin() , v1.end() , back_inserter(v2) , []( int i) { return i
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://wangwei9160.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+          <a href="https://wangwei9160.github.io/tags/stl/">STL</a>
           
         </div>
 
