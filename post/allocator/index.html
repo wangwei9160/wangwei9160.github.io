@@ -69,7 +69,7 @@
 <meta itemprop="description" content="allocator 标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存">
 <meta itemprop="datePublished" content="2021-03-12T11:34:39&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-12T11:34:39&#43;08:00" />
-<meta itemprop="wordCount" content="670">
+<meta itemprop="wordCount" content="701">
 
 
 
@@ -326,7 +326,7 @@
           2021-03-12
         </time>
         
-        <span class="more-meta"> 约 670 字 </span>
+        <span class="more-meta"> 约 701 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
 
         
@@ -429,7 +429,7 @@ alloc.deallocator(p,n);</p>
 </tr>
 <tr>
 <td align="left">dellocate(p,n)</td>
-<td align="center">如标准类</td>
+<td align="center">释放多个,n&gt;=0,特判0的情况</td>
 </tr>
 <tr>
 <td align="left">construct(p)</td>
@@ -454,6 +454,10 @@ alloc.deallocator(p,n);</p>
 <tr>
 <td align="left">destroy(p,n)</td>
 <td align="center">对p所指的对象进行析构函数</td>
+</tr>
+<tr>
+<td align="left">destroy(p1,p2)</td>
+<td align="center">对p1到p2的空间进行析构函数</td>
 </tr>
 </tbody>
 </table>
