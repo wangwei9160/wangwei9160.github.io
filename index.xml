@@ -6,10 +6,167 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 13 Mar 2021 13:27:30 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 17 Mar 2021 14:36:36 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>动态内存</title>
+      <link>https://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</link>
+      <pubDate>Wed, 17 Mar 2021 14:36:36 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</guid>
+      
+        <description>&lt;h2 id=&#34;动态内存&#34;&gt;动态内存&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;全局对象在程序启动时分配，在程序结束时销毁；局部自动对象，当进入其定义所在的程序块时被创建，在离开块时销毁；局部static对象在第一次使用前分配，在程序结束时销毁。&lt;/li&gt;
+&lt;li&gt;动态分配的对象的生存期与他们在哪里创建是无关的，只有当显式地被释放时，这些对象才销毁。&lt;/li&gt;
+&lt;li&gt;标准库定义了两个智能指针类型来管理动态分配的对象。当一个对象应该被销毁时，指向它的只能指针可以确保自动地释放它。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;智能指针&#34;&gt;智能指针&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;动态内存的管理是通过&lt;strong&gt;new&lt;/strong&gt;和&lt;strong&gt;delete&lt;/strong&gt;来完成的。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;new&lt;/strong&gt;：在动态内存中为对象分配空间并返回一个指向该对象的指针，我们可以选择对对象进行初始化。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;delete&lt;/strong&gt;：接受一个动态对象的指针，销毁该对象，并释放与之关联的内存。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;标准库提供了两种&lt;strong&gt;智能指针&lt;/strong&gt;类型来管理动态对象。智能指针的行为类似常规指针，重要的区别是它负责自动释放锁指向的对象。两种智能指针的区别在于管理底层指针的方式：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;shared_ptr&lt;/strong&gt;：允许多个指针指向同一个对象。在最后一个shared_ptr析构的时候，内存才会释放。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;unique_ptr&lt;/strong&gt;：&amp;lsquo;独占&#39;所指向的对象。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;weak_ptr&lt;/strong&gt;：弱引用，指向shared_ptr所管理的对象。这三种类型都定义在memory头文件中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;shared_ptr&#34;&gt;shared_ptr&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;shared_ptr和unique_ptr都支持的操作&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;shared_ptr&amp;lt; T&amp;gt; sp、unique_ptr&amp;lt; T&amp;gt; sp&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;空智能指针，可以指向类型为T的对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;p&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;将p用作一个条件判断，若p指向一个对象，则为true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;*p&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;解引用p，获得它指向的对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;p-&amp;gt;mem&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;等价于(*p).mem&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;p.get()&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;返回p中保存的指针。若智能指针释放了其对象，返回的指针所指向的对象也就消失了&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;swap(p,q)、p.swap(q)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;交换p和q中的指针&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;shared_ptr独有的操作&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;make_shared&amp;lt; T&amp;gt;(args)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;返回一个shared_ptr，指向一个动态分配的类型为T的对象，使用args初始化此对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;shared_ptr&amp;lt; T&amp;gt;p(q)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;p是shared_ptr类型q的拷贝；此操作会递增q中的计数器。q中的指针必须能转换为T*&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;p = q&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;p和q都是shared_ptr类型，保存的指针必须能相互转换。此操作会递减p的引用计数，递减p的引用计数，递增q的引用计数；若p的引用计数变为0，则将其管理的原内存释放&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;p.unique()&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;若p.use_count()为1，返回true；否则返回false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;p.use_count()&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;返回与p共享对象的智能指针数量；主要用于调试&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;最安全的分配和使用动态内存的方法是调用make_shared的标准库函数。此函数在动态内存中分配一个对象并初始化它，返回指向此对象的shared_ptr。通常用auto定义一个对象来保存make_shared_ptr的结果。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每个shared_ptr都有一个关联的计数器，&lt;strong&gt;引用计数&lt;/strong&gt;。一旦一个shared_ptr的计数器变为0，它就会自动释放自己所管理的对象。&lt;/li&gt;
+&lt;li&gt;shared_ptr类会自动销毁此独享。它是通过另一个特殊的成员函数——&lt;strong&gt;析构函数&lt;/strong&gt;完成销毁工作的。类似于构造函数，每个类都有一个析构函数。shared_ptr的析构函数会递减它所指向的对象的引用计数。如果引用计数变为0，shared_ptr的析构函数就会销毁对象，并释放它所占用的内存。&lt;/li&gt;
+&lt;li&gt;当动态对象不再被使用时，shared_ptr类会自动释放动态对象，这一特性使得动态内存的使用变得非常容易。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;使用动态生存期的资源的类&#34;&gt;使用动态生存期的资源的类&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;程序使用动态内存出于以下三种原因之一：
+1、程序不知道自己需要使用多少对象
+2、程序不知道所需对象的准确类型
+3、程序需要在多个对象间共享数据
+容器类是出于第一种原因而使用动态内存的典型例子。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;直接管理内存&#34;&gt;直接管理内存&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;new、delete&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;相比于智能指针，直接管理内存的类与使用智能指针的类不同，它们不能依赖类对象拷贝、赋值和销毁操作的任何默认定义。因此，使用智能指针的程序更容易编写和调试。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;使用new动态分配和初始化对象&#34;&gt;使用new动态分配和初始化对象&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;在自由空间分配的内存是无名的，因此new无法为其分配的对象命名，而是返回一个指向该对象的指针。&lt;/li&gt;
+&lt;li&gt;默认情况下，动态分配的对象是默认初始化的，这意味着内置类型或组合类型的对象的值将是未定义的，而类类型对象将用默认构造函数进行初始化。&lt;/li&gt;
+&lt;li&gt;可以使用直接初始化方法来初始化一个动态分配的对象，也可以使用传统的构造方式（圆括号）。在新标准下，也可以使用列表初始化（花括号）。&lt;/li&gt;
+&lt;li&gt;如果提供一个括号保卫的初始化器，就可以使用auto从此初始化器来推断我们想要分配的对象的类型。当括号中仅有一个单一初始化器时才可以使用auto。&lt;/li&gt;
+&lt;li&gt;用new分配const对象是合法的。虽然const对象的值不能被改变，但它本身是可以被销毁的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;内存耗尽&#34;&gt;内存耗尽&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;一旦一个程序用光了它所有可用的内存，new表达式就会失败。默认情况下，如果new不能分配所要求的内存空间，它就会抛出一个类型为bad_alloc的异常。
+&lt;blockquote&gt;
+&lt;p&gt;//如果分配失败，new返回一个空指针
+int *p1 = new int;//如果分配失败，new抛出std::bad_alloc
+int *p2 = new (nothrow) int;//如果分配失败,new返回一个空指针
+这种形式的new为&lt;strong&gt;定位new&lt;/strong&gt;(placement new)。定位new表达式允许我们向new传递额外的参数。如果nothrow传递给new，试图告诉它不能抛出异常。如果这种形式的new不能分配所需要的内存，它会返回一个空指针。bad_alloc和nothrow都定义在头文件new中。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;释放动态内存&#34;&gt;释放动态内存&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;为了防止内存耗尽，通过&lt;strong&gt;delete表达式&lt;/strong&gt;来将内存归还给系统。delete表达式接受一个指针，指向我们想要释放的对象。delete表达式执行两个动作：销毁给定的指针指向的对象；释放对应的内存。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;动态内存的管理&#34;&gt;动态内存的管理&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;使用new和delete管理动态内存常见的三个问题：
+1、忘记delete内存。
+2、使用已经释放掉的对象。
+3、同一块内存释放两次。
+只使用智能指针，就可以避免所有这些问题。对于一块内存，只有在没有任何智能指针指向它的情况下，智能指针才会自动释放它。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;空悬指针&#34;&gt;空悬指针&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;在delete之后，指针就变成&lt;strong&gt;空悬指针&lt;/strong&gt;(dangling pointer)，指向一块曾经保存数据对象但现在已经无效的内存的指针。&lt;/li&gt;
+&lt;li&gt;未初始化指针的所有缺点空悬指针也有。避免空悬指针的问题：在指针即将要离开其作用域之前释放掉它所关联的内存。这样，在指针关联的内存被释放掉之后，就没有机会继续使用指针了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;动态内存的问题&#34;&gt;动态内存的问题&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;动态内存的一个基本问题是可能有多个指针指向相同的内存。在delete内存之后重置指针的方法只对这个指针有效，对其他任何仍指向（已释放）内存的指针是没有作用的。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>Git</title>

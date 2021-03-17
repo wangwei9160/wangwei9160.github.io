@@ -20,14 +20,5 @@
       <description>allocator 标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存</description>
     </item>
     
-    <item>
-      <title>STL</title>
-      <link>https://wangwei9160.github.io/post/stl/</link>
-      <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
-      
-      <guid>https://wangwei9160.github.io/post/stl/</guid>
-      <description>前言 内容参考自c++ primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步</description>
-    </item>
-    
   </channel>
 </rss>
