@@ -2,111 +2,120 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Awei</title>
-    <link>https://wangwei9160.github.io/post/</link>
+    <link>htpps://wangwei9160.github.io/post/</link>
     <description>Recent content in Posts on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 17 Mar 2021 14:36:36 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 18 Mar 2021 14:59:48 +0800</lastBuildDate>
     
-	<atom:link href="https://wangwei9160.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="htpps://wangwei9160.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Leetcode第230场周赛</title>
+      <link>htpps://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B230/</link>
+      <pubDate>Thu, 18 Mar 2021 14:59:48 +0800</pubDate>
+      
+      <guid>htpps://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B230/</guid>
+      <description>leetcode周赛230 目录 统计匹配检索规则的物品数量 最接近目标价格的甜点成本 通过最少操作次数使数组的和相等 车队II 统计匹配检索规则的物品</description>
+    </item>
+    
+    <item>
       <title>动态内存</title>
-      <link>https://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</link>
+      <link>htpps://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</link>
       <pubDate>Wed, 17 Mar 2021 14:36:36 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</guid>
+      <guid>htpps://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</guid>
       <description>动态内存 全局对象在程序启动时分配，在程序结束时销毁；局部自动对象，当进入其定义所在的程序块时被创建，在离开块时销毁；局部static对象在第</description>
     </item>
     
     <item>
       <title>Git</title>
-      <link>https://wangwei9160.github.io/post/git/</link>
+      <link>htpps://wangwei9160.github.io/post/git/</link>
       <pubDate>Sat, 13 Mar 2021 13:27:30 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/git/</guid>
+      <guid>htpps://wangwei9160.github.io/post/git/</guid>
       <description>github repository 使用github创建仓库时的步骤，windows 创建仓库 1、 new repository 在github界面选择new一个repository 2、设置Reposi</description>
     </item>
     
     <item>
       <title>Allocator</title>
-      <link>https://wangwei9160.github.io/post/allocator/</link>
+      <link>htpps://wangwei9160.github.io/post/allocator/</link>
       <pubDate>Fri, 12 Mar 2021 11:34:39 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/allocator/</guid>
+      <guid>htpps://wangwei9160.github.io/post/allocator/</guid>
       <description>allocator 标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存</description>
     </item>
     
     <item>
       <title>Word</title>
-      <link>https://wangwei9160.github.io/post/word/</link>
+      <link>htpps://wangwei9160.github.io/post/word/</link>
       <pubDate>Mon, 01 Mar 2021 11:53:30 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/word/</guid>
+      <guid>htpps://wangwei9160.github.io/post/word/</guid>
       <description>英语单词 or 小短文 21.03.01</description>
     </item>
     
     <item>
       <title>STL</title>
-      <link>https://wangwei9160.github.io/post/stl/</link>
+      <link>htpps://wangwei9160.github.io/post/stl/</link>
       <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/stl/</guid>
+      <guid>htpps://wangwei9160.github.io/post/stl/</guid>
       <description>前言 内容参考自c++ primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步</description>
     </item>
     
     <item>
       <title>codeforces</title>
-      <link>https://wangwei9160.github.io/post/codeforces634/</link>
+      <link>htpps://wangwei9160.github.io/post/codeforces634/</link>
       <pubDate>Wed, 15 Apr 2020 01:00:00 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/codeforces634/</guid>
+      <guid>htpps://wangwei9160.github.io/post/codeforces634/</guid>
       <description>codeforces 目录A. Candies and Two SistersB. Construct the StringC. Two Teams ComposingD. Anti-SudokuE. Three Blocks PalindromeA. Candies and Two Sisters 题目： There are two sisters Alice and Betty. You have n candies. You want to distribute these n candies between two sisters in such a way that: lice will get a (a&amp;gt;0) candies; Betty will get b (b&amp;gt;0) candies; each sister will get some integer</description>
     </item>
     
     <item>
       <title>leetcode第184场周赛</title>
-      <link>https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/</link>
+      <link>htpps://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/</link>
       <pubDate>Sun, 12 Apr 2020 18:00:00 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/</guid>
-      <description>leetcode第184场周赛 目录 数组中的字符串匹配 查询带键的排列 HTML 实体解析器 给 N x 3 网格图涂色的方案数 数组中的字符串匹配 题目： 给你一个字符</description>
+      <guid>htpps://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/</guid>
+      <description>leetcode第184场周赛 目录 数组中的字符串匹配 查询带键的排列 HTML 实体解析器 给 N x 3 网格图涂色的方案数 数组中的字符串匹配 题目链接 题目： 给你</description>
     </item>
     
     <item>
       <title>Min_max</title>
-      <link>https://wangwei9160.github.io/post/min_max/</link>
+      <link>htpps://wangwei9160.github.io/post/min_max/</link>
       <pubDate>Thu, 09 Apr 2020 21:22:44 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/min_max/</guid>
+      <guid>htpps://wangwei9160.github.io/post/min_max/</guid>
       <description></description>
     </item>
     
     <item>
       <title>New_test</title>
-      <link>https://wangwei9160.github.io/post/new_test/</link>
+      <link>htpps://wangwei9160.github.io/post/new_test/</link>
       <pubDate>Wed, 08 Apr 2020 21:59:56 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/new_test/</guid>
+      <guid>htpps://wangwei9160.github.io/post/new_test/</guid>
       <description>这里是一篇最新的测试文章！ 重新测试！</description>
     </item>
     
     <item>
       <title>Blog</title>
-      <link>https://wangwei9160.github.io/post/blog/</link>
+      <link>htpps://wangwei9160.github.io/post/blog/</link>
       <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/blog/</guid>
+      <guid>htpps://wangwei9160.github.io/post/blog/</guid>
       <description>Hello world!</description>
     </item>
     
     <item>
       <title>markdown</title>
-      <link>https://wangwei9160.github.io/post/markdown/</link>
+      <link>htpps://wangwei9160.github.io/post/markdown/</link>
       <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/markdown/</guid>
+      <guid>htpps://wangwei9160.github.io/post/markdown/</guid>
       <description>一级标题 二级标题 三级标题 四级标题 五级标题 六级标题 我是一级标题 我是二级标题 代码 import + 4个空格代码块 有序列表 123 345 123 1.234 无序列表 123 234 456 98 倾斜的字 加粗的</description>
     </item>
     

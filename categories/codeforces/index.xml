@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>codeforces on Awei</title>
-    <link>https://wangwei9160.github.io/categories/codeforces/</link>
+    <link>htpps://wangwei9160.github.io/categories/codeforces/</link>
     <description>Recent content in codeforces on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 15 Apr 2020 01:00:00 +0800</lastBuildDate>
     
-	<atom:link href="https://wangwei9160.github.io/categories/codeforces/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="htpps://wangwei9160.github.io/categories/codeforces/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>codeforces</title>
-      <link>https://wangwei9160.github.io/post/codeforces634/</link>
+      <link>htpps://wangwei9160.github.io/post/codeforces634/</link>
       <pubDate>Wed, 15 Apr 2020 01:00:00 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/codeforces634/</guid>
+      <guid>htpps://wangwei9160.github.io/post/codeforces634/</guid>
       <description>codeforces 目录A. Candies and Two SistersB. Construct the StringC. Two Teams ComposingD. Anti-SudokuE. Three Blocks PalindromeA. Candies and Two Sisters 题目： There are two sisters Alice and Betty. You have n candies. You want to distribute these n candies between two sisters in such a way that: lice will get a (a&amp;gt;0) candies; Betty will get b (b&amp;gt;0) candies; each sister will get some integer</description>
     </item>
     

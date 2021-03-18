@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>c&#43;&#43; on Awei</title>
-    <link>https://wangwei9160.github.io/tags/c&#43;&#43;/</link>
+    <link>htpps://wangwei9160.github.io/tags/c&#43;&#43;/</link>
     <description>Recent content in c&#43;&#43; on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 17 Mar 2021 14:36:36 +0800</lastBuildDate>
     
-	<atom:link href="https://wangwei9160.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="htpps://wangwei9160.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>动态内存</title>
-      <link>https://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</link>
+      <link>htpps://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</link>
       <pubDate>Wed, 17 Mar 2021 14:36:36 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</guid>
+      <guid>htpps://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</guid>
       <description>动态内存 全局对象在程序启动时分配，在程序结束时销毁；局部自动对象，当进入其定义所在的程序块时被创建，在离开块时销毁；局部static对象在第</description>
     </item>
     
     <item>
       <title>STL</title>
-      <link>https://wangwei9160.github.io/post/stl/</link>
+      <link>htpps://wangwei9160.github.io/post/stl/</link>
       <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/stl/</guid>
+      <guid>htpps://wangwei9160.github.io/post/stl/</guid>
       <description>前言 内容参考自c++ primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步</description>
     </item>
     
