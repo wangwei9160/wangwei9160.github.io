@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Awei</title>
-    <link>htpps://wangwei9160.github.io/</link>
+    <link>https://wangwei9160.github.io/</link>
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 18 Mar 2021 14:59:48 +0800</lastBuildDate>
     
-        <atom:link href="htpps://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Leetcode第230场周赛</title>
-      <link>htpps://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B230/</link>
+      <link>https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B230/</link>
       <pubDate>Thu, 18 Mar 2021 14:59:48 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B230/</guid>
+      <guid>https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B230/</guid>
       
         <description>&lt;h1 id=&#34;leetcode周赛230&#34;&gt;leetcode周赛230&lt;/h1&gt;
 &lt;h3 id=&#34;a-id0目录a&#34;&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
@@ -191,10 +191,10 @@ speedi 是第 i 辆车的初始速度（单位：米/秒）。
     
     <item>
       <title>动态内存</title>
-      <link>htpps://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</link>
+      <link>https://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</link>
       <pubDate>Wed, 17 Mar 2021 14:36:36 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</guid>
+      <guid>https://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</guid>
       
         <description>&lt;h2 id=&#34;动态内存&#34;&gt;动态内存&lt;/h2&gt;
 &lt;ul&gt;
@@ -342,16 +342,101 @@ int *p2 = new (nothrow) int;//如果分配失败,new返回一个空指针
 &lt;ul&gt;
 &lt;li&gt;动态内存的一个基本问题是可能有多个指针指向相同的内存。在delete内存之后重置指针的方法只对这个指针有效，对其他任何仍指向（已释放）内存的指针是没有作用的。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h4 id=&#34;unique_ptr&#34;&gt;unique_ptr&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;unique_ptr操作&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;unique_ptr&amp;lt; T&amp;gt; u1 、 unique_ptr&amp;lt; T , D&amp;gt; u2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;空unique_ptr，可以指向类型为T的对象。u1会使用delete来释放它的指针；u2会使用类型为D的可调用对象来释放它的指针&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;unique_ptr&amp;lt; T, D&amp;gt; u(d)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;空unique_ptr，指向类型为T的对象，用类型为D的对象d代替delete&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;u = nullptr&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;释放u指向的对象，将u置为空&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;u.release()&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;u放弃对指针的控制权，返回指针，并将u置为空&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;u.reset()、u.reset(q)、u.reset(nullptr)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;释放u指向的对象。如果提供了内置指针q，令u指向这个对象；否则将u置为空&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;虽然不能拷贝unique_ptr，但是可以通过拷贝或赋值一个将要被销毁的unique_ptr。最常见的就是从函数返回一个unique_ptr。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;weak_ptr&#34;&gt;weak_ptr&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;weak_ptr是一种不控制所指向对象生存期的智能指针，它指向一个shared_ptr管理的对象。将一个weak_ptr绑定到一个shared_ptr不会改变shared_ptr的引用计数。即使有weak_ptr指向最后一个指对象的shared_ptr被销毁，对象还是会被释放。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;weak_ptr&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;weak_ptr&amp;lt; T&amp;gt; w&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;空weak_ptr可以指向类型为T的对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;weak_ptr&amp;lt; T&amp;gt; w(sp)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;与shared_ptr sp 指向相同对象的weak_ptr。T必须能转换为sp指向的类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;w = p&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;p可以是一个shared_ptr或weak_ptr。赋值后w与p共享对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;w.reset()&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;将w置为空&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;w.use_count()&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;与w共享对象的shared_ptr的数量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;w.expired()&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;若w.use_count()为0，返回true，否贼返回false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;w.lock()&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;如果expired为true，返回一个空的shared_ptr；否贼返回一个指向w的对象的shared_ptr&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;动态数组&#34;&gt;动态数组&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;new和delete运算符一次分配/释放一个对象，但是某些应用需要一次为很多对象分配内存的功能。为了支持这种需求，提供了两种一次分配一个对象数组的方法。
+&lt;ul&gt;
+&lt;li&gt;c++语言定义了另一种new表达式，可以分配一个对象数组。&lt;/li&gt;
+&lt;li&gt;标准库的allocator类，允许将分配和初始化分离。使用allocator通常会提供更好的性能和更灵活的内存管理能力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
       
     </item>
     
     <item>
       <title>Git</title>
-      <link>htpps://wangwei9160.github.io/post/git/</link>
+      <link>https://wangwei9160.github.io/post/git/</link>
       <pubDate>Sat, 13 Mar 2021 13:27:30 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/git/</guid>
+      <guid>https://wangwei9160.github.io/post/git/</guid>
       
         <description>&lt;h1 id=&#34;github-repository&#34;&gt;github repository&lt;/h1&gt;
 &lt;ul&gt;
@@ -410,10 +495,10 @@ xxxx 是github用户名，name是repository的name&lt;/li&gt;
     
     <item>
       <title>Allocator</title>
-      <link>htpps://wangwei9160.github.io/post/allocator/</link>
+      <link>https://wangwei9160.github.io/post/allocator/</link>
       <pubDate>Fri, 12 Mar 2021 11:34:39 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/allocator/</guid>
+      <guid>https://wangwei9160.github.io/post/allocator/</guid>
       
         <description>&lt;h2 id=&#34;allocator&#34;&gt;allocator&lt;/h2&gt;
 &lt;ul&gt;
@@ -465,6 +550,36 @@ alloc.construct(q++ , &amp;ldquo;hi&amp;rdquo; ) ;    //*q为hi!&lt;br&gt;
 while (q != p)  alloc.destory(&amp;ndash;q); // 释放真正构造的string
 alloc.deallocator(p,n);&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h3 id=&#34;拷贝和填充未初始化内存的算法&#34;&gt;拷贝和填充未初始化内存的算法&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;标准库为allocator类定义了两个伴随算法，可以在未初始化内存中创建对象。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;allocator算法&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;uninitialized_copy( b , e , b2 )&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;从迭代器b和e指出的输入范围中拷贝元素到迭代器b2指定的未构造的原始内存中。b2指向的内存必须足够大，能容纳输入序列中元素的拷贝&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;uninitialized_copy_n( b , n , b2 )&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;从迭代器b指向的元素开始，拷贝n个元素到b2开始的内存中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;uninitialized_fill( b , e , t )&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;在迭代器b和e指定的原始内存范围中创建对象，对象的值均为t的拷贝&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;uninitialized_fill_n( b , n , t )&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;从迭代器b指向的内存地址开始创建n个对象。b必须指向足够大的未构造的原始内存，能够容纳给定数量的对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;h4 id=&#34;预计自己写的allocator类&#34;&gt;预计自己写的allocator类&lt;/h4&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -526,10 +641,10 @@ alloc.deallocator(p,n);&lt;/p&gt;
     
     <item>
       <title>Word</title>
-      <link>htpps://wangwei9160.github.io/post/word/</link>
+      <link>https://wangwei9160.github.io/post/word/</link>
       <pubDate>Mon, 01 Mar 2021 11:53:30 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/word/</guid>
+      <guid>https://wangwei9160.github.io/post/word/</guid>
       
         <description>&lt;h1 id=&#34;英语单词-or-小短文&#34;&gt;英语单词 or 小短文&lt;/h1&gt;
 &lt;h3 id=&#34;210301&#34;&gt;21.03.01&lt;/h3&gt;
@@ -539,10 +654,10 @@ alloc.deallocator(p,n);&lt;/p&gt;
     
     <item>
       <title>STL</title>
-      <link>htpps://wangwei9160.github.io/post/stl/</link>
+      <link>https://wangwei9160.github.io/post/stl/</link>
       <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/stl/</guid>
+      <guid>https://wangwei9160.github.io/post/stl/</guid>
       
         <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;ul&gt;
@@ -552,9 +667,6 @@ alloc.deallocator(p,n);&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;只实现部分STL库文件，增加对STL库的理解。会逐步进行完善。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;size_t ： 定义在cstdef头文件中，是一个与机器相关的unsigned类型，其大小足以存储内存中对象的大小。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;大多数算法都定义在头文件algorithm中。标准库还在头文件numeric中定义了一组数值泛型算法。一般情况下，这些算法并不直接操作容器，而是遍历由两个迭代器指定的一个元素范围来进行操作。&lt;/p&gt;
@@ -569,7 +681,10 @@ auto result = find( vec.cbegin() , vec.cend () , val );&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;decltype:如果明确知道返回的函数是哪一个，就能使用decltype简化书写函数指针返回类型的过程。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;size_t&lt;/strong&gt; ： 定义在cstdef头文件中，是一个与机器相关的unsigned类型，其大小足以存储内存中对象的大小。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;decltype&lt;/strong&gt;：如果明确知道返回的函数是哪一个，就能使用decltype简化书写函数指针返回类型的过程。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;例如，假设两个函数返回类型都是string::size_type，并且各有两个const string&amp;amp;类型的形参，此时我们可以便携第三个函数，它接受一个string类型的参数，返回一个指针，该指针指向前两个函数中的一个。&lt;/li&gt;
 &lt;/ul&gt;
@@ -581,7 +696,15 @@ decltype(sumLength) *getFcn(const string&amp;amp;);&lt;/p&gt;
 &lt;p&gt;将decltype作用于某个函数时，它返回函数类型而不是指针类型。因此，我们显示地加上*以表示我们需要返回指针，而不是函数本身。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;at成员函数 ： at成员函数类似于下标运算符，但如果下标越界，at会抛出一个out_of_range异常。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;at成员函数&lt;/strong&gt; ： at成员函数类似于下标运算符，但如果下标越界，at会抛出一个out_of_range异常。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;explicit&lt;/strong&gt;：在要求隐式转换的程序上下文中，通过将苟泽偶函数声明为explicit加以阻止。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;关键字explicit只对一个实参的构造函数有效。需要多个实参的构造函数不能用于执行隐式转换，所以无需将这些构造函数指定为explicit的。只能在类内声明构造函数时使用explicit关键字，在类外部定义时不应重复。&lt;/li&gt;
+&lt;li&gt;发生隐式转换的一种情况是执行拷贝形式的初始化，此时我们只能&lt;strong&gt;直接初始化&lt;/strong&gt;而不能使用explicit构造函数。&lt;/li&gt;
+&lt;li&gt;可以使用static_cast执行了显示的非隐式的转换。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;顺序容器&#34;&gt;顺序容器&lt;/h2&gt;
@@ -1406,10 +1529,10 @@ remove_copy_if(v1.begin() , v1.end() , back_inserter(v2) , []( int i) { return i
     
     <item>
       <title>codeforces</title>
-      <link>htpps://wangwei9160.github.io/post/codeforces634/</link>
+      <link>https://wangwei9160.github.io/post/codeforces634/</link>
       <pubDate>Wed, 15 Apr 2020 01:00:00 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/codeforces634/</guid>
+      <guid>https://wangwei9160.github.io/post/codeforces634/</guid>
       
         <description>&lt;h1 id=&#34;codeforces&#34;&gt;codeforces&lt;/h1&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
@@ -1595,10 +1718,10 @@ int main(){
     
     <item>
       <title>leetcode第184场周赛</title>
-      <link>htpps://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/</link>
+      <link>https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/</link>
       <pubDate>Sun, 12 Apr 2020 18:00:00 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/</guid>
+      <guid>https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/</guid>
       
         <description>&lt;h1 id=&#34;leetcode第184场周赛&#34;&gt;leetcode第184场周赛&lt;/h1&gt;
 &lt;h3 id=&#34;a-id0目录a&#34;&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
@@ -1733,10 +1856,10 @@ int numOfWays(int n) {
     
     <item>
       <title>Min_max</title>
-      <link>htpps://wangwei9160.github.io/post/min_max/</link>
+      <link>https://wangwei9160.github.io/post/min_max/</link>
       <pubDate>Thu, 09 Apr 2020 21:22:44 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/min_max/</guid>
+      <guid>https://wangwei9160.github.io/post/min_max/</guid>
       
         <description></description>
       
@@ -1744,10 +1867,10 @@ int numOfWays(int n) {
     
     <item>
       <title>New_test</title>
-      <link>htpps://wangwei9160.github.io/post/new_test/</link>
+      <link>https://wangwei9160.github.io/post/new_test/</link>
       <pubDate>Wed, 08 Apr 2020 21:59:56 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/new_test/</guid>
+      <guid>https://wangwei9160.github.io/post/new_test/</guid>
       
         <description>&lt;p&gt;这里是一篇最新的测试文章！&lt;/p&gt;
 &lt;p&gt;重新测试！&lt;/p&gt;
@@ -1757,10 +1880,10 @@ int numOfWays(int n) {
     
     <item>
       <title>Blog</title>
-      <link>htpps://wangwei9160.github.io/post/blog/</link>
+      <link>https://wangwei9160.github.io/post/blog/</link>
       <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/blog/</guid>
+      <guid>https://wangwei9160.github.io/post/blog/</guid>
       
         <description>&lt;p&gt;Hello world!&lt;/p&gt;
 </description>
@@ -1769,10 +1892,10 @@ int numOfWays(int n) {
     
     <item>
       <title>markdown</title>
-      <link>htpps://wangwei9160.github.io/post/markdown/</link>
+      <link>https://wangwei9160.github.io/post/markdown/</link>
       <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/markdown/</guid>
+      <guid>https://wangwei9160.github.io/post/markdown/</guid>
       
         <description>&lt;h1 id=&#34;一级标题&#34;&gt;一级标题&lt;/h1&gt;
 &lt;h2 id=&#34;二级标题&#34;&gt;二级标题&lt;/h2&gt;

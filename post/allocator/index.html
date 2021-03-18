@@ -35,7 +35,7 @@
 <meta name="generator" content="Hugo 0.68.3" />
 
 
-<link rel="canonical" href="#ZgotmplZ" />
+<link rel="canonical" href="https://wangwei9160.github.io/post/allocator/" />
 
 
 
@@ -62,14 +62,14 @@
 <meta property="og:title" content="Allocator" />
 <meta property="og:description" content="allocator 标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="htpps://wangwei9160.github.io/post/allocator/" />
+<meta property="og:url" content="https://wangwei9160.github.io/post/allocator/" />
 <meta property="article:published_time" content="2021-03-12T11:34:39+08:00" />
 <meta property="article:modified_time" content="2021-03-12T11:34:39+08:00" />
 <meta itemprop="name" content="Allocator">
 <meta itemprop="description" content="allocator 标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存">
 <meta itemprop="datePublished" content="2021-03-12T11:34:39&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-12T11:34:39&#43;08:00" />
-<meta itemprop="wordCount" content="701">
+<meta itemprop="wordCount" content="967">
 
 
 
@@ -107,28 +107,28 @@
         
           
           
-            <a class="menu-item-link" href="htpps://wangwei9160.github.io/">首页</a>
+            <a class="menu-item-link" href="https://wangwei9160.github.io/">首页</a>
           
         
       </li><li class="mobile-menu-item">
         
           
           
-            <a class="menu-item-link" href="htpps://wangwei9160.github.io/post/">博客</a>
+            <a class="menu-item-link" href="https://wangwei9160.github.io/post/">博客</a>
           
         
       </li><li class="mobile-menu-item">
         
           
           
-            <a class="menu-item-link" href="htpps://wangwei9160.github.io/tags/">标签</a>
+            <a class="menu-item-link" href="https://wangwei9160.github.io/tags/">标签</a>
           
         
       </li><li class="mobile-menu-item">
         
           
           
-            <a class="menu-item-link" href="htpps://wangwei9160.github.io/categories/">分类</a>
+            <a class="menu-item-link" href="https://wangwei9160.github.io/categories/">分类</a>
           
         
       </li><li class="mobile-menu-item">
@@ -239,7 +239,7 @@
         
           
           
-            <a class="menu-item-link" href="htpps://wangwei9160.github.io/">首页</a>
+            <a class="menu-item-link" href="https://wangwei9160.github.io/">首页</a>
           
 
         
@@ -250,7 +250,7 @@
         
           
           
-            <a class="menu-item-link" href="htpps://wangwei9160.github.io/post/">博客</a>
+            <a class="menu-item-link" href="https://wangwei9160.github.io/post/">博客</a>
           
 
         
@@ -261,7 +261,7 @@
         
           
           
-            <a class="menu-item-link" href="htpps://wangwei9160.github.io/tags/">标签</a>
+            <a class="menu-item-link" href="https://wangwei9160.github.io/tags/">标签</a>
           
 
         
@@ -272,7 +272,7 @@
         
           
           
-            <a class="menu-item-link" href="htpps://wangwei9160.github.io/categories/">分类</a>
+            <a class="menu-item-link" href="https://wangwei9160.github.io/categories/">分类</a>
           
 
         
@@ -326,7 +326,7 @@
           2021-03-12
         </time>
         
-        <span class="more-meta"> 约 701 字 </span>
+        <span class="more-meta"> 约 967 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
 
         
@@ -346,7 +346,7 @@
   <ul>
     <li><a href="#allocator">allocator</a>
       <ul>
-        <li></li>
+        <li><a href="#拷贝和填充未初始化内存的算法">拷贝和填充未初始化内存的算法</a></li>
       </ul>
     </li>
   </ul>
@@ -406,6 +406,36 @@ alloc.construct(q++ , &ldquo;hi&rdquo; ) ;    //*q为hi!<br>
 while (q != p)  alloc.destory(&ndash;q); // 释放真正构造的string
 alloc.deallocator(p,n);</p>
 </blockquote>
+<h3 id="拷贝和填充未初始化内存的算法">拷贝和填充未初始化内存的算法</h3>
+<ul>
+<li>标准库为allocator类定义了两个伴随算法，可以在未初始化内存中创建对象。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">allocator算法</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">uninitialized_copy( b , e , b2 )</td>
+<td align="left">从迭代器b和e指出的输入范围中拷贝元素到迭代器b2指定的未构造的原始内存中。b2指向的内存必须足够大，能容纳输入序列中元素的拷贝</td>
+</tr>
+<tr>
+<td align="left">uninitialized_copy_n( b , n , b2 )</td>
+<td align="left">从迭代器b指向的元素开始，拷贝n个元素到b2开始的内存中</td>
+</tr>
+<tr>
+<td align="left">uninitialized_fill( b , e , t )</td>
+<td align="left">在迭代器b和e指定的原始内存范围中创建对象，对象的值均为t的拷贝</td>
+</tr>
+<tr>
+<td align="left">uninitialized_fill_n( b , n , t )</td>
+<td align="left">从迭代器b指向的内存地址开始创建n个对象。b必须指向足够大的未构造的原始内存，能够容纳给定数量的对象</td>
+</tr>
+</tbody>
+</table>
 <h4 id="预计自己写的allocator类">预计自己写的allocator类</h4>
 <table>
 <thead>
@@ -491,7 +521,7 @@ alloc.deallocator(p,n);</p>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="#ZgotmplZ">STL</a>
+          <a href="https://wangwei9160.github.io/tags/stl/">STL</a>
           
         </div>
 
@@ -570,7 +600,7 @@ alloc.deallocator(p,n);</p>
     </a>
 
 
-<a href="#ZgotmplZ" rel="noopener alternate" type="application/rss&#43;xml"
+<a href="https://wangwei9160.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
     class="iconfont" title="rss" target="_blank">
     <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

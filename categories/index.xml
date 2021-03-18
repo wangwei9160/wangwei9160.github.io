@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Awei</title>
-    <link>htpps://wangwei9160.github.io/categories/</link>
+    <link>https://wangwei9160.github.io/categories/</link>
     <description>Recent content in Categories on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 01 Mar 2021 11:53:30 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 18 Mar 2021 14:59:48 +0800</lastBuildDate>
     
-	<atom:link href="htpps://wangwei9160.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wangwei9160.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>leetcode</title>
+      <link>https://wangwei9160.github.io/categories/leetcode/</link>
+      <pubDate>Thu, 18 Mar 2021 14:59:48 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/categories/leetcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>english</title>
-      <link>htpps://wangwei9160.github.io/categories/english/</link>
+      <link>https://wangwei9160.github.io/categories/english/</link>
       <pubDate>Mon, 01 Mar 2021 11:53:30 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/categories/english/</guid>
+      <guid>https://wangwei9160.github.io/categories/english/</guid>
       <description></description>
     </item>
     
     <item>
       <title>codeforces</title>
-      <link>htpps://wangwei9160.github.io/categories/codeforces/</link>
+      <link>https://wangwei9160.github.io/categories/codeforces/</link>
       <pubDate>Wed, 15 Apr 2020 01:00:00 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/categories/codeforces/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>leetcode</title>
-      <link>htpps://wangwei9160.github.io/categories/leetcode/</link>
-      <pubDate>Sun, 12 Apr 2020 18:00:00 +0800</pubDate>
-      
-      <guid>htpps://wangwei9160.github.io/categories/leetcode/</guid>
+      <guid>https://wangwei9160.github.io/categories/codeforces/</guid>
       <description></description>
     </item>
     

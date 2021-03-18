@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>english on Awei</title>
-    <link>htpps://wangwei9160.github.io/categories/english/</link>
+    <link>https://wangwei9160.github.io/categories/english/</link>
     <description>Recent content in english on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 01 Mar 2021 11:53:30 +0800</lastBuildDate>
     
-	<atom:link href="htpps://wangwei9160.github.io/categories/english/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wangwei9160.github.io/categories/english/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Word</title>
-      <link>htpps://wangwei9160.github.io/post/word/</link>
+      <link>https://wangwei9160.github.io/post/word/</link>
       <pubDate>Mon, 01 Mar 2021 11:53:30 +0800</pubDate>
       
-      <guid>htpps://wangwei9160.github.io/post/word/</guid>
+      <guid>https://wangwei9160.github.io/post/word/</guid>
       <description>英语单词 or 小短文 21.03.01</description>
     </item>
     
