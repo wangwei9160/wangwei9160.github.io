@@ -6,10 +6,125 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 18 Mar 2021 14:59:48 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 19 Mar 2021 15:48:48 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>控制</title>
+      <link>https://wangwei9160.github.io/post/%E6%8B%B7%E8%B4%9D%E6%8E%A7%E5%88%B6/</link>
+      <pubDate>Fri, 19 Mar 2021 15:48:48 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/%E6%8B%B7%E8%B4%9D%E6%8E%A7%E5%88%B6/</guid>
+      
+        <description>&lt;h1 id=&#34;拷贝控制&#34;&gt;拷贝控制&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。&lt;/li&gt;
+&lt;li&gt;一个类通过定义五种特殊的成员函数来控制这些操作，包括：&lt;strong&gt;拷贝构造函数&lt;/strong&gt;、&lt;strong&gt;移动构造函数&lt;/strong&gt;、&lt;strong&gt;拷贝赋值运算符&lt;/strong&gt;、&lt;strong&gt;移动赋值运算符&lt;/strong&gt;和&lt;strong&gt;析构函数&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;拷贝和移动构造函数&lt;/strong&gt;定义了当用同类型的另一个对象初始化本对象时做什么。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;拷贝和移动赋值运算符&lt;/strong&gt;定义了将一个对象赋予同类型的另一个对象时做什么。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;析构函数&lt;/strong&gt;定义了当此类型对象销毁时做什么。
+这些统称为&lt;strong&gt;拷贝控制操作&lt;/strong&gt;。如果不显式的定义这些操作，编译器也会为我们定义，但编译器定义的版本的行为可能并非我们所想的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;拷贝赋值销毁&#34;&gt;拷贝、赋值、销毁&lt;/h2&gt;
+&lt;h4 id=&#34;拷贝构造函数&#34;&gt;拷贝构造函数&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;如果一个构造函数的第一个参数是&lt;strong&gt;自身类类型&lt;/strong&gt;的&lt;strong&gt;引用&lt;/strong&gt;，且任何额外参数都有默认值，则此构造函数是拷贝构造函数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;合成拷贝构造函数&#34;&gt;合成拷贝构造函数：&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;如果没有为一个类定义拷贝构造函数，编译器会为我们定义一个。与合成默认构造函数不同，即使定义了其他构造函数，编译器也会为我们合成一个拷贝构造函数。&lt;/li&gt;
+&lt;li&gt;对某些类来说，合成拷贝构造函数用来阻止拷贝该类类型的对象。一般情况下，合成的拷贝构造函数会将其参数的成员逐个拷贝到正在创建的对象中。编译器从给定对象中依次将每个非static成员拷贝到正在创建的对象中。
+&lt;ul&gt;
+&lt;li&gt;每个成员的类型决定了它如何拷贝：
+&lt;ul&gt;
+&lt;li&gt;类类型的成员，会使用其拷贝构造函数来拷贝。&lt;/li&gt;
+&lt;li&gt;内置类型的成员，直接拷贝。&lt;/li&gt;
+&lt;li&gt;数据类型，合成拷贝构造函数会逐元素拷贝数组类型的成员。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;拷贝初始化&#34;&gt;拷贝初始化&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;直接初始化：实际上是要求编译器使用普通的函数匹配来选择与我们提供的参数最匹配的构造函数。&lt;/li&gt;
+&lt;li&gt;拷贝初始化：要求编译器将右侧运算对象拷贝到正在创建的对象中，有时可能有进行类型转换。
+&lt;ul&gt;
+&lt;li&gt;拷贝初始化不仅在使用=定义变量时发生，在以下情况也会发生：
+&lt;ul&gt;
+&lt;li&gt;将一个对象作为实参传递给一个非引用类型的形参&lt;/li&gt;
+&lt;li&gt;从一个返回类型为非引用类型的函数返回一个对象&lt;/li&gt;
+&lt;li&gt;用花括号列表初始化一个数组中的元素或一个聚合类的成员&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;拷贝/移动构造函数必须是存在的且可以访问的（例，不能是private）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;拷贝赋值运算符&#34;&gt;拷贝赋值运算符&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;类控制其对象如何赋值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;合成拷贝赋值运算符&#34;&gt;合成拷贝赋值运算符&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;与拷贝构造函数一样，如果一个类未定义自己的拷贝赋值运算符，编译器会为它生成一个合成拷贝赋值运算符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;析构函数&#34;&gt;析构函数&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;析构函数释放对象使用的资源，并销毁对象的非static数据成员。&lt;/li&gt;
+&lt;li&gt;析构函数是类的一个成员函数，名字由波浪号接类名构成。它没有返回值，也不接受参数。由于析构函数不接受参数，因此它不能被重载。对一个给定类，只会有唯一一个析构函数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;析构函数的调用&#34;&gt;析构函数的调用&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;无论何时一个对象被销毁，就会自动调用其析构函数：
+&lt;ul&gt;
+&lt;li&gt;变量在离开其作用域时被销毁。&lt;/li&gt;
+&lt;li&gt;当一个对象被销毁时，其成员被销毁。&lt;/li&gt;
+&lt;li&gt;容器被销毁时，其元素被销毁。&lt;/li&gt;
+&lt;li&gt;动态分配的独享，当对指向它的指针引用delete运算符时被销毁。&lt;/li&gt;
+&lt;li&gt;对于临时对象，当创建它的完整表达式结束时被销毁。
+析构函数自动运行，通常情况下无须担心何时释放资源。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;合成析构函数&#34;&gt;合成析构函数&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;当一个类未定义自己的析构函数时，编译器会为它定义一个合成析构函数。对于某些类，合成析构函数被用来组织该类型的对象被销毁。如果不是这种情况，合成析构函数的函数体就为空。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;析构函数体自身并不直接销毁成员&lt;/strong&gt;。成员是在析构函数体之后隐含的析构阶段中被销毁的。在整个对象销毁过程中，析构函数体是作为成员销毁步骤之外的另一部分而进行的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;三五法则&#34;&gt;三/五法则&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;拷贝构造函数、拷贝赋值运算符和析构函数作为三个基本操作可以控制类的拷贝操作。在新标准下，一个类还可以定义一个移动构造函数和一个移动赋值运算符。&lt;/li&gt;
+&lt;li&gt;通常情况下，这些操作应该看作一个整体，只需要其中一个操作而不定义所有操作的情况是很少见的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;default&#34;&gt;=default&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;通过将拷贝控制成员定义为=default来显式地要求编译器生成合成的版本。&lt;/li&gt;
+&lt;li&gt;当在类内使用=default修饰成员的声明时，合成的函数将隐式地声明为内联的。如果不希望合成的成员是内联函数，应该只对成员的类外定义使用=default。&lt;/li&gt;
+&lt;li&gt;只能对具有合成版本的成员函数使用=default（即，默认构造函数或拷贝控制成员）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;阻止拷贝&#34;&gt;阻止拷贝&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;对于某些类来说，拷贝构造函数和拷贝赋值运算符是没有合理的意义的。如果不定义拷贝控制成员，编译器会为它生成合成的版本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;定义删除的函数&#34;&gt;定义删除的函数&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;通过将拷贝构造函数和拷贝赋值运算符定义为&lt;strong&gt;删除的函数&lt;/strong&gt;来阻止拷贝。删除的函数是这样一种函数：我们虽然声明了它们，但不能以任何方式使用它们。在函数的参数列表后面机上=delete来指出我们希望将它定义为删除的。
+&lt;ul&gt;
+&lt;li&gt;=delete通知编译器，我们不希望定义这些成员。&lt;/li&gt;
+&lt;li&gt;=delete必须出现在函数&lt;strong&gt;第一次声明&lt;/strong&gt;的时候。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;析构函数不能是删除的成员&lt;/strong&gt;。不能删除析构函数。如果析构函数被删除，就无法销毁此类型的对象。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>Leetcode第230场周赛</title>
@@ -480,7 +595,7 @@ xxxx 是github用户名，name是repository的name&lt;/li&gt;
 &lt;li&gt;git add .&lt;/li&gt;
 &lt;li&gt;git commit -m &amp;ldquo;new&amp;rdquo;&lt;/li&gt;
 &lt;li&gt;git push -u origin main
-在新建仓库分支是main。&lt;/li&gt;
+在新建仓库分支是main。可以在git中查看对应的分支。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;维护repository&#34;&gt;维护repository&lt;/h2&gt;
 &lt;ul&gt;
@@ -699,11 +814,24 @@ decltype(sumLength) *getFcn(const string&amp;amp;);&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;at成员函数&lt;/strong&gt; ： at成员函数类似于下标运算符，但如果下标越界，at会抛出一个out_of_range异常。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;explicit&lt;/strong&gt;：在要求隐式转换的程序上下文中，通过将苟泽偶函数声明为explicit加以阻止。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;explicit&lt;/strong&gt;：在要求隐式转换的程序上下文中，通过将构造函数声明为explicit加以阻止。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;关键字explicit只对一个实参的构造函数有效。需要多个实参的构造函数不能用于执行隐式转换，所以无需将这些构造函数指定为explicit的。只能在类内声明构造函数时使用explicit关键字，在类外部定义时不应重复。&lt;/li&gt;
 &lt;li&gt;发生隐式转换的一种情况是执行拷贝形式的初始化，此时我们只能&lt;strong&gt;直接初始化&lt;/strong&gt;而不能使用explicit构造函数。&lt;/li&gt;
 &lt;li&gt;可以使用static_cast执行了显示的非隐式的转换。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;构造函数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;类通过一个或几个特殊的成员函数来控制其对象的初始化过程。&lt;/li&gt;
+&lt;li&gt;默认构造函数：类通过一个特殊的构造函数来控制默认初始化过程。默认构造函数无须任何实参。&lt;/li&gt;
+&lt;li&gt;合成的默认构造函数：由编译器创建的构造函数。一般合成的默认构造函数将按照如下规则初始化类的数据成员：
+&lt;ul&gt;
+&lt;li&gt;如果存在类内的初始化，用它来初始化成员。&lt;/li&gt;
+&lt;li&gt;否则，默认初始化该成员。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1521,6 +1649,31 @@ remove_copy_if(v1.begin() , v1.end() , back_inserter(v2) , []( int i) { return i
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://wangwei9160.github.io/post/linux/</link>
+      <pubDate>Wed, 20 Jan 2021 00:20:24 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/linux/</guid>
+      
+        <description>&lt;h4 id=&#34;linux-下查看进程内的线程情况&#34;&gt;Linux 下查看进程内的线程情况&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;方法一：ps命令
+&lt;blockquote&gt;
+&lt;p&gt;ps -ef | grep 进程关键字
+ps -T -p 线程&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;方法二：top命令
+&lt;blockquote&gt;
+&lt;p&gt;top -H -p 线程&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 </description>
