@@ -6,10 +6,170 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 19 Mar 2021 15:48:48 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Mar 2021 10:46:16 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>网络编程</title>
+      <link>https://wangwei9160.github.io/post/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Sat, 20 Mar 2021 10:46:16 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+      
+        <description>&lt;h2 id=&#34;阻塞非阻塞同步异步&#34;&gt;阻塞、非阻塞、同步、异步&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;阻塞/非阻塞&lt;/strong&gt;关注的是&lt;strong&gt;程序在等待调用结果&lt;/strong&gt;时的状态。阻塞是等待。非阻塞是不需要等待。例如：
+&lt;ul&gt;
+&lt;li&gt;去书店问老板有没有xx书。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;阻塞&lt;/strong&gt;会将自己&amp;quot;挂起&amp;rdquo;，直到得到老板回应。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;非阻塞&lt;/strong&gt;则会不管老板有没有回应，先弄自己的，偶尔check一下老板有没有回应。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;同步/异步&lt;/strong&gt;关注的是&lt;strong&gt;消息通信机制&lt;/strong&gt;。同步是主动等待数据。异步是被动接受数据，被调用者通过&amp;quot;状态&amp;rdquo;、&amp;ldquo;通知&amp;rdquo;、&amp;ldquo;回调&amp;quot;三种途径通知调用者。
+&lt;ul&gt;
+&lt;li&gt;打电话问书店老板有没有xx书。&lt;/li&gt;
+&lt;li&gt;如果是&lt;strong&gt;同步&lt;/strong&gt;机制，书店老板说我查一下，然后开始等待老板查询结果，当老板告诉结果时，才会返回结果（返回）。&lt;/li&gt;
+&lt;li&gt;如果是&lt;strong&gt;异步&lt;/strong&gt;机制，老板则是说我查一下查完告诉你结果，就挂掉电话（返回没有结果），当老板查好后通过回电的方式告诉结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;io模型&#34;&gt;IO模型&lt;/h2&gt;
+&lt;p&gt;IO的五种模型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;阻塞IO&lt;/li&gt;
+&lt;li&gt;非阻塞IO&lt;/li&gt;
+&lt;li&gt;IO多路复用&lt;/li&gt;
+&lt;li&gt;信号驱动IO&lt;/li&gt;
+&lt;li&gt;异步IO&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以去书店买书，然而书店没有书为例。
+1、阻塞IO
+一直在书店等待，直到书店有书，这是&lt;strong&gt;同步阻塞IO&lt;/strong&gt;
+2、非阻塞IO
+隔一段时间去书店看看有没有书，这是&lt;strong&gt;同步非阻塞IO&lt;/strong&gt;
+3、IO多路复用
+整个事件只有在select、poll、epoll这些调用的时候才会阻塞，收发客户信息不会阻塞。
+来书店买书的时候，书店有一排的书，并不知道哪个书架上有书，老板告诉去哪里找书，这是&lt;strong&gt;IO多路复用&lt;/strong&gt;
+4、信号驱动IO
+老板在书店有书的时候告诉有书，这是&lt;strong&gt;信号驱动IO&lt;/strong&gt;
+5、异步IO
+老板在书店有书的时候直接寄到家里，这是&lt;strong&gt;异步IO&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;selectpollepoll&#34;&gt;select、poll、epoll&lt;/h2&gt;
+&lt;p&gt;以老师让n个学生答题，检查学生做的是否正确：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;select：
+&lt;ul&gt;
+&lt;li&gt;每一次调用，都需要将fd(file descriptor)集合从用户态拷贝到内核态，若fd数量很大，将会造成很大的开销。&lt;/li&gt;
+&lt;li&gt;每一次调用，都需要在内核遍历所有传递进来的fd集合，若fd集合数量很大，将会造成很大的开销&lt;/li&gt;
+&lt;li&gt;select最多监听1024个描述符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;poll：本质上和select没有区别，没有最大连接的限制，基于链表来存储
+&lt;ul&gt;
+&lt;li&gt;将用户传入的数组拷贝到内核空间，查询每个fd对应的设备状态，如果设备就绪则在设备等待队列中加入一项并进行遍历，如果遍历完所有fd没有发现就绪设备，则挂起，知道设备就绪或者主动超时，被唤醒后继续遍历，该过程经历了许多无用的遍历。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;epoll：相比于select和poll，epoll没有描述符限制。
+&lt;ul&gt;
+&lt;li&gt;没有最大并发连接的限制。&lt;/li&gt;
+&lt;li&gt;只管活跃可用的fd，而跟连接总数无关。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ltet&#34;&gt;LT、ET&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;LT(level triggered)是缺省的工作方式，&lt;strong&gt;只要缓冲区有数据就会触发&lt;/strong&gt;，支持block和no-block socket。
+&lt;ul&gt;
+&lt;li&gt;优点：缓冲区有数据内核就会一直通知，保证了数据的完整性。&lt;/li&gt;
+&lt;li&gt;缺点：只要缓冲区有数据内核就会一直通知，导致内核频繁切换到用户态，内核效率低下。&lt;/li&gt;
+&lt;li&gt;select和poll都是LT。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ET(Edge triggered)是&lt;strong&gt;高速工作模式，只有数据到来才触发，不管原缓冲区是否还有数据&lt;/strong&gt;，只支持no-block socket。
+&lt;ul&gt;
+&lt;li&gt;优点：内核只为就绪的描述符发送一次通知，减少了内核的资源浪费。&lt;/li&gt;
+&lt;li&gt;缺点：缓冲区可能有数据剩余。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;reactor&#34;&gt;Reactor&lt;/h2&gt;
+&lt;p&gt;对于支持多连接的服务器，一般总结为2种fd和3种事件。&lt;/p&gt;
+&lt;h5 id=&#34;2种fd&#34;&gt;2种fd：&lt;/h5&gt;
+&lt;p&gt;1、listenfd：一般情况下，只有一个。用来监听特定的端口(如80)。
+2、connfd：每个连接都有一个connfd。用来收发数据。&lt;/p&gt;
+&lt;h5 id=&#34;3种事件&#34;&gt;3种事件：&lt;/h5&gt;
+&lt;p&gt;1、listenfd进行accept阻塞监听，创建一个connfd。
+2、用户态/内核态copy数据。每个connfd对应着2个应用缓冲区，readbuf和writebuf。
+3、处理connfd发来的数据。业务逻辑处理，准备response到writebuf。&lt;/p&gt;
+&lt;p&gt;Reactor模型基于事件驱动，特别适合处理海量的I/O事件。
+Reactor模型中定义的三种角色：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reactor：负责监听和分配事件，将I/O事件分配给对应的Handler。新的事件包含连接建立就绪、读就绪、写就绪等。&lt;/li&gt;
+&lt;li&gt;Acceptor：处理客户端新连接，并分派请求到处理器链中。&lt;/li&gt;
+&lt;li&gt;Handler：将自身与事件绑定，执行非阻塞读/写人物，完成channel的读入，完成处理业务逻辑后，负责将结果写出channel。可用资源池来管理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Reatcor处理请求的流程：
+读取操作：
+1、应用程序注册读就绪事件和相关联的时间处理器
+2、事件分离器等待时间的发生
+3、当发生读就绪事件的时候，时间分离器调用第一步注册的事件处理器。
+写入操作类似于读取操作，第一步是写就绪事件。&lt;/p&gt;
+&lt;h4 id=&#34;单reactor单线程模型&#34;&gt;单Reactor单线程模型&lt;/h4&gt;
+&lt;p&gt;Reactor线程负责多路分离套接字，accept新连接，并分派请求到handler，Redis使用Reactor单进程的模型。&lt;/p&gt;
+&lt;p&gt;消息处理流程：
+1、Reactor对象通过select监控连接事件，收到事件后通过dispatch进行转发。
+2、如果是连接建立的事件，则由acceptor接受连接，并创建handler处理后续事件。
+3、如果不是建立连接事件，则Reactor会分发调用Handle来响应。
+4、Handler会会完成read-&amp;gt;业务处理-&amp;gt;send的完整业务流程。&lt;/p&gt;
+&lt;p&gt;单Reactor单线程模型可以应用于一些小容量应用场景，但是对于高负载、大并发的应用场景却不合适，主要原因：
+1、即使Reactor线程的CPU负载达到100%，也无法满足海量消息的编码、解码、读取和发送。
+2、当Reactor线程负载过重之后，处理速度将变慢，这会导致大量客户端连接超时，超时之后重发，更加重Reactor线程的负载，最终会导致大量消息挤压和处理超时。
+3、一旦Reactor线程意外中断或者进入死循环，会导致整个系统通信模块不可用，不能接受和处理外部消息。&lt;/p&gt;
+&lt;h4 id=&#34;单reactor多线程模型&#34;&gt;单Reactor多线程模型&lt;/h4&gt;
+&lt;p&gt;该模型在事件处理器（Handler）部分采用了多线程（线程池）。&lt;/p&gt;
+&lt;p&gt;消息处理流程：
+1、Reactor对象通过select监控客户端请求事件，收到事件后通过dispatch进行分发。
+2、如果是建立连接请求事件，则由acceptor通过accept处理连接请求，然后创建一个Handler对象处理连接完成后续各种事件。
+3、如果不是建立连接请求事件，则Reactor会分发调用连接对应的Handler来响应。
+4、Handler只负责响应事件，不做具体业务处理，通过read读取数据后，会分发给后面的Worker线程池进行业务处理。
+5、Worker线程池会分配独立的线程完成真正的业务处理，如何将响应结果发给Handler进行处理。
+6、Handler收到响应结果后通过send将相应结果返回给Client。&lt;/p&gt;
+&lt;p&gt;这个模型存在的问题：
+1、多线程数据共享和访问比较复杂，涉及到共享数据的互斥和保护机制。
+2、Reactor承担所有时间的监听和响应，只在主线程中运行，可能存在性能问题。&lt;/p&gt;
+&lt;h4 id=&#34;主从reactor多线程模型&#34;&gt;主从Reactor多线程模型&lt;/h4&gt;
+&lt;p&gt;将Reactor分成两部分：
+1、mainReactor负责监听server socket，用来处理网络IO连接建立操作，将建立的socket channel指定注册给subReactor
+2、subReactor主要做和建立起来的socket做数据交互和事件业务处理操作。通常，subReactor个数上可与CPU个数等同。&lt;/p&gt;
+&lt;p&gt;消息处理流程：
+1、从主线程池中随机选择一个Reactor线程作为acceptor线程，用于绑定监听端口，接受客户端连接。
+2、acceptor线程接受客户端连接请求之后创建新的socket channel，将其注册到主线程池的其他Reactor线程上，由其负责接入认证、IP黑白名单过滤、握手等操作。
+3、步骤2完成后，业务层的链路正式连接，将socket channel从主线程池的Reactor线程的多路复用器摘除，重新注册到sub线程池的线程上，并创建一个Handler用于处理各种连接事件。
+4、当有新的事件发生时，subReactor会调用连接对应的Handler进行相应。
+5、Handler通过Read读取数据后，会分发给后面的Worker线程池进行业务处理。
+6、Worker线程池会分配独立的线程完成真正的业务处理，如何将相应结果发送给Handler进行处理。
+7、Handler收到响应结果后通过send将响应结果返回给Client&lt;/p&gt;
+&lt;h4 id=&#34;keepalive&#34;&gt;keepalive&lt;/h4&gt;
+&lt;p&gt;Keepalive是TCP中一个检测死连接的心跳包保活机制，原理就是TCP在闲了一段时间后会发送数据给对方。
+1、如果对端会发送ACK，那么就认为对端是存货的。
+2、如果对端就会发送RST包，那么TCP就会撤销改连接。
+3、如果对端不发送ACK、RST，那么TCP在一段超时重传之后自动撤销连接。&lt;/p&gt;
+&lt;p&gt;RST：重置连接、复位连接，用来关闭异常的连接。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;什么时候发送RST包
+&lt;ul&gt;
+&lt;li&gt;建立连接的SYN到达某端口，但是该端口上没有正在监听的服务。&lt;/li&gt;
+&lt;li&gt;TCP收到了一个根本不存在的连接上的分节。&lt;/li&gt;
+&lt;li&gt;请求超时。 接收数据超时时，会发送RST包。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/wangwei9160/wangwei9160.github.io/raw/master/image/example.jpg&#34; alt=&#34;&#34;&gt;)&lt;/p&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>控制</title>

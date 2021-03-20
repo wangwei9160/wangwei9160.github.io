@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>控制 - Awei</title>
+  <title>网络编程 - Awei</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="拷贝控制 当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。 一个类通过定义五种特殊的成员函数来控制这些操作，包括" />
+  <meta name="description" content="阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有xx书。 阻塞" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -35,7 +35,7 @@
 <meta name="generator" content="Hugo 0.68.3" />
 
 
-<link rel="canonical" href="https://wangwei9160.github.io/post/%E6%8B%B7%E8%B4%9D%E6%8E%A7%E5%88%B6/" />
+<link rel="canonical" href="https://wangwei9160.github.io/post/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" />
 
 
 
@@ -59,23 +59,23 @@
 
 
 
-<meta property="og:title" content="控制" />
-<meta property="og:description" content="拷贝控制 当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。 一个类通过定义五种特殊的成员函数来控制这些操作，包括" />
+<meta property="og:title" content="网络编程" />
+<meta property="og:description" content="阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有xx书。 阻塞" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://wangwei9160.github.io/post/%E6%8B%B7%E8%B4%9D%E6%8E%A7%E5%88%B6/" />
-<meta property="article:published_time" content="2021-03-19T15:48:48+08:00" />
-<meta property="article:modified_time" content="2021-03-19T15:48:48+08:00" />
-<meta itemprop="name" content="控制">
-<meta itemprop="description" content="拷贝控制 当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。 一个类通过定义五种特殊的成员函数来控制这些操作，包括">
-<meta itemprop="datePublished" content="2021-03-19T15:48:48&#43;08:00" />
-<meta itemprop="dateModified" content="2021-03-19T15:48:48&#43;08:00" />
-<meta itemprop="wordCount" content="1856">
+<meta property="og:url" content="https://wangwei9160.github.io/post/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" />
+<meta property="article:published_time" content="2021-03-20T10:46:16+08:00" />
+<meta property="article:modified_time" content="2021-03-20T10:46:16+08:00" />
+<meta itemprop="name" content="网络编程">
+<meta itemprop="description" content="阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有xx书。 阻塞">
+<meta itemprop="datePublished" content="2021-03-20T10:46:16&#43;08:00" />
+<meta itemprop="dateModified" content="2021-03-20T10:46:16&#43;08:00" />
+<meta itemprop="wordCount" content="3607">
 
 
 
-<meta itemprop="keywords" content="c&#43;&#43;," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="控制"/>
-<meta name="twitter:description" content="拷贝控制 当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。 一个类通过定义五种特殊的成员函数来控制这些操作，包括"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="网络编程"/>
+<meta name="twitter:description" content="阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有xx书。 阻塞"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -319,15 +319,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">控制</h1>
+      <h1 class="post-title">网络编程</h1>
       
       <div class="post-meta">
-        <time datetime="2021-03-19" class="post-time">
-          2021-03-19
+        <time datetime="2021-03-20" class="post-time">
+          2021-03-20
         </time>
         
-        <span class="more-meta"> 约 1856 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span class="more-meta"> 约 3607 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
 
         
         
@@ -344,7 +344,11 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#拷贝赋值销毁">拷贝、赋值、销毁</a>
+    <li><a href="#阻塞非阻塞同步异步">阻塞、非阻塞、同步、异步</a></li>
+    <li><a href="#io模型">IO模型</a></li>
+    <li><a href="#selectpollepoll">select、poll、epoll</a></li>
+    <li><a href="#ltet">LT、ET</a></li>
+    <li><a href="#reactor">Reactor</a>
       <ul>
         <li></li>
       </ul>
@@ -356,110 +360,155 @@
 
     
     <div class="post-content">
-      <h1 id="拷贝控制">拷贝控制</h1>
+      <h2 id="阻塞非阻塞同步异步">阻塞、非阻塞、同步、异步</h2>
 <ul>
-<li>当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。</li>
-<li>一个类通过定义五种特殊的成员函数来控制这些操作，包括：<strong>拷贝构造函数</strong>、<strong>移动构造函数</strong>、<strong>拷贝赋值运算符</strong>、<strong>移动赋值运算符</strong>和<strong>析构函数</strong>。
+<li><strong>阻塞/非阻塞</strong>关注的是<strong>程序在等待调用结果</strong>时的状态。阻塞是等待。非阻塞是不需要等待。例如：
 <ul>
-<li><strong>拷贝和移动构造函数</strong>定义了当用同类型的另一个对象初始化本对象时做什么。</li>
-<li><strong>拷贝和移动赋值运算符</strong>定义了将一个对象赋予同类型的另一个对象时做什么。</li>
-<li><strong>析构函数</strong>定义了当此类型对象销毁时做什么。
-这些统称为<strong>拷贝控制操作</strong>。如果不显式的定义这些操作，编译器也会为我们定义，但编译器定义的版本的行为可能并非我们所想的。</li>
+<li>去书店问老板有没有xx书。</li>
+<li><strong>阻塞</strong>会将自己&quot;挂起&rdquo;，直到得到老板回应。</li>
+<li><strong>非阻塞</strong>则会不管老板有没有回应，先弄自己的，偶尔check一下老板有没有回应。</li>
+</ul>
+</li>
+<li><strong>同步/异步</strong>关注的是<strong>消息通信机制</strong>。同步是主动等待数据。异步是被动接受数据，被调用者通过&quot;状态&rdquo;、&ldquo;通知&rdquo;、&ldquo;回调&quot;三种途径通知调用者。
+<ul>
+<li>打电话问书店老板有没有xx书。</li>
+<li>如果是<strong>同步</strong>机制，书店老板说我查一下，然后开始等待老板查询结果，当老板告诉结果时，才会返回结果（返回）。</li>
+<li>如果是<strong>异步</strong>机制，老板则是说我查一下查完告诉你结果，就挂掉电话（返回没有结果），当老板查好后通过回电的方式告诉结果。</li>
 </ul>
 </li>
 </ul>
-<h2 id="拷贝赋值销毁">拷贝、赋值、销毁</h2>
-<h4 id="拷贝构造函数">拷贝构造函数</h4>
+<h2 id="io模型">IO模型</h2>
+<p>IO的五种模型：</p>
 <ul>
-<li>如果一个构造函数的第一个参数是<strong>自身类类型</strong>的<strong>引用</strong>，且任何额外参数都有默认值，则此构造函数是拷贝构造函数。</li>
+<li>阻塞IO</li>
+<li>非阻塞IO</li>
+<li>IO多路复用</li>
+<li>信号驱动IO</li>
+<li>异步IO</li>
 </ul>
-<h5 id="合成拷贝构造函数">合成拷贝构造函数：</h5>
+<p>以去书店买书，然而书店没有书为例。
+1、阻塞IO
+一直在书店等待，直到书店有书，这是<strong>同步阻塞IO</strong>
+2、非阻塞IO
+隔一段时间去书店看看有没有书，这是<strong>同步非阻塞IO</strong>
+3、IO多路复用
+整个事件只有在select、poll、epoll这些调用的时候才会阻塞，收发客户信息不会阻塞。
+来书店买书的时候，书店有一排的书，并不知道哪个书架上有书，老板告诉去哪里找书，这是<strong>IO多路复用</strong>
+4、信号驱动IO
+老板在书店有书的时候告诉有书，这是<strong>信号驱动IO</strong>
+5、异步IO
+老板在书店有书的时候直接寄到家里，这是<strong>异步IO</strong></p>
+<h2 id="selectpollepoll">select、poll、epoll</h2>
+<p>以老师让n个学生答题，检查学生做的是否正确：</p>
 <ul>
-<li>如果没有为一个类定义拷贝构造函数，编译器会为我们定义一个。与合成默认构造函数不同，即使定义了其他构造函数，编译器也会为我们合成一个拷贝构造函数。</li>
-<li>对某些类来说，合成拷贝构造函数用来阻止拷贝该类类型的对象。一般情况下，合成的拷贝构造函数会将其参数的成员逐个拷贝到正在创建的对象中。编译器从给定对象中依次将每个非static成员拷贝到正在创建的对象中。
+<li>select：
 <ul>
-<li>每个成员的类型决定了它如何拷贝：
+<li>每一次调用，都需要将fd(file descriptor)集合从用户态拷贝到内核态，若fd数量很大，将会造成很大的开销。</li>
+<li>每一次调用，都需要在内核遍历所有传递进来的fd集合，若fd集合数量很大，将会造成很大的开销</li>
+<li>select最多监听1024个描述符。</li>
+</ul>
+</li>
+<li>poll：本质上和select没有区别，没有最大连接的限制，基于链表来存储
 <ul>
-<li>类类型的成员，会使用其拷贝构造函数来拷贝。</li>
-<li>内置类型的成员，直接拷贝。</li>
-<li>数据类型，合成拷贝构造函数会逐元素拷贝数组类型的成员。</li>
+<li>将用户传入的数组拷贝到内核空间，查询每个fd对应的设备状态，如果设备就绪则在设备等待队列中加入一项并进行遍历，如果遍历完所有fd没有发现就绪设备，则挂起，知道设备就绪或者主动超时，被唤醒后继续遍历，该过程经历了许多无用的遍历。</li>
+</ul>
+</li>
+<li>epoll：相比于select和poll，epoll没有描述符限制。
+<ul>
+<li>没有最大并发连接的限制。</li>
+<li>只管活跃可用的fd，而跟连接总数无关。</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h5 id="拷贝初始化">拷贝初始化</h5>
+<h2 id="ltet">LT、ET</h2>
 <ul>
-<li>直接初始化：实际上是要求编译器使用普通的函数匹配来选择与我们提供的参数最匹配的构造函数。</li>
-<li>拷贝初始化：要求编译器将右侧运算对象拷贝到正在创建的对象中，有时可能有进行类型转换。
+<li>LT(level triggered)是缺省的工作方式，<strong>只要缓冲区有数据就会触发</strong>，支持block和no-block socket。
 <ul>
-<li>拷贝初始化不仅在使用=定义变量时发生，在以下情况也会发生：
-<ul>
-<li>将一个对象作为实参传递给一个非引用类型的形参</li>
-<li>从一个返回类型为非引用类型的函数返回一个对象</li>
-<li>用花括号列表初始化一个数组中的元素或一个聚合类的成员</li>
+<li>优点：缓冲区有数据内核就会一直通知，保证了数据的完整性。</li>
+<li>缺点：只要缓冲区有数据内核就会一直通知，导致内核频繁切换到用户态，内核效率低下。</li>
+<li>select和poll都是LT。</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>拷贝/移动构造函数必须是存在的且可以访问的（例，不能是private）</li>
-</ul>
-<h4 id="拷贝赋值运算符">拷贝赋值运算符</h4>
+<li>ET(Edge triggered)是<strong>高速工作模式，只有数据到来才触发，不管原缓冲区是否还有数据</strong>，只支持no-block socket。
 <ul>
-<li>类控制其对象如何赋值</li>
-</ul>
-<h6 id="合成拷贝赋值运算符">合成拷贝赋值运算符</h6>
-<ul>
-<li>与拷贝构造函数一样，如果一个类未定义自己的拷贝赋值运算符，编译器会为它生成一个合成拷贝赋值运算符。</li>
-</ul>
-<h4 id="析构函数">析构函数</h4>
-<ul>
-<li>析构函数释放对象使用的资源，并销毁对象的非static数据成员。</li>
-<li>析构函数是类的一个成员函数，名字由波浪号接类名构成。它没有返回值，也不接受参数。由于析构函数不接受参数，因此它不能被重载。对一个给定类，只会有唯一一个析构函数。</li>
-</ul>
-<h5 id="析构函数的调用">析构函数的调用</h5>
-<ul>
-<li>无论何时一个对象被销毁，就会自动调用其析构函数：
-<ul>
-<li>变量在离开其作用域时被销毁。</li>
-<li>当一个对象被销毁时，其成员被销毁。</li>
-<li>容器被销毁时，其元素被销毁。</li>
-<li>动态分配的独享，当对指向它的指针引用delete运算符时被销毁。</li>
-<li>对于临时对象，当创建它的完整表达式结束时被销毁。
-析构函数自动运行，通常情况下无须担心何时释放资源。</li>
+<li>优点：内核只为就绪的描述符发送一次通知，减少了内核的资源浪费。</li>
+<li>缺点：缓冲区可能有数据剩余。</li>
 </ul>
 </li>
 </ul>
-<h5 id="合成析构函数">合成析构函数</h5>
+<h2 id="reactor">Reactor</h2>
+<p>对于支持多连接的服务器，一般总结为2种fd和3种事件。</p>
+<h5 id="2种fd">2种fd：</h5>
+<p>1、listenfd：一般情况下，只有一个。用来监听特定的端口(如80)。
+2、connfd：每个连接都有一个connfd。用来收发数据。</p>
+<h5 id="3种事件">3种事件：</h5>
+<p>1、listenfd进行accept阻塞监听，创建一个connfd。
+2、用户态/内核态copy数据。每个connfd对应着2个应用缓冲区，readbuf和writebuf。
+3、处理connfd发来的数据。业务逻辑处理，准备response到writebuf。</p>
+<p>Reactor模型基于事件驱动，特别适合处理海量的I/O事件。
+Reactor模型中定义的三种角色：</p>
 <ul>
-<li>当一个类未定义自己的析构函数时，编译器会为它定义一个合成析构函数。对于某些类，合成析构函数被用来组织该类型的对象被销毁。如果不是这种情况，合成析构函数的函数体就为空。</li>
-<li><strong>析构函数体自身并不直接销毁成员</strong>。成员是在析构函数体之后隐含的析构阶段中被销毁的。在整个对象销毁过程中，析构函数体是作为成员销毁步骤之外的另一部分而进行的。</li>
+<li>Reactor：负责监听和分配事件，将I/O事件分配给对应的Handler。新的事件包含连接建立就绪、读就绪、写就绪等。</li>
+<li>Acceptor：处理客户端新连接，并分派请求到处理器链中。</li>
+<li>Handler：将自身与事件绑定，执行非阻塞读/写人物，完成channel的读入，完成处理业务逻辑后，负责将结果写出channel。可用资源池来管理。</li>
 </ul>
-<h4 id="三五法则">三/五法则</h4>
+<p>Reatcor处理请求的流程：
+读取操作：
+1、应用程序注册读就绪事件和相关联的时间处理器
+2、事件分离器等待时间的发生
+3、当发生读就绪事件的时候，时间分离器调用第一步注册的事件处理器。
+写入操作类似于读取操作，第一步是写就绪事件。</p>
+<h4 id="单reactor单线程模型">单Reactor单线程模型</h4>
+<p>Reactor线程负责多路分离套接字，accept新连接，并分派请求到handler，Redis使用Reactor单进程的模型。</p>
+<p>消息处理流程：
+1、Reactor对象通过select监控连接事件，收到事件后通过dispatch进行转发。
+2、如果是连接建立的事件，则由acceptor接受连接，并创建handler处理后续事件。
+3、如果不是建立连接事件，则Reactor会分发调用Handle来响应。
+4、Handler会会完成read-&gt;业务处理-&gt;send的完整业务流程。</p>
+<p>单Reactor单线程模型可以应用于一些小容量应用场景，但是对于高负载、大并发的应用场景却不合适，主要原因：
+1、即使Reactor线程的CPU负载达到100%，也无法满足海量消息的编码、解码、读取和发送。
+2、当Reactor线程负载过重之后，处理速度将变慢，这会导致大量客户端连接超时，超时之后重发，更加重Reactor线程的负载，最终会导致大量消息挤压和处理超时。
+3、一旦Reactor线程意外中断或者进入死循环，会导致整个系统通信模块不可用，不能接受和处理外部消息。</p>
+<h4 id="单reactor多线程模型">单Reactor多线程模型</h4>
+<p>该模型在事件处理器（Handler）部分采用了多线程（线程池）。</p>
+<p>消息处理流程：
+1、Reactor对象通过select监控客户端请求事件，收到事件后通过dispatch进行分发。
+2、如果是建立连接请求事件，则由acceptor通过accept处理连接请求，然后创建一个Handler对象处理连接完成后续各种事件。
+3、如果不是建立连接请求事件，则Reactor会分发调用连接对应的Handler来响应。
+4、Handler只负责响应事件，不做具体业务处理，通过read读取数据后，会分发给后面的Worker线程池进行业务处理。
+5、Worker线程池会分配独立的线程完成真正的业务处理，如何将响应结果发给Handler进行处理。
+6、Handler收到响应结果后通过send将相应结果返回给Client。</p>
+<p>这个模型存在的问题：
+1、多线程数据共享和访问比较复杂，涉及到共享数据的互斥和保护机制。
+2、Reactor承担所有时间的监听和响应，只在主线程中运行，可能存在性能问题。</p>
+<h4 id="主从reactor多线程模型">主从Reactor多线程模型</h4>
+<p>将Reactor分成两部分：
+1、mainReactor负责监听server socket，用来处理网络IO连接建立操作，将建立的socket channel指定注册给subReactor
+2、subReactor主要做和建立起来的socket做数据交互和事件业务处理操作。通常，subReactor个数上可与CPU个数等同。</p>
+<p>消息处理流程：
+1、从主线程池中随机选择一个Reactor线程作为acceptor线程，用于绑定监听端口，接受客户端连接。
+2、acceptor线程接受客户端连接请求之后创建新的socket channel，将其注册到主线程池的其他Reactor线程上，由其负责接入认证、IP黑白名单过滤、握手等操作。
+3、步骤2完成后，业务层的链路正式连接，将socket channel从主线程池的Reactor线程的多路复用器摘除，重新注册到sub线程池的线程上，并创建一个Handler用于处理各种连接事件。
+4、当有新的事件发生时，subReactor会调用连接对应的Handler进行相应。
+5、Handler通过Read读取数据后，会分发给后面的Worker线程池进行业务处理。
+6、Worker线程池会分配独立的线程完成真正的业务处理，如何将相应结果发送给Handler进行处理。
+7、Handler收到响应结果后通过send将响应结果返回给Client</p>
+<h4 id="keepalive">keepalive</h4>
+<p>Keepalive是TCP中一个检测死连接的心跳包保活机制，原理就是TCP在闲了一段时间后会发送数据给对方。
+1、如果对端会发送ACK，那么就认为对端是存货的。
+2、如果对端就会发送RST包，那么TCP就会撤销改连接。
+3、如果对端不发送ACK、RST，那么TCP在一段超时重传之后自动撤销连接。</p>
+<p>RST：重置连接、复位连接，用来关闭异常的连接。</p>
 <ul>
-<li>拷贝构造函数、拷贝赋值运算符和析构函数作为三个基本操作可以控制类的拷贝操作。在新标准下，一个类还可以定义一个移动构造函数和一个移动赋值运算符。</li>
-<li>通常情况下，这些操作应该看作一个整体，只需要其中一个操作而不定义所有操作的情况是很少见的。</li>
-</ul>
-<h4 id="default">=default</h4>
+<li>什么时候发送RST包
 <ul>
-<li>通过将拷贝控制成员定义为=default来显式地要求编译器生成合成的版本。</li>
-<li>当在类内使用=default修饰成员的声明时，合成的函数将隐式地声明为内联的。如果不希望合成的成员是内联函数，应该只对成员的类外定义使用=default。</li>
-<li>只能对具有合成版本的成员函数使用=default（即，默认构造函数或拷贝控制成员）。</li>
-</ul>
-<h4 id="阻止拷贝">阻止拷贝</h4>
-<ul>
-<li>对于某些类来说，拷贝构造函数和拷贝赋值运算符是没有合理的意义的。如果不定义拷贝控制成员，编译器会为它生成合成的版本。</li>
-</ul>
-<h5 id="定义删除的函数">定义删除的函数</h5>
-<ul>
-<li>通过将拷贝构造函数和拷贝赋值运算符定义为<strong>删除的函数</strong>来阻止拷贝。删除的函数是这样一种函数：我们虽然声明了它们，但不能以任何方式使用它们。在函数的参数列表后面机上=delete来指出我们希望将它定义为删除的。
-<ul>
-<li>=delete通知编译器，我们不希望定义这些成员。</li>
-<li>=delete必须出现在函数<strong>第一次声明</strong>的时候。</li>
+<li>建立连接的SYN到达某端口，但是该端口上没有正在监听的服务。</li>
+<li>TCP收到了一个根本不存在的连接上的分节。</li>
+<li>请求超时。 接收数据超时时，会发送RST包。</li>
 </ul>
 </li>
-<li><strong>析构函数不能是删除的成员</strong>。不能删除析构函数。如果析构函数被删除，就无法销毁此类型的对象。</li>
 </ul>
+<p><img src="https://github.com/wangwei9160/wangwei9160.github.io/raw/master/image/example.jpg" alt="">)</p>
 
     </div>
 
@@ -473,7 +522,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2021-03-19
+      2021-03-20
       
     </span>
   </p>
@@ -489,30 +538,14 @@
     
 
     <footer class="post-footer">
-      <div class="post-tags">
-          <a href="https://wangwei9160.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
-          
-        </div>
+      
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-            
-            <i class="iconfont">
-              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
-</svg>
-
-            </i>
-            <span class="prev-text nav-default">网络编程</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
         
-          <a class="next" href="/post/leetcode%E5%91%A8%E8%B5%9B230/">
-            <span class="next-text nav-default">Leetcode第230场周赛</span>
+          <a class="next" href="/post/%E6%8B%B7%E8%B4%9D%E6%8E%A7%E5%88%B6/">
+            <span class="next-text nav-default">控制</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
