@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>leetcode第184场周赛 - Awei</title>
+  <title>动态内存 - Awei</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="leetcode第184场周赛 目录 数组中的字符串匹配 查询带键的排列 HTML 实体解析器 给 N x 3 网格图涂色的方案数 数组中的字符串匹配 题目链接 题目： 给你" />
+  <meta name="description" content="动态内存 全局对象在程序启动时分配，在程序结束时销毁；局部自动对象，当进入其定义所在的程序块时被创建，在离开块时销毁；局部static对象在第" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -35,7 +35,7 @@
 <meta name="generator" content="Hugo 0.68.3" />
 
 
-<link rel="canonical" href="https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/" />
+<link rel="canonical" href="https://wangwei9160.github.io/post/dynamicallyallocate/" />
 
 
 
@@ -59,23 +59,23 @@
 
 
 
-<meta property="og:title" content="leetcode第184场周赛" />
-<meta property="og:description" content="leetcode第184场周赛 目录 数组中的字符串匹配 查询带键的排列 HTML 实体解析器 给 N x 3 网格图涂色的方案数 数组中的字符串匹配 题目链接 题目： 给你" />
+<meta property="og:title" content="动态内存" />
+<meta property="og:description" content="动态内存 全局对象在程序启动时分配，在程序结束时销毁；局部自动对象，当进入其定义所在的程序块时被创建，在离开块时销毁；局部static对象在第" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/" />
-<meta property="article:published_time" content="2020-04-12T18:00:00+08:00" />
-<meta property="article:modified_time" content="2020-04-12T18:00:00+08:00" />
-<meta itemprop="name" content="leetcode第184场周赛">
-<meta itemprop="description" content="leetcode第184场周赛 目录 数组中的字符串匹配 查询带键的排列 HTML 实体解析器 给 N x 3 网格图涂色的方案数 数组中的字符串匹配 题目链接 题目： 给你">
-<meta itemprop="datePublished" content="2020-04-12T18:00:00&#43;08:00" />
-<meta itemprop="dateModified" content="2020-04-12T18:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="1053">
+<meta property="og:url" content="https://wangwei9160.github.io/post/dynamicallyallocate/" />
+<meta property="article:published_time" content="2021-03-17T14:36:36+08:00" />
+<meta property="article:modified_time" content="2021-03-17T14:36:36+08:00" />
+<meta itemprop="name" content="动态内存">
+<meta itemprop="description" content="动态内存 全局对象在程序启动时分配，在程序结束时销毁；局部自动对象，当进入其定义所在的程序块时被创建，在离开块时销毁；局部static对象在第">
+<meta itemprop="datePublished" content="2021-03-17T14:36:36&#43;08:00" />
+<meta itemprop="dateModified" content="2021-03-17T14:36:36&#43;08:00" />
+<meta itemprop="wordCount" content="3445">
 
 
 
-<meta itemprop="keywords" content="比赛," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="leetcode第184场周赛"/>
-<meta name="twitter:description" content="leetcode第184场周赛 目录 数组中的字符串匹配 查询带键的排列 HTML 实体解析器 给 N x 3 网格图涂色的方案数 数组中的字符串匹配 题目链接 题目： 给你"/>
+<meta itemprop="keywords" content="c&#43;&#43;," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="动态内存"/>
+<meta name="twitter:description" content="动态内存 全局对象在程序启动时分配，在程序结束时销毁；局部自动对象，当进入其定义所在的程序块时被创建，在离开块时销毁；局部static对象在第"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -319,18 +319,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">leetcode第184场周赛</h1>
+      <h1 class="post-title">动态内存</h1>
       
       <div class="post-meta">
-        <time datetime="2020-04-12" class="post-time">
-          2020-04-12
+        <time datetime="2021-03-17" class="post-time">
+          2021-03-17
         </time>
-        <div class="post-category">
-            <a href="https://wangwei9160.github.io/categories/leetcode/"> leetcode </a>
-            
-          </div>
-        <span class="more-meta"> 约 1053 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+        <span class="more-meta"> 约 3445 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
 
         
         
@@ -347,9 +344,11 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#动态内存">动态内存</a>
       <ul>
-        <li><a href="#a-id0目录a"><!-- raw HTML omitted -->目录<!-- raw HTML omitted --></a></li>
+        <li><a href="#智能指针">智能指针</a></li>
+        <li><a href="#直接管理内存">直接管理内存</a></li>
+        <li><a href="#动态数组">动态数组</a></li>
       </ul>
     </li>
   </ul>
@@ -359,133 +358,237 @@
 
     
     <div class="post-content">
-      <h1 id="leetcode第184场周赛">leetcode第184场周赛</h1>
-<h3 id="a-id0目录a"><!-- raw HTML omitted -->目录<!-- raw HTML omitted --></h3>
-<p><a href="#a-id1%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8Da">数组中的字符串匹配</a></p>
-<p><a href="#a-id2-%E6%9F%A5%E8%AF%A2%E5%B8%A6%E9%94%AE%E7%9A%84%E6%8E%92%E5%88%97a">查询带键的排列</a></p>
-<p><a href="#a-id3-html-%E5%AE%9E%E4%BD%93%E8%A7%A3%E6%9E%90%E5%99%A8a">HTML 实体解析器</a></p>
-<p><a href="#a-id4%E7%BB%99-n-x-3-%E7%BD%91%E6%A0%BC%E5%9B%BE%E6%B6%82%E8%89%B2%E7%9A%84%E6%96%B9%E6%A1%88%E6%95%B0-a">给 N x 3 网格图涂色的方案数</a></p>
-<h4 id="a-id1数组中的字符串匹配a"><!-- raw HTML omitted -->数组中的字符串匹配<!-- raw HTML omitted --></h4>
-<p><a href="https://leetcode-cn.com/problems/string-matching-in-an-array/">题目链接</a></p>
-<h6 id="题目">题目：</h6>
-<blockquote>
-<p>给你一个字符串数组 words ，数组中的每个字符串都可以看作是一个单词。请你按 任意 顺序返回 words 中是其他单词的子字符串的所有单词。
-如果你可以删除 words[j] 最左侧和/或最右侧的若干字符得到 word[i] ，那么字符串 words[i] 就是 words[j] 的一个子字符串。</p>
-</blockquote>
-<h6 id="思路">思路：</h6>
-<blockquote>
-<p>利用find函数直接暴力匹配</p>
-</blockquote>
-<h6 id="代码">代码：</h6>
-<pre><code>vector&lt;string&gt; stringMatching(vector&lt;string&gt;&amp; words) {
-    vector&lt;string&gt; ans;
-    for(auto x : words){
-        for(auto y : words){
-            if(x == y) continue;
-            if(y.find(x) != -1 ){ans.push_back(x);break;}
-        }
-    }
-    return ans;
-}
-</code></pre><h4 id="a-id2-查询带键的排列a"><!-- raw HTML omitted --> 查询带键的排列<!-- raw HTML omitted --></h4>
-<p><a href="https://leetcode-cn.com/problems/queries-on-a-permutation-with-key/">题目链接</a></p>
-<h6 id="题目-1">题目：</h6>
-<blockquote>
-<p>给你一个待查数组 queries ，数组中的元素为 1 到 m 之间的正整数。 请你根据以下规则处理所有待查项 queries[i]（从 i=0 到 i=queries.length-1）：</p>
+      <h2 id="动态内存">动态内存</h2>
 <ul>
-<li>一开始，排列 P=[1,2,3,&hellip;,m]。</li>
-<li>对于当前的 i ，请你找出待查项 queries[i] 在排列 P 中的位置（下标从 0 开始），然后将其从原位置移动到排列 P 的起始位置（即下标为 0 处）。注意， queries[i] 在 P 中的位置就是queries[i] 的查询结果。
-请你以数组形式返回待查数组  queries 的查询结果。</li>
+<li>全局对象在程序启动时分配，在程序结束时销毁；局部自动对象，当进入其定义所在的程序块时被创建，在离开块时销毁；局部static对象在第一次使用前分配，在程序结束时销毁。</li>
+<li>动态分配的对象的生存期与他们在哪里创建是无关的，只有当显式地被释放时，这些对象才销毁。</li>
+<li>标准库定义了两个智能指针类型来管理动态分配的对象。当一个对象应该被销毁时，指向它的只能指针可以确保自动地释放它。</li>
 </ul>
-</blockquote>
-<h6 id="思路-1">思路：</h6>
-<blockquote>
-<p>模拟一遍就好了</p>
-</blockquote>
-<h6 id="代码-1">代码：</h6>
-<pre><code>vector&lt;int&gt; processQueries(vector&lt;int&gt;&amp; queries, int m) {
-    int mp[1002];
-    for(int i = 0 ; i &lt; m ; i++){
-        mp[i] = i+1;
-    }
-    vector&lt;int&gt; ans;
-    for(auto x : queries){
-        if(mp[0] == x) {ans.push_back(0);continue;}
-        int j = m-1;
-        while( j &gt; 0 &amp;&amp; mp[j] != x) {j--;}
-        ans.push_back(j);
-        for(int k = j ; k &gt; 0 ; k--){
-            mp[k] = mp[k-1];
-        }
-        mp[0] = x;
-        
-    }
-    return ans;
-}
-</code></pre><h4 id="a-id3-html-实体解析器a"><!-- raw HTML omitted --> HTML 实体解析器<!-- raw HTML omitted --></h4>
-<p><a href="https://leetcode-cn.com/problems/html-entity-parser/">题目链接</a></p>
-<h6 id="题目-2">题目：</h6>
-<blockquote>
-<p>「HTML 实体解析器」 是一种特殊的解析器，它将 HTML 代码作为输入，并用字符本身替换掉所有这些特殊的字符实体。
-HTML 里这些特殊字符和它们对应的字符实体包括：</p>
+<h3 id="智能指针">智能指针</h3>
 <ul>
-<li>双引号：字符实体为 &quot; ，对应的字符是 &quot; 。</li>
-<li>单引号：字符实体为 ' ，对应的字符是 ' 。</li>
-<li>与符号：字符实体为 &amp; ，对应对的字符是 &amp; 。</li>
-<li>大于号：字符实体为 &gt; ，对应的字符是 &gt; 。</li>
-<li>小于号：字符实体为 &lt; ，对应的字符是 &lt; 。</li>
-<li>斜线号：字符实体为 ⁄ ，对应的字符是 / 。
-给你输入字符串 text ，请你实现一个 HTML 实体解析器，返回解析器解析后的结果。</li>
+<li>动态内存的管理是通过<strong>new</strong>和<strong>delete</strong>来完成的。
+<ul>
+<li><strong>new</strong>：在动态内存中为对象分配空间并返回一个指向该对象的指针，我们可以选择对对象进行初始化。</li>
+<li><strong>delete</strong>：接受一个动态对象的指针，销毁该对象，并释放与之关联的内存。</li>
 </ul>
-</blockquote>
-<h6 id="思路-2">思路：</h6>
+</li>
+<li>标准库提供了两种<strong>智能指针</strong>类型来管理动态对象。智能指针的行为类似常规指针，重要的区别是它负责自动释放锁指向的对象。两种智能指针的区别在于管理底层指针的方式：
+<ul>
+<li><strong>shared_ptr</strong>：允许多个指针指向同一个对象。在最后一个shared_ptr析构的时候，内存才会释放。</li>
+<li><strong>unique_ptr</strong>：&lsquo;独占'所指向的对象。</li>
+<li><strong>weak_ptr</strong>：弱引用，指向shared_ptr所管理的对象。这三种类型都定义在memory头文件中。</li>
+</ul>
+</li>
+</ul>
+<h4 id="shared_ptr">shared_ptr</h4>
+<table>
+<thead>
+<tr>
+<th align="left">shared_ptr和unique_ptr都支持的操作</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">shared_ptr&lt; T&gt; sp、unique_ptr&lt; T&gt; sp</td>
+<td align="left">空智能指针，可以指向类型为T的对象</td>
+</tr>
+<tr>
+<td align="left">p</td>
+<td align="left">将p用作一个条件判断，若p指向一个对象，则为true</td>
+</tr>
+<tr>
+<td align="left">*p</td>
+<td align="left">解引用p，获得它指向的对象</td>
+</tr>
+<tr>
+<td align="left">p-&gt;mem</td>
+<td align="left">等价于(*p).mem</td>
+</tr>
+<tr>
+<td align="left">p.get()</td>
+<td align="left">返回p中保存的指针。若智能指针释放了其对象，返回的指针所指向的对象也就消失了</td>
+</tr>
+<tr>
+<td align="left">swap(p,q)、p.swap(q)</td>
+<td align="left">交换p和q中的指针</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">shared_ptr独有的操作</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">make_shared&lt; T&gt;(args)</td>
+<td align="left">返回一个shared_ptr，指向一个动态分配的类型为T的对象，使用args初始化此对象</td>
+</tr>
+<tr>
+<td align="left">shared_ptr&lt; T&gt;p(q)</td>
+<td align="left">p是shared_ptr类型q的拷贝；此操作会递增q中的计数器。q中的指针必须能转换为T*</td>
+</tr>
+<tr>
+<td align="left">p = q</td>
+<td align="left">p和q都是shared_ptr类型，保存的指针必须能相互转换。此操作会递减p的引用计数，递减p的引用计数，递增q的引用计数；若p的引用计数变为0，则将其管理的原内存释放</td>
+</tr>
+<tr>
+<td align="left">p.unique()</td>
+<td align="left">若p.use_count()为1，返回true；否则返回false</td>
+</tr>
+<tr>
+<td align="left">p.use_count()</td>
+<td align="left">返回与p共享对象的智能指针数量；主要用于调试</td>
+</tr>
+</tbody>
+</table>
+<p>最安全的分配和使用动态内存的方法是调用make_shared的标准库函数。此函数在动态内存中分配一个对象并初始化它，返回指向此对象的shared_ptr。通常用auto定义一个对象来保存make_shared_ptr的结果。</p>
+<ul>
+<li>每个shared_ptr都有一个关联的计数器，<strong>引用计数</strong>。一旦一个shared_ptr的计数器变为0，它就会自动释放自己所管理的对象。</li>
+<li>shared_ptr类会自动销毁此独享。它是通过另一个特殊的成员函数——<strong>析构函数</strong>完成销毁工作的。类似于构造函数，每个类都有一个析构函数。shared_ptr的析构函数会递减它所指向的对象的引用计数。如果引用计数变为0，shared_ptr的析构函数就会销毁对象，并释放它所占用的内存。</li>
+<li>当动态对象不再被使用时，shared_ptr类会自动释放动态对象，这一特性使得动态内存的使用变得非常容易。</li>
+</ul>
+<h6 id="使用动态生存期的资源的类">使用动态生存期的资源的类</h6>
+<ul>
+<li>程序使用动态内存出于以下三种原因之一：
+1、程序不知道自己需要使用多少对象
+2、程序不知道所需对象的准确类型
+3、程序需要在多个对象间共享数据
+容器类是出于第一种原因而使用动态内存的典型例子。</li>
+</ul>
+<h3 id="直接管理内存">直接管理内存</h3>
+<ul>
+<li><strong>new、delete</strong></li>
+<li>相比于智能指针，直接管理内存的类与使用智能指针的类不同，它们不能依赖类对象拷贝、赋值和销毁操作的任何默认定义。因此，使用智能指针的程序更容易编写和调试。</li>
+</ul>
+<h4 id="使用new动态分配和初始化对象">使用new动态分配和初始化对象</h4>
+<ul>
+<li>在自由空间分配的内存是无名的，因此new无法为其分配的对象命名，而是返回一个指向该对象的指针。</li>
+<li>默认情况下，动态分配的对象是默认初始化的，这意味着内置类型或组合类型的对象的值将是未定义的，而类类型对象将用默认构造函数进行初始化。</li>
+<li>可以使用直接初始化方法来初始化一个动态分配的对象，也可以使用传统的构造方式（圆括号）。在新标准下，也可以使用列表初始化（花括号）。</li>
+<li>如果提供一个括号保卫的初始化器，就可以使用auto从此初始化器来推断我们想要分配的对象的类型。当括号中仅有一个单一初始化器时才可以使用auto。</li>
+<li>用new分配const对象是合法的。虽然const对象的值不能被改变，但它本身是可以被销毁的。</li>
+</ul>
+<h4 id="内存耗尽">内存耗尽</h4>
+<ul>
+<li>一旦一个程序用光了它所有可用的内存，new表达式就会失败。默认情况下，如果new不能分配所要求的内存空间，它就会抛出一个类型为bad_alloc的异常。
 <blockquote>
-<p>利用replace函数</p>
+<p>//如果分配失败，new返回一个空指针
+int *p1 = new int;//如果分配失败，new抛出std::bad_alloc
+int *p2 = new (nothrow) int;//如果分配失败,new返回一个空指针
+这种形式的new为<strong>定位new</strong>(placement new)。定位new表达式允许我们向new传递额外的参数。如果nothrow传递给new，试图告诉它不能抛出异常。如果这种形式的new不能分配所需要的内存，它会返回一个空指针。bad_alloc和nothrow都定义在头文件new中。</p>
 </blockquote>
-<h6 id="代码-2">代码：</h6>
-<pre><code>def entityParser(self, text: str) -&gt; str:
-    text = text.replace('&amp;quot;','&quot;')
-    text = text.replace('&amp;apos;','\'')
-    text = text.replace('&amp;amp;','&amp;')
-    text = text.replace('&amp;gt;','&gt;')
-    text = text.replace('&amp;lt;','&lt;')
-    text = text.replace('&amp;frasl;','/')
-    return text
-</code></pre><h4 id="a-id4给-n-x-3-网格图涂色的方案数-a"><!-- raw HTML omitted -->给 N x 3 网格图涂色的方案数 <!-- raw HTML omitted --></h4>
-<p><a href="https://leetcode-cn.com/problems/number-of-ways-to-paint-n-3-grid/">题目链接</a></p>
-<h6 id="题目-3">题目：</h6>
-<blockquote>
-<p>你有一个 n x 3 的网格图 grid ，你需要用 红，黄，绿 三种颜色之一给每一个格子上色，且确保相邻格子颜色不同（也就是有相同水平边或者垂直边的格子颜色不同）。
-给你网格图的行数 n 。
-请你返回给 grid 涂色的方案数。由于答案可能会非常大，请你返回答案对 10^9 + 7 取余的结果。</p>
-</blockquote>
-<h6 id="思路-3">思路：</h6>
-<blockquote>
-<p>初始化第一行的所有状态
-接下来计算每一行的所有状态的出现的次数
-条件（相同水平边或者垂直边的格子颜色不同）</p>
-</blockquote>
-<h6 id="代码-3">代码:</h6>
-<pre><code>long long dp[5002][3][3][3];
-const int mod = 1e9+7;
-int numOfWays(int n) {
-    for(int i=0;i&lt;3;i++)for(int j=0;j&lt;3;j++)for(int k=0;k&lt;3;k++)if(i!=j&amp;&amp;j!=k) dp[1][i][j][k]=1;
-    for(int p=2;p&lt;=n;p++){
-        for(int i=0;i&lt;3;i++)
-            for(int j=0;j&lt;3;j++)
-                for(int k=0;k&lt;3;k++)
-                    for(int ii=0;ii&lt;3;ii++)
-                        for(int jj=0;jj&lt;3;jj++)
-                            for(int kk=0;kk&lt;3;kk++)
-                                if(i!=j&amp;&amp;j!=k&amp;&amp;ii!=i&amp;&amp;jj!=j&amp;&amp;kk!=k) 
-                                    (dp[p][i][j][k] += dp[p-1][ii][jj][kk]) %= mod;
-    }
-    long long ans =0;
-    for(int i=0;i&lt;3;i++)for(int j=0;j&lt;3;j++)for(int k=0;k&lt;3;k++)if(i!=j&amp;&amp;j!=k) ans+=dp[n][i][j][k];
-    ans%=mod;
-    return ans;
-}
-</code></pre><p><a href="#a-id0%E7%9B%AE%E5%BD%95a">回到目录</a></p>
+</li>
+</ul>
+<h4 id="释放动态内存">释放动态内存</h4>
+<ul>
+<li>为了防止内存耗尽，通过<strong>delete表达式</strong>来将内存归还给系统。delete表达式接受一个指针，指向我们想要释放的对象。delete表达式执行两个动作：销毁给定的指针指向的对象；释放对应的内存。</li>
+</ul>
+<h4 id="动态内存的管理">动态内存的管理</h4>
+<ul>
+<li>使用new和delete管理动态内存常见的三个问题：
+1、忘记delete内存。
+2、使用已经释放掉的对象。
+3、同一块内存释放两次。
+只使用智能指针，就可以避免所有这些问题。对于一块内存，只有在没有任何智能指针指向它的情况下，智能指针才会自动释放它。</li>
+</ul>
+<h4 id="空悬指针">空悬指针</h4>
+<ul>
+<li>在delete之后，指针就变成<strong>空悬指针</strong>(dangling pointer)，指向一块曾经保存数据对象但现在已经无效的内存的指针。</li>
+<li>未初始化指针的所有缺点空悬指针也有。避免空悬指针的问题：在指针即将要离开其作用域之前释放掉它所关联的内存。这样，在指针关联的内存被释放掉之后，就没有机会继续使用指针了。</li>
+</ul>
+<h4 id="动态内存的问题">动态内存的问题</h4>
+<ul>
+<li>动态内存的一个基本问题是可能有多个指针指向相同的内存。在delete内存之后重置指针的方法只对这个指针有效，对其他任何仍指向（已释放）内存的指针是没有作用的。</li>
+</ul>
+<h4 id="unique_ptr">unique_ptr</h4>
+<table>
+<thead>
+<tr>
+<th align="left">unique_ptr操作</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">unique_ptr&lt; T&gt; u1 、 unique_ptr&lt; T , D&gt; u2</td>
+<td align="left">空unique_ptr，可以指向类型为T的对象。u1会使用delete来释放它的指针；u2会使用类型为D的可调用对象来释放它的指针</td>
+</tr>
+<tr>
+<td align="left">unique_ptr&lt; T, D&gt; u(d)</td>
+<td align="left">空unique_ptr，指向类型为T的对象，用类型为D的对象d代替delete</td>
+</tr>
+<tr>
+<td align="left">u = nullptr</td>
+<td align="left">释放u指向的对象，将u置为空</td>
+</tr>
+<tr>
+<td align="left">u.release()</td>
+<td align="left">u放弃对指针的控制权，返回指针，并将u置为空</td>
+</tr>
+<tr>
+<td align="left">u.reset()、u.reset(q)、u.reset(nullptr)</td>
+<td align="left">释放u指向的对象。如果提供了内置指针q，令u指向这个对象；否则将u置为空</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>虽然不能拷贝unique_ptr，但是可以通过拷贝或赋值一个将要被销毁的unique_ptr。最常见的就是从函数返回一个unique_ptr。</li>
+</ul>
+<h4 id="weak_ptr">weak_ptr</h4>
+<ul>
+<li>weak_ptr是一种不控制所指向对象生存期的智能指针，它指向一个shared_ptr管理的对象。将一个weak_ptr绑定到一个shared_ptr不会改变shared_ptr的引用计数。即使有weak_ptr指向最后一个指对象的shared_ptr被销毁，对象还是会被释放。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">weak_ptr</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">weak_ptr&lt; T&gt; w</td>
+<td align="left">空weak_ptr可以指向类型为T的对象</td>
+</tr>
+<tr>
+<td align="left">weak_ptr&lt; T&gt; w(sp)</td>
+<td align="left">与shared_ptr sp 指向相同对象的weak_ptr。T必须能转换为sp指向的类型</td>
+</tr>
+<tr>
+<td align="left">w = p</td>
+<td align="left">p可以是一个shared_ptr或weak_ptr。赋值后w与p共享对象</td>
+</tr>
+<tr>
+<td align="left">w.reset()</td>
+<td align="left">将w置为空</td>
+</tr>
+<tr>
+<td align="left">w.use_count()</td>
+<td align="left">与w共享对象的shared_ptr的数量</td>
+</tr>
+<tr>
+<td align="left">w.expired()</td>
+<td align="left">若w.use_count()为0，返回true，否贼返回false</td>
+</tr>
+<tr>
+<td align="left">w.lock()</td>
+<td align="left">如果expired为true，返回一个空的shared_ptr；否贼返回一个指向w的对象的shared_ptr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="动态数组">动态数组</h3>
+<ul>
+<li>new和delete运算符一次分配/释放一个对象，但是某些应用需要一次为很多对象分配内存的功能。为了支持这种需求，提供了两种一次分配一个对象数组的方法。
+<ul>
+<li>c++语言定义了另一种new表达式，可以分配一个对象数组。</li>
+<li>标准库的allocator类，允许将分配和初始化分离。使用allocator通常会提供更好的性能和更灵活的内存管理能力。</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -499,7 +602,7 @@ int numOfWays(int n) {
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2020-04-12
+      2021-03-17
       
     </span>
   </p>
@@ -516,14 +619,14 @@ int numOfWays(int n) {
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://wangwei9160.github.io/tags/%E6%AF%94%E8%B5%9B/">比赛</a>
+          <a href="https://wangwei9160.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/codeforces634/">
+          <a class="prev" href="/post/leetcode230/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -533,12 +636,12 @@ int numOfWays(int n) {
 </svg>
 
             </i>
-            <span class="prev-text nav-default">codeforces</span>
+            <span class="prev-text nav-default">Leetcode第230场周赛</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/min_max/">
-            <span class="next-text nav-default">Min_max</span>
+          <a class="next" href="/post/git/">
+            <span class="next-text nav-default">Git</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

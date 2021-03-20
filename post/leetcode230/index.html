@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>拷贝控制 - Awei</title>
+  <title>Leetcode第230场周赛 - Awei</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="拷贝控制 当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。 一个类通过定义五种特殊的成员函数来控制这些操作，包括" />
+  <meta name="description" content="leetcode周赛230 目录 统计匹配检索规则的物品数量 最接近目标价格的甜点成本 通过最少操作次数使数组的和相等 车队II 统计匹配检索规则的物品" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -35,7 +35,7 @@
 <meta name="generator" content="Hugo 0.68.3" />
 
 
-<link rel="canonical" href="https://wangwei9160.github.io/post/%E6%8B%B7%E8%B4%9D%E6%8E%A7%E5%88%B6/" />
+<link rel="canonical" href="https://wangwei9160.github.io/post/leetcode230/" />
 
 
 
@@ -59,23 +59,23 @@
 
 
 
-<meta property="og:title" content="拷贝控制" />
-<meta property="og:description" content="拷贝控制 当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。 一个类通过定义五种特殊的成员函数来控制这些操作，包括" />
+<meta property="og:title" content="Leetcode第230场周赛" />
+<meta property="og:description" content="leetcode周赛230 目录 统计匹配检索规则的物品数量 最接近目标价格的甜点成本 通过最少操作次数使数组的和相等 车队II 统计匹配检索规则的物品" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://wangwei9160.github.io/post/%E6%8B%B7%E8%B4%9D%E6%8E%A7%E5%88%B6/" />
-<meta property="article:published_time" content="2021-03-19T15:48:48+08:00" />
-<meta property="article:modified_time" content="2021-03-19T15:48:48+08:00" />
-<meta itemprop="name" content="拷贝控制">
-<meta itemprop="description" content="拷贝控制 当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。 一个类通过定义五种特殊的成员函数来控制这些操作，包括">
-<meta itemprop="datePublished" content="2021-03-19T15:48:48&#43;08:00" />
-<meta itemprop="dateModified" content="2021-03-19T15:48:48&#43;08:00" />
-<meta itemprop="wordCount" content="1908">
+<meta property="og:url" content="https://wangwei9160.github.io/post/leetcode230/" />
+<meta property="article:published_time" content="2021-03-18T14:59:48+08:00" />
+<meta property="article:modified_time" content="2021-03-18T14:59:48+08:00" />
+<meta itemprop="name" content="Leetcode第230场周赛">
+<meta itemprop="description" content="leetcode周赛230 目录 统计匹配检索规则的物品数量 最接近目标价格的甜点成本 通过最少操作次数使数组的和相等 车队II 统计匹配检索规则的物品">
+<meta itemprop="datePublished" content="2021-03-18T14:59:48&#43;08:00" />
+<meta itemprop="dateModified" content="2021-03-18T14:59:48&#43;08:00" />
+<meta itemprop="wordCount" content="1693">
 
 
 
-<meta itemprop="keywords" content="c&#43;&#43;," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="拷贝控制"/>
-<meta name="twitter:description" content="拷贝控制 当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。 一个类通过定义五种特殊的成员函数来控制这些操作，包括"/>
+<meta itemprop="keywords" content="比赛," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Leetcode第230场周赛"/>
+<meta name="twitter:description" content="leetcode周赛230 目录 统计匹配检索规则的物品数量 最接近目标价格的甜点成本 通过最少操作次数使数组的和相等 车队II 统计匹配检索规则的物品"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -319,14 +319,17 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">拷贝控制</h1>
+      <h1 class="post-title">Leetcode第230场周赛</h1>
       
       <div class="post-meta">
-        <time datetime="2021-03-19" class="post-time">
-          2021-03-19
+        <time datetime="2021-03-18" class="post-time">
+          2021-03-18
         </time>
-        
-        <span class="more-meta"> 约 1908 字 </span>
+        <div class="post-category">
+            <a href="https://wangwei9160.github.io/categories/leetcode/"> leetcode </a>
+            
+          </div>
+        <span class="more-meta"> 约 1693 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
 
         
@@ -344,10 +347,9 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#拷贝赋值销毁">拷贝、赋值、销毁</a>
+    <li>
       <ul>
-        <li></li>
-        <li><a href="#拷贝控制和资源管理">拷贝控制和资源管理</a></li>
+        <li><a href="#a-id0目录a"><!-- raw HTML omitted -->目录<!-- raw HTML omitted --></a></li>
       </ul>
     </li>
   </ul>
@@ -357,113 +359,173 @@
 
     
     <div class="post-content">
-      <h1 id="拷贝控制">拷贝控制</h1>
-<ul>
-<li>当定义一个类时，总显式或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。</li>
-<li>一个类通过定义五种特殊的成员函数来控制这些操作，包括：<strong>拷贝构造函数</strong>、<strong>移动构造函数</strong>、<strong>拷贝赋值运算符</strong>、<strong>移动赋值运算符</strong>和<strong>析构函数</strong>。
-<ul>
-<li><strong>拷贝和移动构造函数</strong>定义了当用同类型的另一个对象初始化本对象时做什么。</li>
-<li><strong>拷贝和移动赋值运算符</strong>定义了将一个对象赋予同类型的另一个对象时做什么。</li>
-<li><strong>析构函数</strong>定义了当此类型对象销毁时做什么。
-这些统称为<strong>拷贝控制操作</strong>。如果不显式的定义这些操作，编译器也会为我们定义，但编译器定义的版本的行为可能并非我们所想的。</li>
-</ul>
-</li>
-</ul>
-<h2 id="拷贝赋值销毁">拷贝、赋值、销毁</h2>
-<h4 id="拷贝构造函数">拷贝构造函数</h4>
-<ul>
-<li>如果一个构造函数的第一个参数是<strong>自身类类型</strong>的<strong>引用</strong>，且任何额外参数都有默认值，则此构造函数是拷贝构造函数。</li>
-</ul>
-<h5 id="合成拷贝构造函数">合成拷贝构造函数：</h5>
-<ul>
-<li>如果没有为一个类定义拷贝构造函数，编译器会为我们定义一个。与合成默认构造函数不同，即使定义了其他构造函数，编译器也会为我们合成一个拷贝构造函数。</li>
-<li>对某些类来说，合成拷贝构造函数用来阻止拷贝该类类型的对象。一般情况下，合成的拷贝构造函数会将其参数的成员逐个拷贝到正在创建的对象中。编译器从给定对象中依次将每个非static成员拷贝到正在创建的对象中。
-<ul>
-<li>每个成员的类型决定了它如何拷贝：
-<ul>
-<li>类类型的成员，会使用其拷贝构造函数来拷贝。</li>
-<li>内置类型的成员，直接拷贝。</li>
-<li>数据类型，合成拷贝构造函数会逐元素拷贝数组类型的成员。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="拷贝初始化">拷贝初始化</h5>
-<ul>
-<li>直接初始化：实际上是要求编译器使用普通的函数匹配来选择与我们提供的参数最匹配的构造函数。</li>
-<li>拷贝初始化：要求编译器将右侧运算对象拷贝到正在创建的对象中，有时可能有进行类型转换。
-<ul>
-<li>拷贝初始化不仅在使用=定义变量时发生，在以下情况也会发生：
-<ul>
-<li>将一个对象作为实参传递给一个非引用类型的形参</li>
-<li>从一个返回类型为非引用类型的函数返回一个对象</li>
-<li>用花括号列表初始化一个数组中的元素或一个聚合类的成员</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>拷贝/移动构造函数必须是存在的且可以访问的（例，不能是private）</li>
-</ul>
-<h4 id="拷贝赋值运算符">拷贝赋值运算符</h4>
-<ul>
-<li>类控制其对象如何赋值</li>
-</ul>
-<h6 id="合成拷贝赋值运算符">合成拷贝赋值运算符</h6>
-<ul>
-<li>与拷贝构造函数一样，如果一个类未定义自己的拷贝赋值运算符，编译器会为它生成一个合成拷贝赋值运算符。</li>
-</ul>
-<h4 id="析构函数">析构函数</h4>
-<ul>
-<li>析构函数释放对象使用的资源，并销毁对象的非static数据成员。</li>
-<li>析构函数是类的一个成员函数，名字由波浪号接类名构成。它没有返回值，也不接受参数。由于析构函数不接受参数，因此它不能被重载。对一个给定类，只会有唯一一个析构函数。</li>
-</ul>
-<h5 id="析构函数的调用">析构函数的调用</h5>
-<ul>
-<li>无论何时一个对象被销毁，就会自动调用其析构函数：
-<ul>
-<li>变量在离开其作用域时被销毁。</li>
-<li>当一个对象被销毁时，其成员被销毁。</li>
-<li>容器被销毁时，其元素被销毁。</li>
-<li>动态分配的独享，当对指向它的指针引用delete运算符时被销毁。</li>
-<li>对于临时对象，当创建它的完整表达式结束时被销毁。
-析构函数自动运行，通常情况下无须担心何时释放资源。</li>
-</ul>
-</li>
-</ul>
-<h5 id="合成析构函数">合成析构函数</h5>
-<ul>
-<li>当一个类未定义自己的析构函数时，编译器会为它定义一个合成析构函数。对于某些类，合成析构函数被用来组织该类型的对象被销毁。如果不是这种情况，合成析构函数的函数体就为空。</li>
-<li><strong>析构函数体自身并不直接销毁成员</strong>。成员是在析构函数体之后隐含的析构阶段中被销毁的。在整个对象销毁过程中，析构函数体是作为成员销毁步骤之外的另一部分而进行的。</li>
-</ul>
-<h4 id="三五法则">三/五法则</h4>
-<ul>
-<li>拷贝构造函数、拷贝赋值运算符和析构函数作为三个基本操作可以控制类的拷贝操作。在新标准下，一个类还可以定义一个移动构造函数和一个移动赋值运算符。</li>
-<li>通常情况下，这些操作应该看作一个整体，只需要其中一个操作而不定义所有操作的情况是很少见的。</li>
-</ul>
-<h4 id="default">=default</h4>
-<ul>
-<li>通过将拷贝控制成员定义为=default来显式地要求编译器生成合成的版本。</li>
-<li>当在类内使用=default修饰成员的声明时，合成的函数将隐式地声明为内联的。如果不希望合成的成员是内联函数，应该只对成员的类外定义使用=default。</li>
-<li>只能对具有合成版本的成员函数使用=default（即，默认构造函数或拷贝控制成员）。</li>
-</ul>
-<h4 id="阻止拷贝">阻止拷贝</h4>
-<ul>
-<li>对于某些类来说，拷贝构造函数和拷贝赋值运算符是没有合理的意义的。如果不定义拷贝控制成员，编译器会为它生成合成的版本。</li>
-</ul>
-<h5 id="定义删除的函数">定义删除的函数</h5>
-<ul>
-<li>通过将拷贝构造函数和拷贝赋值运算符定义为<strong>删除的函数</strong>来阻止拷贝。删除的函数是这样一种函数：我们虽然声明了它们，但不能以任何方式使用它们。在函数的参数列表后面机上=delete来指出我们希望将它定义为删除的。
-<ul>
-<li>=delete通知编译器，我们不希望定义这些成员。</li>
-<li>=delete必须出现在函数<strong>第一次声明</strong>的时候。</li>
-</ul>
-</li>
-<li><strong>析构函数不能是删除的成员</strong>。不能删除析构函数。如果析构函数被删除，就无法销毁此类型的对象。</li>
-</ul>
-<h3 id="拷贝控制和资源管理">拷贝控制和资源管理</h3>
-<h4 id="行为像值的类">行为像值的类</h4>
-<p>为了提供像类值的行为，对于类管理的资源，每个对象都应该拥有一份自己的拷贝。</p>
+      <h1 id="leetcode周赛230">leetcode周赛230</h1>
+<h3 id="a-id0目录a"><!-- raw HTML omitted -->目录<!-- raw HTML omitted --></h3>
+<p><a href="#a-id1%E7%BB%9F%E8%AE%A1%E5%8C%B9%E9%85%8D%E6%A3%80%E7%B4%A2%E8%A7%84%E5%88%99%E7%9A%84%E7%89%A9%E5%93%81%E6%95%B0%E9%87%8Fa">统计匹配检索规则的物品数量</a></p>
+<p><a href="#a-id2-%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9B%AE%E6%A0%87%E4%BB%B7%E6%A0%BC%E7%9A%84%E7%94%9C%E7%82%B9%E6%88%90%E6%9C%ACa">最接近目标价格的甜点成本</a></p>
+<p><a href="#a-id3-%E9%80%9A%E8%BF%87%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0%E4%BD%BF%E6%95%B0%E7%BB%84%E7%9A%84%E5%92%8C%E7%9B%B8%E7%AD%89a">通过最少操作次数使数组的和相等</a></p>
+<p><a href="#a-id4%E8%BD%A6%E9%98%9FII-a">车队II</a></p>
+<h4 id="a-id1统计匹配检索规则的物品数量a"><!-- raw HTML omitted -->统计匹配检索规则的物品数量<!-- raw HTML omitted --></h4>
+<p><a href="https://leetcode-cn.com/problems/count-items-matching-a-rule/">题目链接</a></p>
+<h6 id="题目">题目：</h6>
+<pre><code>给你一个数组 items ，其中 items[i] = [typei, colori, namei] ，描述第 i 件物品的类型、颜色以及名称。
+另给你一条由两个字符串 ruleKey 和 ruleValue 表示的检索规则。
+如果第 i 件物品能满足下述条件之一，则认为该物品与给定的检索规则 匹配 ：
+    ruleKey == &quot;type&quot; 且 ruleValue == typei 。
+    ruleKey == &quot;color&quot; 且 ruleValue == colori 。
+    ruleKey == &quot;name&quot; 且 ruleValue == namei 。
+统计并返回 匹配检索规则的物品数量 。
+</code></pre><h6 id="思路">思路：</h6>
+<blockquote>
+<p>找到对应的值匹配</p>
+</blockquote>
+<h6 id="代码">代码：</h6>
+<pre><code>int countMatches(vector&lt;vector&lt;string&gt;&gt;&amp; items, string ruleKey, string ruleValue) {
+    int j = 0;
+    if(ruleKey == &quot;color&quot;) j = 1;
+    else if(ruleKey == &quot;name&quot;) j = 2;
+    int cnt = 0;
+    for( auto x : items) if(ruleValue == x[j]) cnt++;
+    return cnt;
+}
+</code></pre><h4 id="a-id2-最接近目标价格的甜点成本a"><!-- raw HTML omitted --> 最接近目标价格的甜点成本<!-- raw HTML omitted --></h4>
+<p><a href="https://leetcode-cn.com/problems/closest-dessert-cost/">题目链接</a></p>
+<h6 id="题目-1">题目：</h6>
+<pre><code>你打算做甜点，现在需要购买配料。目前共有 n 种冰激凌基料和 m 种配料可供选购。而制作甜点需要遵循以下几条规则：
+
+必须选择 一种 冰激凌基料。
+可以添加 一种或多种 配料，也可以不添加任何配料。
+每种类型的配料 最多两份 。
+给你以下三个输入：
+
+baseCosts ，一个长度为 n 的整数数组，其中每个 baseCosts[i] 表示第 i 种冰激凌基料的价格。
+toppingCosts，一个长度为 m 的整数数组，其中每个 toppingCosts[i] 表示 一份 第 i 种冰激凌配料的价格。
+target ，一个整数，表示你制作甜点的目标价格。
+你希望自己做的甜点总成本尽可能接近目标价格 target 。
+
+返回最接近 target 的甜点成本。如果有多种方案，返回 成本相对较低 的一种。
+</code></pre><h6 id="思路-1">思路：</h6>
+<blockquote>
+<p>数据小，搜索。</p>
+</blockquote>
+<h6 id="代码-1">代码：</h6>
+<pre><code>int ans = -1 ;
+
+void dfs(int cost , vector&lt;int&gt;&amp; b , int pos , int target){
+    if(pos == b.size()){
+        if(ans == -1 || abs(cost-target) &lt; abs(ans-target) || abs(cost-target) == abs(ans-target) &amp;&amp; cost &lt; ans){
+            ans = cost;
+        }
+        return ;
+    }
+    
+    dfs(cost , b , pos+1 , target);
+    dfs(cost + b[pos] , b , pos+1 , target);
+    dfs(cost + b[pos]*2 , b , pos+1 , target);
+}
+
+
+int closestCost(vector&lt;int&gt;&amp; a, vector&lt;int&gt;&amp; b, int target) {
+    ans = -1;
+    int n = a.size();
+    int m = b.size();
+    for(auto x : a){
+        dfs(x , b , 0 , target);
+    }
+    return ans;
+
+}
+</code></pre><h4 id="a-id3通过最少操作次数使数组的和相等a"><!-- raw HTML omitted -->通过最少操作次数使数组的和相等<!-- raw HTML omitted --></h4>
+<p><a href="https://leetcode-cn.com/problems/equal-sum-arrays-with-minimum-number-of-operations/">题目链接</a></p>
+<h6 id="题目-2">题目：</h6>
+<pre><code>给你两个长度可能不等的整数数组 nums1 和 nums2 。两个数组中的所有值都在 1 到 6 之间（包含 1 和 6）。
+
+每次操作中，你可以选择 任意 数组中的任意一个整数，将它变成 1 到 6 之间 任意 的值（包含 1 和 6）。
+
+请你返回使 nums1 中所有数的和与 nums2 中所有数的和相等的最少操作次数。如果无法使两个数组的和相等，请返回 -1 。
+</code></pre><h6 id="思路-2">思路：</h6>
+<blockquote>
+<p>小的往大了变，大的往小的变。
+小的优先把1变成6，大的优先把6变1，在某一次中使得差值小于0，则次数即是答案。</p>
+</blockquote>
+<h6 id="代码-2">代码：</h6>
+<pre><code>int minOperations(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+    int cnt[2][7] = {0} , sum[2] = {0};
+    int j = 0;
+    for(auto x : nums1) {++cnt[j][x];sum[j]+=x;}
+    for(auto x : nums2) {++cnt[j^1][x];sum[j^1]+=x;}
+    if(sum[0] &gt; sum[1]) 
+        return minOperations(nums2,nums1);
+    
+    int need = 0;
+    int diff = sum[1] - sum[0];
+    
+    for(int i = 1 ; i &lt;= 5 ; ++i){
+        if(cnt[j][i] != 0){
+            for(int k=0;k&lt;cnt[j][i];++k){
+                ++need;
+                diff-= 6 - i;
+                if(diff &lt;= 0) break;
+            }
+        }
+        if(diff &lt;= 0) break;
+        if(cnt[j^1][7-i] != 0){
+            for(int k=0;k&lt;cnt[j^1][7-i];++k){
+                ++need;
+                diff-= 6 - i;
+                if(diff &lt;= 0) break;
+            }
+        }
+        if(diff &lt;= 0) break;
+    }
+    if(diff &gt; 0 ) return -1;
+    return need;
+}
+</code></pre><h4 id="a-id4车队iia"><!-- raw HTML omitted -->车队II<!-- raw HTML omitted --></h4>
+<p><a href="https://leetcode-cn.com/problems/car-fleet-ii/">题目链接</a></p>
+<h6 id="题目-3">题目：</h6>
+<pre><code>在一条单车道上有 n 辆车，它们朝着同样的方向行驶。给你一个长度为 n 的数组 cars ，其中 cars[i] = [positioni, speedi] ，它表示：
+
+positioni 是第 i 辆车和道路起点之间的距离（单位：米）。题目保证 positioni &lt; positioni+1 。
+speedi 是第 i 辆车的初始速度（单位：米/秒）。
+简单起见，所有车子可以视为在数轴上移动的点。当两辆车占据同一个位置时，我们称它们相遇了。一旦两辆车相遇，它们会合并成一个车队，这个车队里的车有着同样的位置和相同的速度，速度为这个车队里 最慢 一辆车的速度。
+
+请你返回一个数组 answer ，其中 answer[i] 是第 i 辆车与下一辆车相遇的时间（单位：秒），如果这辆车不会与下一辆车相遇，则 answer[i] 为 -1 。答案精度误差需在 10-5 以内。
+</code></pre><h6 id="思路-3">思路：</h6>
+<blockquote>
+<p>利用栈的思想，栈底是最慢的车，栈顶是最快的车。
+如果ans[i]&gt;0，则一定是cars[i]和某一个cars[j]相遇了且j&gt;i &amp;&amp; speed[j]&lt;speed[i]。反之ans[i]=-1，永远无法消失。
+在碰撞的情况下，可以将cars[i]当做消失，cars[j]的状态依旧不变。左边的车对cars[i]是没有影响的。故仅考虑一辆车的右边即可。
+如果栈顶元素比cars[i]快，则永远无法碰撞，出战。
+反之，必定可以碰撞。由于是从右往左遍历ans[栈顶]可知，若ans[栈顶]=-1(不消失)，则一定在某一时刻碰撞计算即可。若ans[栈顶]&gt;0(会消失)，需要计算是否在碰撞前相遇，如果能再碰撞前相遇则直接计算何时碰撞，若不能，则选择追逐栈顶的前一辆车。</p>
+</blockquote>
+<h6 id="代码-3">代码:</h6>
+<pre><code>vector&lt;double&gt; getCollisionTimes(vector&lt;vector&lt;int&gt;&gt;&amp; cars) {
+    int n = cars.size();
+    vector&lt;double&gt; ans(n , -1);
+    stack&lt;int&gt; s;
+    auto calc = [&amp;](int i , int j){
+        return 1.0*(cars[j][0] - cars[i][0]) / (cars[i][1] - cars[j][1]);
+    };
+    s.push(n-1);
+    for(int i = n - 2 ; ~i ; --i){
+        while(s.size() ){
+            if(cars[s.top()][1] &gt;= cars[i][1]) s.pop();
+            else {
+                if(ans[s.top()] &lt; 0) break;
+                double d = ans[s.top()]*(cars[i][1] - cars[s.top()][1]);
+                if(d &gt; (cars[s.top()][0] - cars[i][0])) break;
+                else s.pop();
+            }
+        }
+        if(s.empty()) ans[i] = -1;
+        else ans[i] = calc(i , s.top());
+        s.push(i);
+    }
+    return ans;
+
+}
+</code></pre><p><a href="#a-id0%E7%9B%AE%E5%BD%95a">回到目录</a></p>
 
     </div>
 
@@ -477,7 +539,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2021-03-19
+      2021-03-18
       
     </span>
   </p>
@@ -494,14 +556,14 @@
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://wangwei9160.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+          <a href="https://wangwei9160.github.io/tags/%E6%AF%94%E8%B5%9B/">比赛</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
+          <a class="prev" href="/post/copycontrol/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -511,12 +573,12 @@
 </svg>
 
             </i>
-            <span class="prev-text nav-default">网络编程</span>
+            <span class="prev-text nav-default">拷贝控制</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/leetcode%E5%91%A8%E8%B5%9B230/">
-            <span class="next-text nav-default">Leetcode第230场周赛</span>
+          <a class="next" href="/post/dynamicallyallocate/">
+            <span class="next-text nav-default">动态内存</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

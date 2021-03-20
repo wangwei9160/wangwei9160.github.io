@@ -13,12 +13,13 @@
     
     <item>
       <title>网络编程</title>
-      <link>https://wangwei9160.github.io/post/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <link>https://wangwei9160.github.io/post/socket/</link>
       <pubDate>Sat, 20 Mar 2021 10:46:16 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+      <guid>https://wangwei9160.github.io/post/socket/</guid>
       
-        <description>&lt;h2 id=&#34;阻塞非阻塞同步异步&#34;&gt;阻塞、非阻塞、同步、异步&lt;/h2&gt;
+        <description>&lt;p&gt;#网络编程&lt;/p&gt;
+&lt;h2 id=&#34;阻塞非阻塞同步异步&#34;&gt;阻塞、非阻塞、同步、异步&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;阻塞/非阻塞&lt;/strong&gt;关注的是&lt;strong&gt;程序在等待调用结果&lt;/strong&gt;时的状态。阻塞是等待。非阻塞是不需要等待。例如：
 &lt;ul&gt;
@@ -173,10 +174,10 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
     
     <item>
       <title>拷贝控制</title>
-      <link>https://wangwei9160.github.io/post/%E6%8B%B7%E8%B4%9D%E6%8E%A7%E5%88%B6/</link>
+      <link>https://wangwei9160.github.io/post/copycontrol/</link>
       <pubDate>Fri, 19 Mar 2021 15:48:48 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/%E6%8B%B7%E8%B4%9D%E6%8E%A7%E5%88%B6/</guid>
+      <guid>https://wangwei9160.github.io/post/copycontrol/</guid>
       
         <description>&lt;h1 id=&#34;拷贝控制&#34;&gt;拷贝控制&lt;/h1&gt;
 &lt;ul&gt;
@@ -282,19 +283,16 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;析构函数不能是删除的成员&lt;/strong&gt;。不能删除析构函数。如果析构函数被删除，就无法销毁此类型的对象。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;拷贝控制和资源管理&#34;&gt;拷贝控制和资源管理&lt;/h3&gt;
-&lt;h4 id=&#34;行为像值的类&#34;&gt;行为像值的类&lt;/h4&gt;
-&lt;p&gt;为了提供像类值的行为，对于类管理的资源，每个对象都应该拥有一份自己的拷贝。&lt;/p&gt;
 </description>
       
     </item>
     
     <item>
       <title>Leetcode第230场周赛</title>
-      <link>https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B230/</link>
+      <link>https://wangwei9160.github.io/post/leetcode230/</link>
       <pubDate>Thu, 18 Mar 2021 14:59:48 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B230/</guid>
+      <guid>https://wangwei9160.github.io/post/leetcode230/</guid>
       
         <description>&lt;h1 id=&#34;leetcode周赛230&#34;&gt;leetcode周赛230&lt;/h1&gt;
 &lt;h3 id=&#34;a-id0目录a&#34;&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
@@ -469,10 +467,10 @@ speedi 是第 i 辆车的初始速度（单位：米/秒）。
     
     <item>
       <title>动态内存</title>
-      <link>https://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</link>
+      <link>https://wangwei9160.github.io/post/dynamicallyallocate/</link>
       <pubDate>Wed, 17 Mar 2021 14:36:36 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98/</guid>
+      <guid>https://wangwei9160.github.io/post/dynamicallyallocate/</guid>
       
         <description>&lt;h2 id=&#34;动态内存&#34;&gt;动态内存&lt;/h2&gt;
 &lt;ul&gt;
@@ -2034,10 +2032,10 @@ int main(){
     
     <item>
       <title>leetcode第184场周赛</title>
-      <link>https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/</link>
+      <link>https://wangwei9160.github.io/post/leetcode184/</link>
       <pubDate>Sun, 12 Apr 2020 18:00:00 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/leetcode%E5%91%A8%E8%B5%9B184/</guid>
+      <guid>https://wangwei9160.github.io/post/leetcode184/</guid>
       
         <description>&lt;h1 id=&#34;leetcode第184场周赛&#34;&gt;leetcode第184场周赛&lt;/h1&gt;
 &lt;h3 id=&#34;a-id0目录a&#34;&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
