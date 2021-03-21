@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Awei</title>
-    <link>https://wangwei9160.github.io/tags/</link>
+    <link>http://wangwei9160.github.io/tags/</link>
     <description>Recent content in Tags on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 19 Mar 2021 15:48:48 +0800</lastBuildDate>
     
-	<atom:link href="https://wangwei9160.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://wangwei9160.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>c&#43;&#43;</title>
-      <link>https://wangwei9160.github.io/tags/c&#43;&#43;/</link>
+      <link>http://wangwei9160.github.io/tags/c&#43;&#43;/</link>
       <pubDate>Fri, 19 Mar 2021 15:48:48 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/tags/c&#43;&#43;/</guid>
+      <guid>http://wangwei9160.github.io/tags/c&#43;&#43;/</guid>
       <description></description>
     </item>
     
     <item>
       <title>比赛</title>
-      <link>https://wangwei9160.github.io/tags/%E6%AF%94%E8%B5%9B/</link>
+      <link>http://wangwei9160.github.io/tags/%E6%AF%94%E8%B5%9B/</link>
       <pubDate>Thu, 18 Mar 2021 14:59:48 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/tags/%E6%AF%94%E8%B5%9B/</guid>
+      <guid>http://wangwei9160.github.io/tags/%E6%AF%94%E8%B5%9B/</guid>
       <description></description>
     </item>
     
     <item>
       <title>STL</title>
-      <link>https://wangwei9160.github.io/tags/stl/</link>
+      <link>http://wangwei9160.github.io/tags/stl/</link>
       <pubDate>Fri, 12 Mar 2021 11:34:39 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/tags/stl/</guid>
+      <guid>http://wangwei9160.github.io/tags/stl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>英语</title>
-      <link>https://wangwei9160.github.io/tags/%E8%8B%B1%E8%AF%AD/</link>
+      <link>http://wangwei9160.github.io/tags/%E8%8B%B1%E8%AF%AD/</link>
       <pubDate>Mon, 01 Mar 2021 11:53:30 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/tags/%E8%8B%B1%E8%AF%AD/</guid>
+      <guid>http://wangwei9160.github.io/tags/%E8%8B%B1%E8%AF%AD/</guid>
       <description></description>
     </item>
     

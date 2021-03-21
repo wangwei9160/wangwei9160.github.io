@@ -2,21 +2,98 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Awei</title>
-    <link>https://wangwei9160.github.io/</link>
+    <link>http://wangwei9160.github.io/</link>
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 20 Mar 2021 10:46:16 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 21 Mar 2021 14:00:09 +0800</lastBuildDate>
     
-        <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>多线程</title>
+      <link>http://wangwei9160.github.io/post/thread/</link>
+      <pubDate>Sun, 21 Mar 2021 14:00:09 +0800</pubDate>
+      
+      <guid>http://wangwei9160.github.io/post/thread/</guid>
+      
+        <description>&lt;h2 id=&#34;多线程&#34;&gt;多线程&lt;/h2&gt;
+&lt;h3 id=&#34;进程&#34;&gt;进程&lt;/h3&gt;
+&lt;p&gt;进程是具有一定独立功能的程序关于某个数据集合的&lt;strong&gt;一次运行过程&lt;/strong&gt;，是系统进行&lt;strong&gt;资源分配和调度&lt;/strong&gt;的一个独立单位。&lt;/p&gt;
+&lt;h5 id=&#34;进程一般具有&#34;&gt;进程一般具有：&lt;/h5&gt;
+&lt;p&gt;动态性、并发性、独立性、异步性。&lt;/p&gt;
+&lt;h5 id=&#34;进程的状态&#34;&gt;进程的状态：&lt;/h5&gt;
+&lt;p&gt;就绪状态、运行状态、阻塞状态、创建状态、终止状态。&lt;/p&gt;
+&lt;h5 id=&#34;经典进程同步问题&#34;&gt;经典进程同步问题：&lt;/h5&gt;
+&lt;p&gt;生产者-消费者问题、哲学家进餐问题、读者-写者问题、理发师问题。&lt;/p&gt;
+&lt;h5 id=&#34;进程调度算法&#34;&gt;进程调度算法：&lt;/h5&gt;
+&lt;p&gt;先来先服务(FCFS)、短作业优先(SJF)、高响应比优先、优先级、时间片轮转、多级队列、多级反馈队列调度算法。&lt;/p&gt;
+&lt;h5 id=&#34;进程通信&#34;&gt;进程通信：&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;共享存储器系统通信(共享内存)、消息传递系统通信、管道通信(无名管道、有名管道)、客户-服务器系统通信(socket)、消息缓冲队列通信机制。&lt;/li&gt;
+&lt;li&gt;或&lt;/li&gt;
+&lt;li&gt;管道及有名管道、信号、消息队列、共享内存、信号量、socket。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;通信方式的优缺点&#34;&gt;通信方式的优缺点：&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;管道：速度慢，容量有限，且只有父子进程之间才能通信&lt;/li&gt;
+&lt;li&gt;消息队列：容量受到系统限制，且在第一次读的时候，还要考虑上一次没有读完的数据&lt;/li&gt;
+&lt;li&gt;信号量：不能传递复杂消息，只能用来同步。&lt;/li&gt;
+&lt;li&gt;共享内存区：能够容易控制容量，速度快，但是要保持同步，注意其中一个写的时候，另一个进程读写的问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;进程死锁&#34;&gt;进程死锁：&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;产生死锁的原因：
+&lt;ul&gt;
+&lt;li&gt;竞争资源&lt;/li&gt;
+&lt;li&gt;进程推进顺序不当&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;产生死锁的必要条件：
+&lt;ul&gt;
+&lt;li&gt;互斥条件&lt;/li&gt;
+&lt;li&gt;占有且等待条件&lt;/li&gt;
+&lt;li&gt;不可剥夺条件&lt;/li&gt;
+&lt;li&gt;循环等待条件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;处理死锁的基本方法：
+&lt;ul&gt;
+&lt;li&gt;预防死锁&lt;/li&gt;
+&lt;li&gt;避免死锁&lt;/li&gt;
+&lt;li&gt;检测和接触死锁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;预防死锁：
+&lt;ul&gt;
+&lt;li&gt;破坏占有且等待条件&lt;/li&gt;
+&lt;li&gt;破坏不可剥夺条件&lt;/li&gt;
+&lt;li&gt;破坏循环等待条件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;线程&#34;&gt;线程&lt;/h3&gt;
+&lt;p&gt;线程是进程中的一个可调度实体，是&lt;strong&gt;cpu调度和分配&lt;/strong&gt;的基本单位。&lt;/p&gt;
+&lt;h5 id=&#34;线程的状态&#34;&gt;线程的状态：&lt;/h5&gt;
+&lt;p&gt;就绪状态、运行状态、阻塞状态、创建状态、终止状态。&lt;/p&gt;
+&lt;h3 id=&#34;线程和进程的关系&#34;&gt;线程和进程的关系&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;进程至少有一个线程，通常将此线程称为主线程。&lt;/li&gt;
+&lt;li&gt;资源分配给进程，同一进程的所有线程共享该进程的所有资源。&lt;/li&gt;
+&lt;li&gt;真正在处理机上运行的是线程。
+多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
+    <item>
       <title>网络编程</title>
-      <link>https://wangwei9160.github.io/post/socket/</link>
+      <link>http://wangwei9160.github.io/post/socket/</link>
       <pubDate>Sat, 20 Mar 2021 10:46:16 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/socket/</guid>
+      <guid>http://wangwei9160.github.io/post/socket/</guid>
       
         <description>&lt;p&gt;#网络编程&lt;/p&gt;
 &lt;h2 id=&#34;阻塞非阻塞同步异步&#34;&gt;阻塞、非阻塞、同步、异步&lt;/h2&gt;
@@ -58,7 +135,6 @@
 5、异步IO
 老板在书店有书的时候直接寄到家里，这是&lt;strong&gt;异步IO&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;selectpollepoll&#34;&gt;select、poll、epoll&lt;/h2&gt;
-&lt;p&gt;以老师让n个学生答题，检查学生做的是否正确：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;select：
 &lt;ul&gt;
@@ -95,7 +171,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;reactor&#34;&gt;Reactor&lt;/h2&gt;
+&lt;h2 id=&#34;reactor模型&#34;&gt;Reactor模型&lt;/h2&gt;
 &lt;p&gt;对于支持多连接的服务器，一般总结为2种fd和3种事件。&lt;/p&gt;
 &lt;h5 id=&#34;2种fd&#34;&gt;2种fd：&lt;/h5&gt;
 &lt;p&gt;1、listenfd：一般情况下，只有一个。用来监听特定的端口(如80)。
@@ -167,17 +243,16 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://github.com/wangwei9160/wangwei9160.github.io/raw/master/image/example.jpg&#34; alt=&#34;&#34;&gt;)&lt;/p&gt;
 </description>
       
     </item>
     
     <item>
       <title>拷贝控制</title>
-      <link>https://wangwei9160.github.io/post/copycontrol/</link>
+      <link>http://wangwei9160.github.io/post/copycontrol/</link>
       <pubDate>Fri, 19 Mar 2021 15:48:48 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/copycontrol/</guid>
+      <guid>http://wangwei9160.github.io/post/copycontrol/</guid>
       
         <description>&lt;h1 id=&#34;拷贝控制&#34;&gt;拷贝控制&lt;/h1&gt;
 &lt;ul&gt;
@@ -283,16 +358,38 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;析构函数不能是删除的成员&lt;/strong&gt;。不能删除析构函数。如果析构函数被删除，就无法销毁此类型的对象。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;交换操作&#34;&gt;交换操作&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;除了定义拷贝控制成员，管理资源的类通常还定义了swap函数。&lt;/li&gt;
+&lt;li&gt;如果一个类定义了自己的swap，算法将使用类自定义版本。否则，算法将使用标准定义的swap。理论上，为了交换两个对象我们需要进行一次拷贝和两次赋值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;编写swap函数&#34;&gt;编写swap函数&lt;/h4&gt;
+&lt;p&gt;在类上定义一个自己版本的swap来重载swap的默认行为。
+将swap定义为friend，以便能访问private中的数据成员。由于swap的存在就是为了优化代码，可将其声明为inline函数。对给定对象的每个数据成员调用swap。
+swap中调用的swap不是std::swap。数据成员是内置类型的，而当内置类型没有特定版本的swap时，对swap的调用会调用标准库std::swap。但是如果一个类的成员有自己类型特定的swap函数，调用std::swap就是错误的。&lt;/p&gt;
+&lt;h4 id=&#34;在赋值运算符中使用swap&#34;&gt;在赋值运算符中使用swap&lt;/h4&gt;
+&lt;p&gt;定义swap的类通常用swap来定义它们的赋值运算符。这些运算符使用了一种名为拷贝并交换的技术。这种技术将左侧运算对象与右侧运算对象的一个副本进行交换&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HasPtr&amp;amp; HasPtr::operator=(HasPtr rhs)
+{
+  swap(*this , rhs);
+  return *this;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在其中rhs是按置传递的，意味着HasPtr的拷贝构造函数，rhs是右侧运算对象的一个副本。参数传递时拷贝HasPtr的操作会分配该对象的一个新副本、
+调用swap交换rhs和*this 中的数据成员。这个调用将左侧运算对象中原来保存的指针存入rhs中，并将rhs中原来的指针存入 *this中。因此，在swap调用之后， *this 中的指针成员将指向新分配的右侧运算对象的一个副本 。
+当赋值运算符结束时，rhs被销毁，HasPtr的析构函数将执行。delete rhs现在指向的内存，即释放掉左侧运算对象中原来的内存。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用拷贝和交换的赋值运算符自动就是异常安全的，且能正确处理自赋值。&lt;/li&gt;
+&lt;/ul&gt;
 </description>
       
     </item>
     
     <item>
       <title>Leetcode第230场周赛</title>
-      <link>https://wangwei9160.github.io/post/leetcode230/</link>
+      <link>http://wangwei9160.github.io/post/leetcode230/</link>
       <pubDate>Thu, 18 Mar 2021 14:59:48 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/leetcode230/</guid>
+      <guid>http://wangwei9160.github.io/post/leetcode230/</guid>
       
         <description>&lt;h1 id=&#34;leetcode周赛230&#34;&gt;leetcode周赛230&lt;/h1&gt;
 &lt;h3 id=&#34;a-id0目录a&#34;&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
@@ -467,10 +564,10 @@ speedi 是第 i 辆车的初始速度（单位：米/秒）。
     
     <item>
       <title>动态内存</title>
-      <link>https://wangwei9160.github.io/post/dynamicallyallocate/</link>
+      <link>http://wangwei9160.github.io/post/dynamicallyallocate/</link>
       <pubDate>Wed, 17 Mar 2021 14:36:36 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/dynamicallyallocate/</guid>
+      <guid>http://wangwei9160.github.io/post/dynamicallyallocate/</guid>
       
         <description>&lt;h2 id=&#34;动态内存&#34;&gt;动态内存&lt;/h2&gt;
 &lt;ul&gt;
@@ -709,10 +806,10 @@ int *p2 = new (nothrow) int;//如果分配失败,new返回一个空指针
     
     <item>
       <title>Git</title>
-      <link>https://wangwei9160.github.io/post/git/</link>
+      <link>http://wangwei9160.github.io/post/git/</link>
       <pubDate>Sat, 13 Mar 2021 13:27:30 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/git/</guid>
+      <guid>http://wangwei9160.github.io/post/git/</guid>
       
         <description>&lt;h1 id=&#34;github-repository&#34;&gt;github repository&lt;/h1&gt;
 &lt;ul&gt;
@@ -771,10 +868,10 @@ xxxx 是github用户名，name是repository的name&lt;/li&gt;
     
     <item>
       <title>Allocator</title>
-      <link>https://wangwei9160.github.io/post/allocator/</link>
+      <link>http://wangwei9160.github.io/post/allocator/</link>
       <pubDate>Fri, 12 Mar 2021 11:34:39 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/allocator/</guid>
+      <guid>http://wangwei9160.github.io/post/allocator/</guid>
       
         <description>&lt;h2 id=&#34;allocator&#34;&gt;allocator&lt;/h2&gt;
 &lt;ul&gt;
@@ -917,10 +1014,10 @@ alloc.deallocator(p,n);&lt;/p&gt;
     
     <item>
       <title>Word</title>
-      <link>https://wangwei9160.github.io/post/word/</link>
+      <link>http://wangwei9160.github.io/post/word/</link>
       <pubDate>Mon, 01 Mar 2021 11:53:30 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/word/</guid>
+      <guid>http://wangwei9160.github.io/post/word/</guid>
       
         <description>&lt;h1 id=&#34;英语单词-or-小短文&#34;&gt;英语单词 or 小短文&lt;/h1&gt;
 &lt;h3 id=&#34;210301&#34;&gt;21.03.01&lt;/h3&gt;
@@ -930,10 +1027,10 @@ alloc.deallocator(p,n);&lt;/p&gt;
     
     <item>
       <title>STL</title>
-      <link>https://wangwei9160.github.io/post/stl/</link>
+      <link>http://wangwei9160.github.io/post/stl/</link>
       <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/stl/</guid>
+      <guid>http://wangwei9160.github.io/post/stl/</guid>
       
         <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;ul&gt;
@@ -993,6 +1090,13 @@ decltype(sumLength) *getFcn(const string&amp;amp;);&lt;/p&gt;
 &lt;li&gt;否则，默认初始化该成员。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;move&lt;/strong&gt;：定义在utility头文件中。move有两个关键点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当reallocate在新内存中构造时，塔必须调用move来表示希望使用移动构造函数。如果漏掉了move调用，会使用拷贝构造函数。&lt;/li&gt;
+&lt;li&gt;通常不为move提供一个using生命。直接调用std::move而不是move。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1818,10 +1922,10 @@ remove_copy_if(v1.begin() , v1.end() , back_inserter(v2) , []( int i) { return i
     
     <item>
       <title>Linux</title>
-      <link>https://wangwei9160.github.io/post/linux/</link>
+      <link>http://wangwei9160.github.io/post/linux/</link>
       <pubDate>Wed, 20 Jan 2021 00:20:24 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/linux/</guid>
+      <guid>http://wangwei9160.github.io/post/linux/</guid>
       
         <description>&lt;h4 id=&#34;linux-下查看进程内的线程情况&#34;&gt;Linux 下查看进程内的线程情况&lt;/h4&gt;
 &lt;ul&gt;
@@ -1843,10 +1947,10 @@ ps -T -p 线程&lt;/p&gt;
     
     <item>
       <title>codeforces</title>
-      <link>https://wangwei9160.github.io/post/codeforces634/</link>
+      <link>http://wangwei9160.github.io/post/codeforces634/</link>
       <pubDate>Wed, 15 Apr 2020 01:00:00 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/codeforces634/</guid>
+      <guid>http://wangwei9160.github.io/post/codeforces634/</guid>
       
         <description>&lt;h1 id=&#34;codeforces&#34;&gt;codeforces&lt;/h1&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
@@ -2032,10 +2136,10 @@ int main(){
     
     <item>
       <title>leetcode第184场周赛</title>
-      <link>https://wangwei9160.github.io/post/leetcode184/</link>
+      <link>http://wangwei9160.github.io/post/leetcode184/</link>
       <pubDate>Sun, 12 Apr 2020 18:00:00 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/leetcode184/</guid>
+      <guid>http://wangwei9160.github.io/post/leetcode184/</guid>
       
         <description>&lt;h1 id=&#34;leetcode第184场周赛&#34;&gt;leetcode第184场周赛&lt;/h1&gt;
 &lt;h3 id=&#34;a-id0目录a&#34;&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
@@ -2170,10 +2274,10 @@ int numOfWays(int n) {
     
     <item>
       <title>Min_max</title>
-      <link>https://wangwei9160.github.io/post/min_max/</link>
+      <link>http://wangwei9160.github.io/post/min_max/</link>
       <pubDate>Thu, 09 Apr 2020 21:22:44 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/min_max/</guid>
+      <guid>http://wangwei9160.github.io/post/min_max/</guid>
       
         <description></description>
       
@@ -2181,10 +2285,10 @@ int numOfWays(int n) {
     
     <item>
       <title>New_test</title>
-      <link>https://wangwei9160.github.io/post/new_test/</link>
+      <link>http://wangwei9160.github.io/post/new_test/</link>
       <pubDate>Wed, 08 Apr 2020 21:59:56 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/new_test/</guid>
+      <guid>http://wangwei9160.github.io/post/new_test/</guid>
       
         <description>&lt;p&gt;这里是一篇最新的测试文章！&lt;/p&gt;
 &lt;p&gt;重新测试！&lt;/p&gt;
@@ -2194,10 +2298,10 @@ int numOfWays(int n) {
     
     <item>
       <title>Blog</title>
-      <link>https://wangwei9160.github.io/post/blog/</link>
+      <link>http://wangwei9160.github.io/post/blog/</link>
       <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/blog/</guid>
+      <guid>http://wangwei9160.github.io/post/blog/</guid>
       
         <description>&lt;p&gt;Hello world!&lt;/p&gt;
 </description>
@@ -2206,10 +2310,10 @@ int numOfWays(int n) {
     
     <item>
       <title>markdown</title>
-      <link>https://wangwei9160.github.io/post/markdown/</link>
+      <link>http://wangwei9160.github.io/post/markdown/</link>
       <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/markdown/</guid>
+      <guid>http://wangwei9160.github.io/post/markdown/</guid>
       
         <description>&lt;h1 id=&#34;一级标题&#34;&gt;一级标题&lt;/h1&gt;
 &lt;h2 id=&#34;二级标题&#34;&gt;二级标题&lt;/h2&gt;

@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://wangwei9160.github.io/sitemap.xml
+Sitemap: http://wangwei9160.github.io/sitemap.xml
