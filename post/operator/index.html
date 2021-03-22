@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>网络编程 - Awei</title>
+  <title>重载运算与类型转换 - Awei</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="#网络编程 阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有x" />
+  <meta name="description" content="重载运算与类型转换 基本概念 关键字operator和其后要定义的运算符号共同组成。 运算符作用域内置类型的运算对象时，无法改变该运算符的含义。可" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -35,7 +35,7 @@
 <meta name="generator" content="Hugo 0.68.3" />
 
 
-<link rel="canonical" href="https://wangwei9160.github.io/post/socket/" />
+<link rel="canonical" href="https://wangwei9160.github.io/post/operator/" />
 
 
 
@@ -59,23 +59,23 @@
 
 
 
-<meta property="og:title" content="网络编程" />
-<meta property="og:description" content="#网络编程 阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有x" />
+<meta property="og:title" content="重载运算与类型转换" />
+<meta property="og:description" content="重载运算与类型转换 基本概念 关键字operator和其后要定义的运算符号共同组成。 运算符作用域内置类型的运算对象时，无法改变该运算符的含义。可" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://wangwei9160.github.io/post/socket/" />
-<meta property="article:published_time" content="2021-03-20T10:46:16+08:00" />
-<meta property="article:modified_time" content="2021-03-20T10:46:16+08:00" />
-<meta itemprop="name" content="网络编程">
-<meta itemprop="description" content="#网络编程 阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有x">
-<meta itemprop="datePublished" content="2021-03-20T10:46:16&#43;08:00" />
-<meta itemprop="dateModified" content="2021-03-20T10:46:16&#43;08:00" />
-<meta itemprop="wordCount" content="3597">
+<meta property="og:url" content="https://wangwei9160.github.io/post/operator/" />
+<meta property="article:published_time" content="2021-03-22T14:54:42+08:00" />
+<meta property="article:modified_time" content="2021-03-22T14:54:42+08:00" />
+<meta itemprop="name" content="重载运算与类型转换">
+<meta itemprop="description" content="重载运算与类型转换 基本概念 关键字operator和其后要定义的运算符号共同组成。 运算符作用域内置类型的运算对象时，无法改变该运算符的含义。可">
+<meta itemprop="datePublished" content="2021-03-22T14:54:42&#43;08:00" />
+<meta itemprop="dateModified" content="2021-03-22T14:54:42&#43;08:00" />
+<meta itemprop="wordCount" content="2253">
 
 
 
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="网络编程"/>
-<meta name="twitter:description" content="#网络编程 阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有x"/>
+<meta itemprop="keywords" content="c&#43;&#43;," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="重载运算与类型转换"/>
+<meta name="twitter:description" content="重载运算与类型转换 基本概念 关键字operator和其后要定义的运算符号共同组成。 运算符作用域内置类型的运算对象时，无法改变该运算符的含义。可"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -319,15 +319,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">网络编程</h1>
+      <h1 class="post-title">重载运算与类型转换</h1>
       
       <div class="post-meta">
-        <time datetime="2021-03-20" class="post-time">
-          2021-03-20
+        <time datetime="2021-03-22" class="post-time">
+          2021-03-22
         </time>
         
-        <span class="more-meta"> 约 3597 字 </span>
-          <span class="more-meta"> 预计阅读 8 分钟 </span>
+        <span class="more-meta"> 约 2253 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
 
         
         
@@ -344,11 +344,29 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#阻塞非阻塞同步异步">阻塞、非阻塞、同步、异步</a></li>
-    <li><a href="#io模型">IO模型</a></li>
-    <li><a href="#selectpollepoll">select、poll、epoll</a></li>
-    <li><a href="#ltet">LT、ET</a></li>
-    <li><a href="#reactor模型">Reactor模型</a>
+    <li><a href="#基本概念">基本概念</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#输入和输出运算符">输入和输出运算符</a>
+      <ul>
+        <li><a href="#重载输出运算符">重载输出运算符&laquo;</a></li>
+        <li><a href="#重载输入运算符">重载输入运算符&raquo;</a></li>
+      </ul>
+    </li>
+    <li><a href="#算术和关系运算符">算术和关系运算符</a>
+      <ul>
+        <li><a href="#相等运算符">相等运算符</a></li>
+        <li><a href="#关系运算符">关系运算符</a></li>
+        <li><a href="#赋值运算符">赋值运算符</a></li>
+        <li><a href="#下标运算符">下标运算符</a></li>
+        <li><a href="#递增和递减运算符">递增和递减运算符</a></li>
+        <li><a href="#成员访问运算符">成员访问运算符</a></li>
+        <li><a href="#函数调用运算符">函数调用运算符</a></li>
+      </ul>
+    </li>
+    <li><a href="#重载类型转换与运算符">重载、类型转换与运算符</a>
       <ul>
         <li></li>
       </ul>
@@ -360,153 +378,75 @@
 
     
     <div class="post-content">
-      <p>#网络编程</p>
-<h2 id="阻塞非阻塞同步异步">阻塞、非阻塞、同步、异步</h2>
+      <h1 id="重载运算与类型转换">重载运算与类型转换</h1>
+<h2 id="基本概念">基本概念</h2>
+<p>关键字operator和其后要定义的运算符号共同组成。
+运算符作用域内置类型的运算对象时，无法改变该运算符的含义。可以重载大部分（不是全部）的运算符。例如：&rdquo; :: &ldquo;、&rdquo; .* &ldquo;、&rdquo; . &ldquo;、&rdquo; ? : &quot; 都是不可以被重载的运算符。
+以下两次调用是等价的，都调用了非成员函数operator+：</p>
+<blockquote>
+<p>oprd1 + oprd2 ;
+operator+(oprd1 , oprd2);
+由于重载的运算符本质上是一次函数调用，所以这些关于运算对象求值顺序的规则无法引用到重载的运算符上。</p>
+</blockquote>
+<h4 id="选择将运算符定义为成员函数或非成员函数">选择将运算符定义为成员函数或非成员函数</h4>
 <ul>
-<li><strong>阻塞/非阻塞</strong>关注的是<strong>程序在等待调用结果</strong>时的状态。阻塞是等待。非阻塞是不需要等待。例如：
-<ul>
-<li>去书店问老板有没有xx书。</li>
-<li><strong>阻塞</strong>会将自己&quot;挂起&rdquo;，直到得到老板回应。</li>
-<li><strong>非阻塞</strong>则会不管老板有没有回应，先弄自己的，偶尔check一下老板有没有回应。</li>
+<li>赋值(=)、下标(<input disabled="" type="checkbox"> )、调用( ( ) )和成员访问箭头( -&gt; )运算符必须是成员。</li>
+<li>复合赋值运算符一般来说应该是成员，但并非必须，这一点与赋值运算符略有不同。</li>
+<li>改变对象状态的运算符或者给定类型密切相关的运算符，如递增、递减和解引用运算符，通常应该是成员。</li>
+<li>具有对称性的运算符可能转换任意一端的运算对象，例如算术、相等性、关系和位运算符等，因此它们通常应该是普通的非成员函数。</li>
 </ul>
-</li>
-<li><strong>同步/异步</strong>关注的是<strong>消息通信机制</strong>。同步是主动等待数据。异步是被动接受数据，被调用者通过&quot;状态&rdquo;、&ldquo;通知&rdquo;、&ldquo;回调&quot;三种途径通知调用者。
+<h2 id="输入和输出运算符">输入和输出运算符</h2>
+<h3 id="重载输出运算符">重载输出运算符&laquo;</h3>
+<p>通常情况下，输出运算符的<strong>第一个形参</strong>是一个非常量ostream对象的引用。之所以ostream是非常量是因为向流写入内容会改变其状态；而该形参是引用是因为我们无法直接复制一个ostream对象。<strong>第二个参数</strong>一般来说是一个常量的引用，该常量是我们想要打印的类类型。第二个形参是引用的原因是希望避免复制实参，且打印对象不会改变对象的内容。</p>
+<h4 id="输出运算符尽量减少格式化操作">输出运算符尽量减少格式化操作</h4>
+<p>用于内置类型的输出运算符不太考虑格式化操作，尤其不会打印换行符，用户希望类的输出运算符也像如此行事。如果运算符打印了换行符，则用户就无法在对象的同一行内接着打印一些描述性的文本了。相反，令输出运算符尽量减少格式化操作可以使用户有权控制输出的细节。
+通常，输出运算符应该主要负责打印对象的内容而非控制格式，输出运算符不应该打印换行符。</p>
+<p><strong>与iostream标准库兼容的输入输出运算符必须是普通的而非成员函数，而不能是类的成员函数。</strong></p>
+<h3 id="重载输入运算符">重载输入运算符&raquo;</h3>
+<p>通常情况下，输入运算符的<strong>第一个形参</strong>是运算符将要读取的流的引用，<strong>第二个形参</strong>是将要读入到(非常量)对象的引用。该运算符通常会返回给某个给定流的引用。第二个心颤必须是非常量是因为输入运算符本身的目的就是将数据读入到这个对象中。
+<strong>当读取操作发生错误时，输入运算符应该负责从错误中恢复。</strong></p>
+<h2 id="算术和关系运算符">算术和关系运算符</h2>
+<p>通常情况下，把算术和关系运算符定义成非成员函数以允许对左侧或右侧的运算对象进行转换。因为这些运算符一般不需要改变运算对象的状态，所以形参都是常量引用。</p>
+<h3 id="相等运算符">相等运算符</h3>
+<p>通常情况下，c++的类通过定义相等运算符来检验两个对象是否相等。会比较对象的每一个数据成员，只有当所有对应的成员都相等时才认为两个对象相等。</p>
+<h3 id="关系运算符">关系运算符</h3>
+<p>通常情况下，关系运算符应该：</p>
 <ul>
-<li>打电话问书店老板有没有xx书。</li>
-<li>如果是<strong>同步</strong>机制，书店老板说我查一下，然后开始等待老板查询结果，当老板告诉结果时，才会返回结果（返回）。</li>
-<li>如果是<strong>异步</strong>机制，老板则是说我查一下查完告诉你结果，就挂掉电话（返回没有结果），当老板查好后通过回电的方式告诉结果。</li>
+<li>定义顺序关系，令其余关联容器中对关键字的要求一致；</li>
+<li>如果类同时也含有== 运算符的话，则定义一种关系令其与== 保持一致。特别是如果两个对象是!=的，那么一个对象应该&lt;另外一个。</li>
 </ul>
-</li>
-</ul>
-<h2 id="io模型">IO模型</h2>
-<p>IO的五种模型：</p>
+<h3 id="赋值运算符">赋值运算符</h3>
+<p>拷贝赋值和移动赋值运算符，可以把类的一个对象赋值给该类的另一个对象。此外，类还可以定义其他赋值运算符以使用别的类型作为右侧运算对象。</p>
+<h3 id="下标运算符">下标运算符</h3>
+<p>表示容器的类通常可以通过元素在容器中的位置访问元素，这些类会定义下标运算符operator[ ]。</p>
+<h3 id="递增和递减运算符">递增和递减运算符</h3>
+<p>在迭代器类中通常会实现递增(++)和递减(&ndash;)运算符。这两种运算符使得类可以再元素的序列中前后移动。</p>
+<h4 id="区分前置和后置运算符">区分前置和后置运算符</h4>
+<p>由于前置和后置版本使用的是同一个符号，意味着起重载版本所用的名字是相同的，并且运算对象的数量和类型都是相同的。为了解决这个问题，后置版本接受一个额外的(不被使用的) int类型的形参。</p>
+<h4 id="显式地调用后置运算符">显式地调用后置运算符</h4>
+<blockquote>
+<p>obj.operator++(0);//调用后置版本的operator++
+obj.operator++(); //调用前置版本的opeator++</p>
+</blockquote>
+<h3 id="成员访问运算符">成员访问运算符</h3>
+<p>在迭代器类以及智能指针类中常常用到解引用运算符(*)和箭头运算符(-&gt;)。</p>
+<h3 id="函数调用运算符">函数调用运算符</h3>
+<p>如果类重载了函数调用运算符，则可以像使用函数一样使用该类的对象。</p>
+<h4 id="lambda是函数对象">lambda是函数对象</h4>
+<p>编写一个lambda，编译器将该表达式翻译成一个未命名类的未命名对象。在lambda表达式产生的类中含有一个重载的函数调用运算符。其行为类似于产生一个类的未命名对象，产生的类只有一个函数调用运算符成员。它的形参列表和函数体与lambda表达式完全一样。</p>
+<h2 id="重载类型转换与运算符">重载、类型转换与运算符</h2>
+<p>由一个实参调用的非显式构造函数定义了一种隐式的类型转换，这种构造函数将实参类型的对象转换成类类型。通过定义类型转换运算符可以做到这一点。转换构造函数和类型转换运算符共同定义了<strong>类类型转换</strong>。</p>
+<h4 id="类型转换运算符">类型转换运算符</h4>
+<p>类型转换运算符是类的一种特殊成员函数，它负责将一个类类型的值转换成其他类型。类型转换函数的一般形式如下所示：</p>
+<blockquote>
+<p>operator type() const;</p>
+</blockquote>
+<h4 id="避免有二义性的类型转换">避免有二义性的类型转换</h4>
+<p>如果类中包含一个或多个类型转换，则必须确保在类类型和目标类型之间只存在唯一一种转换方式。
+两种情况下可能产生多重转换路径：</p>
 <ul>
-<li>阻塞IO</li>
-<li>非阻塞IO</li>
-<li>IO多路复用</li>
-<li>信号驱动IO</li>
-<li>异步IO</li>
-</ul>
-<p>以去书店买书，然而书店没有书为例。
-1、阻塞IO
-一直在书店等待，直到书店有书，这是<strong>同步阻塞IO</strong>
-2、非阻塞IO
-隔一段时间去书店看看有没有书，这是<strong>同步非阻塞IO</strong>
-3、IO多路复用
-整个事件只有在select、poll、epoll这些调用的时候才会阻塞，收发客户信息不会阻塞。
-来书店买书的时候，书店有一排的书，并不知道哪个书架上有书，老板告诉去哪里找书，这是<strong>IO多路复用</strong>
-4、信号驱动IO
-老板在书店有书的时候告诉有书，这是<strong>信号驱动IO</strong>
-5、异步IO
-老板在书店有书的时候直接寄到家里，这是<strong>异步IO</strong></p>
-<h2 id="selectpollepoll">select、poll、epoll</h2>
-<ul>
-<li>select：
-<ul>
-<li>每一次调用，都需要将fd(file descriptor)集合从用户态拷贝到内核态，若fd数量很大，将会造成很大的开销。</li>
-<li>每一次调用，都需要在内核遍历所有传递进来的fd集合，若fd集合数量很大，将会造成很大的开销</li>
-<li>select最多监听1024个描述符。</li>
-</ul>
-</li>
-<li>poll：本质上和select没有区别，没有最大连接的限制，基于链表来存储
-<ul>
-<li>将用户传入的数组拷贝到内核空间，查询每个fd对应的设备状态，如果设备就绪则在设备等待队列中加入一项并进行遍历，如果遍历完所有fd没有发现就绪设备，则挂起，知道设备就绪或者主动超时，被唤醒后继续遍历，该过程经历了许多无用的遍历。</li>
-</ul>
-</li>
-<li>epoll：相比于select和poll，epoll没有描述符限制。
-<ul>
-<li>没有最大并发连接的限制。</li>
-<li>只管活跃可用的fd，而跟连接总数无关。</li>
-</ul>
-</li>
-</ul>
-<h2 id="ltet">LT、ET</h2>
-<ul>
-<li>LT(level triggered)是缺省的工作方式，<strong>只要缓冲区有数据就会触发</strong>，支持block和no-block socket。
-<ul>
-<li>优点：缓冲区有数据内核就会一直通知，保证了数据的完整性。</li>
-<li>缺点：只要缓冲区有数据内核就会一直通知，导致内核频繁切换到用户态，内核效率低下。</li>
-<li>select和poll都是LT。</li>
-</ul>
-</li>
-<li>ET(Edge triggered)是<strong>高速工作模式，只有数据到来才触发，不管原缓冲区是否还有数据</strong>，只支持no-block socket。
-<ul>
-<li>优点：内核只为就绪的描述符发送一次通知，减少了内核的资源浪费。</li>
-<li>缺点：缓冲区可能有数据剩余。</li>
-</ul>
-</li>
-</ul>
-<h2 id="reactor模型">Reactor模型</h2>
-<p>对于支持多连接的服务器，一般总结为2种fd和3种事件。</p>
-<h5 id="2种fd">2种fd：</h5>
-<p>1、listenfd：一般情况下，只有一个。用来监听特定的端口(如80)。
-2、connfd：每个连接都有一个connfd。用来收发数据。</p>
-<h5 id="3种事件">3种事件：</h5>
-<p>1、listenfd进行accept阻塞监听，创建一个connfd。
-2、用户态/内核态copy数据。每个connfd对应着2个应用缓冲区，readbuf和writebuf。
-3、处理connfd发来的数据。业务逻辑处理，准备response到writebuf。</p>
-<p>Reactor模型基于事件驱动，特别适合处理海量的I/O事件。
-Reactor模型中定义的三种角色：</p>
-<ul>
-<li>Reactor：负责监听和分配事件，将I/O事件分配给对应的Handler。新的事件包含连接建立就绪、读就绪、写就绪等。</li>
-<li>Acceptor：处理客户端新连接，并分派请求到处理器链中。</li>
-<li>Handler：将自身与事件绑定，执行非阻塞读/写人物，完成channel的读入，完成处理业务逻辑后，负责将结果写出channel。可用资源池来管理。</li>
-</ul>
-<p>Reatcor处理请求的流程：
-读取操作：
-1、应用程序注册读就绪事件和相关联的时间处理器
-2、事件分离器等待时间的发生
-3、当发生读就绪事件的时候，时间分离器调用第一步注册的事件处理器。
-写入操作类似于读取操作，第一步是写就绪事件。</p>
-<h4 id="单reactor单线程模型">单Reactor单线程模型</h4>
-<p>Reactor线程负责多路分离套接字，accept新连接，并分派请求到handler，Redis使用Reactor单进程的模型。</p>
-<p>消息处理流程：
-1、Reactor对象通过select监控连接事件，收到事件后通过dispatch进行转发。
-2、如果是连接建立的事件，则由acceptor接受连接，并创建handler处理后续事件。
-3、如果不是建立连接事件，则Reactor会分发调用Handle来响应。
-4、Handler会会完成read-&gt;业务处理-&gt;send的完整业务流程。</p>
-<p>单Reactor单线程模型可以应用于一些小容量应用场景，但是对于高负载、大并发的应用场景却不合适，主要原因：
-1、即使Reactor线程的CPU负载达到100%，也无法满足海量消息的编码、解码、读取和发送。
-2、当Reactor线程负载过重之后，处理速度将变慢，这会导致大量客户端连接超时，超时之后重发，更加重Reactor线程的负载，最终会导致大量消息挤压和处理超时。
-3、一旦Reactor线程意外中断或者进入死循环，会导致整个系统通信模块不可用，不能接受和处理外部消息。</p>
-<h4 id="单reactor多线程模型">单Reactor多线程模型</h4>
-<p>该模型在事件处理器（Handler）部分采用了多线程（线程池）。</p>
-<p>消息处理流程：
-1、Reactor对象通过select监控客户端请求事件，收到事件后通过dispatch进行分发。
-2、如果是建立连接请求事件，则由acceptor通过accept处理连接请求，然后创建一个Handler对象处理连接完成后续各种事件。
-3、如果不是建立连接请求事件，则Reactor会分发调用连接对应的Handler来响应。
-4、Handler只负责响应事件，不做具体业务处理，通过read读取数据后，会分发给后面的Worker线程池进行业务处理。
-5、Worker线程池会分配独立的线程完成真正的业务处理，如何将响应结果发给Handler进行处理。
-6、Handler收到响应结果后通过send将相应结果返回给Client。</p>
-<p>这个模型存在的问题：
-1、多线程数据共享和访问比较复杂，涉及到共享数据的互斥和保护机制。
-2、Reactor承担所有时间的监听和响应，只在主线程中运行，可能存在性能问题。</p>
-<h4 id="主从reactor多线程模型">主从Reactor多线程模型</h4>
-<p>将Reactor分成两部分：
-1、mainReactor负责监听server socket，用来处理网络IO连接建立操作，将建立的socket channel指定注册给subReactor
-2、subReactor主要做和建立起来的socket做数据交互和事件业务处理操作。通常，subReactor个数上可与CPU个数等同。</p>
-<p>消息处理流程：
-1、从主线程池中随机选择一个Reactor线程作为acceptor线程，用于绑定监听端口，接受客户端连接。
-2、acceptor线程接受客户端连接请求之后创建新的socket channel，将其注册到主线程池的其他Reactor线程上，由其负责接入认证、IP黑白名单过滤、握手等操作。
-3、步骤2完成后，业务层的链路正式连接，将socket channel从主线程池的Reactor线程的多路复用器摘除，重新注册到sub线程池的线程上，并创建一个Handler用于处理各种连接事件。
-4、当有新的事件发生时，subReactor会调用连接对应的Handler进行相应。
-5、Handler通过Read读取数据后，会分发给后面的Worker线程池进行业务处理。
-6、Worker线程池会分配独立的线程完成真正的业务处理，如何将相应结果发送给Handler进行处理。
-7、Handler收到响应结果后通过send将响应结果返回给Client</p>
-<h4 id="keepalive">keepalive</h4>
-<p>Keepalive是TCP中一个检测死连接的心跳包保活机制，原理就是TCP在闲了一段时间后会发送数据给对方。
-1、如果对端会发送ACK，那么就认为对端是存货的。
-2、如果对端就会发送RST包，那么TCP就会撤销改连接。
-3、如果对端不发送ACK、RST，那么TCP在一段超时重传之后自动撤销连接。</p>
-<p>RST：重置连接、复位连接，用来关闭异常的连接。</p>
-<ul>
-<li>什么时候发送RST包
-<ul>
-<li>建立连接的SYN到达某端口，但是该端口上没有正在监听的服务。</li>
-<li>TCP收到了一个根本不存在的连接上的分节。</li>
-<li>请求超时。 接收数据超时时，会发送RST包。</li>
-</ul>
-</li>
+<li>两个类提供了相同的类型转换。例如，A类定义了一个接受B类对象的转换构造函数吗，同时B类定义了一个转换目标是A类的类型转换运算符时，它们提供了相同的类型转换。</li>
+<li>类定义了多个转换规则，这些转换涉及的类型本身可以通过其他类型转换联系在一起。最典型的例子是算术运算符，对于某个给定的类来说，最好只定义最多一个与算术类型有关的转换规则。</li>
 </ul>
 
     </div>
@@ -521,7 +461,7 @@ Reactor模型中定义的三种角色：</p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2021-03-20
+      2021-03-22
       
     </span>
   </p>
@@ -537,27 +477,17 @@ Reactor模型中定义的三种角色：</p>
     
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://wangwei9160.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/thread/">
-            
-            <i class="iconfont">
-              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
-</svg>
-
-            </i>
-            <span class="prev-text nav-default">多线程</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
         
-          <a class="next" href="/post/copycontrol/">
-            <span class="next-text nav-default">拷贝控制</span>
+          <a class="next" href="/post/thread/">
+            <span class="next-text nav-default">多线程</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

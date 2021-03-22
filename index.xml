@@ -2,21 +2,102 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Awei</title>
-    <link>http://wangwei9160.github.io/</link>
+    <link>https://wangwei9160.github.io/</link>
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 21 Mar 2021 14:00:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 22 Mar 2021 14:54:42 +0800</lastBuildDate>
     
-        <atom:link href="http://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>重载运算与类型转换</title>
+      <link>https://wangwei9160.github.io/post/operator/</link>
+      <pubDate>Mon, 22 Mar 2021 14:54:42 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/operator/</guid>
+      
+        <description>&lt;h1 id=&#34;重载运算与类型转换&#34;&gt;重载运算与类型转换&lt;/h1&gt;
+&lt;h2 id=&#34;基本概念&#34;&gt;基本概念&lt;/h2&gt;
+&lt;p&gt;关键字operator和其后要定义的运算符号共同组成。
+运算符作用域内置类型的运算对象时，无法改变该运算符的含义。可以重载大部分（不是全部）的运算符。例如：&amp;rdquo; :: &amp;ldquo;、&amp;rdquo; .* &amp;ldquo;、&amp;rdquo; . &amp;ldquo;、&amp;rdquo; ? : &amp;quot; 都是不可以被重载的运算符。
+以下两次调用是等价的，都调用了非成员函数operator+：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;oprd1 + oprd2 ;
+operator+(oprd1 , oprd2);
+由于重载的运算符本质上是一次函数调用，所以这些关于运算对象求值顺序的规则无法引用到重载的运算符上。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;选择将运算符定义为成员函数或非成员函数&#34;&gt;选择将运算符定义为成员函数或非成员函数&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;赋值(=)、下标(&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; )、调用( ( ) )和成员访问箭头( -&amp;gt; )运算符必须是成员。&lt;/li&gt;
+&lt;li&gt;复合赋值运算符一般来说应该是成员，但并非必须，这一点与赋值运算符略有不同。&lt;/li&gt;
+&lt;li&gt;改变对象状态的运算符或者给定类型密切相关的运算符，如递增、递减和解引用运算符，通常应该是成员。&lt;/li&gt;
+&lt;li&gt;具有对称性的运算符可能转换任意一端的运算对象，例如算术、相等性、关系和位运算符等，因此它们通常应该是普通的非成员函数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;输入和输出运算符&#34;&gt;输入和输出运算符&lt;/h2&gt;
+&lt;h3 id=&#34;重载输出运算符&#34;&gt;重载输出运算符&amp;laquo;&lt;/h3&gt;
+&lt;p&gt;通常情况下，输出运算符的&lt;strong&gt;第一个形参&lt;/strong&gt;是一个非常量ostream对象的引用。之所以ostream是非常量是因为向流写入内容会改变其状态；而该形参是引用是因为我们无法直接复制一个ostream对象。&lt;strong&gt;第二个参数&lt;/strong&gt;一般来说是一个常量的引用，该常量是我们想要打印的类类型。第二个形参是引用的原因是希望避免复制实参，且打印对象不会改变对象的内容。&lt;/p&gt;
+&lt;h4 id=&#34;输出运算符尽量减少格式化操作&#34;&gt;输出运算符尽量减少格式化操作&lt;/h4&gt;
+&lt;p&gt;用于内置类型的输出运算符不太考虑格式化操作，尤其不会打印换行符，用户希望类的输出运算符也像如此行事。如果运算符打印了换行符，则用户就无法在对象的同一行内接着打印一些描述性的文本了。相反，令输出运算符尽量减少格式化操作可以使用户有权控制输出的细节。
+通常，输出运算符应该主要负责打印对象的内容而非控制格式，输出运算符不应该打印换行符。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;与iostream标准库兼容的输入输出运算符必须是普通的而非成员函数，而不能是类的成员函数。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;重载输入运算符&#34;&gt;重载输入运算符&amp;raquo;&lt;/h3&gt;
+&lt;p&gt;通常情况下，输入运算符的&lt;strong&gt;第一个形参&lt;/strong&gt;是运算符将要读取的流的引用，&lt;strong&gt;第二个形参&lt;/strong&gt;是将要读入到(非常量)对象的引用。该运算符通常会返回给某个给定流的引用。第二个心颤必须是非常量是因为输入运算符本身的目的就是将数据读入到这个对象中。
+&lt;strong&gt;当读取操作发生错误时，输入运算符应该负责从错误中恢复。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;算术和关系运算符&#34;&gt;算术和关系运算符&lt;/h2&gt;
+&lt;p&gt;通常情况下，把算术和关系运算符定义成非成员函数以允许对左侧或右侧的运算对象进行转换。因为这些运算符一般不需要改变运算对象的状态，所以形参都是常量引用。&lt;/p&gt;
+&lt;h3 id=&#34;相等运算符&#34;&gt;相等运算符&lt;/h3&gt;
+&lt;p&gt;通常情况下，c++的类通过定义相等运算符来检验两个对象是否相等。会比较对象的每一个数据成员，只有当所有对应的成员都相等时才认为两个对象相等。&lt;/p&gt;
+&lt;h3 id=&#34;关系运算符&#34;&gt;关系运算符&lt;/h3&gt;
+&lt;p&gt;通常情况下，关系运算符应该：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义顺序关系，令其余关联容器中对关键字的要求一致；&lt;/li&gt;
+&lt;li&gt;如果类同时也含有== 运算符的话，则定义一种关系令其与== 保持一致。特别是如果两个对象是!=的，那么一个对象应该&amp;lt;另外一个。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;赋值运算符&#34;&gt;赋值运算符&lt;/h3&gt;
+&lt;p&gt;拷贝赋值和移动赋值运算符，可以把类的一个对象赋值给该类的另一个对象。此外，类还可以定义其他赋值运算符以使用别的类型作为右侧运算对象。&lt;/p&gt;
+&lt;h3 id=&#34;下标运算符&#34;&gt;下标运算符&lt;/h3&gt;
+&lt;p&gt;表示容器的类通常可以通过元素在容器中的位置访问元素，这些类会定义下标运算符operator[ ]。&lt;/p&gt;
+&lt;h3 id=&#34;递增和递减运算符&#34;&gt;递增和递减运算符&lt;/h3&gt;
+&lt;p&gt;在迭代器类中通常会实现递增(++)和递减(&amp;ndash;)运算符。这两种运算符使得类可以再元素的序列中前后移动。&lt;/p&gt;
+&lt;h4 id=&#34;区分前置和后置运算符&#34;&gt;区分前置和后置运算符&lt;/h4&gt;
+&lt;p&gt;由于前置和后置版本使用的是同一个符号，意味着起重载版本所用的名字是相同的，并且运算对象的数量和类型都是相同的。为了解决这个问题，后置版本接受一个额外的(不被使用的) int类型的形参。&lt;/p&gt;
+&lt;h4 id=&#34;显式地调用后置运算符&#34;&gt;显式地调用后置运算符&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;obj.operator++(0);//调用后置版本的operator++
+obj.operator++(); //调用前置版本的opeator++&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;成员访问运算符&#34;&gt;成员访问运算符&lt;/h3&gt;
+&lt;p&gt;在迭代器类以及智能指针类中常常用到解引用运算符(*)和箭头运算符(-&amp;gt;)。&lt;/p&gt;
+&lt;h3 id=&#34;函数调用运算符&#34;&gt;函数调用运算符&lt;/h3&gt;
+&lt;p&gt;如果类重载了函数调用运算符，则可以像使用函数一样使用该类的对象。&lt;/p&gt;
+&lt;h4 id=&#34;lambda是函数对象&#34;&gt;lambda是函数对象&lt;/h4&gt;
+&lt;p&gt;编写一个lambda，编译器将该表达式翻译成一个未命名类的未命名对象。在lambda表达式产生的类中含有一个重载的函数调用运算符。其行为类似于产生一个类的未命名对象，产生的类只有一个函数调用运算符成员。它的形参列表和函数体与lambda表达式完全一样。&lt;/p&gt;
+&lt;h2 id=&#34;重载类型转换与运算符&#34;&gt;重载、类型转换与运算符&lt;/h2&gt;
+&lt;p&gt;由一个实参调用的非显式构造函数定义了一种隐式的类型转换，这种构造函数将实参类型的对象转换成类类型。通过定义类型转换运算符可以做到这一点。转换构造函数和类型转换运算符共同定义了&lt;strong&gt;类类型转换&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;类型转换运算符&#34;&gt;类型转换运算符&lt;/h4&gt;
+&lt;p&gt;类型转换运算符是类的一种特殊成员函数，它负责将一个类类型的值转换成其他类型。类型转换函数的一般形式如下所示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;operator type() const;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;避免有二义性的类型转换&#34;&gt;避免有二义性的类型转换&lt;/h4&gt;
+&lt;p&gt;如果类中包含一个或多个类型转换，则必须确保在类类型和目标类型之间只存在唯一一种转换方式。
+两种情况下可能产生多重转换路径：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;两个类提供了相同的类型转换。例如，A类定义了一个接受B类对象的转换构造函数吗，同时B类定义了一个转换目标是A类的类型转换运算符时，它们提供了相同的类型转换。&lt;/li&gt;
+&lt;li&gt;类定义了多个转换规则，这些转换涉及的类型本身可以通过其他类型转换联系在一起。最典型的例子是算术运算符，对于某个给定的类来说，最好只定义最多一个与算术类型有关的转换规则。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
+    <item>
       <title>多线程</title>
-      <link>http://wangwei9160.github.io/post/thread/</link>
+      <link>https://wangwei9160.github.io/post/thread/</link>
       <pubDate>Sun, 21 Mar 2021 14:00:09 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/thread/</guid>
+      <guid>https://wangwei9160.github.io/post/thread/</guid>
       
         <description>&lt;h2 id=&#34;多线程&#34;&gt;多线程&lt;/h2&gt;
 &lt;h3 id=&#34;进程&#34;&gt;进程&lt;/h3&gt;
@@ -90,10 +171,10 @@
     
     <item>
       <title>网络编程</title>
-      <link>http://wangwei9160.github.io/post/socket/</link>
+      <link>https://wangwei9160.github.io/post/socket/</link>
       <pubDate>Sat, 20 Mar 2021 10:46:16 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/socket/</guid>
+      <guid>https://wangwei9160.github.io/post/socket/</guid>
       
         <description>&lt;p&gt;#网络编程&lt;/p&gt;
 &lt;h2 id=&#34;阻塞非阻塞同步异步&#34;&gt;阻塞、非阻塞、同步、异步&lt;/h2&gt;
@@ -249,10 +330,10 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
     
     <item>
       <title>拷贝控制</title>
-      <link>http://wangwei9160.github.io/post/copycontrol/</link>
+      <link>https://wangwei9160.github.io/post/copycontrol/</link>
       <pubDate>Fri, 19 Mar 2021 15:48:48 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/copycontrol/</guid>
+      <guid>https://wangwei9160.github.io/post/copycontrol/</guid>
       
         <description>&lt;h1 id=&#34;拷贝控制&#34;&gt;拷贝控制&lt;/h1&gt;
 &lt;ul&gt;
@@ -380,16 +461,43 @@ swap中调用的swap不是std::swap。数据成员是内置类型的，而当内
 &lt;ul&gt;
 &lt;li&gt;使用拷贝和交换的赋值运算符自动就是异常安全的，且能正确处理自赋值。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;对象移动&#34;&gt;对象移动&lt;/h3&gt;
+&lt;h4 id=&#34;右值引用&#34;&gt;右值引用&lt;/h4&gt;
+&lt;p&gt;右值引用就是必须绑定到右值的引用。通过&amp;rdquo; &amp;amp;&amp;amp; &amp;ldquo;而不是&amp;rdquo; &amp;amp; &amp;ldquo;来获得右值引用。右值引用有一个重要的性质——只能绑定到一个将要销毁的对象。可以自由地将一个右值引用的资源“移动”到另一个对象中。
+返回左值引用的函数，连同算术、关系、位以及后置递增/递减运算符，都是返回左值的表达式的梨子。可以将一个左值引用绑定到这类表达式的结果上。
+返回非引用类型的函数，连同算术、关系、位以及后置递增/递减运算符，都生成右值。不能讲一个左值引用绑定到这类表达式上，但可以将一个const的左值引用或者一个右值引用绑定到这类表达式上。&lt;/p&gt;
+&lt;h5 id=&#34;左值持久右值短暂&#34;&gt;左值持久；右值短暂&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;左值&lt;/strong&gt;有持久的状态;&lt;strong&gt;右值&lt;/strong&gt;要么是&lt;strong&gt;字面常量&lt;/strong&gt;，要么是&lt;strong&gt;在表达式求值过程中创建的临时对象&lt;/strong&gt;。
+由于右值引用只能绑定到临时号对象，我们得知&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;所引用的对象将要被销毁&lt;/li&gt;
+&lt;li&gt;该对象没有其他用户
+因此，使用右值引用的代码可以自由得接管所引用的对象的资源。
+&lt;strong&gt;变量是左值&lt;/strong&gt;。变量是持久的，直到离开作用域才会被销毁。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;标准库move函数&#34;&gt;标准库move函数&lt;/h5&gt;
+&lt;p&gt;虽然不能将一个右值引用直接绑定到一个左值上，但我们可以显式地将一个左值转换为对应的右值引用类型。通过调用标准库函数中的move函数来获得绑定到左值上的右值引用。
+move调用告诉编译器：有一个左值，但希望像一个右值一样处理它。同时调用move就意味着承诺：除了对其赋值或销毁它之外，将不会再使用它。在调用move之后，不能对移后源对象的值做任何假设。&lt;/p&gt;
+&lt;h4 id=&#34;移动构造函数和移动赋值运算符&#34;&gt;移动构造函数和移动赋值运算符&lt;/h4&gt;
+&lt;p&gt;类似于拷贝构造函数，移动构造函数的第一个参数是该类类型的一个引用。不同于拷贝构造函数，这个引用参数在移动构造函数中是一个右值引用。与拷贝构造函数一样，任何额外的参数都必须有默认实参。
+除了完成资源移动，移动构造函数还必须确保移后源对象处于&lt;strong&gt;销毁它是无害的&lt;/strong&gt;的状态。特别是，一旦资源完成移动，源对象必须不再指向被移动的资源——这些资源的所有权已经归属于新创建的对象。&lt;/p&gt;
+&lt;h5 id=&#34;移后源对象必须可析构&#34;&gt;移后源对象必须可析构&lt;/h5&gt;
+&lt;p&gt;从一个对象移动数据并不会销毁对象，但有时在移动操作完成之后，源对象会被销毁。因此当我们编写一个移动操作时，必须确保移后源对象进入一个可析构的状态。&lt;/p&gt;
+&lt;h5 id=&#34;合成的移动操作&#34;&gt;合成的移动操作&lt;/h5&gt;
+&lt;p&gt;与处理拷贝构造函数和拷贝赋值运算符一样，编译器也会合成移动构造函数和移动赋值运算符。但是，合成的条件不大相同。
+与拷贝操作不同，编译器不会为某些类合成移动操作。特别是，如果一个类定义了自己的拷贝构造函数、拷贝赋值运算符或者析构函数，编译器就不会为它合成移动构造函数和移动赋值运算符了。因此，某些类就没有移动构造函数或移动赋值运算符。如果一个类没有移动操作，通过正常的函数匹配，类会使用对应的拷贝操作来代替移动操作。
+&lt;strong&gt;只有当一个类没有定义任何自己版本的拷贝控制成员，且类的每个非static数据成员都可以移动时，编译器才会为它合成移动构造函数或移动赋值运算符，编译器可以移动内置类型的成员。&lt;/strong&gt;
+移动操作永远不能隐式地定义为删除的函数。如果显式地要求编译器生成=default的移动操作，切编译器不能移动所有成员，则编译器会将移动操作定义为删除的函数。&lt;/p&gt;
 </description>
       
     </item>
     
     <item>
       <title>Leetcode第230场周赛</title>
-      <link>http://wangwei9160.github.io/post/leetcode230/</link>
+      <link>https://wangwei9160.github.io/post/leetcode230/</link>
       <pubDate>Thu, 18 Mar 2021 14:59:48 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/leetcode230/</guid>
+      <guid>https://wangwei9160.github.io/post/leetcode230/</guid>
       
         <description>&lt;h1 id=&#34;leetcode周赛230&#34;&gt;leetcode周赛230&lt;/h1&gt;
 &lt;h3 id=&#34;a-id0目录a&#34;&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
@@ -564,10 +672,10 @@ speedi 是第 i 辆车的初始速度（单位：米/秒）。
     
     <item>
       <title>动态内存</title>
-      <link>http://wangwei9160.github.io/post/dynamicallyallocate/</link>
+      <link>https://wangwei9160.github.io/post/dynamicallyallocate/</link>
       <pubDate>Wed, 17 Mar 2021 14:36:36 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/dynamicallyallocate/</guid>
+      <guid>https://wangwei9160.github.io/post/dynamicallyallocate/</guid>
       
         <description>&lt;h2 id=&#34;动态内存&#34;&gt;动态内存&lt;/h2&gt;
 &lt;ul&gt;
@@ -806,10 +914,10 @@ int *p2 = new (nothrow) int;//如果分配失败,new返回一个空指针
     
     <item>
       <title>Git</title>
-      <link>http://wangwei9160.github.io/post/git/</link>
+      <link>https://wangwei9160.github.io/post/git/</link>
       <pubDate>Sat, 13 Mar 2021 13:27:30 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/git/</guid>
+      <guid>https://wangwei9160.github.io/post/git/</guid>
       
         <description>&lt;h1 id=&#34;github-repository&#34;&gt;github repository&lt;/h1&gt;
 &lt;ul&gt;
@@ -868,10 +976,10 @@ xxxx 是github用户名，name是repository的name&lt;/li&gt;
     
     <item>
       <title>Allocator</title>
-      <link>http://wangwei9160.github.io/post/allocator/</link>
+      <link>https://wangwei9160.github.io/post/allocator/</link>
       <pubDate>Fri, 12 Mar 2021 11:34:39 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/allocator/</guid>
+      <guid>https://wangwei9160.github.io/post/allocator/</guid>
       
         <description>&lt;h2 id=&#34;allocator&#34;&gt;allocator&lt;/h2&gt;
 &lt;ul&gt;
@@ -1014,10 +1122,10 @@ alloc.deallocator(p,n);&lt;/p&gt;
     
     <item>
       <title>Word</title>
-      <link>http://wangwei9160.github.io/post/word/</link>
+      <link>https://wangwei9160.github.io/post/word/</link>
       <pubDate>Mon, 01 Mar 2021 11:53:30 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/word/</guid>
+      <guid>https://wangwei9160.github.io/post/word/</guid>
       
         <description>&lt;h1 id=&#34;英语单词-or-小短文&#34;&gt;英语单词 or 小短文&lt;/h1&gt;
 &lt;h3 id=&#34;210301&#34;&gt;21.03.01&lt;/h3&gt;
@@ -1027,10 +1135,10 @@ alloc.deallocator(p,n);&lt;/p&gt;
     
     <item>
       <title>STL</title>
-      <link>http://wangwei9160.github.io/post/stl/</link>
+      <link>https://wangwei9160.github.io/post/stl/</link>
       <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/stl/</guid>
+      <guid>https://wangwei9160.github.io/post/stl/</guid>
       
         <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;ul&gt;
@@ -1097,6 +1205,26 @@ decltype(sumLength) *getFcn(const string&amp;amp;);&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;当reallocate在新内存中构造时，塔必须调用move来表示希望使用移动构造函数。如果漏掉了move调用，会使用拷贝构造函数。&lt;/li&gt;
 &lt;li&gt;通常不为move提供一个using生命。直接调用std::move而不是move。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;noexcept&lt;/strong&gt;：承诺一个函数不跑出异常的一种方法。在构造函数中，noexcept出现在参数列表和初始化列表开始的冒号之间。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于用户和编译器来说，预先知道某个函数不会跑出异常显然大有裨益。
+&lt;ul&gt;
+&lt;li&gt;知道函数不会跑出异常有助于简化调用该函数的代码&lt;/li&gt;
+&lt;li&gt;如果编译器确认函数不会跑出异常，它就能执行某些特殊的优化操作，而这些优化操作并不适用于可能出错的代码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;编译器并不会在编译时检查noexcept说明。尽管函数声明了它不会跑出异常，但实际上还是跑出了。一旦一个noexcept函数跑出了异常，程序就会调用terminate以确保遵守不在运行时跑出异常的承诺。因此noexcept一般在两种情况下使用：
+&lt;ul&gt;
+&lt;li&gt;确认函数不会排除异常。&lt;/li&gt;
+&lt;li&gt;根本不知道该如何处理异常。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;noexcept说明符接受一个可选的实参，该实参必须能转换为bool类型：如果是true，函数不会抛出异常；如果是false，则函数可能跑出异常。例：noexcept(true)。&lt;/li&gt;
+&lt;li&gt;noexcept运算符：一元运算符，返回值是一个bool类型的右值常量表达式，用于表示给定的表达式是否会跑出异常，并不会求表达式的值。&lt;/li&gt;
+&lt;li&gt;如果一个虚函数承诺了它不会跑出异常，则后续派生出来的虚函数也必须做出同样的承诺；与之相反，如果基类的虚函数允许跑出异常，则派生类的对应函数既可以允许跑出异常，也可以不允许跑出异常。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1922,10 +2050,10 @@ remove_copy_if(v1.begin() , v1.end() , back_inserter(v2) , []( int i) { return i
     
     <item>
       <title>Linux</title>
-      <link>http://wangwei9160.github.io/post/linux/</link>
+      <link>https://wangwei9160.github.io/post/linux/</link>
       <pubDate>Wed, 20 Jan 2021 00:20:24 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/linux/</guid>
+      <guid>https://wangwei9160.github.io/post/linux/</guid>
       
         <description>&lt;h4 id=&#34;linux-下查看进程内的线程情况&#34;&gt;Linux 下查看进程内的线程情况&lt;/h4&gt;
 &lt;ul&gt;
@@ -1947,10 +2075,10 @@ ps -T -p 线程&lt;/p&gt;
     
     <item>
       <title>codeforces</title>
-      <link>http://wangwei9160.github.io/post/codeforces634/</link>
+      <link>https://wangwei9160.github.io/post/codeforces634/</link>
       <pubDate>Wed, 15 Apr 2020 01:00:00 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/codeforces634/</guid>
+      <guid>https://wangwei9160.github.io/post/codeforces634/</guid>
       
         <description>&lt;h1 id=&#34;codeforces&#34;&gt;codeforces&lt;/h1&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
@@ -2136,10 +2264,10 @@ int main(){
     
     <item>
       <title>leetcode第184场周赛</title>
-      <link>http://wangwei9160.github.io/post/leetcode184/</link>
+      <link>https://wangwei9160.github.io/post/leetcode184/</link>
       <pubDate>Sun, 12 Apr 2020 18:00:00 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/leetcode184/</guid>
+      <guid>https://wangwei9160.github.io/post/leetcode184/</guid>
       
         <description>&lt;h1 id=&#34;leetcode第184场周赛&#34;&gt;leetcode第184场周赛&lt;/h1&gt;
 &lt;h3 id=&#34;a-id0目录a&#34;&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
@@ -2274,10 +2402,10 @@ int numOfWays(int n) {
     
     <item>
       <title>Min_max</title>
-      <link>http://wangwei9160.github.io/post/min_max/</link>
+      <link>https://wangwei9160.github.io/post/min_max/</link>
       <pubDate>Thu, 09 Apr 2020 21:22:44 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/min_max/</guid>
+      <guid>https://wangwei9160.github.io/post/min_max/</guid>
       
         <description></description>
       
@@ -2285,10 +2413,10 @@ int numOfWays(int n) {
     
     <item>
       <title>New_test</title>
-      <link>http://wangwei9160.github.io/post/new_test/</link>
+      <link>https://wangwei9160.github.io/post/new_test/</link>
       <pubDate>Wed, 08 Apr 2020 21:59:56 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/new_test/</guid>
+      <guid>https://wangwei9160.github.io/post/new_test/</guid>
       
         <description>&lt;p&gt;这里是一篇最新的测试文章！&lt;/p&gt;
 &lt;p&gt;重新测试！&lt;/p&gt;
@@ -2298,10 +2426,10 @@ int numOfWays(int n) {
     
     <item>
       <title>Blog</title>
-      <link>http://wangwei9160.github.io/post/blog/</link>
+      <link>https://wangwei9160.github.io/post/blog/</link>
       <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/blog/</guid>
+      <guid>https://wangwei9160.github.io/post/blog/</guid>
       
         <description>&lt;p&gt;Hello world!&lt;/p&gt;
 </description>
@@ -2310,10 +2438,10 @@ int numOfWays(int n) {
     
     <item>
       <title>markdown</title>
-      <link>http://wangwei9160.github.io/post/markdown/</link>
+      <link>https://wangwei9160.github.io/post/markdown/</link>
       <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/markdown/</guid>
+      <guid>https://wangwei9160.github.io/post/markdown/</guid>
       
         <description>&lt;h1 id=&#34;一级标题&#34;&gt;一级标题&lt;/h1&gt;
 &lt;h2 id=&#34;二级标题&#34;&gt;二级标题&lt;/h2&gt;

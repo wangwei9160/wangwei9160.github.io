@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>STL on Awei</title>
-    <link>http://wangwei9160.github.io/tags/stl/</link>
+    <link>https://wangwei9160.github.io/tags/stl/</link>
     <description>Recent content in STL on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 12 Mar 2021 11:34:39 +0800</lastBuildDate>
     
-	<atom:link href="http://wangwei9160.github.io/tags/stl/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wangwei9160.github.io/tags/stl/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Allocator</title>
-      <link>http://wangwei9160.github.io/post/allocator/</link>
+      <link>https://wangwei9160.github.io/post/allocator/</link>
       <pubDate>Fri, 12 Mar 2021 11:34:39 +0800</pubDate>
       
-      <guid>http://wangwei9160.github.io/post/allocator/</guid>
+      <guid>https://wangwei9160.github.io/post/allocator/</guid>
       <description>allocator 标准库allocator类定义在头文件memory中，它帮助我们将内存分配和独享构造分离开来。提供一种类型感知的内存分配方法，它分配的内存</description>
     </item>
     
