@@ -6,10 +6,28 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 22 Mar 2021 14:54:42 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 22 Mar 2021 23:00:56 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>面向对象程序设计</title>
+      <link>https://wangwei9160.github.io/post/oop/</link>
+      <pubDate>Mon, 22 Mar 2021 23:00:56 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/oop/</guid>
+      
+        <description>&lt;h1 id=&#34;面向对象&#34;&gt;面向对象&lt;/h1&gt;
+&lt;h2 id=&#34;oop&#34;&gt;OOP&lt;/h2&gt;
+&lt;h2 id=&#34;基类派生类&#34;&gt;基类派生类&lt;/h2&gt;
+&lt;h2 id=&#34;虚函数&#34;&gt;虚函数&lt;/h2&gt;
+&lt;h2 id=&#34;抽象基类&#34;&gt;抽象基类&lt;/h2&gt;
+&lt;h2 id=&#34;构造函数与拷贝控制&#34;&gt;构造函数与拷贝控制&lt;/h2&gt;
+&lt;h2 id=&#34;容器与继承&#34;&gt;容器与继承&lt;/h2&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>重载运算与类型转换</title>
@@ -176,7 +194,7 @@ obj.operator++(); //调用前置版本的opeator++&lt;/p&gt;
       
       <guid>https://wangwei9160.github.io/post/socket/</guid>
       
-        <description>&lt;p&gt;#网络编程&lt;/p&gt;
+        <description>&lt;h1 id=&#34;网络编程&#34;&gt;网络编程&lt;/h1&gt;
 &lt;h2 id=&#34;阻塞非阻塞同步异步&#34;&gt;阻塞、非阻塞、同步、异步&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;阻塞/非阻塞&lt;/strong&gt;关注的是&lt;strong&gt;程序在等待调用结果&lt;/strong&gt;时的状态。阻塞是等待。非阻塞是不需要等待。例如：
@@ -323,6 +341,42 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 &lt;li&gt;请求超时。 接收数据超时时，会发送RST包。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三次握手&#34;&gt;三次握手&lt;/h3&gt;
+&lt;p&gt;建立一个TCP连接时会发生下述情形：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器必须准备好接受外来的连接。通过调用socket、bind和listen这3个函数来完成，称之为被动打开(passive open)&lt;/li&gt;
+&lt;li&gt;客户通过调用connect发起主动打开(active open)。这导致客户TCP发送一个SYN(同步)分节，它告诉服务器客户将在(待建立的)连接中发送的数据的初始序列号。通常SYN分节不携带数据，其所在IP数据包只含有一个IP首部、一个TCP首部及可能有的TCP选项。&lt;/li&gt;
+&lt;li&gt;服务器必须确认(ACK)客户的SYN，同时自己也得发送一个SYN分节，它含有服务器将在同一连接中发送的数据的初始序列号。服务器在单个分节中发送SYN和对客户SYN的ACK。&lt;/li&gt;
+&lt;li&gt;客户必须确认服务器的SYN。
+这种交换至少需要3个分组，因此称之为三次握手。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;四次握手&#34;&gt;四次握手&lt;/h3&gt;
+&lt;p&gt;建立一个SCTP关联的时候回发生下述情形：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器必须准备好接受外来的连接。通过调用socket、bind和listen这3个函数来完成，称之为被动打开(passive open)&lt;/li&gt;
+&lt;li&gt;客户通过调用connect或者发送一个隐式打开该关联的消息进行主动打开。这使得用户SCTP发送一个INIT消息(初始化)，该消息告诉服务器客户的IP清单、初始序列号、用于标识本关联中所有分组的起始标记、客户请求的外出流的数目以及客户能够支持外来的流的数目&lt;/li&gt;
+&lt;li&gt;服务器以一个INIT ACK消息确认客户的INIT消息，其中含有服务器的IP清单、初始序列号、起始标记、服务器请求的外出流的数目、服务器能够支持的外来流的数目以及一个状态cookie。状态cookie包含服务器用于确信本关联有效所需的所有状态，它是数字化签名过的，以确保其有效性。&lt;/li&gt;
+&lt;li&gt;客户以一个COOKIE ECHO消息回射服务器的状态cookie。除COOKIE ECHO外，该消息可能在同一个分组中还捆绑了用户数据。&lt;/li&gt;
+&lt;li&gt;服务器以一个COOKIE ACK消息确认客户回射的cookie正确，本关联于是确立。该消息也可能在同一分组中还捆绑了用户数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;四次挥手&#34;&gt;四次挥手&lt;/h3&gt;
+&lt;p&gt;TCP终止一个连接需要4个分节。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;某个应用进程首先调用close，称该端执行主动关闭(active close)。该端的TCP于是发送一个FIN分节，表示数据发送完毕。&lt;/li&gt;
+&lt;li&gt;接收到这个FIN的对端执行被动关闭(passive close)。这个FIN由TCP确认，它的接收也作为一个文件结束符(end_of_file)传递给接收端应用进程(放在已排队等候该应用进程接收的任何其他数据之后)，因为FIN的接收意味着接收端应用进程在相应连接上再无额外数据可接收。&lt;/li&gt;
+&lt;li&gt;一段时间后，接收到这个文件结束符的应用进程将调用close关闭它的socket。这导致它的TCP也发送一个FIN。&lt;/li&gt;
+&lt;li&gt;执行这个最终FIN的原发送端TCP(执行主动关闭的那一端)确认这个FIN。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;sctp关联终止&#34;&gt;SCTP关联终止&lt;/h3&gt;
+&lt;p&gt;SCTP 当一端关闭某个关联时，另一端必须停止发送新的数据。关联关闭请求的接收端发送完已经排队的数据(如果有的话)后，完成关联的关闭。&lt;/p&gt;
+&lt;h3 id=&#34;端口号&#34;&gt;端口号&lt;/h3&gt;
+&lt;p&gt;16位整数的端口号
+支持FTP的任何TCP/IP实现都把21端口分配给FTP服务器。分配给简化文件传送协议(TFTP)的是UDP端口号69。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;众所周知的端口为0~1023&lt;/li&gt;
+&lt;li&gt;已登记的端口为1024~49151&lt;/li&gt;
+&lt;li&gt;动态或私用的端口为49152~65535&lt;/li&gt;
 &lt;/ul&gt;
 </description>
       

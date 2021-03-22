@@ -6,10 +6,19 @@
     <description>Recent content in c&#43;&#43; on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 22 Mar 2021 14:54:42 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 22 Mar 2021 23:00:56 +0800</lastBuildDate>
     
 	<atom:link href="https://wangwei9160.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>面向对象程序设计</title>
+      <link>https://wangwei9160.github.io/post/oop/</link>
+      <pubDate>Mon, 22 Mar 2021 23:00:56 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/oop/</guid>
+      <description>面向对象 OOP 基类派生类 虚函数 抽象基类 构造函数与拷贝控制 容器与继承</description>
+    </item>
     
     <item>
       <title>重载运算与类型转换</title>

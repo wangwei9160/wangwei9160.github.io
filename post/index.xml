@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 22 Mar 2021 14:54:42 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 22 Mar 2021 23:00:56 +0800</lastBuildDate>
     
 	<atom:link href="https://wangwei9160.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>面向对象程序设计</title>
+      <link>https://wangwei9160.github.io/post/oop/</link>
+      <pubDate>Mon, 22 Mar 2021 23:00:56 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/oop/</guid>
+      <description>面向对象 OOP 基类派生类 虚函数 抽象基类 构造函数与拷贝控制 容器与继承</description>
+    </item>
     
     <item>
       <title>重载运算与类型转换</title>
@@ -35,7 +44,7 @@
       <pubDate>Sat, 20 Mar 2021 10:46:16 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/socket/</guid>
-      <description>#网络编程 阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有x</description>
+      <description>网络编程 阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有xx</description>
     </item>
     
     <item>
