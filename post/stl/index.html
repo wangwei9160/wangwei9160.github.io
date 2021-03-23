@@ -69,7 +69,7 @@
 <meta itemprop="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步">
 <meta itemprop="datePublished" content="2021-02-28T17:47:04&#43;08:00" />
 <meta itemprop="dateModified" content="2021-02-28T17:47:04&#43;08:00" />
-<meta itemprop="wordCount" content="11023">
+<meta itemprop="wordCount" content="11353">
 
 
 
@@ -326,7 +326,7 @@
           2021-02-28
         </time>
         
-        <span class="more-meta"> 约 11023 字 </span>
+        <span class="more-meta"> 约 11353 字 </span>
           <span class="more-meta"> 预计阅读 23 分钟 </span>
 
         
@@ -388,6 +388,21 @@ auto result = find( vec.cbegin() , vec.cend () , val );</p>
 </blockquote>
 </li>
 <li>由于find操作的是迭代器，因此我们可以用同样的find函数在任何容器中查找值。</li>
+</ul>
+</li>
+<li>
+<p><strong>函数调用的解析过程</strong>
+假定调用obj.mem()，则依次执行以下4个步骤：</p>
+<ul>
+<li>首先确定obj的静态类型。调用的是一个成员，所以该类型必须是类类型。</li>
+<li>在obj的静态类型对应的类中查找mem。如果找不到，则依次在直接基类中不断查找直到继承链的顶端。如果找遍了该类及其基类仍然找不到，则编译器将报错。</li>
+<li>一旦找到了mem，就进行常规的类型检查以确认对于当前找到的mem，本次调用是否合法。</li>
+<li>假设调用合法，则编译器将根据是否是虚函数而产生不同的代码：
+<ul>
+<li>如果mem是虚函数且我们是通过引用或指针进行的拷贝，则编译器产生的代码将在运行时确定到底运行的是哪个版本，依据是对象的动态类型。</li>
+<li>反之，如果mem不是虚函数或者我们是通过对象(而非引用或指针)进行的调用，则编译器将产生一个常规函数调用。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>

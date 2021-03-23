@@ -17,7 +17,7 @@
       <pubDate>Mon, 22 Mar 2021 23:00:56 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/oop/</guid>
-      <description>面向对象 OOP 基类派生类 虚函数 抽象基类 构造函数与拷贝控制 容器与继承</description>
+      <description>面向对象 OOP 继承 通过继承联系在一起的类构成一种层次关系。通常在层次关系的根部有一个基类，其他类则直接或间接地从基类继承而来，这些继承得到的类统</description>
     </item>
     
     <item>
