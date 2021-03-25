@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Interview - Awei</title>
+  <title>面试题 - Awei</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="堆和栈 堆： 栈： 堆空间不足： 栈空间不足： 栈空间存什么： 栈内存会被污染： 谁会产生内存碎片： 内存碎片怎么产生： 如何预防内存碎片： 信号量 信号量的作用" />
+  <meta name="description" content="面试题 const 和 define define 只是一个常数的名字，在编译时编译器会把它替换成常数，仅仅是提升了代码的可读性。 const，是一个不能修改其值的变量，const" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -59,23 +59,23 @@
 
 
 
-<meta property="og:title" content="Interview" />
-<meta property="og:description" content="堆和栈 堆： 栈： 堆空间不足： 栈空间不足： 栈空间存什么： 栈内存会被污染： 谁会产生内存碎片： 内存碎片怎么产生： 如何预防内存碎片： 信号量 信号量的作用" />
+<meta property="og:title" content="面试题" />
+<meta property="og:description" content="面试题 const 和 define define 只是一个常数的名字，在编译时编译器会把它替换成常数，仅仅是提升了代码的可读性。 const，是一个不能修改其值的变量，const" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://wangwei9160.github.io/post/interview/" />
 <meta property="article:published_time" content="2021-03-25T12:08:09+08:00" />
 <meta property="article:modified_time" content="2021-03-25T12:08:09+08:00" />
-<meta itemprop="name" content="Interview">
-<meta itemprop="description" content="堆和栈 堆： 栈： 堆空间不足： 栈空间不足： 栈空间存什么： 栈内存会被污染： 谁会产生内存碎片： 内存碎片怎么产生： 如何预防内存碎片： 信号量 信号量的作用">
+<meta itemprop="name" content="面试题">
+<meta itemprop="description" content="面试题 const 和 define define 只是一个常数的名字，在编译时编译器会把它替换成常数，仅仅是提升了代码的可读性。 const，是一个不能修改其值的变量，const">
 <meta itemprop="datePublished" content="2021-03-25T12:08:09&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-25T12:08:09&#43;08:00" />
-<meta itemprop="wordCount" content="2631">
+<meta itemprop="wordCount" content="5661">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Interview"/>
-<meta name="twitter:description" content="堆和栈 堆： 栈： 堆空间不足： 栈空间不足： 栈空间存什么： 栈内存会被污染： 谁会产生内存碎片： 内存碎片怎么产生： 如何预防内存碎片： 信号量 信号量的作用"/>
+<meta name="twitter:title" content="面试题"/>
+<meta name="twitter:description" content="面试题 const 和 define define 只是一个常数的名字，在编译时编译器会把它替换成常数，仅仅是提升了代码的可读性。 const，是一个不能修改其值的变量，const"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -319,15 +319,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">Interview</h1>
+      <h1 class="post-title">面试题</h1>
       
       <div class="post-meta">
         <time datetime="2021-03-25" class="post-time">
           2021-03-25
         </time>
         
-        <span class="more-meta"> 约 2631 字 </span>
-          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span class="more-meta"> 约 5661 字 </span>
+          <span class="more-meta"> 预计阅读 12 分钟 </span>
 
         
         
@@ -344,7 +344,7 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#面试题">面试题</a>
       <ul>
         <li></li>
       </ul>
@@ -356,22 +356,49 @@
 
     
     <div class="post-content">
-      <h4 id="堆和栈">堆和栈</h4>
-<p>堆：
-栈：
+      <h2 id="面试题">面试题</h2>
+<h4 id="const-和-define">const 和 define</h4>
+<p>define 只是一个常数的名字，在编译时编译器会把它替换成常数，仅仅是提升了代码的可读性。
+const，是一个不能修改其值的变量，const定义的常量在内存中是有自己的地址的。</p>
+<h4 id="new-和-malloc">new 和 malloc</h4>
+<ul>
+<li>new/delete 是c++关键字，需要编译器支持。malloc/free是库函数，需要头文件支持。</li>
+<li>new操作返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，new是符合类型安全的操作。malloc内存分配成功返回的是void*，需要使用强制类型转换将void*指针转换成需要的类型。</li>
+<li>new内存分配失败返回的是bad_alloc异常。malloc内存分配失败返回的是null。</li>
+<li>c++允许重载new/delete操作符，new为对象调用构造函数来完成初始工作。而malloc不允许重载。</li>
+<li>new操作从自由存储区上为对象动态分配内存，而malloc函数从堆上动态分配内存。自由存储区是c++基于new操作符的一个抽象概念，凡是通过new进行内存申请，该内存就是自由存储区。而堆是操作系统的术语，是操作系统维护的一块特殊内存，用于程序的内存动态分配。</li>
+</ul>
+<h4 id="malloc的实质">malloc的实质</h4>
+<p>malloc函数有一个将可用的内存块连接为一个链表的空闲链表。调用malloc函数的时候，沿着链表寻找一个大小足以满足用户请求所需要的的内存块。然后将内存块一分为二（一块与用户请求的大小相等，另一块就是剩下的字节）。将分配给用户的内存传给用户，剩下的返回到链表上。调用free时，将用户释放的内存块连接到空闲链表上。到最后，空闲链表就会被切成很多小的内存片段。如果请求一个很大的内存片段，空闲链表上没有可以满足的片段，则malloc请求延时，将空闲链进行整理合并。如果依旧无法满足要求，则返回null。malloc内存不一定分配成功。</p>
+<h4 id="堆和栈">堆和栈</h4>
+<p>堆：共有的空间，份全局堆和局部堆。全局堆是所有没有分配的空间，局部堆是用户分配的空间，堆在操作系统对进程初始化的时候分配，运行时也可以向操作系统索要额外的堆，但是用完得还给操作系统，否则就造成内存泄漏。
+栈：栈是线程独有的，保存其运行状态和局部变量的。栈在线程开始的时候初始化，每个线程的栈相互独立，每个函数也有自己的栈，栈被用来在函数之间传递参数。操作系统在切换线程的时候会自动的切换栈，也就是切换SS/ESP寄存器。
 堆空间不足：
 栈空间不足：
-栈空间存什么：
-栈内存会被污染：
-谁会产生内存碎片：
-内存碎片怎么产生：
-如何预防内存碎片：</p>
+栈空间存什么：函数的参数值，局部变量的值。
+栈内存会被污染：定义一个变量，在修改另一个变量时，导致原油的变量值被修改，被称之为内存污染。栈是从高到低分配地址的，例如有char类型变量a,b，一个int类型指针指向了b所在的地址，给指针所在地址赋值为一个数时，a的地址比b的地址高，赋值会改变a所在地址的内容，造成内存污染。
+谁会产生内存碎片：堆会产生内存碎片。
+内存碎片怎么产生：malloc函数有一个将可用的内存块连接为一个链表的空闲链表。由于malloc分配时是沿着链表寻找一个大小足以满足用户请求所需的内存块，然后将内存块一分为二，将分配给用户的内存传给用户，剩下的则返回到链表上。调用free时，将用户释放的内存块连接到空闲链表上。到最后，空闲链表就会切成很多小的内存片段。如果请求一个很大的内存片段，空闲链表上没有可以满足的片段，则malloc请求延时，将空闲链进行整理合并。如果依旧无法满足要求，则返回null。malloc内存不一定分配成功。
+如何预防内存碎片：1、伙伴算法，用于管理物理内存，避免内存碎片;伙伴系统是把所有的空闲页框分成11个块链表，每个链表分别包含大小为1,2,4,8,16,32,64,128,256,512,1024个连续的页框。每个块的第一个页框的物理地址是该块大小的整数倍。假设要请求256个页框的块，步骤主要有两步。第一步，在256个页框的链表中检查是否有一个空闲块，如果没有，则查找下一个更大的块，如果有，则满足请求。第二步，在更大的块即512个页框的链表中检查是否有一个空闲块，如果有，把512个页框的空闲块分成两份，第一份用于满足请求，第二份链接到256个页框的链表中。如果没有空闲块，则继续查找更大的。2、高速缓存Slab层用于管理内核分配内存，避免碎片。</p>
+<p>区别：</p>
+<ul>
+<li>管理方式不同：程序运行时，栈由操作系统自动分配管理，无须程序员人工控制，包括函数的参数值、返回值、局部变量等。而堆空间的申请、释放都是有程序员人工控制，也因此容易产生内存泄漏。</li>
+<li>空间大小不同：栈是向低位置扩展，是一块连续的内存区域。即栈顶的地址和栈的最大容量是系统预先规定好的，当申请的空间超过栈的剩余空间时，将出现栈溢出的错误。而堆是向高地址扩展，是不连续的内存区域。因为系统是链表来存储空间内存地址的，且链表的遍历方向是由低地址向高地址扩展的</li>
+<li>产生的碎片：对于堆来说，频繁的malloc/free(new/delete)势必造成内存空间的不连续，从而造成大量的内存碎片，程序的运行效率低下。而对于栈来说，分配的一定是连续的内存空间。</li>
+<li>堆都是程序中由malloc/new函数动态申请分配的，有free/delete函数释放；而栈的分配和释放是由操作系统完成的。栈的动态分配有allocate()函数手动完成，但一般都无需手动操作，而是交给编译器自动进行申请和释放的。</li>
+<li>分配效率不同：堆的内存分配效率比栈低很多。因为栈有操作系统提供的，会在底层堆栈提供支持，分配专门的寄存器存放栈的地址，包括压栈出栈都由专门的指令执行，所以执行效率高。而堆是由c函数支持的，机制复杂，分配内存时库函数搜索可用的内存空间，如果没有足够的连续的空间，则需要操作系统来重新整理堆内存，这样才有机会分到足够大小的空间，然后返回。</li>
+</ul>
 <h4 id="信号量">信号量</h4>
 <p>信号量的作用：
 信号量的同步：</p>
 <h4 id="锁">锁</h4>
-<p>锁的作用：
-锁的互斥：</p>
+<p>mutex（互斥锁）、semaphore（信号量）、rw_semaphore（读写信号量）、spanblock（自旋锁）。
+mutex：主要实现内核中的互斥访问功能，对它的访问必须遵循一些规则：同一时间只能有一个任务持有互斥锁，而且只有这个任务可以对互斥锁进行解锁，不能进行递归锁定或解锁。
+semaphore：信号量创建时需要设置一个初始值，表示同时可以有几个任务可以访问该信号量保护的共享资源，若初始值为1就变成互斥锁，一个任务想要访问共享资源，首先必须得到信号量，获取信号量的操作会将信号量的值减1，若当前信号量的值为负数，则表示无法获得信号量，若当前信号量的值为非负数，表示可以获得信号量。当任务访问完呗信号量保护的共享资源后，必须释放信号量，释放信号量通过把信号量的值加1实现，如果信号量的值为非正数，表明有任务正在等待当前信号量，因此它将被唤醒。
+re_semaphore：读写信号量对访问者进行了细分，或是读者或是写者，读者在保持读写信号量期间只能对该信号量保护的共享资源进行读访问，如果一个任务除了读还需要写，就被归类为写者，它在对共享资源访问之前必须先获得写者身份，写者发现自己不需要写访问的情况下可以降级为读者。读写信号量同时拥有的读者数量不限。如果一个读写信号量当前没有被写者拥有并且也没有写者等待读者释放信号量，那么任何读者都可以成功获得该读写信号量；否则读者必须被挂起知道写者释放信号量。
+spanbloc：自旋锁与互斥锁有点类似，但不会引起调用者睡眠，如果自旋锁已经被别的执行单位保持，则调用者就一直循环在哪里看是否该自选这的保持者已经释放了锁，由于自旋锁使用者保持锁时间非常短，因此选择自选而不是睡眠，自旋锁的小绿远高于互斥锁。
+锁的作用：实现对数据的保护。
+锁的互斥：使用锁的目的是达到同步的作用，使共享资源在同一时间内，只有能有一个进程或者线程对他进行操作。</p>
 <h4 id="内存泄漏">内存泄漏</h4>
 <p>已动态分配的内存由于某种原因程序未释放或无法释放，造成系统内存的浪费，导致程序运行速度变慢甚至系统崩溃等后果。</p>
 <h5 id="智能指针">智能指针</h5>

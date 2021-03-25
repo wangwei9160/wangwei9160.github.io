@@ -69,7 +69,7 @@
 <meta itemprop="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步">
 <meta itemprop="datePublished" content="2021-02-28T17:47:04&#43;08:00" />
 <meta itemprop="dateModified" content="2021-02-28T17:47:04&#43;08:00" />
-<meta itemprop="wordCount" content="11565">
+<meta itemprop="wordCount" content="11740">
 
 
 
@@ -326,7 +326,7 @@
           2021-02-28
         </time>
         
-        <span class="more-meta"> 约 11565 字 </span>
+        <span class="more-meta"> 约 11740 字 </span>
           <span class="more-meta"> 预计阅读 24 分钟 </span>
 
         
@@ -478,6 +478,9 @@ decltype(sumLength) *getFcn(const string&amp;);</p>
 <li>一个中断服务子程序会访问到的非自动变量（Non-automatic variables）</li>
 <li>多线程应用中被几个任务共享的变量。</li>
 </ul>
+</li>
+<li>
+<p>**extern ”C” **：c语言不允许存在同名对象，比如在一个编译单元内部，不存在同名的函数。而c++允许对一个名字基于不同的定义，只要在语义上没有二义性。如果整个工程中由多个源文件组成，在一个源文件中想引用另外一个源文件中已经定义的全局变量，只需要在引用变量的文件中用extern关键字声明。如果不在文件的开头定义，则有效的作用范围也仅限于起定义处到文件结束。</p>
 </li>
 </ul>
 <h2 id="顺序容器">顺序容器</h2>

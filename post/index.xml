@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Interview</title>
+      <title>面试题</title>
       <link>https://wangwei9160.github.io/post/interview/</link>
       <pubDate>Thu, 25 Mar 2021 12:08:09 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/interview/</guid>
-      <description>堆和栈 堆： 栈： 堆空间不足： 栈空间不足： 栈空间存什么： 栈内存会被污染： 谁会产生内存碎片： 内存碎片怎么产生： 如何预防内存碎片： 信号量 信号量的作用</description>
+      <description>面试题 const 和 define define 只是一个常数的名字，在编译时编译器会把它替换成常数，仅仅是提升了代码的可读性。 const，是一个不能修改其值的变量，const</description>
     </item>
     
     <item>
