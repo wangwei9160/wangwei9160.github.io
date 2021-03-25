@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 25 Mar 2021 10:35:51 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 25 Mar 2021 12:08:09 +0800</lastBuildDate>
     
 	<atom:link href="https://wangwei9160.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Interview</title>
+      <link>https://wangwei9160.github.io/post/interview/</link>
+      <pubDate>Thu, 25 Mar 2021 12:08:09 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/interview/</guid>
+      <description>堆和栈 堆： 栈： 堆空间不足： 栈空间不足： 栈空间存什么： 栈内存会被污染： 谁会产生内存碎片： 内存碎片怎么产生： 如何预防内存碎片： 信号量 信号量的作用</description>
+    </item>
     
     <item>
       <title>Shell</title>
@@ -17,7 +26,7 @@
       <pubDate>Thu, 25 Mar 2021 10:35:51 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/shell/</guid>
-      <description>Shell命令 shell脚本的基本写法 脚本第一行，#! 指定解释器，例#!/bin/bash 表示以下内容使用bash解释器 脚本第二部分，注释（</description>
+      <description>Shell命令 python和shell shell更适合做批处理。shell需要各种命令工具支持。 python是通用语言。强扩展性，可读性更强</description>
     </item>
     
     <item>
@@ -180,15 +189,6 @@
       
       <guid>https://wangwei9160.github.io/post/blog/</guid>
       <description>Hello world!</description>
-    </item>
-    
-    <item>
-      <title>markdown</title>
-      <link>https://wangwei9160.github.io/post/markdown/</link>
-      <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
-      
-      <guid>https://wangwei9160.github.io/post/markdown/</guid>
-      <description>一级标题 二级标题 三级标题 四级标题 五级标题 六级标题 我是一级标题 我是二级标题 代码 import + 4个空格代码块 有序列表 123 345 123 1.234 无序列表 123 234 456 98 倾斜的字 加粗的</description>
     </item>
     
   </channel>

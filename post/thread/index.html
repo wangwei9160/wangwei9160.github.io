@@ -69,7 +69,7 @@
 <meta itemprop="description" content="多线程 进程 进程是具有一定独立功能的程序关于某个数据集合的一次运行过程，是系统进行资源分配和调度的一个独立单位。 进程一般具有： 动态性、并发性、">
 <meta itemprop="datePublished" content="2021-03-21T14:00:09&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-21T14:00:09&#43;08:00" />
-<meta itemprop="wordCount" content="782">
+<meta itemprop="wordCount" content="935">
 
 
 
@@ -326,7 +326,7 @@
           2021-03-21
         </time>
         
-        <span class="more-meta"> 约 782 字 </span>
+        <span class="more-meta"> 约 935 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
 
         
@@ -417,6 +417,11 @@
 <p>线程是进程中的一个可调度实体，是<strong>cpu调度和分配</strong>的基本单位。</p>
 <h5 id="线程的状态">线程的状态：</h5>
 <p>就绪状态、运行状态、阻塞状态、创建状态、终止状态。</p>
+<h5 id="线程通信的方式">线程通信的方式</h5>
+<p>共享内存、消息传递、管道流
+共享内存：线程之间共享程序的公共状态，线程之间通过读写内存中的公共状态来隐式通信。使用volatile共享内存
+消息传递：线程之间没有公共的状态，线程之间必须明确的发送信息来显式的进行通信。wait/notify等待通知方式、join方式
+管道流：管道输入/输出流的形式</p>
 <h3 id="线程和进程的关系">线程和进程的关系</h3>
 <ul>
 <li>进程至少有一个线程，通常将此线程称为主线程。</li>

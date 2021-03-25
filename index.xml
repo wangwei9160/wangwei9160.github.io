@@ -6,10 +6,134 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 25 Mar 2021 10:35:51 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 25 Mar 2021 12:08:09 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Interview</title>
+      <link>https://wangwei9160.github.io/post/interview/</link>
+      <pubDate>Thu, 25 Mar 2021 12:08:09 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/interview/</guid>
+      
+        <description>&lt;h4 id=&#34;堆和栈&#34;&gt;堆和栈&lt;/h4&gt;
+&lt;p&gt;堆：
+栈：
+堆空间不足：
+栈空间不足：
+栈空间存什么：
+栈内存会被污染：
+谁会产生内存碎片：
+内存碎片怎么产生：
+如何预防内存碎片：&lt;/p&gt;
+&lt;h4 id=&#34;信号量&#34;&gt;信号量&lt;/h4&gt;
+&lt;p&gt;信号量的作用：
+信号量的同步：&lt;/p&gt;
+&lt;h4 id=&#34;锁&#34;&gt;锁&lt;/h4&gt;
+&lt;p&gt;锁的作用：
+锁的互斥：&lt;/p&gt;
+&lt;h4 id=&#34;内存泄漏&#34;&gt;内存泄漏&lt;/h4&gt;
+&lt;p&gt;已动态分配的内存由于某种原因程序未释放或无法释放，造成系统内存的浪费，导致程序运行速度变慢甚至系统崩溃等后果。&lt;/p&gt;
+&lt;h5 id=&#34;智能指针&#34;&gt;智能指针&lt;/h5&gt;
+&lt;p&gt;智能指针的行为与常规指针类似，重要的区别是它负责自动的释放所指向的对象。主要有两种智能指针：shared_ptr和unique_ptr。两种智能指针的区别在于管理底层指针的方式：shared_ptr允许多个指针共同指向同一个对象，只有当最后一个shared_ptr析构时，内存才会被释放。unique_ptr独占所指向的对象。还有weak_ptr是个弱引用，主要指向shared_ptr类型所指向的对象，不会改变shared_ptr的引用计数，即使有weak_ptr指向最后一个指对象的shared_ptr被销毁，对象还是会被释放。&lt;/p&gt;
+&lt;h5 id=&#34;手写智能指针拷贝构造运算符&#34;&gt;手写智能指针，拷贝构造运算符&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;template&amp;lt;class T&amp;gt;
+class my_shared_ptr{
+    private:
+        T* ptr = nullptr;
+        int num = 0;
+    public:
+        my_shared_ptr() {};
+        my_shared_ptr(nullptr) {};
+        my_shared_ptr(T* ptr) : ptr(p) {num = 1};
+        my_shared_ptr(const my_shared_ptr&amp;amp; p) : ptr(p.ptr) , num(p.num) {
+            if(num) ++num;
+        };
+        my_shared_ptr(my_shared_ptr&amp;amp; p) {
+            std::swap(ptr,p.ptr);
+            std::swap(num,p.num);
+        };
+        ~my_shared_ptr() {
+            if(num &amp;amp;&amp;amp; !(--num)){
+                delete ptr;
+                ptr = nullptr;
+                num = 0;
+            }
+        }
+        T* get(){
+            return ptr;
+        }
+        int use_count(){
+            return num;
+        }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;右值引用&#34;&gt;右值引用&lt;/h4&gt;
+&lt;p&gt;通过&amp;rdquo; &amp;amp;&amp;amp; &amp;ldquo;而不是&amp;rdquo; &amp;amp; &amp;ldquo;来获得右值引用。右值引用有一个重要的性质——只能绑定到一个将要销毁的对象。可以自由地将一个右值引用的资源“移动”到另一个对象中。右值要么是字面常量，要么是在表达式求值过程中创建的临时对象。右值引用主要运用于移动构造和移动赋值、转发。对于一个左值，一般会选择调用拷贝构造函数，这会造成资源的浪费，右值会在执行完之后就销毁，充分利用资源，右值是短暂的。&lt;/p&gt;
+&lt;h4 id=&#34;深拷贝和浅拷贝&#34;&gt;深拷贝和浅拷贝&lt;/h4&gt;
+&lt;p&gt;编译器在我们没有定义拷贝构造函数的时候，会在拷贝对象时调用默认拷贝构造函数，进行的是浅拷贝。对指针进行拷贝之后会出现两个指针指向同一个内存空间。在对含有指针成员的对象进行拷贝的时，必须要自己定义拷贝构造函数，使拷贝后的对象指针成员有自己的内存空间，即深拷贝，这样就避免了内存泄漏。浅拷贝只是对指针的拷贝，深拷贝不仅对指针进行拷贝，还对指针指向的对象进行拷贝。浅拷贝带来的问题在于析构时多次释放内存，可以使用shared_ptr解决这个问题。&lt;/p&gt;
+&lt;h4 id=&#34;类的const成员函数&#34;&gt;类的const成员函数&lt;/h4&gt;
+&lt;p&gt;const成员函数可以访问非const对象的非const数据成员、const数据成员，也可以访问const对象内的所有数据成员。
+非const成员函数可以访问非const对象的非const数据成员、const数据成员，不可以访问const对象的任意数据成员。
+若成员函数并不对数据成员进行修改，应尽量声明为const成员函数。&lt;/p&gt;
+&lt;h4 id=&#34;const-string-s-和-const-string-s的区别&#34;&gt;const string&amp;amp; s 和 const string s的区别&lt;/h4&gt;
+&lt;p&gt;传参时，const string&amp;amp; s 比const string s更节约资源
+值传递和引用传递方式的区别。
+值传递，是从调用的地方把值复制一遍传给函数，需要形成实参的副本，有时间和空间的开销，如果是结构体或者类的话开销会更大，函数中对实参副本的修改并不会影响到函数调用位置实参的值。
+引用传递，把实参的地址拷贝到形参，形参和实参共用一个内存地址，形参的修改会反映到实参上，32位中指针或者引用的开销只有4字节，开销小。
+&amp;amp;的目的是引用，避免了复制，const是为了限定它是只读的。&lt;/p&gt;
+&lt;h4 id=&#34;const-char-s--char-const-s-和-char--const-s的区别&#34;&gt;const char *s ， char const *s 和 char * const s的区别&lt;/h4&gt;
+&lt;p&gt;const 关键字在类型或变量名之前是等价的。声明从右往左读。
+char * const s，其中s是一个const指针 指向char类型，不可修改内容。
+const char * s，其中s是一个指针 指向const char类型。
+char const *s，由于没有没有const *的运算，所以const是修饰char的，与const char * s是一样的。&lt;/p&gt;
+&lt;h4 id=&#34;类的静态数据成员&#34;&gt;类的静态数据成员&lt;/h4&gt;
+&lt;p&gt;static关键字来把类的成员定义为静态的。无论有多少个类的对象，静态成员只有一个。静态成员在所有对象中是共享的。如果不存在其他初始化语句，在创建第一个对象时，所有静态数据都会被初始化为0，不能把静态成员的初始化放在类的定义中，可以再类的外面使用（::）来重新声明静态变量从而对它进行初始化。&lt;/p&gt;
+&lt;h4 id=&#34;静态局部变量和局部变量&#34;&gt;静态局部变量和局部变量&lt;/h4&gt;
+&lt;p&gt;静态变量都在全局数据区分配内存。静态局部变量在程序执行到该对象的声明出首次初始化，即以后的函数调用不再初始化。静态局部变量一般在声明处初始化，如果没有显式初始化，会被自动初始化为0。它始终驻留在全局数据区，知道程序运行结束，但是其作用域仅仅是局部作用域，当定义它的函数或语句结束之后，作用域随之结束。
+局部变量的初始值不可知，作用域仅在它的函数或者语句内部，函数或语句结束之后，局部变量也将销毁。&lt;/p&gt;
+&lt;h4 id=&#34;进程通信&#34;&gt;进程通信&lt;/h4&gt;
+&lt;p&gt;管道及有名管道、信号、消息队列、共享内存、信号量、socket。&lt;/p&gt;
+&lt;h4 id=&#34;多线程&#34;&gt;多线程&lt;/h4&gt;
+&lt;p&gt;阻塞还是非阻塞：
+是否可以传较大数据、最大多大：
+消息队列最多缓存多少消息：
+多线程数据同步问题：
+多线程数据保护：&lt;/p&gt;
+&lt;h4 id=&#34;线程间通信&#34;&gt;线程间通信&lt;/h4&gt;
+&lt;p&gt;共享内存、消息传递、管道流
+共享内存：线程之间共享程序的公共状态，线程之间通过读写内存中的公共状态来隐式通信。使用volatile共享内存
+消息传递：线程之间没有公共的状态，线程之间必须明确的发送信息来显式的进行通信。wait/notify等待通知方式（最典型的是生产者-消费者模式）、join方式
+管道流：管道输入/输出流的形式&lt;/p&gt;
+&lt;h4 id=&#34;tcp-连接&#34;&gt;TCP 连接&lt;/h4&gt;
+&lt;p&gt;建立一个TCP连接时会发生下述情形：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器必须准备好接受外来的连接。通过调用socket、bind和listen这3个函数来完成，称之为被动打开(passive open)&lt;/li&gt;
+&lt;li&gt;客户通过调用connect发起主动打开(active open)。这导致客户TCP发送一个SYN(同步)分节，它告诉服务器客户将在(待建立的)连接中发送的数据的初始序列号。通常SYN分节不携带数据，其所在IP数据包只含有一个IP首部、一个TCP首部及可能有的TCP选项。&lt;/li&gt;
+&lt;li&gt;服务器必须确认(ACK)客户的SYN，同时自己也得发送一个SYN分节，它含有服务器将在同一连接中发送的数据的初始序列号。服务器在单个分节中发送SYN和对客户SYN的ACK。&lt;/li&gt;
+&lt;li&gt;客户必须确认服务器的SYN。
+这种交换至少需要3个分组，因此称之为三次握手。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;socket&#34;&gt;socket&lt;/h4&gt;
+&lt;p&gt;client模型：
+server模型：
+server如何实现并发处理：
+select：
+select最大支持多少个fd：
+socket有几个缓冲区：
+socket缓冲区如何设置：
+UDP缓冲区满了，数据不会丢，为什么
+TCP缓冲区满了，数据不会丢，为什么&lt;/p&gt;
+&lt;h4 id=&#34;tcpip&#34;&gt;TCP/IP&lt;/h4&gt;
+&lt;p&gt;TCP UDP 多播协议：
+TCP协议的可靠性：
+MTU是什么，默认多大：
+UDP和多播数据格式的差异：&lt;/p&gt;
+&lt;h4 id=&#34;红黑树&#34;&gt;红黑树&lt;/h4&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>Shell</title>
@@ -19,11 +143,84 @@
       <guid>https://wangwei9160.github.io/post/shell/</guid>
       
         <description>&lt;h1 id=&#34;shell命令&#34;&gt;Shell命令&lt;/h1&gt;
+&lt;h2 id=&#34;python和shell&#34;&gt;python和shell&lt;/h2&gt;
+&lt;p&gt;shell更适合做批处理。shell需要各种命令工具支持。
+python是通用语言。强扩展性，可读性更强。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you find you need to use arrays for anything more than assignment of ${PIPESTATUS}, you should use Python.&lt;/li&gt;
+&lt;li&gt;If you are writing a script that is more than 100 lines long, you should probably be writing it in Python instead. Bear in mind that scripts grow. Rewrite your script in another language early to avoid a time-consuming rewrite at a later date.&lt;/li&gt;
+&lt;li&gt;如果有复杂的对象，请使用python。&lt;/li&gt;
+&lt;li&gt;如果写了超过100行的shell脚本，考虑使用python重写。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;shell脚本的基本写法&#34;&gt;shell脚本的基本写法&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;脚本第一行，#! 指定解释器，例#!/bin/bash 表示以下内容使用bash解释器&lt;/li&gt;
 &lt;li&gt;脚本第二部分，注释（#）说明，对脚本的基本信息进行描述&lt;/li&gt;
 &lt;li&gt;脚本第三部分，脚本要实现的具体代码内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;shell脚本的执行方法&#34;&gt;shell脚本的执行方法&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;标准脚本执行方法：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;1) 编写人生第一个shell脚本
+# cat first_shell.sh
+
+#!/bin/env bash
+
+# 注释说明
+# Name: first_shell.sh
+
+echo &amp;quot;hello world&amp;quot;
+echo &amp;quot;hello world&amp;quot;
+echo &amp;quot;hello world&amp;quot;
+
+2) 脚本增加可执行权限
+# chmod +x first_shell.sh
+
+3) 标准方式执行脚本
+# pwd
+/shell01
+# /shell01/first_shell.sh
+或者
+# ./first_shell.sh
+
+注意：标准执行方式脚本必须要有可执行权限。
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;非标准执行方法
+&lt;ul&gt;
+&lt;li&gt;直接在命令行指定解释器执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;# bash first_shell.sh
+# sh first_shell.sh
+# bash -x first_shell.sh
++ echo &#39;hello world&#39;
+hello world
++ echo &#39;hello world&#39;
+hello world
++ echo &#39;hello world&#39;
+hello world
+----------------
+-x:一般用于排错，查看脚本的执行过程
+-n:用来查看脚本的语法是否有问题
+------------
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;使用source命令读取脚本文件，执行文件里的代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;# source first_shell.sh
+hello world
+hello world
+hello world
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;变量&#34;&gt;变量&lt;/h3&gt;
+&lt;p&gt;变量名=变量值&lt;/p&gt;
+&lt;h4 id=&#34;变量名命名规则&#34;&gt;变量名命名规则&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;区分大小写&lt;/li&gt;
+&lt;li&gt;不能有特殊符号&lt;/li&gt;
+&lt;li&gt;不能以数字开头&lt;/li&gt;
+&lt;li&gt;等号两边不能有空格&lt;/li&gt;
+&lt;li&gt;见名知意&lt;/li&gt;
 &lt;/ul&gt;
 </description>
       
@@ -291,6 +488,11 @@ obj.operator++(); //调用前置版本的opeator++&lt;/p&gt;
 &lt;p&gt;线程是进程中的一个可调度实体，是&lt;strong&gt;cpu调度和分配&lt;/strong&gt;的基本单位。&lt;/p&gt;
 &lt;h5 id=&#34;线程的状态&#34;&gt;线程的状态：&lt;/h5&gt;
 &lt;p&gt;就绪状态、运行状态、阻塞状态、创建状态、终止状态。&lt;/p&gt;
+&lt;h5 id=&#34;线程通信的方式&#34;&gt;线程通信的方式&lt;/h5&gt;
+&lt;p&gt;共享内存、消息传递、管道流
+共享内存：线程之间共享程序的公共状态，线程之间通过读写内存中的公共状态来隐式通信。使用volatile共享内存
+消息传递：线程之间没有公共的状态，线程之间必须明确的发送信息来显式的进行通信。wait/notify等待通知方式、join方式
+管道流：管道输入/输出流的形式&lt;/p&gt;
 &lt;h3 id=&#34;线程和进程的关系&#34;&gt;线程和进程的关系&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;进程至少有一个线程，通常将此线程称为主线程。&lt;/li&gt;
@@ -860,11 +1062,12 @@ speedi 是第 i 辆车的初始速度（单位：米/秒）。
 &lt;li&gt;&lt;strong&gt;delete&lt;/strong&gt;：接受一个动态对象的指针，销毁该对象，并释放与之关联的内存。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;标准库提供了两种&lt;strong&gt;智能指针&lt;/strong&gt;类型来管理动态对象。智能指针的行为类似常规指针，重要的区别是它负责自动释放锁指向的对象。两种智能指针的区别在于管理底层指针的方式：
+&lt;li&gt;标准库提供了两种&lt;strong&gt;智能指针&lt;/strong&gt;类型来管理动态对象。智能指针的行为类似常规指针，重要的区别是它负责自动释放所指向的对象。两种智能指针的区别在于管理底层指针的方式：
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;shared_ptr&lt;/strong&gt;：允许多个指针指向同一个对象。在最后一个shared_ptr析构的时候，内存才会释放。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;unique_ptr&lt;/strong&gt;：&amp;lsquo;独占&#39;所指向的对象。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;weak_ptr&lt;/strong&gt;：弱引用，指向shared_ptr所管理的对象。这三种类型都定义在memory头文件中。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;weak_ptr&lt;/strong&gt;：弱引用，指向shared_ptr所管理的对象。
+这三种类型都定义在memory头文件中。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -2624,139 +2827,6 @@ int numOfWays(int n) {
       <guid>https://wangwei9160.github.io/post/blog/</guid>
       
         <description>&lt;p&gt;Hello world!&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
-      <title>markdown</title>
-      <link>https://wangwei9160.github.io/post/markdown/</link>
-      <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
-      
-      <guid>https://wangwei9160.github.io/post/markdown/</guid>
-      
-        <description>&lt;h1 id=&#34;一级标题&#34;&gt;一级标题&lt;/h1&gt;
-&lt;h2 id=&#34;二级标题&#34;&gt;二级标题&lt;/h2&gt;
-&lt;h3 id=&#34;三级标题&#34;&gt;三级标题&lt;/h3&gt;
-&lt;h4 id=&#34;四级标题&#34;&gt;四级标题&lt;/h4&gt;
-&lt;h5 id=&#34;五级标题&#34;&gt;五级标题&lt;/h5&gt;
-&lt;h6 id=&#34;六级标题&#34;&gt;六级标题&lt;/h6&gt;
-&lt;h1 id=&#34;我是一级标题&#34;&gt;我是一级标题&lt;/h1&gt;
-&lt;h2 id=&#34;我是二级标题&#34;&gt;我是二级标题&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;代码&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;import 
-&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;4个空格代码块
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;有序列表&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;123&lt;/li&gt;
-&lt;li&gt;345&lt;/li&gt;
-&lt;li&gt;123&lt;br&gt;
-1.234&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;无序列表&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;123
-&lt;ul&gt;
-&lt;li&gt;234&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;456
-&lt;ul&gt;
-&lt;li&gt;98&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;倾斜的字&lt;/em&gt;&lt;br&gt;
-&lt;strong&gt;加粗的字&lt;/strong&gt;&lt;br&gt;
-正常的字&lt;br&gt;
-&lt;em&gt;斜的字&lt;/em&gt;&lt;br&gt;
-&lt;del&gt;被删除的字&lt;/del&gt;&lt;br&gt;
-&lt;em&gt;&lt;strong&gt;粗斜的字&lt;/strong&gt;&lt;/em&gt;&lt;br&gt;
-&lt;!-- raw HTML omitted --&gt;下划线&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;分割线&lt;/p&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;p&gt;创建脚注格式类似这样 &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;区块&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;第二层&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;第三层&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;第一项
-&lt;blockquote&gt;
-&lt;p&gt;区块1&lt;br&gt;
-区块2&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;第二项&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.baidu.com&#34;&gt;百度&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.baidu.com&#34;&gt;https://www.baidu.com&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.baidu.com/img/baidu_jgylogo3.gif&#34; alt=&#34;图片&#34; title=&#34;百度&#34;&gt;&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;表头很长的&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;表头很长的&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;表头很长的&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;单元格&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;单元格&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;单元格&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;单元格&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;单元格&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;单元格&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;使用 &lt;!-- raw HTML omitted --&gt;Ctrl&lt;!-- raw HTML omitted --&gt;+&lt;!-- raw HTML omitted --&gt;Alt&lt;!-- raw HTML omitted --&gt;+&lt;!-- raw HTML omitted --&gt;Del&lt;!-- raw HTML omitted --&gt; 重启电脑&lt;/p&gt;
-&lt;p&gt;\   反斜线
-`   反引号&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;星号
-_   下划线
-{}  花括号
-[]  方括号
-()  小括号&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;井字号&#34;&gt;井字号&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;加号&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;减号
-.   英文句点
-!   感叹号&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;git&#34;&gt;Git&lt;/h1&gt;
-&lt;pre&gt;&lt;code&gt;hugo --theme= --baseUrl=&amp;quot;name.github.io&amp;quot; --buildDrafts
-cd public
-git add .
-git commit -m &amp;quot;&amp;quot;
-git push -u origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;这里是脚注1的内容。 &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/section&gt;
 </description>
       
     </item>
