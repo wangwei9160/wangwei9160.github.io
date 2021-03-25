@@ -6,10 +6,19 @@
     <description>Recent content in c&#43;&#43; on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 22 Mar 2021 23:00:56 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 23 Mar 2021 20:33:51 +0800</lastBuildDate>
     
 	<atom:link href="https://wangwei9160.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Template</title>
+      <link>https://wangwei9160.github.io/post/template/</link>
+      <pubDate>Tue, 23 Mar 2021 20:33:51 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/template/</guid>
+      <description>模块与泛型编程</description>
+    </item>
     
     <item>
       <title>面向对象程序设计</title>

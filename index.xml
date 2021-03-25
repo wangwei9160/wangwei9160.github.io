@@ -6,10 +6,40 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 22 Mar 2021 23:00:56 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 25 Mar 2021 10:35:51 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Shell</title>
+      <link>https://wangwei9160.github.io/post/shell/</link>
+      <pubDate>Thu, 25 Mar 2021 10:35:51 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/shell/</guid>
+      
+        <description>&lt;h1 id=&#34;shell命令&#34;&gt;Shell命令&lt;/h1&gt;
+&lt;h3 id=&#34;shell脚本的基本写法&#34;&gt;shell脚本的基本写法&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;脚本第一行，#! 指定解释器，例#!/bin/bash 表示以下内容使用bash解释器&lt;/li&gt;
+&lt;li&gt;脚本第二部分，注释（#）说明，对脚本的基本信息进行描述&lt;/li&gt;
+&lt;li&gt;脚本第三部分，脚本要实现的具体代码内容&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>Template</title>
+      <link>https://wangwei9160.github.io/post/template/</link>
+      <pubDate>Tue, 23 Mar 2021 20:33:51 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/template/</guid>
+      
+        <description>&lt;h1 id=&#34;模块与泛型编程&#34;&gt;模块与泛型编程&lt;/h1&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>面向对象程序设计</title>
@@ -1379,6 +1409,14 @@ decltype(sumLength) *getFcn(const string&amp;amp;);&lt;/p&gt;
 &lt;li&gt;noexcept说明符接受一个可选的实参，该实参必须能转换为bool类型：如果是true，函数不会抛出异常；如果是false，则函数可能跑出异常。例：noexcept(true)。&lt;/li&gt;
 &lt;li&gt;noexcept运算符：一元运算符，返回值是一个bool类型的右值常量表达式，用于表示给定的表达式是否会跑出异常，并不会求表达式的值。&lt;/li&gt;
 &lt;li&gt;如果一个虚函数承诺了它不会跑出异常，则后续派生出来的虚函数也必须做出同样的承诺；与之相反，如果基类的虚函数允许跑出异常，则派生类的对应函数既可以允许跑出异常，也可以不允许跑出异常。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;volatile&lt;/strong&gt;：volatile提醒编译器它后面所定义的变量随时可能改变，因此编译后的程序每次都需要存储或读取这个变量时，都会直接从变量地址中读取数据。如果没有volatile关键字，则编译器可能优化读取和存储，使用暂存在寄存器中的值。volatile修饰变量的情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设备的硬件寄存器（如：状态寄存器）&lt;/li&gt;
+&lt;li&gt;一个中断服务子程序会访问到的非自动变量（Non-automatic variables）&lt;/li&gt;
+&lt;li&gt;多线程应用中被几个任务共享的变量。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;

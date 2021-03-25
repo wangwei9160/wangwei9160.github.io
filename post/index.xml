@@ -6,10 +6,28 @@
     <description>Recent content in Posts on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 22 Mar 2021 23:00:56 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 25 Mar 2021 10:35:51 +0800</lastBuildDate>
     
 	<atom:link href="https://wangwei9160.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Shell</title>
+      <link>https://wangwei9160.github.io/post/shell/</link>
+      <pubDate>Thu, 25 Mar 2021 10:35:51 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/shell/</guid>
+      <description>Shell命令 shell脚本的基本写法 脚本第一行，#! 指定解释器，例#!/bin/bash 表示以下内容使用bash解释器 脚本第二部分，注释（</description>
+    </item>
+    
+    <item>
+      <title>Template</title>
+      <link>https://wangwei9160.github.io/post/template/</link>
+      <pubDate>Tue, 23 Mar 2021 20:33:51 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/template/</guid>
+      <description>模块与泛型编程</description>
+    </item>
     
     <item>
       <title>面向对象程序设计</title>

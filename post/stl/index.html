@@ -69,7 +69,7 @@
 <meta itemprop="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 自己的轻量级STL库 只实现部分STL库文件，增加对STL库的理解。会逐步">
 <meta itemprop="datePublished" content="2021-02-28T17:47:04&#43;08:00" />
 <meta itemprop="dateModified" content="2021-02-28T17:47:04&#43;08:00" />
-<meta itemprop="wordCount" content="11353">
+<meta itemprop="wordCount" content="11565">
 
 
 
@@ -326,8 +326,8 @@
           2021-02-28
         </time>
         
-        <span class="more-meta"> 约 11353 字 </span>
-          <span class="more-meta"> 预计阅读 23 分钟 </span>
+        <span class="more-meta"> 约 11565 字 </span>
+          <span class="more-meta"> 预计阅读 24 分钟 </span>
 
         
         
@@ -469,6 +469,14 @@ decltype(sumLength) *getFcn(const string&amp;);</p>
 <li>noexcept说明符接受一个可选的实参，该实参必须能转换为bool类型：如果是true，函数不会抛出异常；如果是false，则函数可能跑出异常。例：noexcept(true)。</li>
 <li>noexcept运算符：一元运算符，返回值是一个bool类型的右值常量表达式，用于表示给定的表达式是否会跑出异常，并不会求表达式的值。</li>
 <li>如果一个虚函数承诺了它不会跑出异常，则后续派生出来的虚函数也必须做出同样的承诺；与之相反，如果基类的虚函数允许跑出异常，则派生类的对应函数既可以允许跑出异常，也可以不允许跑出异常。</li>
+</ul>
+</li>
+<li>
+<p><strong>volatile</strong>：volatile提醒编译器它后面所定义的变量随时可能改变，因此编译后的程序每次都需要存储或读取这个变量时，都会直接从变量地址中读取数据。如果没有volatile关键字，则编译器可能优化读取和存储，使用暂存在寄存器中的值。volatile修饰变量的情况：</p>
+<ul>
+<li>设备的硬件寄存器（如：状态寄存器）</li>
+<li>一个中断服务子程序会访问到的非自动变量（Non-automatic variables）</li>
+<li>多线程应用中被几个任务共享的变量。</li>
 </ul>
 </li>
 </ul>
