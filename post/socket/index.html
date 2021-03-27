@@ -69,7 +69,7 @@
 <meta itemprop="description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向">
 <meta itemprop="datePublished" content="2021-03-20T10:46:16&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-20T10:46:16&#43;08:00" />
-<meta itemprop="wordCount" content="5948">
+<meta itemprop="wordCount" content="6637">
 
 
 
@@ -326,8 +326,8 @@
           2021-03-20
         </time>
         
-        <span class="more-meta"> 约 5948 字 </span>
-          <span class="more-meta"> 预计阅读 12 分钟 </span>
+        <span class="more-meta"> 约 6637 字 </span>
+          <span class="more-meta"> 预计阅读 14 分钟 </span>
 
         
         
@@ -365,7 +365,12 @@
         <li><a href="#连接建立终止时交换的报文">连接建立/终止时交换的报文</a></li>
         <li><a href="#tcp报文头部">TCP报文头部</a></li>
         <li><a href="#四次挥手后的确认报文要等待2msl的时间释放tcp连接">四次挥手后的确认报文要等待2MSL的时间释放TCP连接</a></li>
+        <li><a href="#http协议">HTTP协议</a></li>
+        <li><a href="#get-和-post">get 和 post</a></li>
         <li><a href="#http-和-htpps">HTTP 和 HTPPS</a></li>
+        <li><a href="#常用http状态码">常用HTTP状态码</a></li>
+        <li><a href="#sessioncookie和token">Session、Cookie和Token</a></li>
+        <li><a href="#servlet">Servlet</a></li>
       </ul>
     </li>
   </ul>
@@ -531,8 +536,8 @@ Reactor模型中定义的三种角色：</p>
 7、Handler收到响应结果后通过send将响应结果返回给Client</p>
 <h4 id="keepalive">keepalive</h4>
 <p>Keepalive是TCP中一个检测死连接的心跳包保活机制，原理就是TCP在闲了一段时间后会发送数据给对方。
-1、如果对端会发送ACK，那么就认为对端是存货的。
-2、如果对端就会发送RST包，那么TCP就会撤销改连接。
+1、如果对端会发送ACK，那么就认为对端是存活的。
+2、如果对端就会发送RST包，那么TCP就会撤销该连接。
 3、如果对端不发送ACK、RST，那么TCP在一段超时重传之后自动撤销连接。</p>
 <p>RST：重置连接、复位连接，用来关闭异常的连接。</p>
 <ul>
@@ -605,7 +610,34 @@ Reactor模型中定义的三种角色：</p>
 </ul>
 <h3 id="四次挥手后的确认报文要等待2msl的时间释放tcp连接">四次挥手后的确认报文要等待2MSL的时间释放TCP连接</h3>
 <p>如果第四次挥手的报文丢失，服务端没收到确认ack报文就会重发第三次挥手的报文，这样报文一去一回最长时间就是2MSL。</p>
+<h3 id="http协议">HTTP协议</h3>
+<p>HTTP协议中定义了浏览器和服务器进行交互的不同方法，基本方法有4种，分别是get、post、put、delete。这四种方法相当于对服务器资源进行查、改、增和删。
+GET：从服务器上获取数据，相当于查，仅仅是获取服务器资源，不进行修改。
+POST：向服务器提交数据，相当于改，涉及到了数据的更新，更改服务器的数据。
+PUT：向服务器增加数据，相当于增。
+DELETE：删除服务器数据，相当于删。</p>
+<h3 id="get-和-post">get 和 post</h3>
+<ul>
+<li>get是不安全的。在传输过程中，数据被放在请求的URL中；post的所有操作对于用户来说都是不可见的。也可以在get请求上加上request body，给post请求带上url参数。</li>
+<li>get请求提交的url中的数据最多只能是2048字节，这个限制是浏览器给服务器加的。http协议并没有对url长度进行限制，目的是为了保证服务器和浏览器能够正常进行，防止有人恶意发送请求。post请求没有大小限制。</li>
+<li>get限制form表单的数据集的值必须是ASCLL字符；而post支持整个ISO10646字符集。</li>
+<li>get执行效率比post方法好。get是form提交的默认方法。</li>
+<li>get产生一个TCP数据包；post产生两个TCP数据包。
+<ul>
+<li>get方式的请求，浏览器合集把http header和data一并发送出去，服务器响应200（返回数据）；</li>
+<li>post，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</li>
+</ul>
+</li>
+</ul>
 <h3 id="http-和-htpps">HTTP 和 HTPPS</h3>
+<h3 id="常用http状态码">常用HTTP状态码</h3>
+<h3 id="sessioncookie和token">Session、Cookie和Token</h3>
+<h4 id="session">session</h4>
+<h4 id="cookie">cookie</h4>
+<h4 id="cookie与session区别">cookie与session区别</h4>
+<h4 id="token">token</h4>
+<h4 id="session与token区别">session与token区别</h4>
+<h3 id="servlet">Servlet</h3>
 
     </div>
 

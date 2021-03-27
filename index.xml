@@ -694,8 +694,8 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 7、Handler收到响应结果后通过send将响应结果返回给Client&lt;/p&gt;
 &lt;h4 id=&#34;keepalive&#34;&gt;keepalive&lt;/h4&gt;
 &lt;p&gt;Keepalive是TCP中一个检测死连接的心跳包保活机制，原理就是TCP在闲了一段时间后会发送数据给对方。
-1、如果对端会发送ACK，那么就认为对端是存货的。
-2、如果对端就会发送RST包，那么TCP就会撤销改连接。
+1、如果对端会发送ACK，那么就认为对端是存活的。
+2、如果对端就会发送RST包，那么TCP就会撤销该连接。
 3、如果对端不发送ACK、RST，那么TCP在一段超时重传之后自动撤销连接。&lt;/p&gt;
 &lt;p&gt;RST：重置连接、复位连接，用来关闭异常的连接。&lt;/p&gt;
 &lt;ul&gt;
@@ -768,7 +768,34 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;四次挥手后的确认报文要等待2msl的时间释放tcp连接&#34;&gt;四次挥手后的确认报文要等待2MSL的时间释放TCP连接&lt;/h3&gt;
 &lt;p&gt;如果第四次挥手的报文丢失，服务端没收到确认ack报文就会重发第三次挥手的报文，这样报文一去一回最长时间就是2MSL。&lt;/p&gt;
+&lt;h3 id=&#34;http协议&#34;&gt;HTTP协议&lt;/h3&gt;
+&lt;p&gt;HTTP协议中定义了浏览器和服务器进行交互的不同方法，基本方法有4种，分别是get、post、put、delete。这四种方法相当于对服务器资源进行查、改、增和删。
+GET：从服务器上获取数据，相当于查，仅仅是获取服务器资源，不进行修改。
+POST：向服务器提交数据，相当于改，涉及到了数据的更新，更改服务器的数据。
+PUT：向服务器增加数据，相当于增。
+DELETE：删除服务器数据，相当于删。&lt;/p&gt;
+&lt;h3 id=&#34;get-和-post&#34;&gt;get 和 post&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;get是不安全的。在传输过程中，数据被放在请求的URL中；post的所有操作对于用户来说都是不可见的。也可以在get请求上加上request body，给post请求带上url参数。&lt;/li&gt;
+&lt;li&gt;get请求提交的url中的数据最多只能是2048字节，这个限制是浏览器给服务器加的。http协议并没有对url长度进行限制，目的是为了保证服务器和浏览器能够正常进行，防止有人恶意发送请求。post请求没有大小限制。&lt;/li&gt;
+&lt;li&gt;get限制form表单的数据集的值必须是ASCLL字符；而post支持整个ISO10646字符集。&lt;/li&gt;
+&lt;li&gt;get执行效率比post方法好。get是form提交的默认方法。&lt;/li&gt;
+&lt;li&gt;get产生一个TCP数据包；post产生两个TCP数据包。
+&lt;ul&gt;
+&lt;li&gt;get方式的请求，浏览器合集把http header和data一并发送出去，服务器响应200（返回数据）；&lt;/li&gt;
+&lt;li&gt;post，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;http-和-htpps&#34;&gt;HTTP 和 HTPPS&lt;/h3&gt;
+&lt;h3 id=&#34;常用http状态码&#34;&gt;常用HTTP状态码&lt;/h3&gt;
+&lt;h3 id=&#34;sessioncookie和token&#34;&gt;Session、Cookie和Token&lt;/h3&gt;
+&lt;h4 id=&#34;session&#34;&gt;session&lt;/h4&gt;
+&lt;h4 id=&#34;cookie&#34;&gt;cookie&lt;/h4&gt;
+&lt;h4 id=&#34;cookie与session区别&#34;&gt;cookie与session区别&lt;/h4&gt;
+&lt;h4 id=&#34;token&#34;&gt;token&lt;/h4&gt;
+&lt;h4 id=&#34;session与token区别&#34;&gt;session与token区别&lt;/h4&gt;
+&lt;h3 id=&#34;servlet&#34;&gt;Servlet&lt;/h3&gt;
 </description>
       
     </item>
