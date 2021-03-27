@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="网络编程 阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有xx" />
+  <meta name="description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,22 +60,22 @@
 
 
 <meta property="og:title" content="网络编程" />
-<meta property="og:description" content="网络编程 阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有xx" />
+<meta property="og:description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://wangwei9160.github.io/post/socket/" />
 <meta property="article:published_time" content="2021-03-20T10:46:16+08:00" />
 <meta property="article:modified_time" content="2021-03-20T10:46:16+08:00" />
 <meta itemprop="name" content="网络编程">
-<meta itemprop="description" content="网络编程 阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有xx">
+<meta itemprop="description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向">
 <meta itemprop="datePublished" content="2021-03-20T10:46:16&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-20T10:46:16&#43;08:00" />
-<meta itemprop="wordCount" content="4935">
+<meta itemprop="wordCount" content="5948">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="网络编程"/>
-<meta name="twitter:description" content="网络编程 阻塞、非阻塞、同步、异步 阻塞/非阻塞关注的是程序在等待调用结果时的状态。阻塞是等待。非阻塞是不需要等待。例如： 去书店问老板有没有xx"/>
+<meta name="twitter:description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -326,8 +326,8 @@
           2021-03-20
         </time>
         
-        <span class="more-meta"> 约 4935 字 </span>
-          <span class="more-meta"> 预计阅读 10 分钟 </span>
+        <span class="more-meta"> 约 5948 字 </span>
+          <span class="more-meta"> 预计阅读 12 分钟 </span>
 
         
         
@@ -344,6 +344,12 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
+    <li><a href="#tcpip协议">TCP/IP协议</a></li>
+    <li><a href="#运输层">运输层</a>
+      <ul>
+        <li><a href="#协议">协议</a></li>
+      </ul>
+    </li>
     <li><a href="#阻塞非阻塞同步异步">阻塞、非阻塞、同步、异步</a></li>
     <li><a href="#io模型">IO模型</a></li>
     <li><a href="#selectpollepoll">select、poll、epoll</a></li>
@@ -356,6 +362,10 @@
         <li><a href="#四次挥手">四次挥手</a></li>
         <li><a href="#sctp关联终止">SCTP关联终止</a></li>
         <li><a href="#端口号">端口号</a></li>
+        <li><a href="#连接建立终止时交换的报文">连接建立/终止时交换的报文</a></li>
+        <li><a href="#tcp报文头部">TCP报文头部</a></li>
+        <li><a href="#四次挥手后的确认报文要等待2msl的时间释放tcp连接">四次挥手后的确认报文要等待2MSL的时间释放TCP连接</a></li>
+        <li><a href="#http-和-htpps">HTTP 和 HTPPS</a></li>
       </ul>
     </li>
   </ul>
@@ -366,6 +376,27 @@
     
     <div class="post-content">
       <h1 id="网络编程">网络编程</h1>
+<h2 id="tcpip协议">TCP/IP协议</h2>
+<p>应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。</p>
+<h2 id="运输层">运输层</h2>
+<p>主要包含两种协议：
+传输控制协议-TCP：提供面向连接的，可靠的数据传输服务。
+用户数据协议-UDP：提供无连接的，尽最大努力的数据传输服务（不保证数据传输的可靠性）。</p>
+<h3 id="协议">协议</h3>
+<h4 id="运行在tcp协议上的协议">运行在TCP协议上的协议：</h4>
+<p>HTTP（Hypertext Transfer Protocol，超文本传输协议），主要用于普通浏览。
+HTTPS（HTTP over SSL，安全超文本传输协议）,HTTP协议的安全版本。
+FTP（File Transfer Protocol，文件传输协议），用于文件传输。
+POP3（Post Office Protocol, version 3，邮局协议），收邮件用。
+SMTP（Simple Mail Transfer Protocol，简单邮件传输协议），用来发送电子邮件。
+TELNET（Teletype over the Network，网络电传），通过一个终端（terminal）登陆到网络。
+SSH（Secure Shell，用于替代安全性差的TELNET），用于加密安全登陆用。</p>
+<h4 id="运行在udp协议上的协议">运行在UDP协议上的协议：</h4>
+<p>BOOTP（Boot Protocol，启动协议），应用于无盘设备。
+NTP（Network Time Protocol，网络时间协议），用于网络同步。
+DHCP（Dynamic Host Configuration Protocol，动态主机配置协议），动态配置IP地址。</p>
+<h5 id="运行在tcp和udp协议上">运行在TCP和UDP协议上：</h5>
+<p>DNS（Domain Name Service，域名服务），用于完成地址查找，邮件转发等工作。</p>
 <h2 id="阻塞非阻塞同步异步">阻塞、非阻塞、同步、异步</h2>
 <ul>
 <li><strong>阻塞/非阻塞</strong>关注的是<strong>程序在等待调用结果</strong>时的状态。阻塞是等待。非阻塞是不需要等待。例如：
@@ -549,6 +580,32 @@ Reactor模型中定义的三种角色：</p>
 <li>已登记的端口为1024~49151</li>
 <li>动态或私用的端口为49152~65535</li>
 </ul>
+<h3 id="连接建立终止时交换的报文">连接建立/终止时交换的报文</h3>
+<p>当一个连接被建立或被终止时，交换的报文段只包含TCP头部，而没有数据。</p>
+<h3 id="tcp报文头部">TCP报文头部</h3>
+<ul>
+<li>源端口：占16位，源端口号。</li>
+<li>目标端口：占16位，目的端口号。</li>
+<li>序号：seq序号，占32位，用来标识从TCP端向目的端发送的字节流，发送方发送数据时对此进行标记。</li>
+<li>确认序号：ack序号，占32位，只有ACK标识为1时，确认序号字段才有效，确认方ack = 发送方seq + 1.</li>
+<li>头部长度：占4位，TCP首部长度。</li>
+<li>标志位：共6个，URG、ACK、PSH、RST、SYN、PIN。
+<ul>
+<li>ACK：确认序号有效</li>
+<li>FIN：释放连接</li>
+<li>PSH：接收方应该尽快将报文交给应用层</li>
+<li>RST：重新连接</li>
+<li>SYN：发送一个新连接</li>
+<li>URG：紧急指针有效。</li>
+</ul>
+</li>
+<li>窗口大小：占16位。</li>
+<li>校验和：占16位。</li>
+<li>紧急指针：占16位。</li>
+</ul>
+<h3 id="四次挥手后的确认报文要等待2msl的时间释放tcp连接">四次挥手后的确认报文要等待2MSL的时间释放TCP连接</h3>
+<p>如果第四次挥手的报文丢失，服务端没收到确认ack报文就会重发第三次挥手的报文，这样报文一去一回最长时间就是2MSL。</p>
+<h3 id="http-和-htpps">HTTP 和 HTPPS</h3>
 
     </div>
 
