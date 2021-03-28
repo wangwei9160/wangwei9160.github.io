@@ -2568,6 +2568,60 @@ ps -T -p 线程&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;makefile&#34;&gt;makefile&lt;/h3&gt;
+&lt;h5 id=&#34;c文件到exe文件&#34;&gt;.c文件到.exe文件&lt;/h5&gt;
+&lt;p&gt;hello.c &amp;ndash;&amp;gt; 预处理 -E &amp;ndash;&amp;gt; hello.i &amp;ndash;&amp;gt; 编译 -S &amp;ndash;&amp;gt; hello.s &amp;ndash;&amp;gt; 汇编 -c &amp;ndash;&amp;gt; hello.o &amp;ndash;&amp;gt; 链接 -o &amp;ndash;&amp;gt; hello
+预处理 gcc -E hello.c -o helle.i
+编 译    gcc -S hello.i -o hello.s
+汇 编    gcc -c hello.s -o hello.o
+链 接    gcc hello.o -o hello
+esc iso
+预处理：预处理相当于根据预处理命令组装成新的C程序，不过常以i为扩展名。
+编 译：将得到的i文件翻译成汇编代码.s文件。
+汇 编：将汇编文件翻译成机器指令，并打包成可重定位目标程序的o文件。该文件是二进制文件，字节编码是机器指令。
+链 接：将引用的其他o文件并入到我们程序所在的o文件中，处理得到最终的可执行文件。&lt;/p&gt;
+&lt;h4 id=&#34;makefile-结构&#34;&gt;makefile 结构&lt;/h4&gt;
+&lt;p&gt;Makefile主要包含了五个东西：变量定义、显式规则、隐晦规则、文件指示和注释&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;变量的定义。在Makefile中我们要定义一系列的变量，变量一般是字符串。&lt;/li&gt;
+&lt;li&gt;显式规则。显式规则说明了如何生成一个或者多个目标文件。显式地指出要生成的文件，文件的依赖文件，生成的命令。&lt;/li&gt;
+&lt;li&gt;隐晦规则。由make自动推动的功能，隐晦的规则可以让我们比较粗糙的简略地书写Makefile，由make支持。&lt;/li&gt;
+&lt;li&gt;文件指示：一个Makefile中引用另一个Makefile。&lt;/li&gt;
+&lt;li&gt;注释。Makefile只有行注释，用&amp;rdquo; # &amp;ldquo;字符来表示注释。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;预定义变量&#34;&gt;预定义变量&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;$* 　　不包含扩展名的目标文件名称。&lt;/li&gt;
+&lt;li&gt;$+ 　　所有的依赖文件，以空格分开，并以出现的先后为序，可能包含重复的依赖文件。&lt;/li&gt;
+&lt;li&gt;$&amp;lt; 　　第一个依赖文件的名称。&lt;/li&gt;
+&lt;li&gt;$? 　　所有的依赖文件，以空格分开，这些依赖文件的修改日期比目标的创建日期晚。&lt;/li&gt;
+&lt;li&gt;$@ 　 目标的完整名称。&lt;/li&gt;
+&lt;li&gt;$^ 　　所有的依赖文件，以空格分开，不包含重复的依赖文件。&lt;/li&gt;
+&lt;li&gt;$% 如果目标是归档成员，则该变量表示目标的归档成员名称。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;注意事项&#34;&gt;注意事项&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;tab分隔，不能用空格。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;每个makefile最好加一个all&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;注释用“#”符号&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;文件指示，引用其他的makefile文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
       
     </item>
@@ -2933,6 +2987,13 @@ int numOfWays(int n) {
         <description>&lt;p&gt;Hello world!&lt;/p&gt;
 &lt;p&gt;这是一次测试.
 又一次测试&amp;hellip;&lt;/p&gt;
+&lt;p&gt;呜呜呜，手动敲了好多次的git终于想到写bat了，呜呜呜。
+hugo &amp;ndash;theme= &amp;ndash;baseUrl=&amp;quot;https://&amp;rdquo; &amp;ndash;buildDrafts
+cd public
+git add .
+git commit -m
+git push -u origin master
+pause&lt;/p&gt;
 </description>
       
     </item>

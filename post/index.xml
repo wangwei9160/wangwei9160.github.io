@@ -143,7 +143,7 @@
       <pubDate>Wed, 20 Jan 2021 00:20:24 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/linux/</guid>
-      <description>Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程</description>
+      <description>Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程 makefile .c文件到.exe文件 hello.c &amp;ndash;&amp;gt; 预处理 -E &amp;ndash;&amp;gt; hello.i &amp;ndash;&amp;gt; 编</description>
     </item>
     
     <item>
@@ -188,7 +188,7 @@
       <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/blog/</guid>
-      <description>Hello world! 这是一次测试. 又一次测试&amp;hellip;</description>
+      <description>Hello world! 这是一次测试. 又一次测试&amp;hellip; 呜呜呜，手动敲了好多次的git终于想到写bat了，呜呜呜。 hugo &amp;ndash;theme= &amp;ndash;baseUrl=&amp;quot;https://&amp;rdquo; &amp;ndash;buildDrafts cd public git add . git commit -m git push -u origin master pause</description>
     </item>
     
   </channel>

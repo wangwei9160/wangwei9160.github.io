@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程" />
+  <meta name="description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程 makefile .c文件到.exe文件 hello.c &amp;ndash;&amp;gt; 预处理 -E &amp;ndash;&amp;gt; hello.i &amp;ndash;&amp;gt; 编" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,22 +60,22 @@
 
 
 <meta property="og:title" content="Linux" />
-<meta property="og:description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程" />
+<meta property="og:description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程 makefile .c文件到.exe文件 hello.c &ndash;&gt; 预处理 -E &ndash;&gt; hello.i &ndash;&gt; 编" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://wangwei9160.github.io/post/linux/" />
 <meta property="article:published_time" content="2021-01-20T00:20:24+08:00" />
 <meta property="article:modified_time" content="2021-01-20T00:20:24+08:00" />
 <meta itemprop="name" content="Linux">
-<meta itemprop="description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程">
+<meta itemprop="description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程 makefile .c文件到.exe文件 hello.c &ndash;&gt; 预处理 -E &ndash;&gt; hello.i &ndash;&gt; 编">
 <meta itemprop="datePublished" content="2021-01-20T00:20:24&#43;08:00" />
 <meta itemprop="dateModified" content="2021-01-20T00:20:24&#43;08:00" />
-<meta itemprop="wordCount" content="48">
+<meta itemprop="wordCount" content="755">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux"/>
-<meta name="twitter:description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程"/>
+<meta name="twitter:description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程 makefile .c文件到.exe文件 hello.c &ndash;&gt; 预处理 -E &ndash;&gt; hello.i &ndash;&gt; 编"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -326,8 +326,8 @@
           2021-01-20
         </time>
         
-        <span class="more-meta"> 约 48 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+        <span class="more-meta"> 约 755 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
 
         
         
@@ -347,6 +347,7 @@
     <li>
       <ul>
         <li></li>
+        <li><a href="#makefile">makefile</a></li>
       </ul>
     </li>
   </ul>
@@ -368,6 +369,60 @@ ps -T -p 线程</p>
 <blockquote>
 <p>top -H -p 线程</p>
 </blockquote>
+</li>
+</ul>
+<h3 id="makefile">makefile</h3>
+<h5 id="c文件到exe文件">.c文件到.exe文件</h5>
+<p>hello.c &ndash;&gt; 预处理 -E &ndash;&gt; hello.i &ndash;&gt; 编译 -S &ndash;&gt; hello.s &ndash;&gt; 汇编 -c &ndash;&gt; hello.o &ndash;&gt; 链接 -o &ndash;&gt; hello
+预处理 gcc -E hello.c -o helle.i
+编 译    gcc -S hello.i -o hello.s
+汇 编    gcc -c hello.s -o hello.o
+链 接    gcc hello.o -o hello
+esc iso
+预处理：预处理相当于根据预处理命令组装成新的C程序，不过常以i为扩展名。
+编 译：将得到的i文件翻译成汇编代码.s文件。
+汇 编：将汇编文件翻译成机器指令，并打包成可重定位目标程序的o文件。该文件是二进制文件，字节编码是机器指令。
+链 接：将引用的其他o文件并入到我们程序所在的o文件中，处理得到最终的可执行文件。</p>
+<h4 id="makefile-结构">makefile 结构</h4>
+<p>Makefile主要包含了五个东西：变量定义、显式规则、隐晦规则、文件指示和注释</p>
+<ul>
+<li>变量的定义。在Makefile中我们要定义一系列的变量，变量一般是字符串。</li>
+<li>显式规则。显式规则说明了如何生成一个或者多个目标文件。显式地指出要生成的文件，文件的依赖文件，生成的命令。</li>
+<li>隐晦规则。由make自动推动的功能，隐晦的规则可以让我们比较粗糙的简略地书写Makefile，由make支持。</li>
+<li>文件指示：一个Makefile中引用另一个Makefile。</li>
+<li>注释。Makefile只有行注释，用&rdquo; # &ldquo;字符来表示注释。</li>
+</ul>
+<h5 id="预定义变量">预定义变量</h5>
+<ul>
+<li>$* 　　不包含扩展名的目标文件名称。</li>
+<li>$+ 　　所有的依赖文件，以空格分开，并以出现的先后为序，可能包含重复的依赖文件。</li>
+<li>$&lt; 　　第一个依赖文件的名称。</li>
+<li>$? 　　所有的依赖文件，以空格分开，这些依赖文件的修改日期比目标的创建日期晚。</li>
+<li>$@ 　 目标的完整名称。</li>
+<li>$^ 　　所有的依赖文件，以空格分开，不包含重复的依赖文件。</li>
+<li>$% 如果目标是归档成员，则该变量表示目标的归档成员名称。</li>
+</ul>
+<h4 id="注意事项">注意事项</h4>
+<ul>
+<li>
+<ol>
+<li>tab分隔，不能用空格。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>每个makefile最好加一个all</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>注释用“#”符号</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>文件指示，引用其他的makefile文件</li>
+</ol>
 </li>
 </ul>
 
