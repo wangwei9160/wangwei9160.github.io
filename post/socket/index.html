@@ -69,7 +69,7 @@
 <meta itemprop="description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向">
 <meta itemprop="datePublished" content="2021-03-20T10:46:16&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-20T10:46:16&#43;08:00" />
-<meta itemprop="wordCount" content="6637">
+<meta itemprop="wordCount" content="8703">
 
 
 
@@ -326,8 +326,8 @@
           2021-03-20
         </time>
         
-        <span class="more-meta"> 约 6637 字 </span>
-          <span class="more-meta"> 预计阅读 14 分钟 </span>
+        <span class="more-meta"> 约 8703 字 </span>
+          <span class="more-meta"> 预计阅读 18 分钟 </span>
 
         
         
@@ -630,13 +630,129 @@ DELETE：删除服务器数据，相当于删。</p>
 </li>
 </ul>
 <h3 id="http-和-htpps">HTTP 和 HTPPS</h3>
+<h5 id="http的特点">HTTP的特点：</h5>
+<ul>
+<li>无状态。协议对客户端没有状态存储，对事物处理没有“记忆”能力。例，访问一个网站需要反复进行登录操作。</li>
+<li>无连接：由于无状态的特点，每次请求需要TCP三次握手四次挥手，和服务器重新建立连接。若某个客户端在短时间内多次请求同一个资源，服务器并不能区别是否已经响应过用户的请求，所以每次需要重新响应请求，耗费不必要的时间和流量。</li>
+<li>基于请求和响应：由客户端发起请求，服务端响应</li>
+<li>简单快速、灵活</li>
+<li>通信使用明文、请求和响应不会对通信方进行确认、无法保护数据的完整性。
+针对HTTP的无状态的解决策略：</li>
+<li>通过Cookie/Session技术</li>
+<li>持久连接，只要一方没有明确提出断开连接，则保持TCP连接状态，在请求首部字段中的Connection:keep-alive即表明使用了持久连接。</li>
+</ul>
+<h5 id="https的特点">HTTPS的特点：</h5>
+<p>基于HTTP协议，通过SSL或TLS提供加密处理数据、验证对方身份以及数据完整性保护。</p>
+<ul>
+<li>内容加密：采用混合加密技术，中间者无法直接查看明文内容。</li>
+<li>验证身份：通过证书认证客户端访问的是自己的服务器。</li>
+<li>保护数据完整性：防止传输的内容被中间人冒充或者篡改。</li>
+</ul>
+<h5 id="区别">区别</h5>
+<table>
+<thead>
+<tr>
+<th align="center">区别</th>
+<th align="center">HTTP</th>
+<th align="center">HTTPS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">协议</td>
+<td align="center">运行在TCP之上，明文传输，客户端与服务端都无法验证对方的身份</td>
+<td align="center">身披SSL外壳的HTTP，运行在SSL之上，SSL运行在TCP之上，是添加了加密和认证机制的HTTP</td>
+</tr>
+<tr>
+<td align="center">端口</td>
+<td align="center">80</td>
+<td align="center">443</td>
+</tr>
+<tr>
+<td align="center">资源消耗</td>
+<td align="center">较少</td>
+<td align="center">由于加密解密，会消耗更多的CPU和内存资源</td>
+</tr>
+<tr>
+<td align="center">开销</td>
+<td align="center">无需证书</td>
+<td align="center">需要证书，而证书一般需要向认证机构购买</td>
+</tr>
+<tr>
+<td align="center">加密机制</td>
+<td align="center">无</td>
+<td align="center">共享密钥加密和公开密钥加密兵俑的混合加密机制</td>
+</tr>
+<tr>
+<td align="center">安全性</td>
+<td align="center">弱</td>
+<td align="center">由于加密机制，安全性强</td>
+</tr>
+</tbody>
+</table>
 <h3 id="常用http状态码">常用HTTP状态码</h3>
+<table>
+<thead>
+<tr>
+<th align="center">类别</th>
+<th align="center">原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1XX</td>
+<td align="center">informational(信息性状态码)接受的请求正在处理</td>
+</tr>
+<tr>
+<td align="center">2XX</td>
+<td align="center">success(成功状态码)请求正常处理完毕</td>
+</tr>
+<tr>
+<td align="center">3XX</td>
+<td align="center">redirection(重定向状态码)需要进行附加操作以完成请求</td>
+</tr>
+<tr>
+<td align="center">4XX</td>
+<td align="center">client error(客户端错误状态码)服务器无法处理请求</td>
+</tr>
+<tr>
+<td align="center">5XX</td>
+<td align="center">server error(服务器错误状态码)服务器处理请求出错</td>
+</tr>
+</tbody>
+</table>
 <h3 id="sessioncookie和token">Session、Cookie和Token</h3>
-<h4 id="session">session</h4>
 <h4 id="cookie">cookie</h4>
+<p>cookie是由web服务器保存在用户浏览器上的小文件(key-value格式)，包含用户相关的信息。客户端向服务器发起请求，如果服务器需要记录该用户状态，就使用response向客户端浏览器颁发一个cookie。客户端浏览器会把cookie保存起来。当浏览器再请求该网站时，浏览器把请求的网站连同该cookie一同提交给服务器。服务器检查该cookie，以此来辨认用户身份。</p>
+<h4 id="session">session</h4>
+<p>session是依赖cookie实现的。session是服务端对象。
+session是浏览器和服务器会话过程中，服务器分配的一块储存空间。服务器默认为浏览器在cookie中设置sessionID，浏览器在向服务器请求过程中传输cookie包含sessionID，服务器根据sessionID获取会话中存储的信息，然后确定会话的身份信息。</p>
 <h4 id="cookie与session区别">cookie与session区别</h4>
+<ul>
+<li>存储位置与安全性：cookie数据存放在客户端上，安全性较差。session数据存放在服务器上，安全性相对较高。</li>
+<li>存储空间：单个cookie保存的数据不能超过4k，很多浏览器都限制一个站点最多保存20个cookie，session无限制。</li>
+<li>占用服务器资源：session一定时间内保存在服务器上，当访问增多，占用服务器性能，考虑到服务器性能方面，应当使用cookie。</li>
+</ul>
+<p>cookie和session，一般认为是两个独立的东西，session采用的是在服务器端保持状态的方案，而cookie采用的是客户端保持状态的方案。
+由于session是用Session ID来确定当前对话所对应的服务器session，而Session ID是通过cookie来传递的，禁用cookie相当于失去了session id，得不到session。
+关闭cookie的情况下使用session，途径有：
+1、手动通过URL传值、隐藏表单传递session id。
+2、用文件、数据库等形式保存session id，在跨页过程中手动调用。</p>
 <h4 id="token">token</h4>
+<h5 id="token的背景">token的背景</h5>
+<p>客户端频繁向服务器请求数据，服务端频繁的去数据库查询用户名和密码并与之进行对比，判断用户名和密码是否正确</p>
+<h5 id="token的定义">token的定义</h5>
+<p>token是服务端生成的一串字符串，以作为客户端进行请求的一个令牌，当第一次登陆后，服务器生成一个token返回给客户端，以后客户端只需带上这个token前来请求数据即可，无需再次带上用户名和密码。</p>
+<h5 id="token的目的">token的目的</h5>
+<p>为了减轻服务器的压力，减少频繁的查询数据库。
+token是服务端产生的。如果前端使用用户名、密码向服务器请求认证，服务器认证成功，那么在服务器会返回token给前端。前端可以再每次请求的时候带上token证明自己的合法地位。</p>
 <h4 id="session与token区别">session与token区别</h4>
+<ul>
+<li>session机制存在服务器压力增大，CSRF跨站伪造请求攻击，扩展性不强等问题；</li>
+<li>session存储在服务器端，token存储在客户端</li>
+<li>token提供认证和授权功能，作为身份认证，token安全性比session好</li>
+<li>session这种会话存储方式只适用于客户端代码和服务端代码运行在同一台服务器上，token适用于项目级的前后端分离（前后端代码运行在不同的服务器下）。</li>
+</ul>
 <h3 id="servlet">Servlet</h3>
 
     </div>
