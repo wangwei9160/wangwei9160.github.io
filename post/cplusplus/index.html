@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>C&#43;&#43; - Awei</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="Awei" />
+  <meta name="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 主要形式是通过实现部分STL库文件，增加对STL库的理解。会逐步进行完善" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.68.3" />
+
+
+<link rel="canonical" href="https://wangwei9160.github.io/post/cplusplus/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="C&#43;&#43;" />
+<meta property="og:description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 主要形式是通过实现部分STL库文件，增加对STL库的理解。会逐步进行完善" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wangwei9160.github.io/post/cplusplus/" />
+<meta property="article:published_time" content="2021-02-28T17:47:04+08:00" />
+<meta property="article:modified_time" content="2021-02-28T17:47:04+08:00" />
+<meta itemprop="name" content="C&#43;&#43;">
+<meta itemprop="description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 主要形式是通过实现部分STL库文件，增加对STL库的理解。会逐步进行完善">
+<meta itemprop="datePublished" content="2021-02-28T17:47:04&#43;08:00" />
+<meta itemprop="dateModified" content="2021-02-28T17:47:04&#43;08:00" />
+<meta itemprop="wordCount" content="11737">
+
+
+
+<meta itemprop="keywords" content="c&#43;&#43;," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C&#43;&#43;"/>
+<meta name="twitter:description" content="前言 内容参考自c&#43;&#43; primer 第五版和网上的一些资料。仅供自己学习参考使用。 主要形式是通过实现部分STL库文件，增加对STL库的理解。会逐步进行完善"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Awei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangwei9160.github.io/">首页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangwei9160.github.io/post/">博客</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangwei9160.github.io/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangwei9160.github.io/categories/">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Awei
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangwei9160.github.io/">首页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangwei9160.github.io/post/">博客</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangwei9160.github.io/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://wangwei9160.github.io/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">C&#43;&#43;</h1>
+      
+      <div class="post-meta">
+        <time datetime="2021-02-28" class="post-time">
+          2021-02-28
+        </time>
+        
+        <span class="more-meta"> 约 11737 字 </span>
+          <span class="more-meta"> 预计阅读 24 分钟 </span>
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#顺序容器">顺序容器</a>
+      <ul>
+        <li><a href="#容器操作">容器操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#泛型算法">泛型算法</a>
+      <ul>
+        <li></li>
+        <li><a href="#迭代器">迭代器</a></li>
+      </ul>
+    </li>
+    <li><a href="#关联容器">关联容器</a>
+      <ul>
+        <li></li>
+        <li><a href="#pair">pair</a></li>
+        <li><a href="#关联容器操作">关联容器操作</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h1 id="前言">前言</h1>
+<ul>
+<li>内容参考自c++ primer 第五版和网上的一些资料。仅供自己学习参考使用。</li>
+<li>主要形式是通过实现部分STL库文件，增加对STL库的理解。会逐步进行完善。</li>
+</ul>
+<h1 id="c">c++</h1>
+<ul>
+<li>
+<p>大多数算法都定义在头文件algorithm中。标准库还在头文件numeric中定义了一组数值泛型算法。一般情况下，这些算法并不直接操作容器，而是遍历由两个迭代器指定的一个元素范围来进行操作。</p>
+<ul>
+<li>例如，查找int类型的vector中是否包含一个特定值，可以使用find函数。
+<blockquote>
+<p>int val = 1;
+auto result = find( vec.cbegin() , vec.cend () , val );</p>
+</blockquote>
+</li>
+<li>由于find操作的是迭代器，因此我们可以用同样的find函数在任何容器中查找值。</li>
+</ul>
+</li>
+<li>
+<p><strong>函数调用的解析过程</strong>
+假定调用obj.mem()，则依次执行以下4个步骤：</p>
+<ul>
+<li>首先确定obj的静态类型。调用的是一个成员，所以该类型必须是类类型。</li>
+<li>在obj的静态类型对应的类中查找mem。如果找不到，则依次在直接基类中不断查找直到继承链的顶端。如果找遍了该类及其基类仍然找不到，则编译器将报错。</li>
+<li>一旦找到了mem，就进行常规的类型检查以确认对于当前找到的mem，本次调用是否合法。</li>
+<li>假设调用合法，则编译器将根据是否是虚函数而产生不同的代码：
+<ul>
+<li>如果mem是虚函数且我们是通过引用或指针进行的拷贝，则编译器产生的代码将在运行时确定到底运行的是哪个版本，依据是对象的动态类型。</li>
+<li>反之，如果mem不是虚函数或者我们是通过对象(而非引用或指针)进行的调用，则编译器将产生一个常规函数调用。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>size_t</strong> ： 定义在cstdef头文件中，是一个与机器相关的unsigned类型，其大小足以存储内存中对象的大小。</p>
+</li>
+<li>
+<p><strong>decltype</strong>：如果明确知道返回的函数是哪一个，就能使用decltype简化书写函数指针返回类型的过程。</p>
+<ul>
+<li>例如，假设两个函数返回类型都是string::size_type，并且各有两个const string&amp;类型的形参，此时我们可以便携第三个函数，它接受一个string类型的参数，返回一个指针，该指针指向前两个函数中的一个。</li>
+</ul>
+<blockquote>
+<p>string::size_type sumLength(const string&amp; , const string&amp;);
+string::size_type largerLength(const string&amp; , const string&amp;);
+decltype(sumLength) *getFcn(const string&amp;);</p>
+</blockquote>
+<p>将decltype作用于某个函数时，它返回函数类型而不是指针类型。因此，我们显示地加上*以表示我们需要返回指针，而不是函数本身。</p>
+</li>
+<li>
+<p><strong>at成员函数</strong> ： at成员函数类似于下标运算符，但如果下标越界，at会抛出一个out_of_range异常。</p>
+</li>
+<li>
+<p><strong>explicit</strong>：在要求隐式转换的程序上下文中，通过将构造函数声明为explicit加以阻止。</p>
+<ul>
+<li>关键字explicit只对一个实参的构造函数有效。需要多个实参的构造函数不能用于执行隐式转换，所以无需将这些构造函数指定为explicit的。只能在类内声明构造函数时使用explicit关键字，在类外部定义时不应重复。</li>
+<li>发生隐式转换的一种情况是执行拷贝形式的初始化，此时我们只能<strong>直接初始化</strong>而不能使用explicit构造函数。</li>
+<li>可以使用static_cast执行了显示的非隐式的转换。</li>
+</ul>
+</li>
+<li>
+<p>构造函数：</p>
+<ul>
+<li>类通过一个或几个特殊的成员函数来控制其对象的初始化过程。</li>
+<li>默认构造函数：类通过一个特殊的构造函数来控制默认初始化过程。默认构造函数无须任何实参。</li>
+<li>合成的默认构造函数：由编译器创建的构造函数。一般合成的默认构造函数将按照如下规则初始化类的数据成员：
+<ul>
+<li>如果存在类内的初始化，用它来初始化成员。</li>
+<li>否则，默认初始化该成员。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>move</strong>：定义在utility头文件中。move有两个关键点：</p>
+<ul>
+<li>当reallocate在新内存中构造时，塔必须调用move来表示希望使用移动构造函数。如果漏掉了move调用，会使用拷贝构造函数。</li>
+<li>通常不为move提供一个using生命。直接调用std::move而不是move。</li>
+</ul>
+</li>
+<li>
+<p><strong>noexcept</strong>：承诺一个函数不跑出异常的一种方法。在构造函数中，noexcept出现在参数列表和初始化列表开始的冒号之间。</p>
+<ul>
+<li>对于用户和编译器来说，预先知道某个函数不会跑出异常显然大有裨益。
+<ul>
+<li>知道函数不会跑出异常有助于简化调用该函数的代码</li>
+<li>如果编译器确认函数不会跑出异常，它就能执行某些特殊的优化操作，而这些优化操作并不适用于可能出错的代码。</li>
+</ul>
+</li>
+<li>编译器并不会在编译时检查noexcept说明。尽管函数声明了它不会跑出异常，但实际上还是跑出了。一旦一个noexcept函数跑出了异常，程序就会调用terminate以确保遵守不在运行时跑出异常的承诺。因此noexcept一般在两种情况下使用：
+<ul>
+<li>确认函数不会排除异常。</li>
+<li>根本不知道该如何处理异常。</li>
+</ul>
+</li>
+<li>noexcept说明符接受一个可选的实参，该实参必须能转换为bool类型：如果是true，函数不会抛出异常；如果是false，则函数可能跑出异常。例：noexcept(true)。</li>
+<li>noexcept运算符：一元运算符，返回值是一个bool类型的右值常量表达式，用于表示给定的表达式是否会跑出异常，并不会求表达式的值。</li>
+<li>如果一个虚函数承诺了它不会跑出异常，则后续派生出来的虚函数也必须做出同样的承诺；与之相反，如果基类的虚函数允许跑出异常，则派生类的对应函数既可以允许跑出异常，也可以不允许跑出异常。</li>
+</ul>
+</li>
+<li>
+<p><strong>volatile</strong>：volatile提醒编译器它后面所定义的变量随时可能改变，因此编译后的程序每次都需要存储或读取这个变量时，都会直接从变量地址中读取数据。如果没有volatile关键字，则编译器可能优化读取和存储，使用暂存在寄存器中的值。volatile修饰变量的情况：</p>
+<ul>
+<li>设备的硬件寄存器（如：状态寄存器）</li>
+<li>一个中断服务子程序会访问到的非自动变量（Non-automatic variables）</li>
+<li>多线程应用中被几个任务共享的变量。</li>
+</ul>
+</li>
+<li>
+<p>**extern ”C” **：c语言不允许存在同名对象，比如在一个编译单元内部，不存在同名的函数。而c++允许对一个名字基于不同的定义，只要在语义上没有二义性。如果整个工程中由多个源文件组成，在一个源文件中想引用另外一个源文件中已经定义的全局变量，只需要在引用变量的文件中用extern关键字声明。如果不在文件的开头定义，则有效的作用范围也仅限于起定义处到文件结束。</p>
+</li>
+</ul>
+<h2 id="顺序容器">顺序容器</h2>
+<ul>
+<li>顺序容器包括：<strong>vector,deque,list,forward_list,array,string</strong></li>
+<li><strong>string</strong>和<strong>vector</strong>。由于元素是连续存储的，由元素的下标来计算其地址是非常快的。为保持连续存储，添加一个元素可能要分配额外的存储空间。</li>
+<li><strong>list</strong>和<strong>forward_list</strong>。是令容器任何位置的添加和删除操作都很快速。作为代价，这两个容器不支持元素的随机访问：为访问一个元素，只能遍历整个容器。与vector,deque,array相比，这两个容器的额外内存开销也很大。</li>
+<li><strong>deque</strong>。与vector和string类似，deque支持快速的随机访问，中间位置添加或删除元素的代价很大。但是，两端添加或删除元素很快，与list和forward_list的速度相当。</li>
+<li><strong>assign</strong>操作 （仅顺序容器）。允许我们从一个不同但相容的类型赋值，或者从容器的一个子序列赋值。assign操作用参数所指定的元素（的拷贝）替换左边容器中的所有元素。
+<blockquote>
+<p>list<!-- raw HTML omitted --> names;
+vector&lt;const char*&gt; oldstyle;
+names.assign(oldstyle.cbegin(),oldstyle.cend ());
+list<!-- raw HTML omitted --> slist1(1);//1个元素，为空string。
+slist1.assign(10,&ldquo;Hiya!&quot;);//10个元素，每个都是&quot;Hiya!&rdquo;</p>
+</blockquote>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">顺序容器</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">vector</td>
+<td align="center">可变大小数组。支持快速随机访问。在尾部之外的位置插入或删除元素可能很慢。</td>
+</tr>
+<tr>
+<td align="center">deque</td>
+<td align="center">双端队列。支持快速随机访问。在头尾位置插入/伤处速度很快。</td>
+</tr>
+<tr>
+<td align="center">list</td>
+<td align="center">双向链表。只支持双向顺序访问。在list中任何位置进行插入/删除操作速度都很快。</td>
+</tr>
+<tr>
+<td align="center">forward_list</td>
+<td align="center">单向链表。只支持单向顺序访问。在链表中任何位置进行插入/删除操作速度都很快。</td>
+</tr>
+<tr>
+<td align="center">array</td>
+<td align="center">固定大小数组。支持快速随机访问。不能添加或删除元素。</td>
+</tr>
+<tr>
+<td align="center">string</td>
+<td align="center">与vector相似的容器，但专门用于保存字符。随机访问快。在尾部插入/删除速度快。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="容器操作">容器操作</h3>
+<table>
+<thead>
+<tr>
+<th>类型别名</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iterator</td>
+<td>此容器类型的迭代器类型</td>
+</tr>
+<tr>
+<td>const_iterator</td>
+<td>可以读取元素，但不能修改元素的迭代器类型</td>
+</tr>
+<tr>
+<td>size_type</td>
+<td>无符号整数类型，足够保存此种容器类型最大可能容器的大小</td>
+</tr>
+<tr>
+<td>difference_type</td>
+<td>带符号类型，足够保存两个迭代器之间的距离</td>
+</tr>
+<tr>
+<td>value_type</td>
+<td>元素类型</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>元素的左值类型；与value_type&amp;含义相同</td>
+</tr>
+<tr>
+<td>const_reference</td>
+<td>元素的const左值类型（即，const value_type&amp;）</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>构造函数</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C c</td>
+<td>默认构造函数，构造空容器(array有单独的构造函数)</td>
+</tr>
+<tr>
+<td>C c1(c2)</td>
+<td>构造c2的拷贝c1</td>
+</tr>
+<tr>
+<td>C c(b,e)</td>
+<td>构造c，将迭代器 b 和 e 指定的范围内的元素拷贝到t(array不支持)</td>
+</tr>
+<tr>
+<td>C c(a,b,c,d&hellip;)</td>
+<td>列表初始化t</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>赋值与swap</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c1 = c2</td>
+<td>将c1中的元素替换为c2中的元素</td>
+</tr>
+<tr>
+<td>c1 = {a,b,c&hellip;}</td>
+<td>将c1中的元素替换为列表中元素(不适用于array)</td>
+</tr>
+<tr>
+<td>a.swap(b)</td>
+<td>交换a和b的元素</td>
+</tr>
+<tr>
+<td>swap(a,b)</td>
+<td>a.swap(b)等价</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>大小</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c.size()</td>
+<td>c中元素的数目(不支持forward_list)</td>
+</tr>
+<tr>
+<td>c.max_size()</td>
+<td>c可保存的最大元素数目</td>
+</tr>
+<tr>
+<td>c.empty()</td>
+<td>若c中存储了元素，返回false，否则返回true</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>添加/删除元素(不适用于array)</th>
+<th>不同容器中，操作的接口不同</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c.insert(args)</td>
+<td>将args中的元素进行拷贝进c</td>
+</tr>
+<tr>
+<td>c.emplace(inits)</td>
+<td>使用inits构造c中的一个元素</td>
+</tr>
+<tr>
+<td>c.erase(args)</td>
+<td>除args指定的元素</td>
+</tr>
+<tr>
+<td>c.clear()</td>
+<td>删除c中的所有元素，返回void</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>关系运算符</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>==,!=</td>
+<td>所有容器都支持相等(不等)运算符</td>
+</tr>
+<tr>
+<td>&lt;,&lt;=,&gt;,&gt;=</td>
+<td>关系运算符(无序关联容器不支持)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>获取迭代器</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c.begin(),c.end ()</td>
+<td>返回指向c的首元素和尾元素之后位置的迭代器</td>
+</tr>
+<tr>
+<td>c.cbegin(),c.cend ()</td>
+<td>返回const_iterator</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>反向容器的额外成员</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reverse_iterator</td>
+<td>按逆序寻址元素的迭代器</td>
+</tr>
+<tr>
+<td>const_reverse_iterator</td>
+<td>不能修改元素的逆序迭代器</td>
+</tr>
+<tr>
+<td>c.rbegin(),c.rend ()</td>
+<td>返回指向c的尾元素和首元素之前位置的迭代器</td>
+</tr>
+<tr>
+<td>c.crbegin(),c.crend ()</td>
+<td>返回const_reverse_iterator</td>
+</tr>
+</tbody>
+</table>
+<h5 id="vector对象是如何增长的">vector对象是如何增长的:</h5>
+<table>
+<thead>
+<tr>
+<th>容器大小管理操作</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shrink_to_fit只适用于vector、string和deque</td>
+<td></td>
+</tr>
+<tr>
+<td>capacity和reserve只适用于vector和string</td>
+<td></td>
+</tr>
+<tr>
+<td>c.shrink_to_fit</td>
+<td>将capacity()减少为与size()相同大小</td>
+</tr>
+<tr>
+<td>c.capacity()</td>
+<td>不重新分配内存空间的话，c可以保存多少元素</td>
+</tr>
+<tr>
+<td>c.reserve(n)</td>
+<td>分配至少能容纳n个元素的内存空间</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>capacity和size。容器的size是指已经保存的元素的数目；而capacity则是不分配新的内存空间的前提下它最多可以保存多少元素。在标准库的实现中，每次添加1个元素，共添加24个元素，会使capacity变为32.</li>
+<li>调用shrink_to_fit只是一个请求，标准库并不保证退还内存。</li>
+<li>每个vector实现都可以选择自己的内存分配策略。但是必须遵守的一条原则是：只有当<strong>迫不得已</strong>时才可以分配新的内存空间。所有实现都应遵循一个原则：确保用push_back向vector添加元素的操作有高效率。从技术角度说，就是通过在一个初始为空的vector上调用n次push_back来创建一个n个元素的vector，所花费的时间不能超过n的常数倍。</li>
+</ul>
+<h5 id="容器适配器">容器适配器</h5>
+<ul>
+<li>除了顺序容器外，标准库还定义了三个顺序容器适配器：stack、queue和priority_queue。<strong>适配器</strong>是标准库中的一个通用概念。本质上，一个适配器是一种机制，能使某种事物的行为看起来像另外一种事物一样。</li>
+<li>默认情况下，stack和queue是基于<strong>deque</strong>实现的，priority_queue是在<strong>vector</strong>基础上实现的。</li>
+<li>对于一个给定的适配器，可以使用哪些容器是有限制的。所有适配器都要求容器具有添加和删除元素的能力。因此，适配器不能构造在array直伤。</li>
+</ul>
+<h2 id="泛型算法">泛型算法</h2>
+<ul>
+<li>为弄清算法如何用于不同类型的容器，分析find是如何在未排序的元素序列中查找一个指定元素。
+<ol>
+<li>访问序列中的首元素。</li>
+<li>比较此元素与我们要查找的值。</li>
+<li>如果此元素与我们要查找的值匹配，find返回标识此元素的值。</li>
+<li>否则，find前进到下一个元素，重复执行步骤2和3.</li>
+<li>如果到达序列尾部，find应停止。</li>
+<li>如果find到达序列尾部，它应该返回一个指出元素未找到的值。此值和步骤3返回的值必须具有相容的类型。</li>
+</ol>
+<ul>
+<li>这些步骤都不需要依赖于容器所保存的元素类型。因此，只要有一个迭代器就可以用来访问元素，find就完全不依赖于容器的类型。</li>
+<li>迭代器令算法不依赖于容器，但算法依赖于元素类型的操作。只需要迭代器就可以进行除了上述第二步之外的所有操作。但第二步中我们需要使用元素类型上的操作，find需要用到元素类型的==运算符完成每个元素与给定值的比较。在大多数的算法提供了一种方法，允许我们使用自定义的操作来代替默认的运算符。</li>
+</ul>
+</li>
+</ul>
+<h5 id="谓词">谓词</h5>
+<ul>
+<li>谓词是一个可调用的表达式，其返回结果是一个能用作条件的值。标准库算法所使用的的谓词分为两类：<strong>一元谓词</strong>(unary predicate，意味着他们只接受单一参数)和<strong>二元谓词</strong>(binary prediacate,意味着它们有两个参数)。接受谓词参数的算法对输入序列中的元素调用谓词。因此，元素类型必须能转换为谓词的参数类型。
+<ul>
+<li>接受一个二元谓词参数的sort版本用这个谓词代替&lt;来比较元素。我们提供给sort的谓词必须满足在关键字类型上定义一个<strong>严格弱序</strong>(strict weak ordering)。可以讲严格弱序看做'&lsquo;小于等于&rsquo;',虽然实际上定义的操作可能是一个复杂的函数。无论我们怎样定义比较函数，它必须具备如下基本性质：
+<ul>
+<li>两个关键字不能同时“小于等于”对方.</li>
+<li>如果k1&quot;小于等于&quot;k2,且k2&quot;小于等于&quot;k3,那么k1必须&quot;小于等于&quot;k3.</li>
+<li>如果存在两个关键字，任何一个都不&quot;小于等于&quot;另一个,那么我们称这两个关键字是&quot;等价&quot;的.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="lambda表达式">lambda表达式</h5>
+<ul>
+<li>我们可以向一个算法传递任何类型的可调用对象。对于一个对象或一个表达式，如果可以对其使用调用运算符，则称它为可调用的。即，如果e是一个可调用的表达式，则我们可以便携代码e(args)，其中args是一个逗号分隔的一个或多个参数的列表。</li>
+<li>一个lambda表达式表示一个可调用的代码单元。我们可以将其理解为一个未命名的内联函数。与任何函数类似，一个lambda具有一个返回类型、一个参数列表和一个函数体。但与函数不同，lambda可能定义在函数内部。一个lambda表达式具有如下形式：
+<blockquote>
+<p>[ capture list ] ( parameter list ) -&gt; return type { function body }
+auto f = [] {return 42;}</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="参数绑定">参数绑定</h5>
+<ul>
+<li>对于那种只在一两个地方使用的简单操作，lambda表达式是最有用的。</li>
+<li>如果lambda的捕获列表为空，通常可以用函数来代替它。但是对于捕获局部变量的lambda，用函数来替换它就不是那么容易了。例如，我们用在find_if调用中的lambda比较一个string和一个给定大小可以使用
+<blockquote>
+<p>bool check_size(const string &amp;s,string::size_type sz){
+return s.size() &gt;= sz;
+}</p>
+</blockquote>
+</li>
+<li>但是，我们不用能这个函数作为find_if的一个参数。find_if接受一个一元谓词，因此传递给find_if的可调用对象必须接受单一参数。</li>
+</ul>
+<h6 id="标准库bind函数">标准库bind函数</h6>
+<ul>
+<li>我们可以使用bind函数，它定义在头文件functional中。可以将bind函数看作一个通用的函数适配器，它接受一个可调用对象，生成一个新的可调用对象来&quot;适应&quot;原对象的参数列表。调用bind的一般形式为
+<ul>
+<li>auto newCallable = bind(callable , arg_list)</li>
+</ul>
+</li>
+<li>其中，newCallable本身是一个可调用对象，arg_list是一个逗号分隔的参数列表，对应给定的callable的参数。arg_list中的参数可能包含形如_n的名字，其中n是一个整数。这些参数是&quot;占位符&rdquo;，表示newCallable的参数，它们占据了传递给newCallable的参数的位置。</li>
+</ul>
+<h6 id="bind的参数">bind的参数：</h6>
+<ul>
+<li>我们可以用bind修正参数的值。更一般的，可以用bind绑定给定可调用对象中的参数或重新安排其顺序。
+<ul>
+<li>
+<blockquote>
+<p>auto g = bind(f , a , b , _2 , c , _1);</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>生成一个新的可调用对象，它有两个参数，分别用占位符_2和_1表示。这个新的可调用对象将它自己的参数作为第三个和第五个参数传递给f。f的第一个、第二个和第四个分别被绑定在给定值a、b和c上。</li>
+<li>传递给g的参数按位置绑定到占位符。第一个参数绑定到_1，第二个参数绑定到_2.因此，当我们调用g时，其第一个参数将被传递给f作为最后一个参数，第二个 参数将被传递给f作为第三个参数。这个bind调用会将
+<ul>
+<li>g(_1 , _2)</li>
+</ul>
+</li>
+<li>映射为
+<ul>
+<li>f(a , b, _2 , c, _1);</li>
+</ul>
+</li>
+<li>调用g(X , Y ) 会调用 f(a, b, X, c, Y)</li>
+</ul>
+<h6 id="例如用bind重排参数顺序">例如用bind重排参数顺序：</h6>
+<blockquote>
+<p>按单词长度由短到长排序
+sort(words.begin(),words.end (), isShorter);
+按单词长度由长到短排序
+sort(words.begin(),words.end (), bind(isShorter, _2, _1));</p>
+</blockquote>
+<h3 id="迭代器">迭代器</h3>
+<ul>
+<li>标准库在iterator中定义了额外几种迭代器。
+<ul>
+<li><strong>插入迭代器（insert iterator）</strong>：这些迭代器被绑定在一个容器上，可用来向容器插入元素。</li>
+<li><strong>流迭代器（stream iterator）</strong>：这些迭代器被绑定到输入或输出流上，可用来遍历所相关联的io流。</li>
+<li><strong>反向迭代器（reverse iterator）</strong>：这些迭代器向后而不是向前移动。除了forward_list之外的标准库容器都有反向迭代器。</li>
+<li><strong>移动迭代器（move iterator）</strong>：这些专用的迭代器不是拷贝其中的元素，而是移动它们。</li>
+</ul>
+</li>
+</ul>
+<h5 id="插入迭代器">插入迭代器</h5>
+<ul>
+<li>
+<p>插入器是一种迭代器适配器。它接受一个容器，生成一个迭代器，能实现向给定容器添加元素。</p>
+<ul>
+<li>插入器有三种类型，差异在于元素插入的位置：</li>
+<li><strong>back_inserter</strong>创建一个使用push_back的迭代器。</li>
+<li><strong>front_inserter</strong>创建一个使用push_front的迭代器。</li>
+<li><strong>inserter</strong>创建一个使用insert的迭代器。此函数接受第二个参数，这个参数必须是一个指向给定容器的迭代器。元素将被插入到给定迭代器所表示的元素之前。
+当调用inserter(c , iter)时，我们得到一个迭代器，接下来使用它时，会讲元素插入到iter原来指向的元素之前的位置。即，如果it是由inserter生成的迭代器，则赋值语句：</li>
+</ul>
+<blockquote>
+<p>*it = val;</p>
+</blockquote>
+<p>与下面的语句效果一样：</p>
+<blockquote>
+<p>it = c.insert(it, val);
+++it;</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="iostream迭代器">iostream迭代器</h5>
+<p>虽然iostream类型不是容器，但标准库定义了可以用于这些IO类型对象的迭代器，istream_iterator读取输入流，ostream_iterator向一个输出流写数据。</p>
+<h6 id="istream_iterator">istream_iterator</h6>
+<table>
+<thead>
+<tr>
+<th>istream_iterator操作</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>istream_iterator<!-- raw HTML omitted --> in(is)</td>
+<td>in从输入流is读取类型为T的值</td>
+</tr>
+<tr>
+<td>istream_iterator<!-- raw HTML omitted --> end</td>
+<td>读取类型为T的值的istream_iterator迭代器，表示尾后位置</td>
+</tr>
+<tr>
+<td>in1 == in2 或 in1!=in2</td>
+<td>in1和in2必须读取相同类型。如果它们都是尾后迭代器，或绑定到相同的输入，则两者相等</td>
+</tr>
+<tr>
+<td>*in</td>
+<td>返回从流中读取的值</td>
+</tr>
+<tr>
+<td>in-&gt;mem</td>
+<td>与(*in).mem的含义相同</td>
+</tr>
+<tr>
+<td>++in,in++</td>
+<td>使用元素类型所定义的&raquo;运算符从输入流中读取下一个值。</td>
+</tr>
+</tbody>
+</table>
+<h6 id="ostream_iterator">ostream_iterator</h6>
+<table>
+<thead>
+<tr>
+<th>ostream_iterator操作</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ostream_iterator<!-- raw HTML omitted --> out(os)</td>
+<td>out将类型为T的值写到输出流os中</td>
+</tr>
+<tr>
+<td>ostream_iterator<!-- raw HTML omitted --> out(os,d)</td>
+<td>out将类型为T的值写到输出流os中，每个值后面都输出一个d.d指向一个空字符结尾的字符数组</td>
+</tr>
+<tr>
+<td>out = val</td>
+<td>用&laquo;运算符将val写入到out所绑定的ostream中。val的类型必须与out可写的类型兼容</td>
+</tr>
+<tr>
+<td>*out,++out,out++</td>
+<td>这些运算符是存在的，但不对out做任何事情。每个运算符都返回out</td>
+</tr>
+</tbody>
+</table>
+<h5 id="反向迭代器">反向迭代器</h5>
+<ul>
+<li>反向迭代器就是在容器中从尾元素向首元素反向移动的迭代器。对于反向迭代器，递增操作的含义变为：递增一个反向迭代器（++it）会移动到前一个元素；递减一个迭代器（&ndash;it）会移动到下一个元素。</li>
+<li>我们可以通过调用rbegin、rend 、crbegin和crend 成员函数来获得反向迭代器。</li>
+</ul>
+<h5 id="泛型算法结构">泛型算法结构</h5>
+<ul>
+<li>任何算法的最基本的特性是它要求其迭代器提供哪些操作。算法锁要求的迭代器操作可以分为5个<strong>迭代器类别</strong>(iterator category)。每个算法都会对它的每个迭代器参数指明需提供哪些迭代器。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>迭代器类别</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入迭代器</td>
+<td>只读，不写；单遍扫描，只能递增</td>
+</tr>
+<tr>
+<td>输出迭代器</td>
+<td>只写，不读；单遍扫描，只能递增</td>
+</tr>
+<tr>
+<td>前向迭代器</td>
+<td>可读写；多遍扫描，只能递增</td>
+</tr>
+<tr>
+<td>双向迭代器</td>
+<td>可读读；多遍扫描，可增可减</td>
+</tr>
+<tr>
+<td>随机访问迭代器</td>
+<td>可读写；多遍扫描，支持全部迭代器运算</td>
+</tr>
+</tbody>
+</table>
+<h6 id="输入迭代器">输入迭代器</h6>
+<ul>
+<li>可以读取序列中的元素。一个输入迭代器必须支持：
+<ul>
+<li>用于比较两个迭代器相等和不相等运算符（==、!=）</li>
+<li>用于推进迭代器的前置和后置递增运算（++）</li>
+<li>用于读取元素的解引用运算符（*）；解引用只会出现在赋值运算符的右侧</li>
+<li>箭头运算符（-&gt;），等价于(*it).member，即，解引用迭代器，并提取对象的成员
+输入迭代器只用于顺序访问。输入迭代器只能用于单遍扫描。
+算法find和accumlate要求输入迭代器；而istream_iterator是一种输入迭代器。</li>
+</ul>
+</li>
+</ul>
+<h6 id="输出迭代器">输出迭代器</h6>
+<ul>
+<li>可以看作输入迭代器功能上的补集——只写而不读元素。一个输出迭代器必须支持：
+<ul>
+<li>用于推进迭代器的前置和后置递增运算（++）</li>
+<li>解引用运算符（*）,只出现在赋值运算符的左侧（向一个已经解引用的输出迭代器赋值，就是将值写入它所指向的元素）
+我们只能向一个输出迭代器赋值一次。输出迭代器只能用于单遍扫描算法。用作目的位置的迭代器通常都是输出迭代器。
+copy函数的第三个删除就是输出迭代器。ostream_iterator类型也是输出迭代器</li>
+</ul>
+</li>
+</ul>
+<h6 id="前向迭代器">前向迭代器</h6>
+<ul>
+<li>可以读写元素。前向迭代器的特点：
+<ul>
+<li>只能在序列中沿一个方向移动。前向迭代器支持输入和输出迭代器的操作，而且可以多次读写同一个元素。可以保存前向迭代器的状态，使用前向迭代器的算法可以对序列进行多遍扫描。
+算法replace要求前向迭代器，forward_list上的迭代器是前向迭代器。</li>
+</ul>
+</li>
+</ul>
+<h6 id="双向迭代器">双向迭代器：</h6>
+<ul>
+<li>可以正向/反向读写序列中的元素。双向迭代器除了支持前向迭代器的操作外，还支持：
+<ul>
+<li>前置和后置递减运算符（&ndash;）。
+算法reverse要求双向迭代器，除了forward_list之外，其他标准库都提供符合双向迭代器要求的迭代器。</li>
+</ul>
+</li>
+</ul>
+<h6 id="随机访问迭代器">随机访问迭代器：</h6>
+<ul>
+<li>提供在常量时间内访问序列中任意元素的能力。不仅支持双向迭代器的所有功能，还支持：
+<ul>
+<li>用于比较两个迭代器相对位置的关系运算符（&lt;、&lt;=、&gt;和&gt;=）</li>
+<li>迭代器和一个整数值的加减运算（+、+=、-和-=）,计算结果是迭代器在序列中前进（或后退）给定整数个元素后的位置</li>
+<li>用于两个迭代器上的减法运算符（-）,得到两个迭代器的距离</li>
+<li>下标运算符（iter[n]）与*(iter[n])等价
+算法sort要求随机访问迭代器。array、deque、string和vector的迭代器都是随机访问迭代器，用于访问内置数组元素的指针也是。</li>
+</ul>
+</li>
+</ul>
+<h6 id="常用的容器支持的迭代器类别">常用的容器支持的迭代器类别</h6>
+<ul>
+<li>只有顺序容器和关联容器才支持迭代器遍历。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">容器</th>
+<th align="center">支持的迭代器类别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">vector</td>
+<td align="center">随机访问迭代器</td>
+</tr>
+<tr>
+<td align="left">deque</td>
+<td align="center">随机访问迭代器</td>
+</tr>
+<tr>
+<td align="left">list</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="left">set</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="left">multiset</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="left">map</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="left">multimap</td>
+<td align="center">双向迭代器</td>
+</tr>
+<tr>
+<td align="left">stack、queue、priority_queue</td>
+<td align="center">不支持</td>
+</tr>
+</tbody>
+</table>
+<h6 id="算法形参模式">算法形参模式</h6>
+<ul>
+<li>
+<p>在任何其他算法分类上，还有一组参数规范。大多数算法具有如下4种形式之一：</p>
+<blockquote>
+<p>alg(beg , end , other args);
+alg(beg , end , dest , other args);
+alg(beg , end , beg2 , other args);
+alg(beg , end , beg2 , end2 , other args);</p>
+</blockquote>
+<p>其中alg是算法的名字，beg和end表示算法所操作的输入范围。dest、beg2和end2，都是迭代器参数，如果用到了这些迭代器参数，它们分别承担指定目的位置和第二个范围角色。除了这些迭代器参数，一些算法还接受额外的、非迭代器的特定参数。</p>
+</li>
+</ul>
+<h6 id="_if版本的算法">_if版本的算法</h6>
+<ul>
+<li>接受一个元素的算法通常有另一个不同名字的版本，此版本接受一个谓词代替元素值。接受谓词参数的算法都有附加_if的前缀：
+<blockquote>
+<p>//查找输入范围中val第一次出现的位置
+find(beg , end , val );
+//查找第一个令pred为真的元素
+find_if(beg , end , pred );
+这两个算法提供了命名上的差异的版本，而非重载版本。</p>
+</blockquote>
+</li>
+</ul>
+<h6 id="_copy版本的算法">_copy版本的算法</h6>
+<ul>
+<li>
+<p>默认情况下，重排元素的算法将重排后的元素写回到给定的输入序列中。这些算法还提供另一个版本，将元素写到一个指定的输出目的位置。写到额外目的空间的算法都在名字后面附加一个_copy：</p>
+<blockquote>
+<p>//反转输入范围中元素的顺序
+reverse(beg , end )
+//将元素按逆序拷贝到dest
+reverse_copy(beg , end , dest )</p>
+</blockquote>
+<p>还有一些算法同时提供_copy和_if版本。这些版本接受一个目的位置迭代器和一个谓词：</p>
+<blockquote>
+<p>//从v1中删除奇数元素
+remove_if(v1.begin() , v1.end() , []( int i) { return i%2; } ) ;
+//将偶数元素从v1拷贝到v2;v1不变
+remove_copy_if(v1.begin() , v1.end() , back_inserter(v2) , []( int i) { return i%2 ;} );</p>
+</blockquote>
+<p>在第一个调用中，从输入序列中将奇数元素删除。在第二个调用中，将非奇数元素从输入范围拷贝到v2中。</p>
+</li>
+</ul>
+<h2 id="关联容器">关联容器</h2>
+<ul>
+<li>关联容器支持高效的关键字查找和访问。两个主要的关联容器类型是<strong>map</strong> 和 <strong>set</strong>。</li>
+<li>关联容器支持普通容器的操作。不支持顺序容器位置相关的操作。关联容器是根据关键字存储的。
+|关联容器类型 |    |
+| :&ndash;    | :-:  |
+| <strong>按关键字有序保存元素</strong> |  |
+| map | 关联数组：保存关键字-值对 |
+| set | 关键字即值，只保存关键字的容器 |
+| mulitmap | 关键字可重复出现的map |
+| multiset | 关键字可重复出现的set |
+| <strong>无序集合</strong> |  |
+| unordered_map | 用哈希函数组织的map |
+| unordered_set | 用哈希函数组织的set |
+| unordered_mulitmap | 哈希组织的map；关键字可以重复出现 |
+| unordered_multiset | 哈希组织的set；关键字可以重复出现 |</li>
+</ul>
+<h4 id="有序容器的关键字类型">有序容器的关键字类型</h4>
+<ul>
+<li>可以向一个算法提供我们自己定义的比较操作，与之类似，也可以提供自己定义的操作来代替关键字上的&lt;运算符。所提供的操作必须在关键字类型上定义一个<strong>严格弱序</strong>。可以讲严格弱序看作&quot;小于等于&rdquo;。</li>
+</ul>
+<h4 id="使用关键字类型的比较函数">使用关键字类型的比较函数</h4>
+<ul>
+<li>用来组织一个容器中元素的操作的类型也是该容器类型的一部分。为了制定使用自定义的操作，必须在定义关联容器类型时提供此操作的类型。
+在定义时我们必须提供两个类型：关键字类型，以及比较操作类型——函数指针类型。</li>
+</ul>
+<h3 id="pair">pair</h3>
+<ul>
+<li>pair是一个标准库类型，它定义在头文件utility中。</li>
+<li>一个pair保存两个数据成员。类似容器，pair是一个用来生成特定类型的模板。当创建一个pair时，必须提供两个类型名，pair的数据成员将具有对应的类型。</li>
+<li>pair的数据成员是public的。两个成员分别命名为first和second。用普通的成员访问符号来访问它们。可以用make_pair来生成pair对象。</li>
+</ul>
+<h3 id="关联容器操作">关联容器操作</h3>
+<table>
+<thead>
+<tr>
+<th align="left">关联容器额外的类型别名</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">key_value</td>
+<td align="center">此容器类型的关键字类型</td>
+</tr>
+<tr>
+<td align="left">mapped_type</td>
+<td align="center">每个关键字关联的类型；只适用于map</td>
+</tr>
+<tr>
+<td align="left">value_type</td>
+<td align="center">对于set，与key_type相同；对于map，为pair&lt;const key_type , mapped_type&gt;</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>对于set类型，key_type和value_type是一样的；set中保存的值就是关键字。在map中，元素是关键字-值对。即，每个元素是一个pair对象，包含一个关键字和一个关联的值。</li>
+</ul>
+<h4 id="关联容器迭代器">关联容器迭代器</h4>
+<ul>
+<li>当解引用一个关联容器迭代器时，我们会得到一个类型为容器的value_type的值的引用。对于map而言，value_type是一个pair类型，其first成员保存const的关键字，second成员保存值。</li>
+</ul>
+<p><strong>set的迭代器是const的</strong></p>
+<ul>
+<li>虽然set类型同时定义了iterator和const_iterator类型，但两种类型都只允许只读访问set中的元素。与不能改变一个map元素的关键字一样，一个set中的关键字也是const的。可以用一个set迭代器来读取元素的值，但不能修改。</li>
+</ul>
+<h4 id="map的下标操作">map的下标操作</h4>
+<ul>
+<li>map和unordered_map容器提供了下标运算符和at函数。set类型不支持下标。multimap和unordered_multimap不能进行下标操作，可能有多个值与一个关键字相关联。</li>
+</ul>
+<h4 id="访问元素">访问元素</h4>
+<table>
+<thead>
+<tr>
+<th align="left">关联容器额外的类型别名</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">lower_bound和upper_bound不适用于无序容器</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">下标和at操作只适用于非const的map和unordered_map</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">c.find(k)</td>
+<td align="center">返回一个迭代器，指向第一个关键字为k的元素，若k不在容器中，则返回尾后迭代器。</td>
+</tr>
+<tr>
+<td align="left">c.count(k)</td>
+<td align="center">返回关键字等于k的元素的数量。对于不允许重复关键字的容器，返回值永远是0或1</td>
+</tr>
+<tr>
+<td align="left">c.lower_bound(k)</td>
+<td align="center">返回一个迭代器，指向第一个关键字<strong>不小于</strong>k的元素</td>
+</tr>
+<tr>
+<td align="left">c.upper_bound(k)</td>
+<td align="center">返回一个迭代器，指向第一个关键字<strong>大于</strong>k的元素</td>
+</tr>
+<tr>
+<td align="left">c.equal_range(k)</td>
+<td align="center">返回一个迭代器pair，表示关键字等于k的元素的范围。若k不存在，pair的两个成员均等于c.end()</td>
+</tr>
+</tbody>
+</table>
+<h5 id="对map使用find代替下标">对map使用find代替下标</h5>
+<ul>
+<li>对map和unordered_map类型，使用下标操作可能会导致：如果关键字未在map中，下标操作会插入一个具有给定关键字的元素。在指向知道给定关键字是否在map中，应当使用find。</li>
+</ul>
+<h5 id="multimap或multiset中查找元素">multimap或multiset中查找元素</h5>
+<ul>
+<li>对于允许重复关键字的容器来说，在容器中可能有很多元素具有给定的关键字。如果一个multimap或multiset中有多个元素具有给定关键字，则这些元素在容器中会相邻存储。可以通过以下步骤实现找到所有的映射。
+<ul>
+<li>
+<p>1、使用count和find实现</p>
+<ul>
+<li>可以通过count找到给定关键字的数量</li>
+<li>通过find得到一个迭代器指向第一个关键字</li>
+<li>循环次数为count的返回值，读取所有的映射</li>
+</ul>
+</li>
+<li>
+<p>2、还可以通过面向迭代器的方法解决这个问题。</p>
+<ul>
+<li>如果查找的元素具有容器中最大的关键字，则此关键字的upper_bound返回尾后迭代器。如果关键字不存在，且大于容器中任何关键字，则lowe_bound返回的也是尾后迭代器。可以通过如下循环实现读取</li>
+</ul>
+<blockquote>
+<p>for ( auto beg = x.lowe_bound(id) , end = x.upper_bound(id) ; beg != end ; ++beg )</p>
+</blockquote>
+<ul>
+<li>此处代码与count和find能完成相同的工作，但更直接。</li>
+</ul>
+</li>
+<li>
+<p>3、equal_range函数</p>
+<ul>
+<li>直接调用equal_range即可。此函数接受一个关键字，返回一个迭代器。若关键字存在，则第一个迭代器指向第一个与关键字匹配的元素，第二个迭代器指向最后一个匹配元素之后的位置。若未找到匹配元素，则两个迭代器都指向关键字可以插入的位置</li>
+</ul>
+<blockquote>
+<p>for (auto pos = x.equal_range(id) ; pos.first != pos.second ; ++pos.first)
+与使用upper_bound和lower_bound功能一直，但没有使用局部变量。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Awei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+      2021-02-28
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://wangwei9160.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/word/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">Word</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+          <a class="next" href="/post/linux/">
+            <span class="next-text nav-default">Linux</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="https://github.com/wangwei9160" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://wangwei9160.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2020 -
+    2021
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        Awei
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

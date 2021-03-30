@@ -1723,21 +1723,19 @@ alloc.deallocator(p,n);&lt;/p&gt;
     </item>
     
     <item>
-      <title>STL</title>
-      <link>https://wangwei9160.github.io/post/stl/</link>
+      <title>C&#43;&#43;</title>
+      <link>https://wangwei9160.github.io/post/cplusplus/</link>
       <pubDate>Sun, 28 Feb 2021 17:47:04 +0800</pubDate>
       
-      <guid>https://wangwei9160.github.io/post/stl/</guid>
+      <guid>https://wangwei9160.github.io/post/cplusplus/</guid>
       
         <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;内容参考自c++ primer 第五版和网上的一些资料。仅供自己学习参考使用。&lt;/li&gt;
+&lt;li&gt;主要形式是通过实现部分STL库文件，增加对STL库的理解。会逐步进行完善。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;自己的轻量级stl库&#34;&gt;自己的轻量级STL库&lt;/h1&gt;
+&lt;h1 id=&#34;c&#34;&gt;c++&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;只实现部分STL库文件，增加对STL库的理解。会逐步进行完善。&lt;/p&gt;
-&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;大多数算法都定义在头文件algorithm中。标准库还在头文件numeric中定义了一组数值泛型算法。一般情况下，这些算法并不直接操作容器，而是遍历由两个迭代器指定的一个元素范围来进行操作。&lt;/p&gt;
 &lt;ul&gt;
