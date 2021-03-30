@@ -6,10 +6,105 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 25 Mar 2021 12:08:09 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 30 Mar 2021 10:05:09 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Stl</title>
+      <link>https://wangwei9160.github.io/post/stl/</link>
+      <pubDate>Tue, 30 Mar 2021 10:05:09 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/stl/</guid>
+      
+        <description>&lt;h1 id=&#34;stl&#34;&gt;STL&lt;/h1&gt;
+&lt;p&gt;整理stl的内容，各个.h文件的主要内容&lt;/p&gt;
+&lt;h2 id=&#34;六大组件&#34;&gt;六大组件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;容器(containers)：各种数据结构，如vector,list,deque,set,map,主要用来存放数据。从实现的角度来看，stl容器是一种class template。&lt;/li&gt;
+&lt;li&gt;算法(alogirithm)：各种常用算法，如sort,search,copy,erase&amp;hellip;。从实现的角度来看，stl算法是一种function template。&lt;/li&gt;
+&lt;li&gt;迭代器(iterators)：泛型指针，从实现的角度来看，迭代器是一种将operator*,operator-&amp;gt;,operator++,operator&amp;ndash;等指针相关操作予以重载的class template，所有stl容器都附带自己专属的迭代器，只有容器设计者才知道如何遍历自己的元素。原生指针也是一种迭代器。&lt;/li&gt;
+&lt;li&gt;仿函数(functors)：行为类似函数，可作为算法的某种策略(policy)。从实现的角度来看，仿函数是一种重载了operator()的class或class template。一般函数指针可以视为狭义的仿函数。&lt;/li&gt;
+&lt;li&gt;适配器(adapters)：一种用来修饰容器或仿函数或迭代器接口的东西，如queue和stack，只是容器适配器，它们的底层完全借助queue，所有操作由底层queue供应，改变functor接口者；改变iterator接口者，称为iterator adaptor。&lt;/li&gt;
+&lt;li&gt;配置器(allocators)：负责空间配置与管理。从实现的角度来看，配置器是一个实现了动态空间配置、空间管理、空间释放的class template。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;memoryh&#34;&gt;memory.h&lt;/h4&gt;
+&lt;p&gt;memory.h 内含件 alloc.h、construct.h、uninitialized.h&lt;/p&gt;
+&lt;h4 id=&#34;constructh&#34;&gt;construct.h&lt;/h4&gt;
+&lt;p&gt;construct.h 定义有两个基本函数：构造用的construct()和析构用的destroy()
+construct()接受一个指针ptr和一个初值value，该函数的用途就是将初值设定到指针所指的空间上。
+destroy()有两个版本：
+第一个版本接受一个指针，准备将该指针指向的对象析构掉。直接掉用该对象的析构函数。
+第二个版本接受first和last两个迭代器，准备讲[first，last)范围内的所有对象析构掉。&lt;/p&gt;
+&lt;h4 id=&#34;alloch&#34;&gt;alloc.h&lt;/h4&gt;
+&lt;p&gt;alloc.h 定义了一二级配置器，实现对象构造前的空间配置和独享析构后的空间释放
+第一级配置器：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;allocate()直接使用malloc()、deallocate()直接使用free()。&lt;/li&gt;
+&lt;li&gt;模拟c++的set_new_handler()以处理内存不足的状况。
+第二级配置器：&lt;/li&gt;
+&lt;li&gt;维护16个自由链表(free lists)负责16种小型区块的次配置能力。内存池以malloc()配置而得，如果内存不足，转调用第一级配置器。&lt;/li&gt;
+&lt;li&gt;如果需求区块大于128bytes，就转调用第一级配置器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;第二级配置器共维护16个free-lists，各自管理的大小分别为8，16,24,32,40,48,56,64,72，80,88，96,104,112,120,128bytes。
+union obj{
+union obj * free_list_link;
+char client_data[1] ;&lt;br&gt;
+}
+static obj * volatitle free_list[]&lt;/p&gt;
+&lt;p&gt;static size_t FREELIST_INDEX(size_t bytes) 根据区块大小，决定使用第几号free-list,n从1算起&lt;/p&gt;
+&lt;p&gt;static void * refill(size_t n) 返回一个大小为n的对象，并可能加入大小为n的其他区块到free list
+当发现free list中没有可用区块的时候，就调用refill()，准备为free list 重新填充空间。新的空间将取自内存池(由chunk_alloc()完成)。缺省取得20个新节点(新区块)，万一内存池空间不足，获得的节点数(区块书)可能小于20.&lt;/p&gt;
+&lt;p&gt;static char * chunk_alloc(size_t size , int &amp;amp;nobjs) 配置一大块空间，可容纳nobjs个大小为size的区块
+从内存池中去空间给free list使用，是chunk_alloc()的工作。&lt;/p&gt;
+&lt;p&gt;start_free 内存池起始位置。只能在chunk_alloc()中变化
+end_free 内存池结束位置。只能在chunk_alloc()中变化
+heap_size&lt;/p&gt;
+&lt;p&gt;allocate(size_t n)
+首先判断区块大小，大于128bytes就调用第一级配置器，小于128bytes就检查对应的free list，如果free list 之内有可用的区块，就直接用，如果没有可用区块，就将区块大小上调至8倍数变节，然后调用refill()，准备为free list重新填充空间。
+deallocate(void *p , size_t n)
+首先判断区块大小，大于128bytes就调用第一级配置器，小于128bytes就找出对应的free list，将区块回收。
+reallocate(void *p , size_t old_size , size_t new_size)&lt;/p&gt;
+&lt;h4 id=&#34;uninitializedh&#34;&gt;uninitialized.h&lt;/h4&gt;
+&lt;p&gt;uninitialized.h 定义了一些全局函数，用来填充(fill)或复制(copy)大块内存数据。
+uninitialized_copy(),uninitialized_fill(),uninitialized_fill_n()分别对应于高层次函数copy()、fill()、fill_n()。
+uninitialized_fill_n()接受三个参数：
+1、迭代器first指向欲初始化空间的起始处。
+2、n表示欲初始化空间的大小。
+3、x表示初值
+uninitialized_copy() 接受三个参数：
+1、迭代器first指向输入端的其实位置
+2、迭代器last指向输入端的结束位置(前闭后开区间)
+3、迭代器result指向输出端(欲初始化空间)的起始处
+uninitialized_fill()接受三个参数：
+1、迭代器first指向输出端(欲初始化空间)的起始处
+2、迭代器last指向输出端(欲初始化空间)的借书处(前闭后开区间)
+3、x表示初值&lt;/p&gt;
+&lt;h2 id=&#34;allocator&#34;&gt;allocator&lt;/h2&gt;
+&lt;h3 id=&#34;必要接口&#34;&gt;必要接口&lt;/h3&gt;
+&lt;p&gt;allocator::value_type
+allocator::pointer
+allocator::const_pointer
+allocator::reference
+allocator::const_reference
+allocator::size_type
+allocator::difference_type
+allocator::rebind
+allocator::allocator()
+allocator::allocator(const allocator&amp;amp;)
+template&lt;!-- raw HTML omitted --&gt;allocator::allocator(const allocator&lt;!-- raw HTML omitted --&gt;&amp;amp;)
+allocator::~allocator()
+pointer allocator::address(reference x) const
+const_pointer allocator::address(const_reference x) const
+pointer allocator::allocate(size_type n , const void* = 0)
+void allocator::deallocate(pointer p , size_type n)
+size_type allocator::max_size() const
+void allocator::construct(pointer p , const T&amp;amp; x)
+void allocator::destroy(pointer p)&lt;/p&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>面试题</title>
@@ -3087,27 +3182,6 @@ int numOfWays(int n) {
       
         <description>&lt;p&gt;这里是一篇最新的测试文章！&lt;/p&gt;
 &lt;p&gt;重新测试！&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
-      <title>Blog</title>
-      <link>https://wangwei9160.github.io/post/blog/</link>
-      <pubDate>Wed, 08 Apr 2020 17:25:04 +0800</pubDate>
-      
-      <guid>https://wangwei9160.github.io/post/blog/</guid>
-      
-        <description>&lt;p&gt;Hello world!&lt;/p&gt;
-&lt;p&gt;这是一次测试.
-又一次测试&amp;hellip;&lt;/p&gt;
-&lt;p&gt;呜呜呜，手动敲了好多次的git终于想到写bat了，呜呜呜。
-hugo &amp;ndash;theme= &amp;ndash;baseUrl=&amp;quot;https://&amp;rdquo; &amp;ndash;buildDrafts
-cd public
-git add .
-git commit -m
-git push -u origin master
-pause&lt;/p&gt;
 </description>
       
     </item>

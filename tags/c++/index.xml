@@ -6,10 +6,19 @@
     <description>Recent content in c&#43;&#43; on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 23 Mar 2021 20:33:51 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 30 Mar 2021 10:05:09 +0800</lastBuildDate>
     
 	<atom:link href="https://wangwei9160.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Stl</title>
+      <link>https://wangwei9160.github.io/post/stl/</link>
+      <pubDate>Tue, 30 Mar 2021 10:05:09 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/stl/</guid>
+      <description>STL 整理stl的内容，各个.h文件的主要内容 六大组件 容器(containers)：各种数据结构，如vector,list,deque,set,</description>
+    </item>
     
     <item>
       <title>Template</title>
