@@ -69,7 +69,7 @@
 <meta itemprop="description" content="STL 整理stl的内容，各个.h文件的主要内容 六大组件 容器(containers)：各种数据结构，如vector,list,deque,set,">
 <meta itemprop="datePublished" content="2021-03-30T10:05:09&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-30T10:05:09&#43;08:00" />
-<meta itemprop="wordCount" content="2217">
+<meta itemprop="wordCount" content="3365">
 
 
 
@@ -326,8 +326,8 @@
           2021-03-30
         </time>
         
-        <span class="more-meta"> 约 2217 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span class="more-meta"> 约 3365 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
 
         
         
@@ -354,6 +354,7 @@
         <li><a href="#必要接口">必要接口</a></li>
       </ul>
     </li>
+    <li><a href="#iterator">iterator</a></li>
   </ul>
 </nav>
   </div>
@@ -373,7 +374,8 @@
 <li>配置器(allocators)：负责空间配置与管理。从实现的角度来看，配置器是一个实现了动态空间配置、空间管理、空间释放的class template。</li>
 </ul>
 <h4 id="memoryh">memory.h</h4>
-<p>memory.h 内含件 alloc.h、construct.h、uninitialized.h</p>
+<p>memory.h 内含件 alloc.h、construct.h、uninitialized.h
+包含auto_ptr ，用来包装源生指针的对象，内存漏洞问题可以藉此解决</p>
 <h4 id="constructh">construct.h</h4>
 <p>construct.h 定义有两个基本函数：构造用的construct()和析构用的destroy()
 construct()接受一个指针ptr和一个初值value，该函数的用途就是将初值设定到指针所指的空间上。
@@ -388,14 +390,14 @@ destroy()有两个版本：
 <li>模拟c++的set_new_handler()以处理内存不足的状况。
 第二级配置器：</li>
 <li>维护16个自由链表(free lists)负责16种小型区块的次配置能力。内存池以malloc()配置而得，如果内存不足，转调用第一级配置器。</li>
-<li>如果需求区块大于128bytes，就转调用第一级配置器。</li>
-</ul>
-<p>第二级配置器共维护16个free-lists，各自管理的大小分别为8，16,24,32,40,48,56,64,72，80,88，96,104,112,120,128bytes。
+<li>如果需求区块大于128bytes，就转调用第一级配置器。
+第二级配置器共维护16个free-lists，各自管理的大小分别为8，16,24,32,40,48,56,64,72，80,88，96,104,112,120,128bytes。
 union obj{
 union obj * free_list_link;
 char client_data[1] ;<br>
 }
-static obj * volatitle free_list[]</p>
+static obj * volatitle free_list[]</li>
+</ul>
 <p>static size_t FREELIST_INDEX(size_t bytes) 根据区块大小，决定使用第几号free-list,n从1算起</p>
 <p>static void * refill(size_t n) 返回一个大小为n的对象，并可能加入大小为n的其他区块到free list
 当发现free list中没有可用区块的时候，就调用refill()，准备为free list 重新填充空间。新的空间将取自内存池(由chunk_alloc()完成)。缺省取得20个新节点(新区块)，万一内存池空间不足，获得的节点数(区块书)可能小于20.</p>
@@ -445,6 +447,53 @@ void allocator::deallocate(pointer p , size_type n)
 size_type allocator::max_size() const
 void allocator::construct(pointer p , const T&amp; x)
 void allocator::destroy(pointer p)</p>
+<h2 id="iterator">iterator</h2>
+<p>并不是所有的迭代器都是class type，如原生指针。如果不是class type，就无法为它定义内嵌型别。STL必须接受原生指针作为一种迭代器。
+partial specialization（偏特化），如果class template拥有一个template参数，可以针对其中某个template参数进行特化工作，即可以再泛化设计中提供一个特化版本。</p>
+<pre><code>该泛化版本允许T为任何型别
+template&lt;typename T&gt;
+class C {...};
+</code></pre><pre><code>该版本适用于T为原生指针的情况，是上一个形式的进一步条件限制。
+template&lt;typename T&gt;
+class C&lt;T*&gt; {...};
+</code></pre><p>设计一个class template专门用来萃取迭代器的特性，而value type 正是迭代器的特性之一</p>
+<pre><code>template &lt;class I&gt;
+struct iterator_traits{
+    typedef typename I::value_type value_type;
+};
+</code></pre><p>如果I定义有自己的value_type，那么通过这个traits的作用，萃取出来的value_type是就是I::value_type
+令iterator_traits拥有一个paritial sepcializations</p>
+<pre><code>template&lt;class T&gt;
+struct iterator_traits&lt;T*&gt;{
+    typedef T value_type;
+};
+</code></pre><p>根据移动特性与施行操作，迭代器被分为五类：</p>
+<ul>
+<li>input iterator：这种迭代器所指的对象，不允许外接改变，只读。</li>
+<li>output iterator：唯写</li>
+<li>forward iterator：允许写入型算法(如replace())</li>
+<li>bidirectional iterator：可双向移动。某些算法需要逆向走访某个迭代器区间(例如逆向拷贝某范围内的元素)</li>
+<li>random access iterator：涵盖所有的指针算术能力
+input iterator、output iterator -&gt; forward iterator -&gt; bidirectional iterator -&gt; random access iterator。箭头代表概念与强化的关系。</li>
+</ul>
+<p>最常用的迭代器相应型别有五种：value_type、difference_type、pointer、reference、iterator_catagoly。</p>
+<ul>
+<li>value_type ，是指迭代器所指独享的型别。任何一个打算与STL算法有完美搭配的class，都应该定义自己的value type内嵌型别。</li>
+<li>difference_type，用来表示两个迭代器之间的距离，因此它可以用来表示一个容器的最大容量，对于一个连续空间的容器而言，头尾之间的距离就是其最大容量。如果一个一个泛型算法提供计数功能，如STL的count()，其返回值就得使用到difference_type。</li>
+<li>reference_type：
+<ul>
+<li>constant iterators，指不允许改变&quot;所指对象的内容&rdquo;，例如const int *pic;</li>
+<li>mutable iterators，指允许改变&quot;所指对象的内容&rdquo;，例如int * pi。</li>
+<li>对mutable iterators进行提领操作时，获得的不应该是一个右值，而是一个左值，因为右值不允许赋值操作，左值允许。</li>
+</ul>
+</li>
+<li>pointer_type
+<ul>
+<li>如果传递一个左值，令它代表p所指之物是可能的，那么传回一个左值，令它代表p所指之物的地址也可以。也就是说，传回一个pointer，指向迭代器所指之物。</li>
+</ul>
+</li>
+<li>iterator_category</li>
+</ul>
 
     </div>
 

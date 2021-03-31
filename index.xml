@@ -30,7 +30,8 @@
 &lt;li&gt;配置器(allocators)：负责空间配置与管理。从实现的角度来看，配置器是一个实现了动态空间配置、空间管理、空间释放的class template。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;memoryh&#34;&gt;memory.h&lt;/h4&gt;
-&lt;p&gt;memory.h 内含件 alloc.h、construct.h、uninitialized.h&lt;/p&gt;
+&lt;p&gt;memory.h 内含件 alloc.h、construct.h、uninitialized.h
+包含auto_ptr ，用来包装源生指针的对象，内存漏洞问题可以藉此解决&lt;/p&gt;
 &lt;h4 id=&#34;constructh&#34;&gt;construct.h&lt;/h4&gt;
 &lt;p&gt;construct.h 定义有两个基本函数：构造用的construct()和析构用的destroy()
 construct()接受一个指针ptr和一个初值value，该函数的用途就是将初值设定到指针所指的空间上。
@@ -45,14 +46,14 @@ destroy()有两个版本：
 &lt;li&gt;模拟c++的set_new_handler()以处理内存不足的状况。
 第二级配置器：&lt;/li&gt;
 &lt;li&gt;维护16个自由链表(free lists)负责16种小型区块的次配置能力。内存池以malloc()配置而得，如果内存不足，转调用第一级配置器。&lt;/li&gt;
-&lt;li&gt;如果需求区块大于128bytes，就转调用第一级配置器。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;第二级配置器共维护16个free-lists，各自管理的大小分别为8，16,24,32,40,48,56,64,72，80,88，96,104,112,120,128bytes。
+&lt;li&gt;如果需求区块大于128bytes，就转调用第一级配置器。
+第二级配置器共维护16个free-lists，各自管理的大小分别为8，16,24,32,40,48,56,64,72，80,88，96,104,112,120,128bytes。
 union obj{
 union obj * free_list_link;
 char client_data[1] ;&lt;br&gt;
 }
-static obj * volatitle free_list[]&lt;/p&gt;
+static obj * volatitle free_list[]&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;static size_t FREELIST_INDEX(size_t bytes) 根据区块大小，决定使用第几号free-list,n从1算起&lt;/p&gt;
 &lt;p&gt;static void * refill(size_t n) 返回一个大小为n的对象，并可能加入大小为n的其他区块到free list
 当发现free list中没有可用区块的时候，就调用refill()，准备为free list 重新填充空间。新的空间将取自内存池(由chunk_alloc()完成)。缺省取得20个新节点(新区块)，万一内存池空间不足，获得的节点数(区块书)可能小于20.&lt;/p&gt;
@@ -102,6 +103,53 @@ void allocator::deallocate(pointer p , size_type n)
 size_type allocator::max_size() const
 void allocator::construct(pointer p , const T&amp;amp; x)
 void allocator::destroy(pointer p)&lt;/p&gt;
+&lt;h2 id=&#34;iterator&#34;&gt;iterator&lt;/h2&gt;
+&lt;p&gt;并不是所有的迭代器都是class type，如原生指针。如果不是class type，就无法为它定义内嵌型别。STL必须接受原生指针作为一种迭代器。
+partial specialization（偏特化），如果class template拥有一个template参数，可以针对其中某个template参数进行特化工作，即可以再泛化设计中提供一个特化版本。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;该泛化版本允许T为任何型别
+template&amp;lt;typename T&amp;gt;
+class C {...};
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;该版本适用于T为原生指针的情况，是上一个形式的进一步条件限制。
+template&amp;lt;typename T&amp;gt;
+class C&amp;lt;T*&amp;gt; {...};
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设计一个class template专门用来萃取迭代器的特性，而value type 正是迭代器的特性之一&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;template &amp;lt;class I&amp;gt;
+struct iterator_traits{
+    typedef typename I::value_type value_type;
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果I定义有自己的value_type，那么通过这个traits的作用，萃取出来的value_type是就是I::value_type
+令iterator_traits拥有一个paritial sepcializations&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;template&amp;lt;class T&amp;gt;
+struct iterator_traits&amp;lt;T*&amp;gt;{
+    typedef T value_type;
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;根据移动特性与施行操作，迭代器被分为五类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;input iterator：这种迭代器所指的对象，不允许外接改变，只读。&lt;/li&gt;
+&lt;li&gt;output iterator：唯写&lt;/li&gt;
+&lt;li&gt;forward iterator：允许写入型算法(如replace())&lt;/li&gt;
+&lt;li&gt;bidirectional iterator：可双向移动。某些算法需要逆向走访某个迭代器区间(例如逆向拷贝某范围内的元素)&lt;/li&gt;
+&lt;li&gt;random access iterator：涵盖所有的指针算术能力
+input iterator、output iterator -&amp;gt; forward iterator -&amp;gt; bidirectional iterator -&amp;gt; random access iterator。箭头代表概念与强化的关系。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最常用的迭代器相应型别有五种：value_type、difference_type、pointer、reference、iterator_catagoly。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;value_type ，是指迭代器所指独享的型别。任何一个打算与STL算法有完美搭配的class，都应该定义自己的value type内嵌型别。&lt;/li&gt;
+&lt;li&gt;difference_type，用来表示两个迭代器之间的距离，因此它可以用来表示一个容器的最大容量，对于一个连续空间的容器而言，头尾之间的距离就是其最大容量。如果一个一个泛型算法提供计数功能，如STL的count()，其返回值就得使用到difference_type。&lt;/li&gt;
+&lt;li&gt;reference_type：
+&lt;ul&gt;
+&lt;li&gt;constant iterators，指不允许改变&amp;quot;所指对象的内容&amp;rdquo;，例如const int *pic;&lt;/li&gt;
+&lt;li&gt;mutable iterators，指允许改变&amp;quot;所指对象的内容&amp;rdquo;，例如int * pi。&lt;/li&gt;
+&lt;li&gt;对mutable iterators进行提领操作时，获得的不应该是一个右值，而是一个左值，因为右值不允许赋值操作，左值允许。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;pointer_type
+&lt;ul&gt;
+&lt;li&gt;如果传递一个左值，令它代表p所指之物是可能的，那么传回一个左值，令它代表p所指之物的地址也可以。也就是说，传回一个pointer，指向迭代器所指之物。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;iterator_category&lt;/li&gt;
+&lt;/ul&gt;
 </description>
       
     </item>
@@ -840,13 +888,13 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;连接建立终止时交换的报文&#34;&gt;连接建立/终止时交换的报文&lt;/h3&gt;
 &lt;p&gt;当一个连接被建立或被终止时，交换的报文段只包含TCP头部，而没有数据。&lt;/p&gt;
-&lt;h3 id=&#34;tcp报文头部&#34;&gt;TCP报文头部&lt;/h3&gt;
+&lt;h3 id=&#34;tcp报文&#34;&gt;TCP报文&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;源端口：占16位，源端口号。&lt;/li&gt;
 &lt;li&gt;目标端口：占16位，目的端口号。&lt;/li&gt;
 &lt;li&gt;序号：seq序号，占32位，用来标识从TCP端向目的端发送的字节流，发送方发送数据时对此进行标记。&lt;/li&gt;
 &lt;li&gt;确认序号：ack序号，占32位，只有ACK标识为1时，确认序号字段才有效，确认方ack = 发送方seq + 1.&lt;/li&gt;
-&lt;li&gt;头部长度：占4位，TCP首部长度。&lt;/li&gt;
+&lt;li&gt;报文首部长度：占4位，TCP首部长度。&lt;/li&gt;
 &lt;li&gt;标志位：共6个，URG、ACK、PSH、RST、SYN、PIN。
 &lt;ul&gt;
 &lt;li&gt;ACK：确认序号有效&lt;/li&gt;
@@ -1007,6 +1055,8 @@ token是服务端产生的。如果前端使用用户名、密码向服务器请
 &lt;li&gt;session这种会话存储方式只适用于客户端代码和服务端代码运行在同一台服务器上，token适用于项目级的前后端分离（前后端代码运行在不同的服务器下）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;servlet&#34;&gt;Servlet&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;ddddddddd&lt;/p&gt;
 </description>
       
     </item>
