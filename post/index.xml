@@ -26,7 +26,7 @@
       <pubDate>Thu, 25 Mar 2021 12:08:09 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/interview/</guid>
-      <description>面试题 const 和 define define 只是一个常数的名字，在编译时编译器会把它替换成常数，仅仅是提升了代码的可读性。 const，是一个不能修改其值的变量，const</description>
+      <description>面试题 编程语言 c和c++的特点与区别 C语言： 1、面向过程的结构化语言，易于调试和维护。 2、表现能力和处理能力极强，可以直接访问内存的物理地址</description>
     </item>
     
     <item>
