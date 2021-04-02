@@ -6,10 +6,30 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 30 Mar 2021 10:05:09 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 02 Apr 2021 17:00:01 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>挫败的人生r</title>
+      <link>https://wangwei9160.github.io/post/loser/</link>
+      <pubDate>Fri, 02 Apr 2021 17:00:01 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/loser/</guid>
+      
+        <description>&lt;h2 id=&#34;面&#34;&gt;面&lt;/h2&gt;
+&lt;h3 id=&#34;第一次面&#34;&gt;第一次面&lt;/h3&gt;
+&lt;p&gt;c++和python的感觉
+右值引用
+二分(匹配最后一个)
+太久没有写面试算法题了，直接发蒙&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;
+边界问题忘记了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.
+自己平时写代码的陋习体现了&amp;hellip;..喜欢盯着代码看&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.
+能在相比其他的专业知识最擅长的地方挂了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;..&lt;/p&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>Stl</title>
@@ -167,7 +187,7 @@ input iterator、output iterator -&amp;gt; forward iterator -&amp;gt; bidirectio
 &lt;p&gt;C语言：
 1、面向过程的结构化语言，易于调试和维护。
 2、表现能力和处理能力极强，可以直接访问内存的物理地址。
-3、实现了对硬件的编程操作，也适合于应用软件开发
+3、实现了对硬件的编程操作，也适合于应用软件开发。
 4、效率高，可移植性强。
 C++：
 1、在C语言的基础上进行了扩充和完善，使C++兼容了C语言的面向过程的特点。
@@ -214,7 +234,7 @@ C++：
 3、节约内存空间。const定义的变量，系统只为它分配一次内存，而使用#define定义的常量宏，能分配好多次，const能节约空间。
 4、类中使用const修饰函数防止修改非static类成员变量。
 5、修饰指针const int * p 、int const * p，const修饰指向的变量，p可变，p指向的对象不可变。int * const p，const修饰指针p，p不可变，p指向的对象可变。const int * const A ， 指针p和指针p指向的对象都不可变。
-const位于 * 的左侧，则const就是用来修饰指针所指向的对象，即指针指向的对象是常量；如果const位于 * 的右侧，const就是修饰指针的本身，则指针本身是常量。
+&lt;strong&gt;const位于 * 的左侧，则const就是用来修饰指针所指向的对象，即指针指向的对象是常量；如果const位于 * 的右侧，const就是修饰指针的本身，则指针本身是常量。&lt;/strong&gt;
 6、修饰函数返回值，防止返回值被改变
 7、修饰类的成员变量，使用const修饰的变量必须初始化，在类中不能再定义时初始化。在类的构造函数上初始化。初始化带static类型的变量，在类的外部初始化。
 8、const定义的对象变量只能只作用于这个程序，不能被程序的其他文件调用。&lt;/p&gt;
@@ -421,8 +441,8 @@ spanbloc：自旋锁与互斥锁有点类似，但不会引起调用者睡眠，
 server模型：
 server如何实现并发处理：
 select：
-select最大支持多少个fd：
-socket有几个缓冲区：
+select最大支持多少个fd：1024
+socket有几个缓冲区：2个readbuf和writebuf
 socket缓冲区如何设置：
 UDP缓冲区满了，数据不会丢，为什么
 TCP缓冲区满了，数据不会丢，为什么&lt;/p&gt;
@@ -872,7 +892,7 @@ DHCP（Dynamic Host Configuration Protocol，动态主机配置协议），动�
 老板在书店有书的时候告诉有书，这是&lt;strong&gt;信号驱动IO&lt;/strong&gt;
 5、异步IO
 老板在书店有书的时候直接寄到家里，这是&lt;strong&gt;异步IO&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;selectpollepoll&#34;&gt;select、poll、epoll&lt;/h2&gt;
+&lt;h2 id=&#34;io复用模型selectpollepoll&#34;&gt;IO复用模型select、poll、epoll&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;select：
 &lt;ul&gt;
@@ -936,8 +956,8 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 &lt;p&gt;消息处理流程：
 1、Reactor对象通过select监控连接事件，收到事件后通过dispatch进行转发。
 2、如果是连接建立的事件，则由acceptor接受连接，并创建handler处理后续事件。
-3、如果不是建立连接事件，则Reactor会分发调用Handle来响应。
-4、Handler会会完成read-&amp;gt;业务处理-&amp;gt;send的完整业务流程。&lt;/p&gt;
+3、如果不是建立连接事件，则Reactor会分发调用Handler来响应。
+4、Handler会完成read-&amp;gt;业务处理-&amp;gt;send的完整业务流程。&lt;/p&gt;
 &lt;p&gt;单Reactor单线程模型可以应用于一些小容量应用场景，但是对于高负载、大并发的应用场景却不合适，主要原因：
 1、即使Reactor线程的CPU负载达到100%，也无法满足海量消息的编码、解码、读取和发送。
 2、当Reactor线程负载过重之后，处理速度将变慢，这会导致大量客户端连接超时，超时之后重发，更加重Reactor线程的负载，最终会导致大量消息挤压和处理超时。
@@ -3351,19 +3371,6 @@ int numOfWays(int n) {
       <guid>https://wangwei9160.github.io/post/min_max/</guid>
       
         <description></description>
-      
-    </item>
-    
-    <item>
-      <title>New_test</title>
-      <link>https://wangwei9160.github.io/post/new_test/</link>
-      <pubDate>Wed, 08 Apr 2020 21:59:56 +0800</pubDate>
-      
-      <guid>https://wangwei9160.github.io/post/new_test/</guid>
-      
-        <description>&lt;p&gt;这里是一篇最新的测试文章！&lt;/p&gt;
-&lt;p&gt;重新测试！&lt;/p&gt;
-</description>
       
     </item>
     

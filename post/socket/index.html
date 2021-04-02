@@ -69,7 +69,7 @@
 <meta itemprop="description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向">
 <meta itemprop="datePublished" content="2021-03-20T10:46:16&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-20T10:46:16&#43;08:00" />
-<meta itemprop="wordCount" content="8704">
+<meta itemprop="wordCount" content="8710">
 
 
 
@@ -326,7 +326,7 @@
           2021-03-20
         </time>
         
-        <span class="more-meta"> 约 8704 字 </span>
+        <span class="more-meta"> 约 8710 字 </span>
           <span class="more-meta"> 预计阅读 18 分钟 </span>
 
         
@@ -352,7 +352,7 @@
     </li>
     <li><a href="#阻塞非阻塞同步异步">阻塞、非阻塞、同步、异步</a></li>
     <li><a href="#io模型">IO模型</a></li>
-    <li><a href="#selectpollepoll">select、poll、epoll</a></li>
+    <li><a href="#io复用模型selectpollepoll">IO复用模型select、poll、epoll</a></li>
     <li><a href="#ltet">LT、ET</a></li>
     <li><a href="#reactor模型">Reactor模型</a>
       <ul>
@@ -440,7 +440,7 @@ DHCP（Dynamic Host Configuration Protocol，动态主机配置协议），动�
 老板在书店有书的时候告诉有书，这是<strong>信号驱动IO</strong>
 5、异步IO
 老板在书店有书的时候直接寄到家里，这是<strong>异步IO</strong></p>
-<h2 id="selectpollepoll">select、poll、epoll</h2>
+<h2 id="io复用模型selectpollepoll">IO复用模型select、poll、epoll</h2>
 <ul>
 <li>select：
 <ul>
@@ -504,8 +504,8 @@ Reactor模型中定义的三种角色：</p>
 <p>消息处理流程：
 1、Reactor对象通过select监控连接事件，收到事件后通过dispatch进行转发。
 2、如果是连接建立的事件，则由acceptor接受连接，并创建handler处理后续事件。
-3、如果不是建立连接事件，则Reactor会分发调用Handle来响应。
-4、Handler会会完成read-&gt;业务处理-&gt;send的完整业务流程。</p>
+3、如果不是建立连接事件，则Reactor会分发调用Handler来响应。
+4、Handler会完成read-&gt;业务处理-&gt;send的完整业务流程。</p>
 <p>单Reactor单线程模型可以应用于一些小容量应用场景，但是对于高负载、大并发的应用场景却不合适，主要原因：
 1、即使Reactor线程的CPU负载达到100%，也无法满足海量消息的编码、解码、读取和发送。
 2、当Reactor线程负载过重之后，处理速度将变慢，这会导致大量客户端连接超时，超时之后重发，更加重Reactor线程的负载，最终会导致大量消息挤压和处理超时。

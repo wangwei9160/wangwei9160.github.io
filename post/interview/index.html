@@ -69,7 +69,7 @@
 <meta itemprop="description" content="面试题 编程语言 c和c&#43;&#43;的特点与区别 C语言： 1、面向过程的结构化语言，易于调试和维护。 2、表现能力和处理能力极强，可以直接访问内存的物理地址">
 <meta itemprop="datePublished" content="2021-03-25T12:08:09&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-25T12:08:09&#43;08:00" />
-<meta itemprop="wordCount" content="12059">
+<meta itemprop="wordCount" content="12082">
 
 
 
@@ -326,7 +326,7 @@
           2021-03-25
         </time>
         
-        <span class="more-meta"> 约 12059 字 </span>
+        <span class="more-meta"> 约 12082 字 </span>
           <span class="more-meta"> 预计阅读 25 分钟 </span>
 
         
@@ -364,7 +364,7 @@
 <p>C语言：
 1、面向过程的结构化语言，易于调试和维护。
 2、表现能力和处理能力极强，可以直接访问内存的物理地址。
-3、实现了对硬件的编程操作，也适合于应用软件开发
+3、实现了对硬件的编程操作，也适合于应用软件开发。
 4、效率高，可移植性强。
 C++：
 1、在C语言的基础上进行了扩充和完善，使C++兼容了C语言的面向过程的特点。
@@ -411,7 +411,7 @@ C++：
 3、节约内存空间。const定义的变量，系统只为它分配一次内存，而使用#define定义的常量宏，能分配好多次，const能节约空间。
 4、类中使用const修饰函数防止修改非static类成员变量。
 5、修饰指针const int * p 、int const * p，const修饰指向的变量，p可变，p指向的对象不可变。int * const p，const修饰指针p，p不可变，p指向的对象可变。const int * const A ， 指针p和指针p指向的对象都不可变。
-const位于 * 的左侧，则const就是用来修饰指针所指向的对象，即指针指向的对象是常量；如果const位于 * 的右侧，const就是修饰指针的本身，则指针本身是常量。
+<strong>const位于 * 的左侧，则const就是用来修饰指针所指向的对象，即指针指向的对象是常量；如果const位于 * 的右侧，const就是修饰指针的本身，则指针本身是常量。</strong>
 6、修饰函数返回值，防止返回值被改变
 7、修饰类的成员变量，使用const修饰的变量必须初始化，在类中不能再定义时初始化。在类的构造函数上初始化。初始化带static类型的变量，在类的外部初始化。
 8、const定义的对象变量只能只作用于这个程序，不能被程序的其他文件调用。</p>
@@ -618,8 +618,8 @@ spanbloc：自旋锁与互斥锁有点类似，但不会引起调用者睡眠，
 server模型：
 server如何实现并发处理：
 select：
-select最大支持多少个fd：
-socket有几个缓冲区：
+select最大支持多少个fd：1024
+socket有几个缓冲区：2个readbuf和writebuf
 socket缓冲区如何设置：
 UDP缓冲区满了，数据不会丢，为什么
 TCP缓冲区满了，数据不会丢，为什么</p>

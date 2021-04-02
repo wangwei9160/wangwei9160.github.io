@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 30 Mar 2021 10:05:09 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 02 Apr 2021 17:00:01 +0800</lastBuildDate>
     
 	<atom:link href="https://wangwei9160.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>挫败的人生r</title>
+      <link>https://wangwei9160.github.io/post/loser/</link>
+      <pubDate>Fri, 02 Apr 2021 17:00:01 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/loser/</guid>
+      <description>面 第一次面 c++和python的感觉 右值引用 二分(匹配最后一个) 太久没有写面试算法题了，直接发蒙&amp;hellip;&amp;hellip;&amp;helli</description>
+    </item>
     
     <item>
       <title>Stl</title>
@@ -180,15 +189,6 @@
       
       <guid>https://wangwei9160.github.io/post/min_max/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>New_test</title>
-      <link>https://wangwei9160.github.io/post/new_test/</link>
-      <pubDate>Wed, 08 Apr 2020 21:59:56 +0800</pubDate>
-      
-      <guid>https://wangwei9160.github.io/post/new_test/</guid>
-      <description>这里是一篇最新的测试文章！ 重新测试！</description>
     </item>
     
   </channel>
