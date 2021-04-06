@@ -25,26 +25,6 @@
     </item>
     
     <item>
-      <title>挫败的人生r</title>
-      <link>https://wangwei9160.github.io/post/loser/</link>
-      <pubDate>Fri, 02 Apr 2021 17:00:01 +0800</pubDate>
-      
-      <guid>https://wangwei9160.github.io/post/loser/</guid>
-      
-        <description>&lt;h2 id=&#34;面&#34;&gt;面&lt;/h2&gt;
-&lt;h3 id=&#34;第一次面&#34;&gt;第一次面&lt;/h3&gt;
-&lt;p&gt;c++和python的感觉
-右值引用
-二分(匹配最后一个)
-太久没有写面试算法题了，直接发蒙&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;
-边界问题忘记了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.
-自己平时写代码的陋习体现了&amp;hellip;..喜欢盯着代码看&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.
-能在相比其他的专业知识最擅长的地方挂了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;..&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
       <title>Stl</title>
       <link>https://wangwei9160.github.io/post/stl/</link>
       <pubDate>Tue, 30 Mar 2021 10:05:09 +0800</pubDate>
@@ -183,6 +163,10 @@ input iterator、output iterator -&amp;gt; forward iterator -&amp;gt; bidirectio
 &lt;/li&gt;
 &lt;li&gt;iterator_category&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;vector&#34;&gt;vector&lt;/h2&gt;
+&lt;p&gt;push_back
+erase
+pop_back&lt;/p&gt;
 </description>
       
     </item>
@@ -1219,8 +1203,6 @@ token是服务端产生的。如果前端使用用户名、密码向服务器请
 &lt;li&gt;session这种会话存储方式只适用于客户端代码和服务端代码运行在同一台服务器上，token适用于项目级的前后端分离（前后端代码运行在不同的服务器下）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;servlet&#34;&gt;Servlet&lt;/h3&gt;
-&lt;hr&gt;
-&lt;p&gt;ddddddddd&lt;/p&gt;
 </description>
       
     </item>
@@ -3045,6 +3027,26 @@ esc iso
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>挫败的人生r</title>
+      <link>https://wangwei9160.github.io/post/loser/</link>
+      <pubDate>Fri, 01 Jan 2021 17:00:00 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/loser/</guid>
+      
+        <description>&lt;h2 id=&#34;面&#34;&gt;面&lt;/h2&gt;
+&lt;h3 id=&#34;第一次面&#34;&gt;第一次面&lt;/h3&gt;
+&lt;p&gt;c++和python的感觉
+右值引用
+二分(匹配最后一个)
+太久没有写面试算法题了，直接发蒙&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;
+边界问题忘记了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.
+自己平时写代码的陋习体现了&amp;hellip;..喜欢盯着代码看&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.
+能在相比其他的专业知识最擅长的地方挂了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;..&lt;/p&gt;
 </description>
       
     </item>
