@@ -69,7 +69,7 @@
 <meta itemprop="description" content="面 第一次面 c&#43;&#43;和python的感觉 右值引用 二分(匹配最后一个) 太久没有写面试算法题了，直接发蒙&hellip;&hellip;&helli">
 <meta itemprop="datePublished" content="2021-01-01T17:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2021-01-01T17:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="1180">
+<meta itemprop="wordCount" content="1321">
 
 
 
@@ -326,7 +326,7 @@
           2021-01-01
         </time>
         
-        <span class="more-meta"> 约 1180 字 </span>
+        <span class="more-meta"> 约 1321 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
 
         
@@ -347,6 +347,7 @@
     <li><a href="#面">面</a>
       <ul>
         <li><a href="#第一次面">第一次面</a></li>
+        <li><a href="#第二次面">第二次面</a></li>
       </ul>
     </li>
     <li><a href="#笔试">笔试</a>
@@ -371,32 +372,55 @@
 边界问题忘记了&hellip;&hellip;&hellip;&hellip;&hellip;.
 自己平时写代码的陋习体现了&hellip;..喜欢盯着代码看&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.
 能在相比其他的专业知识最擅长的地方挂了&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..</p>
+<h3 id="第二次面">第二次面</h3>
+<p>指针数组的运算
+循环次数
+union 和 struct
+虚函数继承
+二维数组 &amp;之后+1再运算的结果
+静态局部变量
+递归
+int (*frontec[10])(int)
+tcp服务器的流程
+c语言的局部变量和全局变量名重复
+linux命令
+编程题</p>
 <h2 id="笔试">笔试</h2>
 <h3 id="海康">海康</h3>
 <p>linux基础
 tcp 状态
 c++ 基础语法
-编写矩阵乘法</p>
+简答：进程通信机制</p>
+<ul>
+<li>管道及有名管道、信号、消息队列、共享内存、信号量、socket</li>
+</ul>
+<p>编写矩阵乘法</p>
 <h3 id="巨人网络">巨人网络</h3>
-<p>选择题：
+<p>选择题：考查知识的广度
 计算机图形学
 c#类型
 进程锁机制
 内存大小
+…………
 编程题1：曼哈顿距离
 编程题2：广搜
 简答题1：智力题
-简答题2：
-选择1：代码问题
-选择2：AI决策树
-选择3：忘记了
-选择4：new和malloc。
-选了选择4没答好&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
-new/delete 是c++关键字，需要编译器支持。malloc/free是库函数，需要头文件支持。(答出来了。)
-new操作返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，new是符合类型安全的操作。malloc内存分配成功返回的是void*，需要使用强制类型转换将void*指针转换成需要的类型。(后半段答错了，想成返回void了，是void *，答的时候就感觉怪怪的&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;)
-new内存分配失败返回的是bad_alloc异常。malloc内存分配失败返回的是null。(没答出来&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;)
-c++允许重载new/delete操作符，new为对象调用构造函数来完成初始工作。而malloc不允许重载。(答错了&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;)
-new操作从自由存储区上为对象动态分配内存，而malloc函数从堆上动态分配内存。自由存储区是c++基于new操作符的一个抽象概念，凡是通过new进行内存申请，该内存就是自由存储区。而堆是操作系统的术语，是操作系统维护的一块特殊内存，用于程序的内存动态分配。(没答出来&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;)</p>
+简答题2：4选1</p>
+<ul>
+<li>选择1：代码问题</li>
+<li>选择2：AI决策树</li>
+<li>选择3：忘记了</li>
+<li>选择4：new和malloc。</li>
+<li>选了选择4没答好&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+<ul>
+<li>new/delete 是c++关键字，需要编译器支持。malloc/free是库函数，需要头文件支持。(答出来了。)</li>
+<li>new操作返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，new是符合类型安全的操作。malloc内存分配成功返回的是void*，需要使用强制类型转换将void*指针转换成需要的类型。(后半段答错了，想成返回void了，是void *，答的时候就感觉怪怪的&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;)</li>
+<li>new内存分配失败返回的是bad_alloc异常。malloc内存分配失败返回的是null。(没答出来&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;)</li>
+<li>c++允许重载new/delete操作符，new为对象调用构造函数来完成初始工作。而malloc不允许重载。(答错了&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;)</li>
+<li>new操作从自由存储区上为对象动态分配内存，而malloc函数从堆上动态分配内存。自由存储区是c++基于new操作符的一个抽象概念，凡是通过new进行内存申请，该内存就是自由存储区。而堆是操作系统的术语，是操作系统维护的一块特殊内存，用于程序的内存动态分配。(没答出来&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;)</li>
+</ul>
+</li>
+</ul>
 
     </div>
 

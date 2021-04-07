@@ -6,20 +6,33 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 03 Apr 2021 22:23:17 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 07 Apr 2021 14:00:00 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>ComputerGraphics</title>
+      <link>https://wangwei9160.github.io/post/computergraphics/</link>
+      <pubDate>Wed, 07 Apr 2021 14:00:00 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/computergraphics/</guid>
+      
+        <description>&lt;h2 id=&#34;计算机图形学cg&#34;&gt;计算机图形学CG&lt;/h2&gt;
+&lt;p&gt;三个基本任务：表示、交汇、绘制
+openGL&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
       <title>数据库</title>
       <link>https://wangwei9160.github.io/post/sql/</link>
-      <pubDate>Sat, 03 Apr 2021 22:23:17 +0800</pubDate>
+      <pubDate>Sat, 03 Apr 2021 20:00:00 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/sql/</guid>
       
         <description>&lt;h2 id=&#34;数据库&#34;&gt;数据库&lt;/h2&gt;
-&lt;hr&gt;
 </description>
       
     </item>
@@ -200,6 +213,8 @@ C++：
 - 强制多态：编译程序通过语义操作，把操作对象的类型强行改变，以符合函数或操作符的要求。例如int+double，就把int强制转换为double，然后执行double+double运算，实现了强制多态。
 动态多态：运行时多态，包含多态的基础是虚函数，主要通过继承和虚函数来实现，当基类和子类拥有同名同参数同返回的方法，切该方法声明为虚函数，当基类对象，指针，引用指向的是派生类的对象的时候，基类对象，指针，引用在调用基类的方法，实际上调用的是派生类方法。
 如果类中有虚方法，则自动在类中增加一个虚函数指针，该指针指向的是一个虚函数表，虚函数表中存在着每个虚函数真正对应的函数地址。动态多态采用一种延迟绑定技术，普通的函数调用，在编译期间就已经确定调用的函数的地址，所以无论如何调用都是对应的函数。如果是拥有虚函数的类，在调用虚函数时，首先去检查虚函数表，然后在确定调用的是哪一个函数，所以调用的函数是运行时绑定。&lt;/p&gt;
+&lt;h4 id=&#34;静态关联动态关联&#34;&gt;静态关联、动态关联&lt;/h4&gt;
+&lt;p&gt;在多态中，如果程序在编译阶段就能确定实际执行动作，就叫静态关联。如果等到程序运行时才能确定叫动态关联。&lt;/p&gt;
 &lt;h4 id=&#34;多重继承和二义性&#34;&gt;多重继承和二义性&lt;/h4&gt;
 &lt;p&gt;单继承：一个派生类的基类只有一个时称之为单继承。
 多重继承：一个派生类的基类有两个或多个，派生类从两个或多个基类中继承所需的属性。
@@ -223,7 +238,7 @@ C++：
 1、被static修饰的变量属于类变量，可以通过&lt;strong&gt;类名.变量名&lt;/strong&gt;直接引用，而不需要new出一个类来
 2、被static修饰的方法属于类方法，可以通过&lt;strong&gt;类名.方法名&lt;/strong&gt;直接引用，而不需要new出一个类来。
 被static修饰的变量和方法统一属于类的静态资源，是类实例之间共享的。静态成员是属于整个类的而不是某个对象，静态成员变量值存储一份供所有对象共用。所以在所有对象中都可以共享它，使用静态成员变量实现了多个对象之间的数据共享不会破坏隐藏的原则，保证了安全性还可以节省内存。&lt;/p&gt;
-&lt;h6 id=&#34;const&#34;&gt;const&lt;/h6&gt;
+&lt;h5 id=&#34;const&#34;&gt;const&lt;/h5&gt;
 &lt;p&gt;const主要是防止定义的对象再次被修改，定义对象变量时要初始化变量。
 基本用法：
 1、用于定义常量变量，这个变量在后面就不可以被再次修改
@@ -252,7 +267,7 @@ const，是一个不能修改其值的变量，const定义的常量在内存中�
 &lt;p&gt;const 关键字在类型或变量名之前是等价的。声明从右往左读。
 char * const s，其中s是一个const指针 指向char类型，不可修改内容。
 const char * s，其中s是一个指针 指向const char类型。
-char const *s，由于没有没有const *的运算，所以const是修饰char的，与const char * s是一样的。&lt;/p&gt;
+**char const &lt;em&gt;s，由于没有const &lt;em&gt;的运算，所以const是修饰char的，与const char * s是一样的。&lt;/em&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;h4 id=&#34;类的静态数据成员&#34;&gt;类的静态数据成员&lt;/h4&gt;
 &lt;p&gt;static关键字来把类的成员定义为静态的。无论有多少个类的对象，静态成员只有一个。静态成员在所有对象中是共享的。如果不存在其他初始化语句，在创建第一个对象时，所有静态数据都会被初始化为0，不能把静态成员的初始化放在类的定义中，可以再类的外面使用（::）来重新声明静态变量从而对它进行初始化。&lt;/p&gt;
 &lt;h4 id=&#34;静态局部变量和局部变量&#34;&gt;静态局部变量和局部变量&lt;/h4&gt;
@@ -274,11 +289,11 @@ char const *s，由于没有没有const *的运算，所以const是修饰char的
 2、空间不同。堆是动态分配的，没有静态分配的。栈有2种分配方式：静态分配和动态分配。静态分配是编译器完成的，比如局部变量的分配。动态分配是由malloc函数进行分配的，栈的动态分配是编译器进行释放的，无需手动进行。&lt;/p&gt;
 &lt;h4 id=&#34;new-和-malloc&#34;&gt;new 和 malloc&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;new/delete 是c++关键字，需要编译器支持。malloc/free是库函数，需要头文件支持。&lt;/li&gt;
-&lt;li&gt;new操作返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，new是符合类型安全的操作。malloc内存分配成功返回的是void*，需要使用强制类型转换将void*指针转换成需要的类型。&lt;/li&gt;
-&lt;li&gt;new内存分配失败返回的是bad_alloc异常。malloc内存分配失败返回的是null。&lt;/li&gt;
-&lt;li&gt;c++允许重载new/delete操作符，new为对象调用构造函数来完成初始工作。而malloc不允许重载。&lt;/li&gt;
-&lt;li&gt;new操作从自由存储区上为对象动态分配内存，而malloc函数从堆上动态分配内存。自由存储区是c++基于new操作符的一个抽象概念，凡是通过new进行内存申请，该内存就是自由存储区。而堆是操作系统的术语，是操作系统维护的一块特殊内存，用于程序的内存动态分配。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;本身上的区别&lt;/strong&gt;：new/delete 是c++关键字，需要编译器支持。malloc/free是库函数，需要头文件支持。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;返回类型的区别&lt;/strong&gt;：new操作返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，new是符合类型安全的操作。malloc内存分配成功返回的是void*，需要使用强制类型转换将void*指针转换成需要的类型。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分配失败的区别&lt;/strong&gt;：new内存分配失败返回的是bad_alloc异常。malloc内存分配失败返回的是null。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可否重载的区别&lt;/strong&gt;：c++允许重载new/delete操作符，new为对象调用构造函数来完成初始工作。而malloc不允许重载。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分配内存的区别&lt;/strong&gt;：new操作从自由存储区上为对象动态分配内存，而malloc函数从堆上动态分配内存。自由存储区是c++基于new操作符的一个抽象概念，凡是通过new进行内存申请，该内存就是自由存储区。而堆是操作系统的术语，是操作系统维护的一块特殊内存，用于程序的内存动态分配。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;malloc的实质&#34;&gt;malloc的实质&lt;/h4&gt;
 &lt;p&gt;malloc函数有一个将可用的内存块连接为一个链表的空闲链表。调用malloc函数的时候，沿着链表寻找一个大小足以满足用户请求所需要的的内存块。然后将内存块一分为二（一块与用户请求的大小相等，另一块就是剩下的字节）。将分配给用户的内存传给用户，剩下的返回到链表上。调用free时，将用户释放的内存块连接到空闲链表上。到最后，空闲链表就会被切成很多小的内存片段。如果请求一个很大的内存片段，空闲链表上没有可以满足的片段，则malloc请求延时，将空闲链进行整理合并。如果依旧无法满足要求，则返回null。malloc内存不一定分配成功。&lt;/p&gt;
@@ -328,14 +343,14 @@ class my_shared_ptr{
 当不太确定是否定义了XX的时候，就可以使用#ifdef XXX #error &amp;ldquo;XXX has been defined&amp;rdquo; #else # endif。来提示宏XXX已经被定义了。&lt;/p&gt;
 &lt;h4 id=&#34;struct-和-class&#34;&gt;struct 和 class&lt;/h4&gt;
 &lt;p&gt;区别：
-1、默认的继承访问权。class默认的是private，struct默认的是public
-2、默认的访问权限。struct作为数据结构的实现体，它默认的数据访问控制是public的，而class作为对象的实现体，它默认的成员变量访问控制是private的。
-3、class还用于定义模板参数，像&amp;rsquo;typename&amp;rsquo;。struct不用于定义模板参数。
-4、class和struct在大括号上的区别：
+1、&lt;strong&gt;默认的继承访问权&lt;/strong&gt;。class默认的是private，struct默认的是public
+2、&lt;strong&gt;默认的访问权限&lt;/strong&gt;。struct作为数据结构的实现体，它默认的数据访问控制是public的，而class作为对象的实现体，它默认的成员变量访问控制是private的。
+3、&lt;strong&gt;是否可用于定义模板参数&lt;/strong&gt;。class还用于定义模板参数，像&amp;rsquo;typename&amp;rsquo;。struct不用于定义模板参数。
+4、&lt;strong&gt;class和struct在大括号上的区别&lt;/strong&gt;：
 - class和struct如果定义了构造函数的话，都不能使用大括号进行初始化
 - 如果没有定义构造函数，struct可以用大括号初始化。
 - 如果没有定义构造函数，且所有成员变量全是public的话，class可以使用大括号初始化。
-struct更适合看成一个数据结构的实现体，class更适合看成是一个对象的实现体。&lt;/p&gt;
+&lt;strong&gt;struct更适合看成一个数据结构的实现体，class更适合看成是一个对象的实现体。&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;派生类-和-虚函数&#34;&gt;派生类 和 虚函数&lt;/h4&gt;
 &lt;p&gt;派生类，必须通过使用类派生列表来明确指出它是从哪个基类继承而来的。类派生列表的形式是一个冒号后面紧跟以逗号隔开的基类列表。
 虚函数，基类将类型相关的函数与派生类不做改变直接继承的函数区分对待。对于一些函数，基类希望它的派生类各自定义适合自身的版本。
@@ -365,14 +380,12 @@ struct更适合看成一个数据结构的实现体，class更适合看成是一
 &lt;p&gt;派生新类的过程一般要经历三个步骤:吸收基类成员、改造基类成员、添加新的成员。&lt;/p&gt;
 &lt;h4 id=&#34;深拷贝和浅拷贝&#34;&gt;深拷贝和浅拷贝&lt;/h4&gt;
 &lt;p&gt;编译器在我们没有定义拷贝构造函数的时候，会在拷贝对象时调用默认拷贝构造函数，进行的是浅拷贝。对指针进行拷贝之后会出现两个指针指向同一个内存空间。在对含有指针成员的对象进行拷贝的时，必须要自己定义拷贝构造函数，使拷贝后的对象指针成员有自己的内存空间，即深拷贝，这样就避免了内存泄漏。浅拷贝只是对指针的拷贝，深拷贝不仅对指针进行拷贝，还对指针指向的对象进行拷贝。浅拷贝带来的问题在于析构时多次释放内存，可以使用shared_ptr解决这个问题。&lt;/p&gt;
-&lt;h4 id=&#34;静态关联动态关联&#34;&gt;静态关联、动态关联&lt;/h4&gt;
-&lt;p&gt;在多态中，如果程序在编译阶段就能确定实际执行动作，就叫静态关联。如果等到程序运行时才能确定叫动态关联。&lt;/p&gt;
 &lt;h4 id=&#34;重载&#34;&gt;重载&lt;/h4&gt;
 &lt;p&gt;重载的作用：在同一个作用域内用同一个函数名命名一组功能相似的函数，减少了函数名的数量，避免了名字空间的污染。
 函数重载是一种静态多态：多态是指用同一个东西表示不同的形态。函数重载是静态多态，即编译时多态。
 编译器在编译.cpp文件中当前使用的作用域里的同名函数时，根据函数形参的类型和顺序会对函数进行重命名。C语言中编译器在编译.c文件时，指挥对函数进行简单的重命名，两个函数名相同的函数在编译之后也照样相同。调用时就不知道到底调用哪一个而出错。&lt;/p&gt;
 &lt;h4 id=&#34;类型转换&#34;&gt;类型转换&lt;/h4&gt;
-&lt;p&gt;1、static_cast：用于非多态类型的静态转换，对应于c中的隐式类型转换，但不能用于两个不想关类型的转换，例如整型和整型指针之间的转换。
+&lt;p&gt;1、static_cast：用于非多态类型的静态转换，对应于c中的隐式类型转换，但不能用于两个不相关类型的转换，例如整型和整型指针之间的转换。
 2、reinterpret_cast：重新解释，可以将一种类型转换成另一种不相关类型，对于c中的强制类型转换，处理无法进行隐式转换的情况。
 3、const_cast：功能是删除变量的const属性，方便再次赋值，该转换在编译时完成，用于解除const、volatile修饰符，只能转换指针或引用。
 4、dynamic_cast：通常在基类和派生类之间转换使用。&lt;/p&gt;
@@ -851,7 +864,7 @@ NTP（Network Time Protocol，网络时间协议），用于网络同步。
 DHCP（Dynamic Host Configuration Protocol，动态主机配置协议），动态配置IP地址。&lt;/p&gt;
 &lt;h5 id=&#34;运行在tcp和udp协议上&#34;&gt;运行在TCP和UDP协议上：&lt;/h5&gt;
 &lt;p&gt;DNS（Domain Name Service，域名服务），用于完成地址查找，邮件转发等工作。&lt;/p&gt;
-&lt;h2 id=&#34;阻塞非阻塞同步异步&#34;&gt;阻塞、非阻塞、同步、异步&lt;/h2&gt;
+&lt;h2 id=&#34;阻塞非阻塞同步异步调用方式&#34;&gt;阻塞、非阻塞、同步、异步（调用方式）&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;阻塞/非阻塞&lt;/strong&gt;关注的是&lt;strong&gt;程序在等待调用结果&lt;/strong&gt;时的状态。阻塞是等待。非阻塞是不需要等待。例如：
 &lt;ul&gt;
@@ -3027,6 +3040,18 @@ esc iso
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;linux常用命令
+（1）查看进程名包含test的进程号 grep top ps
+（2）强行停止该进程 kill
+（3）查看硬盘空间
+（4）查看当前文件夹占用硬盘空间大小
+（5）查看cpu使用情况 grep
+（6）显示用户当前所处的工作目录
+（7）查看ip地址 ipconfig
+（8）查看文本文件1.log有几行 awk
+（9）创建一个名为image的文件夹
+（10）运行某程序时报错80端口已被占用，如何查看此端口被谁占用 grep
+（11）查看当前日期时间&lt;/p&gt;
 </description>
       
     </item>
@@ -3047,32 +3072,55 @@ esc iso
 边界问题忘记了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.
 自己平时写代码的陋习体现了&amp;hellip;..喜欢盯着代码看&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.
 能在相比其他的专业知识最擅长的地方挂了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;..&lt;/p&gt;
+&lt;h3 id=&#34;第二次面&#34;&gt;第二次面&lt;/h3&gt;
+&lt;p&gt;指针数组的运算
+循环次数
+union 和 struct
+虚函数继承
+二维数组 &amp;amp;之后+1再运算的结果
+静态局部变量
+递归
+int (*frontec[10])(int)
+tcp服务器的流程
+c语言的局部变量和全局变量名重复
+linux命令
+编程题&lt;/p&gt;
 &lt;h2 id=&#34;笔试&#34;&gt;笔试&lt;/h2&gt;
 &lt;h3 id=&#34;海康&#34;&gt;海康&lt;/h3&gt;
 &lt;p&gt;linux基础
 tcp 状态
 c++ 基础语法
-编写矩阵乘法&lt;/p&gt;
+简答：进程通信机制&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;管道及有名管道、信号、消息队列、共享内存、信号量、socket&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;编写矩阵乘法&lt;/p&gt;
 &lt;h3 id=&#34;巨人网络&#34;&gt;巨人网络&lt;/h3&gt;
-&lt;p&gt;选择题：
+&lt;p&gt;选择题：考查知识的广度
 计算机图形学
 c#类型
 进程锁机制
 内存大小
+…………
 编程题1：曼哈顿距离
 编程题2：广搜
 简答题1：智力题
-简答题2：
-选择1：代码问题
-选择2：AI决策树
-选择3：忘记了
-选择4：new和malloc。
-选了选择4没答好&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;..
-new/delete 是c++关键字，需要编译器支持。malloc/free是库函数，需要头文件支持。(答出来了。)
-new操作返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，new是符合类型安全的操作。malloc内存分配成功返回的是void*，需要使用强制类型转换将void*指针转换成需要的类型。(后半段答错了，想成返回void了，是void *，答的时候就感觉怪怪的&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;)
-new内存分配失败返回的是bad_alloc异常。malloc内存分配失败返回的是null。(没答出来&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;)
-c++允许重载new/delete操作符，new为对象调用构造函数来完成初始工作。而malloc不允许重载。(答错了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;)
-new操作从自由存储区上为对象动态分配内存，而malloc函数从堆上动态分配内存。自由存储区是c++基于new操作符的一个抽象概念，凡是通过new进行内存申请，该内存就是自由存储区。而堆是操作系统的术语，是操作系统维护的一块特殊内存，用于程序的内存动态分配。(没答出来&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;)&lt;/p&gt;
+简答题2：4选1&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;选择1：代码问题&lt;/li&gt;
+&lt;li&gt;选择2：AI决策树&lt;/li&gt;
+&lt;li&gt;选择3：忘记了&lt;/li&gt;
+&lt;li&gt;选择4：new和malloc。&lt;/li&gt;
+&lt;li&gt;选了选择4没答好&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;..
+&lt;ul&gt;
+&lt;li&gt;new/delete 是c++关键字，需要编译器支持。malloc/free是库函数，需要头文件支持。(答出来了。)&lt;/li&gt;
+&lt;li&gt;new操作返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，new是符合类型安全的操作。malloc内存分配成功返回的是void*，需要使用强制类型转换将void*指针转换成需要的类型。(后半段答错了，想成返回void了，是void *，答的时候就感觉怪怪的&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;)&lt;/li&gt;
+&lt;li&gt;new内存分配失败返回的是bad_alloc异常。malloc内存分配失败返回的是null。(没答出来&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;)&lt;/li&gt;
+&lt;li&gt;c++允许重载new/delete操作符，new为对象调用构造函数来完成初始工作。而malloc不允许重载。(答错了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;)&lt;/li&gt;
+&lt;li&gt;new操作从自由存储区上为对象动态分配内存，而malloc函数从堆上动态分配内存。自由存储区是c++基于new操作符的一个抽象概念，凡是通过new进行内存申请，该内存就是自由存储区。而堆是操作系统的术语，是操作系统维护的一块特殊内存，用于程序的内存动态分配。(没答出来&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
       
     </item>
@@ -3262,144 +3310,6 @@ int main(){
     return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;返回目录&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
-      <title>leetcode第184场周赛</title>
-      <link>https://wangwei9160.github.io/post/leetcode184/</link>
-      <pubDate>Sun, 12 Apr 2020 18:00:00 +0800</pubDate>
-      
-      <guid>https://wangwei9160.github.io/post/leetcode184/</guid>
-      
-        <description>&lt;h1 id=&#34;leetcode第184场周赛&#34;&gt;leetcode第184场周赛&lt;/h1&gt;
-&lt;h3 id=&#34;a-id0目录a&#34;&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;#a-id1%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8Da&#34;&gt;数组中的字符串匹配&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;#a-id2-%E6%9F%A5%E8%AF%A2%E5%B8%A6%E9%94%AE%E7%9A%84%E6%8E%92%E5%88%97a&#34;&gt;查询带键的排列&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;#a-id3-html-%E5%AE%9E%E4%BD%93%E8%A7%A3%E6%9E%90%E5%99%A8a&#34;&gt;HTML 实体解析器&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;#a-id4%E7%BB%99-n-x-3-%E7%BD%91%E6%A0%BC%E5%9B%BE%E6%B6%82%E8%89%B2%E7%9A%84%E6%96%B9%E6%A1%88%E6%95%B0-a&#34;&gt;给 N x 3 网格图涂色的方案数&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;a-id1数组中的字符串匹配a&#34;&gt;&lt;!-- raw HTML omitted --&gt;数组中的字符串匹配&lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/string-matching-in-an-array/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
-&lt;h6 id=&#34;题目&#34;&gt;题目：&lt;/h6&gt;
-&lt;blockquote&gt;
-&lt;p&gt;给你一个字符串数组 words ，数组中的每个字符串都可以看作是一个单词。请你按 任意 顺序返回 words 中是其他单词的子字符串的所有单词。
-如果你可以删除 words[j] 最左侧和/或最右侧的若干字符得到 word[i] ，那么字符串 words[i] 就是 words[j] 的一个子字符串。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&#34;思路&#34;&gt;思路：&lt;/h6&gt;
-&lt;blockquote&gt;
-&lt;p&gt;利用find函数直接暴力匹配&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&#34;代码&#34;&gt;代码：&lt;/h6&gt;
-&lt;pre&gt;&lt;code&gt;vector&amp;lt;string&amp;gt; stringMatching(vector&amp;lt;string&amp;gt;&amp;amp; words) {
-    vector&amp;lt;string&amp;gt; ans;
-    for(auto x : words){
-        for(auto y : words){
-            if(x == y) continue;
-            if(y.find(x) != -1 ){ans.push_back(x);break;}
-        }
-    }
-    return ans;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;a-id2-查询带键的排列a&#34;&gt;&lt;!-- raw HTML omitted --&gt; 查询带键的排列&lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/queries-on-a-permutation-with-key/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
-&lt;h6 id=&#34;题目-1&#34;&gt;题目：&lt;/h6&gt;
-&lt;blockquote&gt;
-&lt;p&gt;给你一个待查数组 queries ，数组中的元素为 1 到 m 之间的正整数。 请你根据以下规则处理所有待查项 queries[i]（从 i=0 到 i=queries.length-1）：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一开始，排列 P=[1,2,3,&amp;hellip;,m]。&lt;/li&gt;
-&lt;li&gt;对于当前的 i ，请你找出待查项 queries[i] 在排列 P 中的位置（下标从 0 开始），然后将其从原位置移动到排列 P 的起始位置（即下标为 0 处）。注意， queries[i] 在 P 中的位置就是queries[i] 的查询结果。
-请你以数组形式返回待查数组  queries 的查询结果。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&#34;思路-1&#34;&gt;思路：&lt;/h6&gt;
-&lt;blockquote&gt;
-&lt;p&gt;模拟一遍就好了&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&#34;代码-1&#34;&gt;代码：&lt;/h6&gt;
-&lt;pre&gt;&lt;code&gt;vector&amp;lt;int&amp;gt; processQueries(vector&amp;lt;int&amp;gt;&amp;amp; queries, int m) {
-    int mp[1002];
-    for(int i = 0 ; i &amp;lt; m ; i++){
-        mp[i] = i+1;
-    }
-    vector&amp;lt;int&amp;gt; ans;
-    for(auto x : queries){
-        if(mp[0] == x) {ans.push_back(0);continue;}
-        int j = m-1;
-        while( j &amp;gt; 0 &amp;amp;&amp;amp; mp[j] != x) {j--;}
-        ans.push_back(j);
-        for(int k = j ; k &amp;gt; 0 ; k--){
-            mp[k] = mp[k-1];
-        }
-        mp[0] = x;
-        
-    }
-    return ans;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;a-id3-html-实体解析器a&#34;&gt;&lt;!-- raw HTML omitted --&gt; HTML 实体解析器&lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/html-entity-parser/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
-&lt;h6 id=&#34;题目-2&#34;&gt;题目：&lt;/h6&gt;
-&lt;blockquote&gt;
-&lt;p&gt;「HTML 实体解析器」 是一种特殊的解析器，它将 HTML 代码作为输入，并用字符本身替换掉所有这些特殊的字符实体。
-HTML 里这些特殊字符和它们对应的字符实体包括：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;双引号：字符实体为 &amp;quot; ，对应的字符是 &amp;quot; 。&lt;/li&gt;
-&lt;li&gt;单引号：字符实体为 &#39; ，对应的字符是 &#39; 。&lt;/li&gt;
-&lt;li&gt;与符号：字符实体为 &amp;amp; ，对应对的字符是 &amp;amp; 。&lt;/li&gt;
-&lt;li&gt;大于号：字符实体为 &amp;gt; ，对应的字符是 &amp;gt; 。&lt;/li&gt;
-&lt;li&gt;小于号：字符实体为 &amp;lt; ，对应的字符是 &amp;lt; 。&lt;/li&gt;
-&lt;li&gt;斜线号：字符实体为 ⁄ ，对应的字符是 / 。
-给你输入字符串 text ，请你实现一个 HTML 实体解析器，返回解析器解析后的结果。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&#34;思路-2&#34;&gt;思路：&lt;/h6&gt;
-&lt;blockquote&gt;
-&lt;p&gt;利用replace函数&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&#34;代码-2&#34;&gt;代码：&lt;/h6&gt;
-&lt;pre&gt;&lt;code&gt;def entityParser(self, text: str) -&amp;gt; str:
-    text = text.replace(&#39;&amp;amp;quot;&#39;,&#39;&amp;quot;&#39;)
-    text = text.replace(&#39;&amp;amp;apos;&#39;,&#39;\&#39;&#39;)
-    text = text.replace(&#39;&amp;amp;amp;&#39;,&#39;&amp;amp;&#39;)
-    text = text.replace(&#39;&amp;amp;gt;&#39;,&#39;&amp;gt;&#39;)
-    text = text.replace(&#39;&amp;amp;lt;&#39;,&#39;&amp;lt;&#39;)
-    text = text.replace(&#39;&amp;amp;frasl;&#39;,&#39;/&#39;)
-    return text
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;a-id4给-n-x-3-网格图涂色的方案数-a&#34;&gt;&lt;!-- raw HTML omitted --&gt;给 N x 3 网格图涂色的方案数 &lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/number-of-ways-to-paint-n-3-grid/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
-&lt;h6 id=&#34;题目-3&#34;&gt;题目：&lt;/h6&gt;
-&lt;blockquote&gt;
-&lt;p&gt;你有一个 n x 3 的网格图 grid ，你需要用 红，黄，绿 三种颜色之一给每一个格子上色，且确保相邻格子颜色不同（也就是有相同水平边或者垂直边的格子颜色不同）。
-给你网格图的行数 n 。
-请你返回给 grid 涂色的方案数。由于答案可能会非常大，请你返回答案对 10^9 + 7 取余的结果。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&#34;思路-3&#34;&gt;思路：&lt;/h6&gt;
-&lt;blockquote&gt;
-&lt;p&gt;初始化第一行的所有状态
-接下来计算每一行的所有状态的出现的次数
-条件（相同水平边或者垂直边的格子颜色不同）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h6 id=&#34;代码-3&#34;&gt;代码:&lt;/h6&gt;
-&lt;pre&gt;&lt;code&gt;long long dp[5002][3][3][3];
-const int mod = 1e9+7;
-int numOfWays(int n) {
-    for(int i=0;i&amp;lt;3;i++)for(int j=0;j&amp;lt;3;j++)for(int k=0;k&amp;lt;3;k++)if(i!=j&amp;amp;&amp;amp;j!=k) dp[1][i][j][k]=1;
-    for(int p=2;p&amp;lt;=n;p++){
-        for(int i=0;i&amp;lt;3;i++)
-            for(int j=0;j&amp;lt;3;j++)
-                for(int k=0;k&amp;lt;3;k++)
-                    for(int ii=0;ii&amp;lt;3;ii++)
-                        for(int jj=0;jj&amp;lt;3;jj++)
-                            for(int kk=0;kk&amp;lt;3;kk++)
-                                if(i!=j&amp;amp;&amp;amp;j!=k&amp;amp;&amp;amp;ii!=i&amp;amp;&amp;amp;jj!=j&amp;amp;&amp;amp;kk!=k) 
-                                    (dp[p][i][j][k] += dp[p-1][ii][jj][kk]) %= mod;
-    }
-    long long ans =0;
-    for(int i=0;i&amp;lt;3;i++)for(int j=0;j&amp;lt;3;j++)for(int k=0;k&amp;lt;3;k++)if(i!=j&amp;amp;&amp;amp;j!=k) ans+=dp[n][i][j][k];
-    ans%=mod;
-    return ans;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;a href=&#34;#a-id0%E7%9B%AE%E5%BD%95a&#34;&gt;回到目录&lt;/a&gt;&lt;/p&gt;
 </description>
       
     </item>

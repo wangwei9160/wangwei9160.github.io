@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Linux - Awei</title>
+  <title>ComputerGraphics - Awei</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程 makefile .c文件到.exe文件 hello.c &amp;ndash;&amp;gt; 预处理 -E &amp;ndash;&amp;gt; hello.i &amp;ndash;&amp;gt; 编" />
+  <meta name="description" content="计算机图形学CG 三个基本任务：表示、交汇、绘制 openGL" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -35,7 +35,7 @@
 <meta name="generator" content="Hugo 0.68.3" />
 
 
-<link rel="canonical" href="https://wangwei9160.github.io/post/linux/" />
+<link rel="canonical" href="https://wangwei9160.github.io/post/computergraphics/" />
 
 
 
@@ -59,23 +59,23 @@
 
 
 
-<meta property="og:title" content="Linux" />
-<meta property="og:description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程 makefile .c文件到.exe文件 hello.c &ndash;&gt; 预处理 -E &ndash;&gt; hello.i &ndash;&gt; 编" />
+<meta property="og:title" content="ComputerGraphics" />
+<meta property="og:description" content="计算机图形学CG 三个基本任务：表示、交汇、绘制 openGL" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://wangwei9160.github.io/post/linux/" />
-<meta property="article:published_time" content="2021-01-20T00:20:24+08:00" />
-<meta property="article:modified_time" content="2021-01-20T00:20:24+08:00" />
-<meta itemprop="name" content="Linux">
-<meta itemprop="description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程 makefile .c文件到.exe文件 hello.c &ndash;&gt; 预处理 -E &ndash;&gt; hello.i &ndash;&gt; 编">
-<meta itemprop="datePublished" content="2021-01-20T00:20:24&#43;08:00" />
-<meta itemprop="dateModified" content="2021-01-20T00:20:24&#43;08:00" />
-<meta itemprop="wordCount" content="943">
+<meta property="og:url" content="https://wangwei9160.github.io/post/computergraphics/" />
+<meta property="article:published_time" content="2021-04-07T14:00:00+08:00" />
+<meta property="article:modified_time" content="2021-04-07T14:00:00+08:00" />
+<meta itemprop="name" content="ComputerGraphics">
+<meta itemprop="description" content="计算机图形学CG 三个基本任务：表示、交汇、绘制 openGL">
+<meta itemprop="datePublished" content="2021-04-07T14:00:00&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-07T14:00:00&#43;08:00" />
+<meta itemprop="wordCount" content="24">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Linux"/>
-<meta name="twitter:description" content="Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程 makefile .c文件到.exe文件 hello.c &ndash;&gt; 预处理 -E &ndash;&gt; hello.i &ndash;&gt; 编"/>
+<meta name="twitter:title" content="ComputerGraphics"/>
+<meta name="twitter:description" content="计算机图形学CG 三个基本任务：表示、交汇、绘制 openGL"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -319,15 +319,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">Linux</h1>
+      <h1 class="post-title">ComputerGraphics</h1>
       
       <div class="post-meta">
-        <time datetime="2021-01-20" class="post-time">
-          2021-01-20
+        <time datetime="2021-04-07" class="post-time">
+          2021-04-07
         </time>
         
-        <span class="more-meta"> 约 943 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 24 字 </span>
+          <span class="more-meta"> 预计阅读 1 分钟 </span>
 
         
         
@@ -344,12 +344,7 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li>
-      <ul>
-        <li></li>
-        <li><a href="#makefile">makefile</a></li>
-      </ul>
-    </li>
+    <li><a href="#计算机图形学cg">计算机图形学CG</a></li>
   </ul>
 </nav>
   </div>
@@ -357,86 +352,9 @@
 
     
     <div class="post-content">
-      <h4 id="linux-下查看进程内的线程情况">Linux 下查看进程内的线程情况</h4>
-<ul>
-<li>方法一：ps命令
-<blockquote>
-<p>ps -ef | grep 进程关键字
-ps -T -p 线程</p>
-</blockquote>
-</li>
-<li>方法二：top命令
-<blockquote>
-<p>top -H -p 线程</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="makefile">makefile</h3>
-<h5 id="c文件到exe文件">.c文件到.exe文件</h5>
-<p>hello.c &ndash;&gt; 预处理 -E &ndash;&gt; hello.i &ndash;&gt; 编译 -S &ndash;&gt; hello.s &ndash;&gt; 汇编 -c &ndash;&gt; hello.o &ndash;&gt; 链接 -o &ndash;&gt; hello
-预处理 gcc -E hello.c -o helle.i
-编 译    gcc -S hello.i -o hello.s
-汇 编    gcc -c hello.s -o hello.o
-链 接    gcc hello.o -o hello
-esc iso
-预处理：预处理相当于根据预处理命令组装成新的C程序，不过常以i为扩展名。
-编 译：将得到的i文件翻译成汇编代码.s文件。
-汇 编：将汇编文件翻译成机器指令，并打包成可重定位目标程序的o文件。该文件是二进制文件，字节编码是机器指令。
-链 接：将引用的其他o文件并入到我们程序所在的o文件中，处理得到最终的可执行文件。</p>
-<h4 id="makefile-结构">makefile 结构</h4>
-<p>Makefile主要包含了五个东西：变量定义、显式规则、隐晦规则、文件指示和注释</p>
-<ul>
-<li>变量的定义。在Makefile中我们要定义一系列的变量，变量一般是字符串。</li>
-<li>显式规则。显式规则说明了如何生成一个或者多个目标文件。显式地指出要生成的文件，文件的依赖文件，生成的命令。</li>
-<li>隐晦规则。由make自动推动的功能，隐晦的规则可以让我们比较粗糙的简略地书写Makefile，由make支持。</li>
-<li>文件指示：一个Makefile中引用另一个Makefile。</li>
-<li>注释。Makefile只有行注释，用&rdquo; # &ldquo;字符来表示注释。</li>
-</ul>
-<h5 id="预定义变量">预定义变量</h5>
-<ul>
-<li>$* 　　不包含扩展名的目标文件名称。</li>
-<li>$+ 　　所有的依赖文件，以空格分开，并以出现的先后为序，可能包含重复的依赖文件。</li>
-<li>$&lt; 　　第一个依赖文件的名称。</li>
-<li>$? 　　所有的依赖文件，以空格分开，这些依赖文件的修改日期比目标的创建日期晚。</li>
-<li>$@ 　 目标的完整名称。</li>
-<li>$^ 　　所有的依赖文件，以空格分开，不包含重复的依赖文件。</li>
-<li>$% 如果目标是归档成员，则该变量表示目标的归档成员名称。</li>
-</ul>
-<h4 id="注意事项">注意事项</h4>
-<ul>
-<li>
-<ol>
-<li>tab分隔，不能用空格。</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>每个makefile最好加一个all</li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li>注释用“#”符号</li>
-</ol>
-</li>
-<li>
-<ol start="4">
-<li>文件指示，引用其他的makefile文件</li>
-</ol>
-</li>
-</ul>
-<p>linux常用命令
-（1）查看进程名包含test的进程号 grep top ps
-（2）强行停止该进程 kill
-（3）查看硬盘空间
-（4）查看当前文件夹占用硬盘空间大小
-（5）查看cpu使用情况 grep
-（6）显示用户当前所处的工作目录
-（7）查看ip地址 ipconfig
-（8）查看文本文件1.log有几行 awk
-（9）创建一个名为image的文件夹
-（10）运行某程序时报错80端口已被占用，如何查看此端口被谁占用 grep
-（11）查看当前日期时间</p>
+      <h2 id="计算机图形学cg">计算机图形学CG</h2>
+<p>三个基本任务：表示、交汇、绘制
+openGL</p>
 
     </div>
 
@@ -450,7 +368,7 @@ esc iso
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2021-01-20
+      2021-04-07
       
     </span>
   </p>
@@ -471,22 +389,9 @@ esc iso
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/cplusplus/">
-            
-            <i class="iconfont">
-              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
-</svg>
-
-            </i>
-            <span class="prev-text nav-default">C&#43;&#43;</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
         
-          <a class="next" href="/post/loser/">
-            <span class="next-text nav-default">挫败的人生r</span>
+          <a class="next" href="/post/sql/">
+            <span class="next-text nav-default">数据库</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
