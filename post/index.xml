@@ -26,7 +26,7 @@
       <pubDate>Sat, 03 Apr 2021 20:00:00 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/sql/</guid>
-      <description>数据库</description>
+      <description>数据库 杂谈 create procedure：创建存储过程 exec procedure：执行存储过程 alter procedure：修改存储过程 drop procedure：从数据</description>
     </item>
     
     <item>
@@ -170,7 +170,7 @@
       <pubDate>Wed, 20 Jan 2021 00:20:24 +0800</pubDate>
       
       <guid>https://wangwei9160.github.io/post/linux/</guid>
-      <description>Linux 下查看进程内的线程情况 方法一：ps命令 ps -ef | grep 进程关键字 ps -T -p 线程 方法二：top命令 top -H -p 线程 makefile .c文件到.exe文件 hello.c &amp;ndash;&amp;gt; 预处理 -E &amp;ndash;&amp;gt; hello.i &amp;ndash;&amp;gt; 编</description>
+      <description>Linux 杂谈 Linux文件系统的文件都按其作用分门别类地放在相关的目录中，对于外部设备文件，一般应将其放在**/dev**目录中 ls ：用来显示当前目</description>
     </item>
     
     <item>

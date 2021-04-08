@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="数据库" />
+  <meta name="description" content="数据库 杂谈 create procedure：创建存储过程 exec procedure：执行存储过程 alter procedure：修改存储过程 drop procedure：从数据" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,22 +60,22 @@
 
 
 <meta property="og:title" content="数据库" />
-<meta property="og:description" content="数据库" />
+<meta property="og:description" content="数据库 杂谈 create procedure：创建存储过程 exec procedure：执行存储过程 alter procedure：修改存储过程 drop procedure：从数据" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://wangwei9160.github.io/post/sql/" />
 <meta property="article:published_time" content="2021-04-03T20:00:00+08:00" />
 <meta property="article:modified_time" content="2021-04-03T20:00:00+08:00" />
 <meta itemprop="name" content="数据库">
-<meta itemprop="description" content="数据库">
+<meta itemprop="description" content="数据库 杂谈 create procedure：创建存储过程 exec procedure：执行存储过程 alter procedure：修改存储过程 drop procedure：从数据">
 <meta itemprop="datePublished" content="2021-04-03T20:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2021-04-03T20:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="3">
+<meta itemprop="wordCount" content="450">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="数据库"/>
-<meta name="twitter:description" content="数据库"/>
+<meta name="twitter:description" content="数据库 杂谈 create procedure：创建存储过程 exec procedure：执行存储过程 alter procedure：修改存储过程 drop procedure：从数据"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -326,7 +326,7 @@
           2021-04-03
         </time>
         
-        <span class="more-meta"> 约 3 字 </span>
+        <span class="more-meta"> 约 450 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
 
         
@@ -344,7 +344,11 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#数据库">数据库</a></li>
+    <li><a href="#数据库">数据库</a>
+      <ul>
+        <li><a href="#杂谈">杂谈</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -353,6 +357,41 @@
     
     <div class="post-content">
       <h2 id="数据库">数据库</h2>
+<h3 id="杂谈">杂谈</h3>
+<ul>
+<li><strong>create procedure</strong>：创建存储过程</li>
+<li><strong>exec procedure</strong>：执行存储过程</li>
+<li><strong>alter procedure</strong>：修改存储过程</li>
+<li><strong>drop procedure</strong>：从数据库中删除过程。</li>
+<li>建立索引的语句中的关键字：
+<ul>
+<li><strong>unique</strong>：唯一约束，保证某列的每行必须有唯一的值</li>
+<li><strong>primary</strong>：主键约束，NOT NULL 和 UNIQUE 的结合。确保某列（或两个列多个列的结合）有唯一标识，有助于更容易更快速地找到表中的一个特定的记录。</li>
+<li><strong>foreign</strong>：外键约束，保证一个表中的数据匹配另一个表中的值的参照完整性</li>
+<li><strong>not null</strong>：非空约束，指示某列不能存储 NULL 值</li>
+<li><strong>default</strong>：默认，规定没有给列赋值时的默认值</li>
+<li><strong>check</strong>：保证列中的值符合指定的条件</li>
+</ul>
+</li>
+<li>三级模式结构：
+<ul>
+<li>模式（逻辑模式或概念模式）。</li>
+<li>外模式（用户模式）。</li>
+<li>内模式（物理模式或存储模式）。</li>
+</ul>
+</li>
+<li>Access窗体的视图：
+<ul>
+<li>窗体视图</li>
+<li>数据表视图</li>
+<li>设计视图</li>
+<li>数据透视表视图</li>
+<li>数据透视图视图</li>
+</ul>
+</li>
+<li><strong>PCTFREE</strong>：为一个块保留的空间百分比，表示数据块在什么情况下可以被insert。</li>
+<li><strong>PCTUSED</strong>：是指当块里的数据低于多少百分比时，又可以重新被insert。</li>
+</ul>
 
     </div>
 
