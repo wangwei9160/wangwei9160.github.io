@@ -3153,17 +3153,22 @@ data&lt;/p&gt;
 能在相比其他的专业知识最擅长的地方挂了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;..&lt;/p&gt;
 &lt;h3 id=&#34;第二次面&#34;&gt;第二次面&lt;/h3&gt;
 &lt;p&gt;指针数组的运算
-循环次数
-union 和 struct
-虚函数继承
-二维数组 &amp;amp;之后+1再运算的结果
-静态局部变量
+循环次数，&amp;amp;&amp;amp;运算
+union 和 struct 的内存大小
+继承、虚继承
+指针运算&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  int a[2][5] = {{2,3,4,5,6}, {7,8,9,10,11}};
+  int *ptr = (int *)(&amp;amp;a + 1);
+  cout &amp;lt;&amp;lt; *(ptr - 3) &amp;lt;&amp;lt; endl;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;静态局部变量
 递归
-int (*frontec[10])(int)
-tcp服务器的流程
-c语言的局部变量和全局变量名重复
+函数指针：int (*frontec[10])(int)
+创建一个tcp服务器的流程
+c语言的局部变量和全局变量名是否可以重复
 linux命令
-编程题&lt;/p&gt;
+编程题1：双指针找到乘积等于目标值
+编程题2：动态规划爬楼梯
+sql命令 查找&lt;/p&gt;
 &lt;h2 id=&#34;笔试&#34;&gt;笔试&lt;/h2&gt;
 &lt;h3 id=&#34;海康&#34;&gt;海康&lt;/h3&gt;
 &lt;p&gt;linux基础

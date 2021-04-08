@@ -69,7 +69,7 @@
 <meta itemprop="description" content="面 第一次面 c&#43;&#43;和python的感觉 右值引用 二分(匹配最后一个) 太久没有写面试算法题了，直接发蒙&hellip;&hellip;&helli">
 <meta itemprop="datePublished" content="2021-01-01T17:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2021-01-01T17:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="1321">
+<meta itemprop="wordCount" content="1392">
 
 
 
@@ -326,7 +326,7 @@
           2021-01-01
         </time>
         
-        <span class="more-meta"> 约 1321 字 </span>
+        <span class="more-meta"> 约 1392 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
 
         
@@ -374,17 +374,22 @@
 能在相比其他的专业知识最擅长的地方挂了&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..</p>
 <h3 id="第二次面">第二次面</h3>
 <p>指针数组的运算
-循环次数
-union 和 struct
-虚函数继承
-二维数组 &amp;之后+1再运算的结果
-静态局部变量
+循环次数，&amp;&amp;运算
+union 和 struct 的内存大小
+继承、虚继承
+指针运算</p>
+<pre><code>  int a[2][5] = {{2,3,4,5,6}, {7,8,9,10,11}};
+  int *ptr = (int *)(&amp;a + 1);
+  cout &lt;&lt; *(ptr - 3) &lt;&lt; endl;
+</code></pre><p>静态局部变量
 递归
-int (*frontec[10])(int)
-tcp服务器的流程
-c语言的局部变量和全局变量名重复
+函数指针：int (*frontec[10])(int)
+创建一个tcp服务器的流程
+c语言的局部变量和全局变量名是否可以重复
 linux命令
-编程题</p>
+编程题1：双指针找到乘积等于目标值
+编程题2：动态规划爬楼梯
+sql命令 查找</p>
 <h2 id="笔试">笔试</h2>
 <h3 id="海康">海康</h3>
 <p>linux基础
