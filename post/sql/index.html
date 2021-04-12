@@ -69,7 +69,7 @@
 <meta itemprop="description" content="数据库 杂谈 create procedure：创建存储过程 exec procedure：执行存储过程 alter procedure：修改存储过程 drop procedure：从数据">
 <meta itemprop="datePublished" content="2021-04-03T20:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2021-04-03T20:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="450">
+<meta itemprop="wordCount" content="619">
 
 
 
@@ -326,8 +326,8 @@
           2021-04-03
         </time>
         
-        <span class="more-meta"> 约 450 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+        <span class="more-meta"> 约 619 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
 
         
         
@@ -391,6 +391,21 @@
 </li>
 <li><strong>PCTFREE</strong>：为一个块保留的空间百分比，表示数据块在什么情况下可以被insert。</li>
 <li><strong>PCTUSED</strong>：是指当块里的数据低于多少百分比时，又可以重新被insert。</li>
+</ul>
+<h4 id="关系型数据库和非关系型数据库">关系型数据库和非关系型数据库</h4>
+<ul>
+<li>关系型数据库：
+<ul>
+<li>优点：易于维护，使用方便，直接用sql语句进行查询，支持复杂的多表连接查询</li>
+<li>缺点：读写性能差，面对海量数据的高效率读写性能差。固定的表结构，灵活性差；高并发读写需求会面临硬盘I/O的瓶颈</li>
+</ul>
+</li>
+<li>非关系型数据库：
+<ul>
+<li>优点：格式灵活。速度快。扩展性好。容易部署。</li>
+<li>缺点：  不支持事务，不支持sql，不利于对复杂的查询。</li>
+</ul>
+</li>
 </ul>
 
     </div>
