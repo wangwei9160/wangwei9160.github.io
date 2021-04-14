@@ -902,6 +902,149 @@ obj.operator++(); //调用前置版本的opeator++&lt;/p&gt;
       <guid>https://wangwei9160.github.io/post/socket/</guid>
       
         <description>&lt;h1 id=&#34;网络编程&#34;&gt;网络编程&lt;/h1&gt;
+&lt;h2 id=&#34;基本tcp-socket编程&#34;&gt;基本TCP socket编程&lt;/h2&gt;
+&lt;h3 id=&#34;socket函数&#34;&gt;socket函数&lt;/h3&gt;
+&lt;p&gt;为了执行网络I/O，一个进程必须做的第一件事情就是调用socket函数，指定期望的通信协议类型（IPv4的TCP、IPv6的UDP、Unix域字节流协议等）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/socket.h&amp;gt;
+int socket(int family , int type , int protocol );
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回的设定：弱成功则为非负描述符，若出错则返回-1.&lt;/p&gt;
+&lt;p&gt;其中family参数指明协议族，该参数也往往被称为协议域。type参数指明套接字类型。protocol参数为协议类型常值，或设为0，以选择所给定family和type组合的系统默认值。
+|family|说明|
+|:-:|:-:|
+|AF_INET|IPv4协议|
+|AF_INET6|IPv6协议|
+|AF_LOCAL|Unix域协议|
+|AF_ROUTE|路由套接字|
+|AF_KEY|密钥套接字|&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;type&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;SOCK_STREAM&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;字节流套接字&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;SOCK_DGRAM&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;数据报套接字&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;SOCK_SEQPACKET&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;有序分组套接字&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;SOCK_RAW&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;原始套接字&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;protocol&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;IPPROTO_CP&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;TCP传输协议&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;IPPROTO_UDP&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;UDP传输协议&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;IPPROTO_SCTP&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;SCTP传输协议&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;connet-函数&#34;&gt;connet 函数&lt;/h3&gt;
+&lt;p&gt;TCP客户用connet函数来建立与TCP服务器的连接。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/socket.h&amp;gt;
+int connet(int sockfd , const struct sockaddr *servaddr , socklen_t addrlen);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回的设定：若成功则为0，若出错则为-1。&lt;br&gt;
+sockfd是由socket函数返回的套接字描述符，第二个、第三个参数分别是一个指向套接字地址结构的指针和该结构的大小。套接字地址结构必须包含服务器的IP地址和端口号。&lt;/p&gt;
+&lt;h4 id=&#34;tcp套接字调用connet函数&#34;&gt;TCP套接字调用connet函数&lt;/h4&gt;
+&lt;p&gt;TCP套接字调用connet函数将会激发TCP的三次握手，而且仅在连接建立成功或出错时才返回，其中出错返回可能包含一下几种情况。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若TCP客户没有收到SYN分节的响应，则返回ETIMEDOUT错误。例，调用connet函数时，内核发送一个SYN，若无反应则等待6s后再发送一个，若仍无反应则等待24s后再发送一个。若总共75s后仍未收到响应则返回ETIMEODOUT错误。&lt;/li&gt;
+&lt;li&gt;若对客户的SYN响应是RST，则表明服务器主机在指定的端口上没有进程在等待与之连接（服务器进程也许没有在运行）。这是一种硬错误（hard error），客户一接收到RST就马上返回ECONNREFUSED错误。&lt;/li&gt;
+&lt;li&gt;若客户发出的SYN在中间的某个路由器上引发了&amp;quot;目的地不可达&amp;quot;的ICMP错误，则认为是一种软错误（softy error）。客户主机内核保存该消息，并按第一种情况中所述的时间间隔继续发送SYN。若在某个规定的时间内（4.4BSD规定是75s）后仍未收到响应，则把保存的消息（ICMP错误）作为EHOSTUNREACH或ENETUNREACH错误返回给进程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;rst&#34;&gt;RST&lt;/h6&gt;
+&lt;p&gt;RST是TCP在发送错误时发送的一种TCP分节。产生RST的三个条件是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目的地为某端口的SYN到达，然而该端口上没有正在监听的服务器。&lt;/li&gt;
+&lt;li&gt;TCP想取消一个已有连接。&lt;/li&gt;
+&lt;li&gt;TCP接收到一个根本不存在的连接上的分节。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bind-函数&#34;&gt;bind 函数&lt;/h3&gt;
+&lt;p&gt;bind函数把一个本地协议地址赋予一个套接字。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/socket.h&amp;gt;
+int bind(int sockfd , const struct sockaddr *myaddr , socklen_t addrlen);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回的设定：若成功则为0，若出错则为-1.
+第二个参数是一个指向特定于协议的地址结构的指针，第三个参数是该地址结构的长度。对于TCP，调用bind函数可以指定一个端口号，或指定一个IP地址，也可以两者都指定，还可以都不指定。&lt;/p&gt;
+&lt;h3 id=&#34;listen-函数&#34;&gt;listen 函数&lt;/h3&gt;
+&lt;p&gt;listen函数仅由TCP服务器调用，它完成两件事情。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当socket函数创建一个套接字时，它被假设为一个主动套接字，也就是说，它是一个将调用connet发起连接的客户套接字。listen函数把一个未连接的套接字转换成一个被动套接字，指示内核应接受指向该套接字的连接请求。调用listen导致套接字从CLOSED状态转换到LISTEN状态。&lt;/li&gt;
+&lt;li&gt;内核应该为响应套接字排队的最大连接个数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/socket.h&amp;gt;
+int listen(int sockfd , int backlog);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回的设定：若成功则为0，若出错则为-1.&lt;/p&gt;
+&lt;p&gt;listen函数应该在调用socket和bind这两个函数之后，并在调用accept函数之前调用。
+内核为任何一个给定的监听套接字维护两个队列：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;未完成连接队列(incomplete connection queue)，每个这样的SYN分节对应其中一项：已由某个客户发出并到达服务器，而服务器正在等待完成响应的TCP三次握手过程。这些套接字处于SYN_RCVD状态。&lt;/li&gt;
+&lt;li&gt;已完成连接队列(completed connection queue)，每个已完成TCP三次握手过程的客户对应其中一项。这些套接字处于ESTABLISHED状态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;accept函数&#34;&gt;accept函数&lt;/h3&gt;
+&lt;p&gt;accept函数由TCP服务器调用，用于从已完成连接队列对头返回下一个已完成连接。如果已完成连接队列为空，那么进程被投入睡眠（假定套接字为默认的阻塞方式）。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/socket.h&amp;gt;
+int accept(int sockfd , struct sockaddr *cliaddr , socklen_t *addrlen);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回的设定：若成功则为非负描述符，若出错则为-1.
+参数cliaddr和addrlen用来返回已连接的对端进程（客户）的协议地址。adrlen是值-结果参数：调用前，将由*addrlen所引用的整数值置为由cliaddr所指的套接字地址结构的长度，返回时，该整数值即为由内核存放在该套接字地址结构内的确切字节数。&lt;/p&gt;
+&lt;h3 id=&#34;fork-和-exec函数&#34;&gt;fork 和 exec函数&lt;/h3&gt;
+&lt;p&gt;Unix的fork函数是Unix派生新进程的唯一方法。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+pid_t frok(void);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回的设定：在子进程中为0，在父进程中为紫禁城ID，若出错为-1.
+frok函数调用它一次，它却返回两次。它在调用进程（父进程）中返回一次，返回值是新派生进程（子进程）的进程ID号；在子进程又返回一次，返回值为0，因此，返回值本身告知当前进程是子进程和还是父进程。
+fork在子进程返回0而不是父进程的进程ID的原因在于：任何子进程只有一个父进程，而且子进程总是可以调用getppid取得父进程的进程ID。相反，父进程可以有许多子进程，而且无法获取各个子进程的进程ID。如果父进程想要跟踪所有子进程的进程ID，那么它必须记录每次调用fork的返回值。&lt;/p&gt;
+&lt;p&gt;存放在硬盘上的可执行程序文件能够被Unix执行的唯一方法是：由一个现有进程调用六个exec函数中的某一个。（当这6个函数中是哪一个被调用并不重要时，我们往往把它们统称为exec函数）exec把当前进程映像替换成新的程序文件，而且该新程序通常从main函数开始执行。进程ID并不改变。我们称调用exec的进程为调用进程，称新之星的程序为新程序。&lt;/p&gt;
+&lt;p&gt;这6个exec函数之间的区别在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;待执行的程序文件是由文件名（filename）还是路径名（pathname）指定；&lt;/li&gt;
+&lt;li&gt;新程序的参数是一一列出还是由一个指针数组来引用。&lt;/li&gt;
+&lt;li&gt;把调用进程的环境传递给新程序还是给新程序指定新的环境。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;fork的两个典型用法&#34;&gt;fork的两个典型用法&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;一个进程创建一个自身的副本，这样每个副本都可以在另一个副本执行其他任务的同时处理各自的某个操作。这是网络服务器的典型用法。&lt;/li&gt;
+&lt;li&gt;一个进程想要执行另一个程序。既然创建新锦成的唯一方法是调用fork。该进程玉石首先调用fork创建一个自身的副本，然后其中一个副本（子进程）调用exec把自身替换成新的程序。这是诸如shell之类程序的典型用法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;colse-函数&#34;&gt;colse 函数&lt;/h3&gt;
+&lt;p&gt;通常的Unix close函数也用来关闭套接字，并终止TCP连接。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+int close(int sockfd);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回的设定：若成功则为0，若出错则为-1.&lt;br&gt;
+close一个TCP套接字的默认行为是把该套接字标记成已关闭，然后立即返回到调用进程。该套接字描述符不能再由调用进程使用，也就是说它不能再作为read或write的第一个参数。然而TCP将尝试发送已排队等待发送到对端的任何数据，发送完毕后发生的是正常的TCP链接终止序列。&lt;/p&gt;
+&lt;h3 id=&#34;getsockname-和-getpeername-函数&#34;&gt;getsockname 和 getpeername 函数&lt;/h3&gt;
+&lt;p&gt;这两个函数或者返回与某个套接字关联的本地协议地址（getsockname）或者返回与某个套接字关联的外地协议地址（getpeername）。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/socket.h&amp;gt;
+int getsockname(int sockfd , struct sockaddr *localaddr , socklen_t *addrlen);
+int getpeername(int sockfd , struct sockaddr *peeraddr , socklen_t *addrlen);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回的设定：若成功则为0，若出错则为-1.&lt;/p&gt;
+&lt;h3 id=&#34;流程&#34;&gt;流程&lt;/h3&gt;
+&lt;p&gt;所有客户和服务器都从调用socket开始，它返回一个套接字描述符。客户随后调用connect，服务器则调用bind、listen和accept。套接字通常使用标准的close函数关闭，不过也可以使用shutdown函数关闭套接字的另一种方法，还要查看SO_LINGER套接字选项对于关闭套接字的影响。
+大多数TCP服务器是并发的，它们为每个待处理的客户连接调用fork派生一个子进程。大多数UDP服务器确实迭代的。&lt;/p&gt;
 &lt;h2 id=&#34;tcpip协议&#34;&gt;TCP/IP协议&lt;/h2&gt;
 &lt;p&gt;应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。&lt;/p&gt;
 &lt;h2 id=&#34;运输层&#34;&gt;运输层&lt;/h2&gt;
@@ -3167,7 +3310,7 @@ data&lt;/p&gt;
       <guid>https://wangwei9160.github.io/post/loser/</guid>
       
         <description>&lt;h2 id=&#34;面&#34;&gt;面&lt;/h2&gt;
-&lt;h3 id=&#34;第一次面&#34;&gt;第一次面&lt;/h3&gt;
+&lt;h3 id=&#34;第一家面&#34;&gt;第一家面&lt;/h3&gt;
 &lt;p&gt;c++和python的感觉
 右值引用
 二分(匹配最后一个)
@@ -3175,7 +3318,7 @@ data&lt;/p&gt;
 边界问题忘记了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.
 自己平时写代码的陋习体现了&amp;hellip;..喜欢盯着代码看&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.
 能在相比其他的专业知识最擅长的地方挂了&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;..&lt;/p&gt;
-&lt;h3 id=&#34;第二次面&#34;&gt;第二次面&lt;/h3&gt;
+&lt;h3 id=&#34;第二家面&#34;&gt;第二家面&lt;/h3&gt;
 &lt;p&gt;指针数组的运算
 循环次数，&amp;amp;&amp;amp;运算
 union 和 struct 的内存大小
@@ -3194,7 +3337,7 @@ linux命令
 编程题2：动态规划爬楼梯
 sql命令 查找&lt;/p&gt;
 &lt;h2 id=&#34;笔试&#34;&gt;笔试&lt;/h2&gt;
-&lt;h3 id=&#34;海康&#34;&gt;海康&lt;/h3&gt;
+&lt;h3 id=&#34;hk&#34;&gt;hk&lt;/h3&gt;
 &lt;p&gt;linux基础
 tcp 状态
 c++ 基础语法
@@ -3203,7 +3346,7 @@ c++ 基础语法
 &lt;li&gt;管道及有名管道、信号、消息队列、共享内存、信号量、socket&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;编写矩阵乘法&lt;/p&gt;
-&lt;h3 id=&#34;巨人网络&#34;&gt;巨人网络&lt;/h3&gt;
+&lt;h3 id=&#34;jrwl&#34;&gt;jrwl&lt;/h3&gt;
 &lt;p&gt;选择题：考查知识的广度
 计算机图形学
 c#类型
@@ -3229,7 +3372,7 @@ c#类型
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;完美世界&#34;&gt;完美世界&lt;/h3&gt;
+&lt;h3 id=&#34;wmsj&#34;&gt;wmsj&lt;/h3&gt;
 &lt;p&gt;c++基础
 this
 友元
@@ -3239,12 +3382,12 @@ this
 感觉大概是两种坐错的情况：第一种是第一个人坐剩下的n-1个位置，第一个人选的位置的那个人坐剩下的n-2个位置(不包括第一个人的位置，留给最后一个人坐)，即(n-1)!。第二种情况是选2个人相互坐错，然后就递归成f(n-2)。
 答案就是n*f(n-1)。但是不知道哪里错了o.o
 编程题2：背包问题&lt;/p&gt;
-&lt;h3 id=&#34;西山居&#34;&gt;西山居&lt;/h3&gt;
-&lt;p&gt;没注意看时间和通知 导致淘米和西山居的时间有一点点冲突 西山居的只能写1小时&lt;/p&gt;
+&lt;h3 id=&#34;xs&#34;&gt;xs&lt;/h3&gt;
+&lt;p&gt;没注意看时间和通知 导致时间有一点点冲突 只能写1小时&lt;/p&gt;
 &lt;p&gt;编程题1：unicode utf-8
 编程题2：大数乘法
 简答：多线程race condition、deadlock livelock并举生活中例子说明&lt;/p&gt;
-&lt;h3 id=&#34;淘米&#34;&gt;淘米&lt;/h3&gt;
+&lt;h3 id=&#34;tm&#34;&gt;tm&lt;/h3&gt;
 &lt;p&gt;sql
 linux
 函数声明为const
@@ -3253,6 +3396,12 @@ linux
 图形渲染管线的流程
 TCP如何保证可靠的传输
 进程和线程&lt;/p&gt;
+&lt;h2 id=&#34;gzsy&#34;&gt;gzsy&lt;/h2&gt;
+&lt;p&gt;简答题就像是真实做游戏的部分有点不太会搞&amp;hellip;&amp;hellip;&amp;hellip;..&lt;/p&gt;
+&lt;h2 id=&#34;dy&#34;&gt;dy&lt;/h2&gt;
+&lt;p&gt;简答：
+1、防御csrf的方法。csrf（跨站请求伪造）&lt;/p&gt;
+&lt;p&gt;大数取模&lt;/p&gt;
 </description>
       
     </item>

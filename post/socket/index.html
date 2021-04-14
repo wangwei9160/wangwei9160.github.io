@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Awei" />
-  <meta name="description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向" />
+  <meta name="description" content="网络编程 基本TCP socket编程 socket函数 为了执行网络I/O，一个进程必须做的第一件事情就是调用socket函数，指定期望的通信协议" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,22 +60,22 @@
 
 
 <meta property="og:title" content="网络编程" />
-<meta property="og:description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向" />
+<meta property="og:description" content="网络编程 基本TCP socket编程 socket函数 为了执行网络I/O，一个进程必须做的第一件事情就是调用socket函数，指定期望的通信协议" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://wangwei9160.github.io/post/socket/" />
 <meta property="article:published_time" content="2021-03-20T10:46:16+08:00" />
 <meta property="article:modified_time" content="2021-03-20T10:46:16+08:00" />
 <meta itemprop="name" content="网络编程">
-<meta itemprop="description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向">
+<meta itemprop="description" content="网络编程 基本TCP socket编程 socket函数 为了执行网络I/O，一个进程必须做的第一件事情就是调用socket函数，指定期望的通信协议">
 <meta itemprop="datePublished" content="2021-03-20T10:46:16&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-20T10:46:16&#43;08:00" />
-<meta itemprop="wordCount" content="8715">
+<meta itemprop="wordCount" content="11994">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="网络编程"/>
-<meta name="twitter:description" content="网络编程 TCP/IP协议 应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。 运输层 主要包含两种协议： 传输控制协议-TCP：提供面向"/>
+<meta name="twitter:description" content="网络编程 基本TCP socket编程 socket函数 为了执行网络I/O，一个进程必须做的第一件事情就是调用socket函数，指定期望的通信协议"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -326,8 +326,8 @@
           2021-03-20
         </time>
         
-        <span class="more-meta"> 约 8715 字 </span>
-          <span class="more-meta"> 预计阅读 18 分钟 </span>
+        <span class="more-meta"> 约 11994 字 </span>
+          <span class="more-meta"> 预计阅读 24 分钟 </span>
 
         
         
@@ -344,6 +344,19 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
+    <li><a href="#基本tcp-socket编程">基本TCP socket编程</a>
+      <ul>
+        <li><a href="#socket函数">socket函数</a></li>
+        <li><a href="#connet-函数">connet 函数</a></li>
+        <li><a href="#bind-函数">bind 函数</a></li>
+        <li><a href="#listen-函数">listen 函数</a></li>
+        <li><a href="#accept函数">accept函数</a></li>
+        <li><a href="#fork-和-exec函数">fork 和 exec函数</a></li>
+        <li><a href="#colse-函数">colse 函数</a></li>
+        <li><a href="#getsockname-和-getpeername-函数">getsockname 和 getpeername 函数</a></li>
+        <li><a href="#流程">流程</a></li>
+      </ul>
+    </li>
     <li><a href="#tcpip协议">TCP/IP协议</a></li>
     <li><a href="#运输层">运输层</a>
       <ul>
@@ -381,6 +394,149 @@
     
     <div class="post-content">
       <h1 id="网络编程">网络编程</h1>
+<h2 id="基本tcp-socket编程">基本TCP socket编程</h2>
+<h3 id="socket函数">socket函数</h3>
+<p>为了执行网络I/O，一个进程必须做的第一件事情就是调用socket函数，指定期望的通信协议类型（IPv4的TCP、IPv6的UDP、Unix域字节流协议等）</p>
+<pre><code>#include &lt;sys/socket.h&gt;
+int socket(int family , int type , int protocol );
+</code></pre><p>返回的设定：弱成功则为非负描述符，若出错则返回-1.</p>
+<p>其中family参数指明协议族，该参数也往往被称为协议域。type参数指明套接字类型。protocol参数为协议类型常值，或设为0，以选择所给定family和type组合的系统默认值。
+|family|说明|
+|:-:|:-:|
+|AF_INET|IPv4协议|
+|AF_INET6|IPv6协议|
+|AF_LOCAL|Unix域协议|
+|AF_ROUTE|路由套接字|
+|AF_KEY|密钥套接字|</p>
+<table>
+<thead>
+<tr>
+<th align="center">type</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">SOCK_STREAM</td>
+<td align="center">字节流套接字</td>
+</tr>
+<tr>
+<td align="center">SOCK_DGRAM</td>
+<td align="center">数据报套接字</td>
+</tr>
+<tr>
+<td align="center">SOCK_SEQPACKET</td>
+<td align="center">有序分组套接字</td>
+</tr>
+<tr>
+<td align="center">SOCK_RAW</td>
+<td align="center">原始套接字</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="center">protocol</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">IPPROTO_CP</td>
+<td align="center">TCP传输协议</td>
+</tr>
+<tr>
+<td align="center">IPPROTO_UDP</td>
+<td align="center">UDP传输协议</td>
+</tr>
+<tr>
+<td align="center">IPPROTO_SCTP</td>
+<td align="center">SCTP传输协议</td>
+</tr>
+</tbody>
+</table>
+<h3 id="connet-函数">connet 函数</h3>
+<p>TCP客户用connet函数来建立与TCP服务器的连接。</p>
+<pre><code>#include &lt;sys/socket.h&gt;
+int connet(int sockfd , const struct sockaddr *servaddr , socklen_t addrlen);
+</code></pre><p>返回的设定：若成功则为0，若出错则为-1。<br>
+sockfd是由socket函数返回的套接字描述符，第二个、第三个参数分别是一个指向套接字地址结构的指针和该结构的大小。套接字地址结构必须包含服务器的IP地址和端口号。</p>
+<h4 id="tcp套接字调用connet函数">TCP套接字调用connet函数</h4>
+<p>TCP套接字调用connet函数将会激发TCP的三次握手，而且仅在连接建立成功或出错时才返回，其中出错返回可能包含一下几种情况。</p>
+<ul>
+<li>若TCP客户没有收到SYN分节的响应，则返回ETIMEDOUT错误。例，调用connet函数时，内核发送一个SYN，若无反应则等待6s后再发送一个，若仍无反应则等待24s后再发送一个。若总共75s后仍未收到响应则返回ETIMEODOUT错误。</li>
+<li>若对客户的SYN响应是RST，则表明服务器主机在指定的端口上没有进程在等待与之连接（服务器进程也许没有在运行）。这是一种硬错误（hard error），客户一接收到RST就马上返回ECONNREFUSED错误。</li>
+<li>若客户发出的SYN在中间的某个路由器上引发了&quot;目的地不可达&quot;的ICMP错误，则认为是一种软错误（softy error）。客户主机内核保存该消息，并按第一种情况中所述的时间间隔继续发送SYN。若在某个规定的时间内（4.4BSD规定是75s）后仍未收到响应，则把保存的消息（ICMP错误）作为EHOSTUNREACH或ENETUNREACH错误返回给进程。</li>
+</ul>
+<h6 id="rst">RST</h6>
+<p>RST是TCP在发送错误时发送的一种TCP分节。产生RST的三个条件是：</p>
+<ul>
+<li>目的地为某端口的SYN到达，然而该端口上没有正在监听的服务器。</li>
+<li>TCP想取消一个已有连接。</li>
+<li>TCP接收到一个根本不存在的连接上的分节。</li>
+</ul>
+<h3 id="bind-函数">bind 函数</h3>
+<p>bind函数把一个本地协议地址赋予一个套接字。</p>
+<pre><code>#include &lt;sys/socket.h&gt;
+int bind(int sockfd , const struct sockaddr *myaddr , socklen_t addrlen);
+</code></pre><p>返回的设定：若成功则为0，若出错则为-1.
+第二个参数是一个指向特定于协议的地址结构的指针，第三个参数是该地址结构的长度。对于TCP，调用bind函数可以指定一个端口号，或指定一个IP地址，也可以两者都指定，还可以都不指定。</p>
+<h3 id="listen-函数">listen 函数</h3>
+<p>listen函数仅由TCP服务器调用，它完成两件事情。</p>
+<ul>
+<li>当socket函数创建一个套接字时，它被假设为一个主动套接字，也就是说，它是一个将调用connet发起连接的客户套接字。listen函数把一个未连接的套接字转换成一个被动套接字，指示内核应接受指向该套接字的连接请求。调用listen导致套接字从CLOSED状态转换到LISTEN状态。</li>
+<li>内核应该为响应套接字排队的最大连接个数</li>
+</ul>
+<pre><code>#include &lt;sys/socket.h&gt;
+int listen(int sockfd , int backlog);
+</code></pre><p>返回的设定：若成功则为0，若出错则为-1.</p>
+<p>listen函数应该在调用socket和bind这两个函数之后，并在调用accept函数之前调用。
+内核为任何一个给定的监听套接字维护两个队列：</p>
+<ul>
+<li>未完成连接队列(incomplete connection queue)，每个这样的SYN分节对应其中一项：已由某个客户发出并到达服务器，而服务器正在等待完成响应的TCP三次握手过程。这些套接字处于SYN_RCVD状态。</li>
+<li>已完成连接队列(completed connection queue)，每个已完成TCP三次握手过程的客户对应其中一项。这些套接字处于ESTABLISHED状态。</li>
+</ul>
+<h3 id="accept函数">accept函数</h3>
+<p>accept函数由TCP服务器调用，用于从已完成连接队列对头返回下一个已完成连接。如果已完成连接队列为空，那么进程被投入睡眠（假定套接字为默认的阻塞方式）。</p>
+<pre><code>#include &lt;sys/socket.h&gt;
+int accept(int sockfd , struct sockaddr *cliaddr , socklen_t *addrlen);
+</code></pre><p>返回的设定：若成功则为非负描述符，若出错则为-1.
+参数cliaddr和addrlen用来返回已连接的对端进程（客户）的协议地址。adrlen是值-结果参数：调用前，将由*addrlen所引用的整数值置为由cliaddr所指的套接字地址结构的长度，返回时，该整数值即为由内核存放在该套接字地址结构内的确切字节数。</p>
+<h3 id="fork-和-exec函数">fork 和 exec函数</h3>
+<p>Unix的fork函数是Unix派生新进程的唯一方法。</p>
+<pre><code>#include &lt;unistd.h&gt;
+pid_t frok(void);
+</code></pre><p>返回的设定：在子进程中为0，在父进程中为紫禁城ID，若出错为-1.
+frok函数调用它一次，它却返回两次。它在调用进程（父进程）中返回一次，返回值是新派生进程（子进程）的进程ID号；在子进程又返回一次，返回值为0，因此，返回值本身告知当前进程是子进程和还是父进程。
+fork在子进程返回0而不是父进程的进程ID的原因在于：任何子进程只有一个父进程，而且子进程总是可以调用getppid取得父进程的进程ID。相反，父进程可以有许多子进程，而且无法获取各个子进程的进程ID。如果父进程想要跟踪所有子进程的进程ID，那么它必须记录每次调用fork的返回值。</p>
+<p>存放在硬盘上的可执行程序文件能够被Unix执行的唯一方法是：由一个现有进程调用六个exec函数中的某一个。（当这6个函数中是哪一个被调用并不重要时，我们往往把它们统称为exec函数）exec把当前进程映像替换成新的程序文件，而且该新程序通常从main函数开始执行。进程ID并不改变。我们称调用exec的进程为调用进程，称新之星的程序为新程序。</p>
+<p>这6个exec函数之间的区别在于：</p>
+<ul>
+<li>待执行的程序文件是由文件名（filename）还是路径名（pathname）指定；</li>
+<li>新程序的参数是一一列出还是由一个指针数组来引用。</li>
+<li>把调用进程的环境传递给新程序还是给新程序指定新的环境。</li>
+</ul>
+<h4 id="fork的两个典型用法">fork的两个典型用法</h4>
+<ul>
+<li>一个进程创建一个自身的副本，这样每个副本都可以在另一个副本执行其他任务的同时处理各自的某个操作。这是网络服务器的典型用法。</li>
+<li>一个进程想要执行另一个程序。既然创建新锦成的唯一方法是调用fork。该进程玉石首先调用fork创建一个自身的副本，然后其中一个副本（子进程）调用exec把自身替换成新的程序。这是诸如shell之类程序的典型用法。</li>
+</ul>
+<h3 id="colse-函数">colse 函数</h3>
+<p>通常的Unix close函数也用来关闭套接字，并终止TCP连接。</p>
+<pre><code>#include &lt;unistd.h&gt;
+int close(int sockfd);
+</code></pre><p>返回的设定：若成功则为0，若出错则为-1.<br>
+close一个TCP套接字的默认行为是把该套接字标记成已关闭，然后立即返回到调用进程。该套接字描述符不能再由调用进程使用，也就是说它不能再作为read或write的第一个参数。然而TCP将尝试发送已排队等待发送到对端的任何数据，发送完毕后发生的是正常的TCP链接终止序列。</p>
+<h3 id="getsockname-和-getpeername-函数">getsockname 和 getpeername 函数</h3>
+<p>这两个函数或者返回与某个套接字关联的本地协议地址（getsockname）或者返回与某个套接字关联的外地协议地址（getpeername）。</p>
+<pre><code>#include &lt;sys/socket.h&gt;
+int getsockname(int sockfd , struct sockaddr *localaddr , socklen_t *addrlen);
+int getpeername(int sockfd , struct sockaddr *peeraddr , socklen_t *addrlen);
+</code></pre><p>返回的设定：若成功则为0，若出错则为-1.</p>
+<h3 id="流程">流程</h3>
+<p>所有客户和服务器都从调用socket开始，它返回一个套接字描述符。客户随后调用connect，服务器则调用bind、listen和accept。套接字通常使用标准的close函数关闭，不过也可以使用shutdown函数关闭套接字的另一种方法，还要查看SO_LINGER套接字选项对于关闭套接字的影响。
+大多数TCP服务器是并发的，它们为每个待处理的客户连接调用fork派生一个子进程。大多数UDP服务器确实迭代的。</p>
 <h2 id="tcpip协议">TCP/IP协议</h2>
 <p>应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。</p>
 <h2 id="运输层">运输层</h2>
