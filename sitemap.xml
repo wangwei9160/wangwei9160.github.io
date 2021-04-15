@@ -3,20 +3,41 @@
   
   <url>
     <loc>https://wangwei9160.github.io/</loc>
-    <lastmod>2021-04-07T14:00:00+08:00</lastmod>
+    <lastmod>2021-04-15T16:23:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://wangwei9160.github.io/post/computergraphics/</loc>
-    <lastmod>2021-04-07T14:00:00+08:00</lastmod>
+    <loc>https://wangwei9160.github.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2021-04-15T16:23:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://wangwei9160.github.io/post/</loc>
+    <lastmod>2021-04-15T16:23:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangwei9160.github.io/tags/</loc>
+    <lastmod>2021-04-15T16:23:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangwei9160.github.io/post/ubuntu/</loc>
+    <lastmod>2021-04-15T16:23:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wangwei9160.github.io/post/computergraphics/</loc>
     <lastmod>2021-04-07T14:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -30,21 +51,7 @@
   </url>
   
   <url>
-    <loc>https://wangwei9160.github.io/tags/c&#43;&#43;/</loc>
-    <lastmod>2021-03-30T10:05:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://wangwei9160.github.io/post/stl/</loc>
-    <lastmod>2021-03-30T10:05:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wangwei9160.github.io/tags/</loc>
     <lastmod>2021-03-30T10:05:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

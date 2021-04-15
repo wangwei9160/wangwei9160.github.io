@@ -6,10 +6,138 @@
     <description>Recent content on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 07 Apr 2021 14:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 15 Apr 2021 16:23:18 +0800</lastBuildDate>
     
         <atom:link href="https://wangwei9160.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>在Ubuntu环境中搭建环境</title>
+      <link>https://wangwei9160.github.io/post/ubuntu/</link>
+      <pubDate>Thu, 15 Apr 2021 16:23:18 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/ubuntu/</guid>
+      
+        <description>&lt;h2 id=&#34;安装c环境&#34;&gt;安装C++环境&lt;/h2&gt;
+&lt;h3 id=&#34;安装ubnutu&#34;&gt;安装Ubnutu&lt;/h3&gt;
+&lt;h3 id=&#34;安装编译环境&#34;&gt;安装编译环境&lt;/h3&gt;
+&lt;p&gt;更新Ubuntu安装包信息：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo apt update&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;安装编译功能包：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo apt install build-essential&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;安装开发文档：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo apt-get install manpages-dev&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;确认gcc版本&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;gcc &amp;ndash;version&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;安装git&#34;&gt;安装GIT&lt;/h3&gt;
+&lt;p&gt;安装GIT：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo apt install git&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;确认git版本&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;git &amp;ndash;version&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;下载gcc源代码&#34;&gt;下载GCC源代码&lt;/h3&gt;
+&lt;p&gt;从gcc官网下载代码到src目录：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;git clone git://git.gnu.org/git/gcc.git src&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;配置gcc编译环境&#34;&gt;配置GCC编译环境&lt;/h3&gt;
+&lt;p&gt;创建一个存放编译结果的目录，在这个目录中执行配置命令。&lt;/p&gt;
+&lt;p&gt;准备mpc开发库：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;apt-get install libmpc-dev&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;安装flex：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo apt-get install flex&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;配置编译环境（64位环境需要使用&amp;ndash;disable-multilibx）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;../src/configure &amp;ndash;disable-multilib&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;编译GCC&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;make&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;安装GCC&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo make install&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;gcc版本切换&#34;&gt;GCC版本切换&lt;/h3&gt;
+&lt;p&gt;增加gcc版本切换选项&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo update-alternatives &amp;ndash;install /usr/bin/gcc gcc /usr/bin/x86_64-linux-gnu-gcc-9 90$ sudo update-alternatives &amp;ndash;install /usr/bin/gcc gcc /usr/local/bin/x86_64-pc-linux-gnu-gcc 100&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;确认gcc选项&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo update-alternatives &amp;ndash;config gcc&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;确认切换结果&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;gcc &amp;ndash;versin&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;测试&#34;&gt;测试&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;vim hello.c&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+int main(){
+    printf(&amp;quot;Hello Word!\n&amp;quot;);
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;gcc hello.c -o hello
+./hello&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;安装mysql环境&#34;&gt;安装MYSQL环境&lt;/h2&gt;
+&lt;h3 id=&#34;安装mysql&#34;&gt;安装mysql&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo apt-get update
+sudo apt-get install mysql-server&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;验证&#34;&gt;验证&lt;/h3&gt;
+&lt;p&gt;systemctl status mysql&lt;/p&gt;
+&lt;h3 id=&#34;登录mysql&#34;&gt;登录MYSQL&lt;/h3&gt;
+&lt;p&gt;root用户登录：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo mysql -u root -p&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;普通用户：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo mysql&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;mysql常用操作&#34;&gt;MYSQL常用操作&lt;/h3&gt;
+&lt;p&gt;启动mysql service&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo service mysql start&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;新增用户&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;CREATE USER &amp;lsquo;admin&amp;rsquo;@&amp;lsquo;localhost&amp;rsquo; IDENTIFIED BY &amp;lsquo;密码&amp;rsquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对新增用户更改加密方式和密码&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ALTER USER &amp;lsquo;admin&amp;rsquo;@&amp;lsquo;localhost&amp;rsquo; IDENTIFIED WITH mysql_native_password BY &amp;lsquo;admin&amp;rsquo;;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;卸载mysql&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo rm /var/lib/mysql/ -R
+sudo rm /etc/mysql/ -R
+sudo apt-get autoremove mysql* &amp;ndash;purge&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+      
+    </item>
     
     <item>
       <title>ComputerGraphics</title>
@@ -3402,195 +3530,6 @@ TCP如何保证可靠的传输
 &lt;p&gt;简答：
 1、防御csrf的方法。csrf（跨站请求伪造）&lt;/p&gt;
 &lt;p&gt;大数取模&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
-      <title>codeforces</title>
-      <link>https://wangwei9160.github.io/post/codeforces634/</link>
-      <pubDate>Wed, 15 Apr 2020 01:00:00 +0800</pubDate>
-      
-      <guid>https://wangwei9160.github.io/post/codeforces634/</guid>
-      
-        <description>&lt;h1 id=&#34;codeforces&#34;&gt;codeforces&lt;/h1&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;目录&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
-&lt;!-- raw HTML omitted --&gt;A. Candies and Two Sisters&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
-&lt;!-- raw HTML omitted --&gt;B. Construct the String&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
-&lt;!-- raw HTML omitted --&gt;C. Two Teams Composing&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
-&lt;!-- raw HTML omitted --&gt;D. Anti-Sudoku&lt;!-- raw HTML omitted --&gt;&lt;br&gt;
-&lt;!-- raw HTML omitted --&gt;E. Three Blocks Palindrome&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h4 id=&#34;a-idaa-candies-and-two-sistersa&#34;&gt;&lt;!-- raw HTML omitted --&gt;A. Candies and Two Sisters&lt;!-- raw HTML omitted --&gt;&lt;/h4&gt;
-&lt;h5 id=&#34;题目&#34;&gt;题目：&lt;/h5&gt;
-&lt;p&gt;There are two sisters Alice and Betty. You have n candies. You want to distribute these n candies between two sisters in such a way that:&lt;br&gt;
-lice will get a (a&amp;gt;0) candies;
-Betty will get b (b&amp;gt;0) candies;
-each sister will get some integer number of candies;
-Alice will get a greater amount of candies than Betty (i.e. a&amp;gt;b);
-all the candies will be given to one of two sisters (i.e. a+b=n).
-Your task is to calculate the number of ways to distribute exactly n candies between sisters in a way described above. Candies are indistinguishable.&lt;br&gt;
-Formally, find the number of ways to represent n as the sum of n=a+b, where a and b are positive integers and a&amp;gt;b&amp;hellip;
-You have to answer t independent test cases.&lt;/p&gt;
-&lt;h4 id=&#34;题意&#34;&gt;题意：&lt;/h4&gt;
-&lt;p&gt;The answer is (n-1)/2&lt;/p&gt;
-&lt;h4 id=&#34;代码&#34;&gt;代码：&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-using namespace std;
-int main() {
-	int t;
-	cin &amp;gt;&amp;gt; t;
-	while (t--) {
-		int n;cin &amp;gt;&amp;gt; n;
-		cout &amp;lt;&amp;lt; (n - 1) / 2 &amp;lt;&amp;lt; endl;
-	}
-	return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;返回目录&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;B. Construct the String&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h4 id=&#34;题目-1&#34;&gt;题目：&lt;/h4&gt;
-&lt;p&gt;You are given three positive integers n, a and b. You have to construct a string s of length n consisting of lowercase Latin letters such that each substring of length a has exactly b distinct letters. It is guaranteed that the answer exists.&lt;br&gt;
-You have to answer t independent test cases.&lt;br&gt;
-Recall that the substring s[l…r] is the string $s_l$,$s_{l+1}$,…,$s_r$ and its length is r?l+1. In this problem you are only interested in substrings of length a.&lt;/p&gt;
-&lt;h4 id=&#34;题意-1&#34;&gt;题意：&lt;/h4&gt;
-&lt;p&gt;There is no substring containing more than b distinct characters and each substring of length a contains exactly b distinct characters because of the condition b?a.&lt;/p&gt;
-&lt;h4 id=&#34;代码-1&#34;&gt;代码：&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-using namespace std;
-int main() {
-	int t;
-	cin &amp;gt;&amp;gt; t;
-	while (t--) {
-		int n, a, b;
-		cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; a &amp;gt;&amp;gt; b;
-        string ans=&amp;quot;&amp;quot;;int k=0;
-		for (int i = 0; i &amp;lt; n; ++i) {
-			ans += &#39;a&#39;+k;
-            k = (k+1)%b;
-		}
-        cout &amp;lt;&amp;lt; ans &amp;lt;&amp;lt; endl;
-	}
-	return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;返回目录&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;C. Two Teams Composing&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h4 id=&#34;题目-2&#34;&gt;题目：&lt;/h4&gt;
-&lt;p&gt;You have n students under your control and you have to compose exactly two teams consisting of some subset of your students. Each student had his own skill, the i-th student skill is denoted by an integer ai (different students can have the same skills).&lt;br&gt;
-So, about the teams. Firstly, these two teams should have the same size. Two more constraints:&lt;br&gt;
-The first team should consist of students with distinct skills (i.e. all skills in the first team are unique). &lt;br&gt;
-The second team should consist of students with the same skills (i.e. all skills in the second team are equal).&lt;br&gt;
-Note that it is permissible that some student of the first team has the same skill as a student of the second team.
-Consider some examples (skills are given): &lt;br&gt;
-[1,2,3], [4,4] is not a good pair of teams because sizes should be the same;&lt;br&gt;
-[1,1,2], [3,3,3] is not a good pair of teams because the first team should not contain students with the same skills;&lt;br&gt;
-[1,2,3], [3,4,4] is not a good pair of teams because the second team should contain students with the same skills;&lt;br&gt;
-[1,2,3], [3,3,3] is a good pair of teams;&lt;br&gt;
-[5], [6] is a good pair of teams.&lt;br&gt;
-Your task is to find the maximum possible size x for which it is possible to compose a valid pair of teams, where each team size is x (skills in the first team needed to be unique, skills in the second team should be the same between them). A student cannot be part of more than one team.&lt;br&gt;
-You have to answer t independent test cases.&lt;/p&gt;
-&lt;h4 id=&#34;题意-2&#34;&gt;题意：&lt;/h4&gt;
-&lt;p&gt;The number of different skills is diff.The number of skill i is $cnt_i$ .&lt;br&gt;
-maxcnt = max($cnt_1$,$cnt_2$,…,$cnt_n$).&lt;br&gt;
-The answer is max( min(diff?1,maxcnt) , min(diff,maxcnt?1) ).&lt;/p&gt;
-&lt;h4 id=&#34;代码-2&#34;&gt;代码：&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-using namespace std;
-int main() {
-	int t;
-	cin &amp;gt;&amp;gt; t;
-	while (t--) {
-		int n;
-		cin &amp;gt;&amp;gt; n;
-		vector&amp;lt;int&amp;gt; cnt(n + 1);
-		for (int i = 0; i &amp;lt; n; ++i) {
-			int x;
-			cin &amp;gt;&amp;gt; x;
-			++cnt[x];
-		}
-		int mx = *max_element(cnt.begin(), cnt.end());
-		int diff = n + 1 - count(cnt.begin(), cnt.end(), 0);
-		cout &amp;lt;&amp;lt; max(min(mx - 1, diff), min(mx, diff - 1)) &amp;lt;&amp;lt; endl;
-	}
-	return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;返回目录&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;D. Anti-Sudoku&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h4 id=&#34;题目-3&#34;&gt;题目：&lt;/h4&gt;
-&lt;p&gt;You are given a correct solution of the sudoku puzzle.&lt;br&gt;
-Blocks are bordered with bold black color.&lt;br&gt;
-Your task is to change at most 9 elements of this field (i.e. choose some 1?i,j?9 and change the number at the position (i,j) to any other number in range [1;9]) to make it anti-sudoku. The anti-sudoku is the 9×9 field, in which:&lt;br&gt;
-Any number in this field is in range [1;9];&lt;br&gt;
-each row contains at least two equal elements;&lt;br&gt;
-each column contains at least two equal elements;&lt;br&gt;
-each 3×3 block (you can read what is the block in the link above) contains at least two equal elements.&lt;br&gt;
-It is guaranteed that the answer exists.&lt;br&gt;
-You have to answer t independent test cases.&lt;/p&gt;
-&lt;h4 id=&#34;题意-3&#34;&gt;题意：&lt;/h4&gt;
-&lt;p&gt;Well, if we replace all occurrences of the number 2 with the number 1, then the initial solution will be anti-sudoku. It is easy to see that this replacement will make exactly two copies of 1 in every row, column, and block. There are also other correct approaches but I found this one the most pretty.&lt;/p&gt;
-&lt;h4 id=&#34;代码-3&#34;&gt;代码：&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-using namespace std;
-int main() {
-	int t;
-	cin &amp;gt;&amp;gt; t;
-	while (t--) {
-		for (int i = 0; i &amp;lt; 9; ++i) {
-			string s;
-			cin &amp;gt;&amp;gt; s;
-			for (auto &amp;amp;c : s) if (c == &#39;2&#39;) c = &#39;1&#39;;
-			cout &amp;lt;&amp;lt; s &amp;lt;&amp;lt; endl;
-		}
-	}
-	return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;返回目录&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;E. Three Blocks Palindrome&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h4 id=&#34;题意-4&#34;&gt;题意：&lt;/h4&gt;
-&lt;p&gt;The only difference between easy and hard versions is constraints.&lt;br&gt;
-You are given a sequence a consisting of n positive integers.&lt;br&gt;
-Let&amp;rsquo;s define a three blocks palindrome as the sequence, consisting of at most two distinct elements (let these elements are a and b, a can be equal b) and is as follows: [$\underbrace{a,a,…,a}&lt;em&gt;\text{x}$,$\underbrace{b,b,…,b}&lt;/em&gt;\text{y}$,$\underbrace{a,a,…,a}_\text{x}$]. There x,y are integers greater than or equal to 0. For example, sequences [], [2], [1,1], [1,2,1], [1,2,2,1] and [1,1,2,1,1] are three block palindromes but [1,2,3,2,1], [1,2,1,2,1] and [1,2] are not.&lt;br&gt;
-Your task is to choose the maximum by length subsequence of a that is a three blocks palindrome.&lt;br&gt;
-You have to answer t independent test cases.&lt;br&gt;
-Recall that the sequence t is a a subsequence of the sequence s if t can be derived from s by removing zero or more elements without changing the order of the remaining elements. For example, if s=[1,2,1,3,1,2,1], then possible subsequences are: [1,1,1,1], [3] and [1,2,1,3,1,2,1], but not [3,2,3] and [1,1,1,1,2].&lt;/p&gt;
-&lt;h4 id=&#34;代码-4&#34;&gt;代码：&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
-using namespace std;
-int main(){
-    int t;cin&amp;gt;&amp;gt;t;
-    while(t--){
-        int n;cin&amp;gt;&amp;gt;n;
-        vector&amp;lt;int&amp;gt; a(n,0);
-        const int M = 200;
-        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; pre(M,vi(n+1));
-        vector&amp;lt;vi&amp;gt; at(M);
-        for(int i = 0 ; i &amp;lt; n ; i++){
-            cin &amp;gt;&amp;gt;a[i];
-            --a[i];
-            at[a[i]].push_back(i);
-        }
-        for(int i = 0 ; i &amp;lt; M ; i++){
-            for(int j = 0 ; j &amp;lt; n ; j++){
-                pre[i][j+1] = pre[i][j] + (a[j]==i);
-            }
-        }
-        int ans = 0;
-        for(int i = 0 ; i &amp;lt; M ; i++){
-            int k = pre[i][n];
-            ans = max(ans,k);
-            for(int j = 1 ; 2*j &amp;lt;= k ; j++){
-                int bi = at[i][j-1];
-                int ed = at[i][k-j];
-                for(int t = 0 ; t &amp;lt; M ; t++){
-                    if(t!=i){
-                        ans = max(ans,j*2 + pre[t][ed]-pre[t][bi]);
-                    }
-                }
-            }
-        }
-        cout &amp;lt;&amp;lt; ans &amp;lt;&amp;lt; endl;
-    }
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;返回目录&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 </description>
       
     </item>

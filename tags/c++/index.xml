@@ -6,10 +6,19 @@
     <description>Recent content in c&#43;&#43; on Awei</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 30 Mar 2021 10:05:09 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 15 Apr 2021 16:23:18 +0800</lastBuildDate>
     
 	<atom:link href="https://wangwei9160.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>在Ubuntu环境中搭建环境</title>
+      <link>https://wangwei9160.github.io/post/ubuntu/</link>
+      <pubDate>Thu, 15 Apr 2021 16:23:18 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/ubuntu/</guid>
+      <description>安装C++环境 安装Ubnutu 安装编译环境 更新Ubuntu安装包信息： sudo apt update 安装编译功能包： sudo apt install build-essential 安装开发文档： sudo apt-get install manpages-dev 确认gcc版本 gcc &amp;ndash;version</description>
+    </item>
     
     <item>
       <title>Stl</title>
