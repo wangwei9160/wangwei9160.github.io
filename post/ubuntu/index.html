@@ -69,7 +69,7 @@
 <meta itemprop="description" content="安装C&#43;&#43;环境 安装Ubnutu 安装编译环境 更新Ubuntu安装包信息： sudo apt update 安装编译功能包： sudo apt install build-essential 安装开发文档： sudo apt-get install manpages-dev 确认gcc版本 gcc &ndash;version">
 <meta itemprop="datePublished" content="2021-04-15T16:23:18&#43;08:00" />
 <meta itemprop="dateModified" content="2021-04-15T16:23:18&#43;08:00" />
-<meta itemprop="wordCount" content="452">
+<meta itemprop="wordCount" content="483">
 
 
 
@@ -326,7 +326,7 @@
           2021-04-15
         </time>
         
-        <span class="more-meta"> 约 452 字 </span>
+        <span class="more-meta"> 约 483 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
 
         
@@ -472,6 +472,16 @@ sudo apt-get install mysql-server</p>
 <p>启动mysql service</p>
 <blockquote>
 <p>sudo service mysql start</p>
+</blockquote>
+<p>进入mysql</p>
+<blockquote>
+<p>mysql -u root -p</p>
+</blockquote>
+<p>修改root密码</p>
+<blockquote>
+<p>use mysql;
+update user set authentication_string=MD5(&ldquo;123456&rdquo;) where user=&quot;root&rdquo; and host=&quot;localhost&rdquo;;
+flush privileges;</p>
 </blockquote>
 <p>新增用户</p>
 <blockquote>

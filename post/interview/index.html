@@ -69,7 +69,7 @@
 <meta itemprop="description" content="面试题 编程语言 c和c&#43;&#43;的特点与区别 C语言： 1、面向过程的结构化语言，易于调试和维护。 2、表现能力和处理能力极强，可以直接访问内存的物理地址">
 <meta itemprop="datePublished" content="2021-03-25T12:08:09&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-25T12:08:09&#43;08:00" />
-<meta itemprop="wordCount" content="12080">
+<meta itemprop="wordCount" content="12368">
 
 
 
@@ -326,7 +326,7 @@
           2021-03-25
         </time>
         
-        <span class="more-meta"> 约 12080 字 </span>
+        <span class="more-meta"> 约 12368 字 </span>
           <span class="more-meta"> 预计阅读 25 分钟 </span>
 
         
@@ -637,6 +637,16 @@ TCP缓冲区满了，数据不会丢，为什么</p>
 TCP协议的可靠性：
 MTU是什么，默认多大：
 UDP和多播数据格式的差异：</p>
+<h5 id="tcp如何保证可靠的传输">TCP如何保证可靠的传输：</h5>
+<ul>
+<li><strong>确认和重传</strong>：接收方收到报文会确认，发送方发送一段时间后没有收到确认就会重传</li>
+<li><strong>数据校验</strong></li>
+<li><strong>数据合理分片和排序</strong> ：根据MTU合理分片，接收方会缓存未按序到达的数据，能提示发送方降低发送的效率，防止丢包。</li>
+<li><strong>流量控制</strong>：当接收方来不及处理发送方的数据，能提示发送方降低发送的效率，防止包丢失。</li>
+<li><strong>拥塞控制</strong>：当网络拥塞的时候，减少数据的发送。（慢开始和拥塞避免，快重传he快恢复。）</li>
+</ul>
+<p>滑动窗口：
+由于发送方希望在收到确认前，能继续发送其他报文段。在收到确认报文前发送了其他报文，这样能提高信道的利用率。但是由于可能需要重传的缘故，需要一个缓冲区来维护这些报文，所以就需要一个窗口。</p>
 <h4 id="红黑树">红黑树</h4>
 
     </div>

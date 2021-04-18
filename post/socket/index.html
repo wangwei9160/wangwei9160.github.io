@@ -352,7 +352,7 @@
         <li><a href="#listen-函数">listen 函数</a></li>
         <li><a href="#accept函数">accept函数</a></li>
         <li><a href="#fork-和-exec函数">fork 和 exec函数</a></li>
-        <li><a href="#colse-函数">colse 函数</a></li>
+        <li><a href="#close-函数">close 函数</a></li>
         <li><a href="#getsockname-和-getpeername-函数">getsockname 和 getpeername 函数</a></li>
         <li><a href="#流程">流程</a></li>
       </ul>
@@ -522,7 +522,7 @@ fork在子进程返回0而不是父进程的进程ID的原因在于：任何子�
 <li>一个进程创建一个自身的副本，这样每个副本都可以在另一个副本执行其他任务的同时处理各自的某个操作。这是网络服务器的典型用法。</li>
 <li>一个进程想要执行另一个程序。既然创建新锦成的唯一方法是调用fork。该进程玉石首先调用fork创建一个自身的副本，然后其中一个副本（子进程）调用exec把自身替换成新的程序。这是诸如shell之类程序的典型用法。</li>
 </ul>
-<h3 id="colse-函数">colse 函数</h3>
+<h3 id="close-函数">close 函数</h3>
 <p>通常的Unix close函数也用来关闭套接字，并终止TCP连接。</p>
 <pre><code>#include &lt;unistd.h&gt;
 int close(int sockfd);
