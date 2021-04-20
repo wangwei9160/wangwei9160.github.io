@@ -69,7 +69,7 @@
 <meta itemprop="description" content="网络编程 基本TCP socket编程 socket函数 为了执行网络I/O，一个进程必须做的第一件事情就是调用socket函数，指定期望的通信协议">
 <meta itemprop="datePublished" content="2021-03-20T10:46:16&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-20T10:46:16&#43;08:00" />
-<meta itemprop="wordCount" content="11994">
+<meta itemprop="wordCount" content="11995">
 
 
 
@@ -326,7 +326,7 @@
           2021-03-20
         </time>
         
-        <span class="more-meta"> 约 11994 字 </span>
+        <span class="more-meta"> 约 11995 字 </span>
           <span class="more-meta"> 预计阅读 24 分钟 </span>
 
         
@@ -354,7 +354,7 @@
         <li><a href="#fork-和-exec函数">fork 和 exec函数</a></li>
         <li><a href="#close-函数">close 函数</a></li>
         <li><a href="#getsockname-和-getpeername-函数">getsockname 和 getpeername 函数</a></li>
-        <li><a href="#流程">流程</a></li>
+        <li><a href="#tcp连接的流程">TCP连接的流程</a></li>
       </ul>
     </li>
     <li><a href="#tcpip协议">TCP/IP协议</a></li>
@@ -534,9 +534,9 @@ close一个TCP套接字的默认行为是把该套接字标记成已关闭，然
 int getsockname(int sockfd , struct sockaddr *localaddr , socklen_t *addrlen);
 int getpeername(int sockfd , struct sockaddr *peeraddr , socklen_t *addrlen);
 </code></pre><p>返回的设定：若成功则为0，若出错则为-1.</p>
-<h3 id="流程">流程</h3>
+<h3 id="tcp连接的流程">TCP连接的流程</h3>
 <p>所有客户和服务器都从调用socket开始，它返回一个套接字描述符。客户随后调用connect，服务器则调用bind、listen和accept。套接字通常使用标准的close函数关闭，不过也可以使用shutdown函数关闭套接字的另一种方法，还要查看SO_LINGER套接字选项对于关闭套接字的影响。
-大多数TCP服务器是并发的，它们为每个待处理的客户连接调用fork派生一个子进程。大多数UDP服务器确实迭代的。</p>
+大多数TCP服务器是并发的，它们为每个待处理的客户连接调用fork派生一个子进程。大多数UDP服务器确是迭代的。</p>
 <h2 id="tcpip协议">TCP/IP协议</h2>
 <p>应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。</p>
 <h2 id="运输层">运输层</h2>
@@ -560,7 +560,7 @@ DHCP（Dynamic Host Configuration Protocol，动态主机配置协议），动�
 <p>DNS（Domain Name Service，域名服务），用于完成地址查找，邮件转发等工作。</p>
 <h2 id="阻塞非阻塞同步异步调用方式">阻塞、非阻塞、同步、异步（调用方式）</h2>
 <ul>
-<li><strong>阻塞/非阻塞</strong>关注的是<strong>程序在等待调用结果</strong>时的状态。阻塞是等待。非阻塞是不需要等待。例如：
+<li><strong>阻塞/非阻塞</strong>关注的是<strong>程序在等待调用结果时的状态</strong>。阻塞是等待。非阻塞是不需要等待。例如：
 <ul>
 <li>去书店问老板有没有xx书。</li>
 <li><strong>阻塞</strong>会将自己&quot;挂起&rdquo;，直到得到老板回应。</li>
@@ -656,10 +656,10 @@ Reactor模型中定义的三种角色：</p>
 3、当发生读就绪事件的时候，时间分离器调用第一步注册的事件处理器。
 写入操作类似于读取操作，第一步是写就绪事件。</p>
 <h4 id="单reactor单线程模型">单Reactor单线程模型</h4>
-<p>Reactor线程负责多路分离套接字，accept新连接，并分派请求到handler，Redis使用Reactor单进程的模型。</p>
+<p>Reactor线程负责多路分离套接字，Acceptor新连接，并分派请求到Handler，Redis使用Reactor单进程的模型。</p>
 <p>消息处理流程：
 1、Reactor对象通过select监控连接事件，收到事件后通过dispatch进行转发。
-2、如果是连接建立的事件，则由acceptor接受连接，并创建handler处理后续事件。
+2、如果是连接建立的事件，则由Acceptor接受连接，并创建Handler处理后续事件。
 3、如果不是建立连接事件，则Reactor会分发调用Handler来响应。
 4、Handler会完成read-&gt;业务处理-&gt;send的完整业务流程。</p>
 <p>单Reactor单线程模型可以应用于一些小容量应用场景，但是对于高负载、大并发的应用场景却不合适，主要原因：
@@ -670,7 +670,7 @@ Reactor模型中定义的三种角色：</p>
 <p>该模型在事件处理器（Handler）部分采用了多线程（线程池）。</p>
 <p>消息处理流程：
 1、Reactor对象通过select监控客户端请求事件，收到事件后通过dispatch进行分发。
-2、如果是建立连接请求事件，则由acceptor通过accept处理连接请求，然后创建一个Handler对象处理连接完成后续各种事件。
+2、如果是建立连接请求事件，则由Acceptor处理连接请求，然后创建一个Handler对象处理连接完成后续各种事件。
 3、如果不是建立连接请求事件，则Reactor会分发调用连接对应的Handler来响应。
 4、Handler只负责响应事件，不做具体业务处理，通过read读取数据后，会分发给后面的Worker线程池进行业务处理。
 5、Worker线程池会分配独立的线程完成真正的业务处理，如何将响应结果发给Handler进行处理。
@@ -689,7 +689,7 @@ Reactor模型中定义的三种角色：</p>
 4、当有新的事件发生时，subReactor会调用连接对应的Handler进行相应。
 5、Handler通过Read读取数据后，会分发给后面的Worker线程池进行业务处理。
 6、Worker线程池会分配独立的线程完成真正的业务处理，如何将相应结果发送给Handler进行处理。
-7、Handler收到响应结果后通过send将响应结果返回给Client</p>
+7、Handler收到响应结果后通过send将响应结果返回给Client.</p>
 <h4 id="keepalive">keepalive</h4>
 <p>Keepalive是TCP中一个检测死连接的心跳包保活机制，原理就是TCP在闲了一段时间后会发送数据给对方。
 1、如果对端会发送ACK，那么就认为对端是存活的。
@@ -711,7 +711,7 @@ Reactor模型中定义的三种角色：</p>
 <li>服务器必须准备好接受外来的连接。通过调用socket、bind和listen这3个函数来完成，称之为被动打开(passive open)</li>
 <li>客户通过调用connect发起主动打开(active open)。这导致客户TCP发送一个SYN(同步)分节，它告诉服务器客户将在(待建立的)连接中发送的数据的初始序列号。通常SYN分节不携带数据，其所在IP数据包只含有一个IP首部、一个TCP首部及可能有的TCP选项。</li>
 <li>服务器必须确认(ACK)客户的SYN，同时自己也得发送一个SYN分节，它含有服务器将在同一连接中发送的数据的初始序列号。服务器在单个分节中发送SYN和对客户SYN的ACK。</li>
-<li>客户必须确认服务器的SYN。
+<li>客户必须确认服务器的SYN。<br>
 这种交换至少需要3个分组，因此称之为三次握手。</li>
 </ul>
 <h3 id="四次握手">四次握手</h3>

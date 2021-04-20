@@ -668,6 +668,9 @@ UDP和多播数据格式的差异：&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;滑动窗口：
 由于发送方希望在收到确认前，能继续发送其他报文段。在收到确认报文前发送了其他报文，这样能提高信道的利用率。但是由于可能需要重传的缘故，需要一个缓冲区来维护这些报文，所以就需要一个窗口。&lt;/p&gt;
+&lt;h5 id=&#34;实现可靠的udp&#34;&gt;实现可靠的UDP&lt;/h5&gt;
+&lt;p&gt;实现确认机制、重传机制、窗口确认机制 &lt;br&gt;
+改进拥塞控制、重发机制以及淡化服务器算法等。&lt;/p&gt;
 &lt;h4 id=&#34;红黑树&#34;&gt;红黑树&lt;/h4&gt;
 </description>
       
@@ -1190,9 +1193,9 @@ close一个TCP套接字的默认行为是把该套接字标记成已关闭，然
 int getsockname(int sockfd , struct sockaddr *localaddr , socklen_t *addrlen);
 int getpeername(int sockfd , struct sockaddr *peeraddr , socklen_t *addrlen);
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回的设定：若成功则为0，若出错则为-1.&lt;/p&gt;
-&lt;h3 id=&#34;流程&#34;&gt;流程&lt;/h3&gt;
+&lt;h3 id=&#34;tcp连接的流程&#34;&gt;TCP连接的流程&lt;/h3&gt;
 &lt;p&gt;所有客户和服务器都从调用socket开始，它返回一个套接字描述符。客户随后调用connect，服务器则调用bind、listen和accept。套接字通常使用标准的close函数关闭，不过也可以使用shutdown函数关闭套接字的另一种方法，还要查看SO_LINGER套接字选项对于关闭套接字的影响。
-大多数TCP服务器是并发的，它们为每个待处理的客户连接调用fork派生一个子进程。大多数UDP服务器确实迭代的。&lt;/p&gt;
+大多数TCP服务器是并发的，它们为每个待处理的客户连接调用fork派生一个子进程。大多数UDP服务器确是迭代的。&lt;/p&gt;
 &lt;h2 id=&#34;tcpip协议&#34;&gt;TCP/IP协议&lt;/h2&gt;
 &lt;p&gt;应用层、运输层(tcp/udp)、网络层(ip)、网络接口层。&lt;/p&gt;
 &lt;h2 id=&#34;运输层&#34;&gt;运输层&lt;/h2&gt;
@@ -1216,7 +1219,7 @@ DHCP（Dynamic Host Configuration Protocol，动态主机配置协议），动�
 &lt;p&gt;DNS（Domain Name Service，域名服务），用于完成地址查找，邮件转发等工作。&lt;/p&gt;
 &lt;h2 id=&#34;阻塞非阻塞同步异步调用方式&#34;&gt;阻塞、非阻塞、同步、异步（调用方式）&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;阻塞/非阻塞&lt;/strong&gt;关注的是&lt;strong&gt;程序在等待调用结果&lt;/strong&gt;时的状态。阻塞是等待。非阻塞是不需要等待。例如：
+&lt;li&gt;&lt;strong&gt;阻塞/非阻塞&lt;/strong&gt;关注的是&lt;strong&gt;程序在等待调用结果时的状态&lt;/strong&gt;。阻塞是等待。非阻塞是不需要等待。例如：
 &lt;ul&gt;
 &lt;li&gt;去书店问老板有没有xx书。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;阻塞&lt;/strong&gt;会将自己&amp;quot;挂起&amp;rdquo;，直到得到老板回应。&lt;/li&gt;
@@ -1312,10 +1315,10 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 3、当发生读就绪事件的时候，时间分离器调用第一步注册的事件处理器。
 写入操作类似于读取操作，第一步是写就绪事件。&lt;/p&gt;
 &lt;h4 id=&#34;单reactor单线程模型&#34;&gt;单Reactor单线程模型&lt;/h4&gt;
-&lt;p&gt;Reactor线程负责多路分离套接字，accept新连接，并分派请求到handler，Redis使用Reactor单进程的模型。&lt;/p&gt;
+&lt;p&gt;Reactor线程负责多路分离套接字，Acceptor新连接，并分派请求到Handler，Redis使用Reactor单进程的模型。&lt;/p&gt;
 &lt;p&gt;消息处理流程：
 1、Reactor对象通过select监控连接事件，收到事件后通过dispatch进行转发。
-2、如果是连接建立的事件，则由acceptor接受连接，并创建handler处理后续事件。
+2、如果是连接建立的事件，则由Acceptor接受连接，并创建Handler处理后续事件。
 3、如果不是建立连接事件，则Reactor会分发调用Handler来响应。
 4、Handler会完成read-&amp;gt;业务处理-&amp;gt;send的完整业务流程。&lt;/p&gt;
 &lt;p&gt;单Reactor单线程模型可以应用于一些小容量应用场景，但是对于高负载、大并发的应用场景却不合适，主要原因：
@@ -1326,7 +1329,7 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 &lt;p&gt;该模型在事件处理器（Handler）部分采用了多线程（线程池）。&lt;/p&gt;
 &lt;p&gt;消息处理流程：
 1、Reactor对象通过select监控客户端请求事件，收到事件后通过dispatch进行分发。
-2、如果是建立连接请求事件，则由acceptor通过accept处理连接请求，然后创建一个Handler对象处理连接完成后续各种事件。
+2、如果是建立连接请求事件，则由Acceptor处理连接请求，然后创建一个Handler对象处理连接完成后续各种事件。
 3、如果不是建立连接请求事件，则Reactor会分发调用连接对应的Handler来响应。
 4、Handler只负责响应事件，不做具体业务处理，通过read读取数据后，会分发给后面的Worker线程池进行业务处理。
 5、Worker线程池会分配独立的线程完成真正的业务处理，如何将响应结果发给Handler进行处理。
@@ -1345,7 +1348,7 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 4、当有新的事件发生时，subReactor会调用连接对应的Handler进行相应。
 5、Handler通过Read读取数据后，会分发给后面的Worker线程池进行业务处理。
 6、Worker线程池会分配独立的线程完成真正的业务处理，如何将相应结果发送给Handler进行处理。
-7、Handler收到响应结果后通过send将响应结果返回给Client&lt;/p&gt;
+7、Handler收到响应结果后通过send将响应结果返回给Client.&lt;/p&gt;
 &lt;h4 id=&#34;keepalive&#34;&gt;keepalive&lt;/h4&gt;
 &lt;p&gt;Keepalive是TCP中一个检测死连接的心跳包保活机制，原理就是TCP在闲了一段时间后会发送数据给对方。
 1、如果对端会发送ACK，那么就认为对端是存活的。
@@ -1367,7 +1370,7 @@ Reactor模型中定义的三种角色：&lt;/p&gt;
 &lt;li&gt;服务器必须准备好接受外来的连接。通过调用socket、bind和listen这3个函数来完成，称之为被动打开(passive open)&lt;/li&gt;
 &lt;li&gt;客户通过调用connect发起主动打开(active open)。这导致客户TCP发送一个SYN(同步)分节，它告诉服务器客户将在(待建立的)连接中发送的数据的初始序列号。通常SYN分节不携带数据，其所在IP数据包只含有一个IP首部、一个TCP首部及可能有的TCP选项。&lt;/li&gt;
 &lt;li&gt;服务器必须确认(ACK)客户的SYN，同时自己也得发送一个SYN分节，它含有服务器将在同一连接中发送的数据的初始序列号。服务器在单个分节中发送SYN和对客户SYN的ACK。&lt;/li&gt;
-&lt;li&gt;客户必须确认服务器的SYN。
+&lt;li&gt;客户必须确认服务器的SYN。&lt;br&gt;
 这种交换至少需要3个分组，因此称之为三次握手。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;四次握手&#34;&gt;四次握手&lt;/h3&gt;
@@ -3496,8 +3499,12 @@ STL容器
 c++内存分配
 堆和栈
 深拷贝和浅拷贝&lt;/p&gt;
+&lt;h3 id=&#34;tm二面&#34;&gt;tm二面&lt;/h3&gt;
+&lt;p&gt;挖简历上的内容
+讲会什么
+…………………………&lt;/p&gt;
 &lt;h2 id=&#34;笔试&#34;&gt;笔试&lt;/h2&gt;
-&lt;h3 id=&#34;hk&#34;&gt;hk&lt;/h3&gt;
+&lt;h3 id=&#34;hkws&#34;&gt;hkws&lt;/h3&gt;
 &lt;p&gt;linux基础
 tcp 状态
 c++ 基础语法
@@ -3556,12 +3563,19 @@ linux
 图形渲染管线的流程
 TCP如何保证可靠的传输
 进程和线程&lt;/p&gt;
-&lt;h2 id=&#34;gzsy&#34;&gt;gzsy&lt;/h2&gt;
-&lt;p&gt;简答题就像是真实做游戏的部分有点不太会搞&amp;hellip;&amp;hellip;&amp;hellip;..&lt;/p&gt;
-&lt;h2 id=&#34;dy&#34;&gt;dy&lt;/h2&gt;
+&lt;h3 id=&#34;gzsy&#34;&gt;gzsy&lt;/h3&gt;
+&lt;p&gt;简答题就像是真实做游戏的部分有点不太会搞&amp;hellip;&amp;hellip;&amp;hellip;..
+果然挂了~~~&lt;/p&gt;
+&lt;h3 id=&#34;dy&#34;&gt;dy&lt;/h3&gt;
 &lt;p&gt;简答：
 1、防御csrf的方法。csrf（跨站请求伪造）&lt;/p&gt;
 &lt;p&gt;大数取模&lt;/p&gt;
+&lt;h3 id=&#34;jbtltyx&#34;&gt;jbt&amp;amp;ltyx&lt;/h3&gt;
+&lt;p&gt;c++基础+linux+智力题+数据结构
+简答程序运行结果
+编程题1：一个数的质因数个数
+编程题2：字符串匹配 pattern 长度最大为6 string 最大长度为40 ，使得满足匹配的数量
+例如：ab -&amp;gt; hello 其中a-&amp;gt;h、b-&amp;gt;ello , a-&amp;gt;he、b-&amp;gt;llo ， a-&amp;gt;hel、b-&amp;gt;lo ， a-&amp;gt;hell 、b-&amp;gt;o 共四种&lt;/p&gt;
 </description>
       
     </item>
