@@ -379,7 +379,37 @@ pop_back&lt;/p&gt;
       
       <guid>https://wangwei9160.github.io/post/interview/</guid>
       
-        <description>&lt;h2 id=&#34;面试题&#34;&gt;面试题&lt;/h2&gt;
+        <description>&lt;h2 id=&#34;学习书单&#34;&gt;学习书单&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;c++:
+&lt;ul&gt;
+&lt;li&gt;c++ primer&lt;/li&gt;
+&lt;li&gt;深度探索c++对象模型&lt;/li&gt;
+&lt;li&gt;effective c++&lt;/li&gt;
+&lt;li&gt;stl源码解析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;数据结构：
+&lt;ul&gt;
+&lt;li&gt;剑指offer&lt;/li&gt;
+&lt;li&gt;leetcode&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;网络编程：
+&lt;ul&gt;
+&lt;li&gt;tcp/ip 协议卷&lt;/li&gt;
+&lt;li&gt;unix环境高级编程&lt;/li&gt;
+&lt;li&gt;linux高性能服务器编程&lt;/li&gt;
+&lt;li&gt;Linux多线程服务端编程：使用muduo C++网络库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;数据库
+&lt;ul&gt;
+&lt;li&gt;mysql必知必会&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;面试题&#34;&gt;面试题&lt;/h2&gt;
 &lt;h3 id=&#34;编程语言&#34;&gt;编程语言&lt;/h3&gt;
 &lt;h4 id=&#34;c和c的特点与区别&#34;&gt;c和c++的特点与区别&lt;/h4&gt;
 &lt;p&gt;C语言：&lt;/p&gt;
@@ -3502,7 +3532,10 @@ c++内存分配
 &lt;h3 id=&#34;tm二面&#34;&gt;tm二面&lt;/h3&gt;
 &lt;p&gt;挖简历上的内容
 讲会什么
-…………………………&lt;/p&gt;
+…………………………
+问比赛经历，主要负责什么，干了什么，时间分配
+看过stl源码解析，将一下内存那部分是怎么实现的。很尬忘记了只记得负责构造和释放。
+第一次二面感觉有点犯病，确实自己底子很薄，一问就倒。&lt;/p&gt;
 &lt;h2 id=&#34;笔试&#34;&gt;笔试&lt;/h2&gt;
 &lt;h3 id=&#34;hkws&#34;&gt;hkws&lt;/h3&gt;
 &lt;p&gt;linux基础
