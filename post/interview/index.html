@@ -69,7 +69,7 @@
 <meta itemprop="description" content="学习书单 c&#43;&#43;: c&#43;&#43; primer 深度探索c&#43;&#43;对象模型 effective c&#43;&#43; stl源码解析 数据结构： 剑指offer leetcode 网络编程： tcp/ip 协议卷 unix环境高级编程 linux高性能服务器">
 <meta itemprop="datePublished" content="2021-03-25T12:08:09&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-25T12:08:09&#43;08:00" />
-<meta itemprop="wordCount" content="14985">
+<meta itemprop="wordCount" content="15504">
 
 
 
@@ -326,8 +326,8 @@
           2021-03-25
         </time>
         
-        <span class="more-meta"> 约 14985 字 </span>
-          <span class="more-meta"> 预计阅读 30 分钟 </span>
+        <span class="more-meta"> 约 15504 字 </span>
+          <span class="more-meta"> 预计阅读 31 分钟 </span>
 
         
         
@@ -426,6 +426,19 @@
 这个模型的主要优点在于它的空间和存取时间的效率。主要的缺点在于如果运行程序代码未曾改变，单单所用的class object的nonstatic data members有所修改 ，那么那些运用程序均得重新编译。</li>
 </ul>
 </li>
+</ul>
+<h4 id="字节对齐">字节对齐</h4>
+<p>需要字节对齐的根本原因在于CPU访问数据的效率问题。如果变量在自然对齐位置，则只要一次就可以取出数据，</p>
+<h4 id="内存泄漏">内存泄漏</h4>
+<p>内存泄漏是指使用new申请内存，但是使用完之后没有使用delete释放内存，导致占用了有效内存。</p>
+<h4 id="内存溢出">内存溢出</h4>
+<p>内存溢出是指程序在申请内存时没有足够的内存空间供其使用。</p>
+<p>原因可能如下：</p>
+<ul>
+<li>内存中加载的数据过于庞大。</li>
+<li>代码汇总存在死循环。</li>
+<li>递归调用太深，导致堆栈溢出等。</li>
+<li>内存泄漏最终导致内存溢出。</li>
 </ul>
 <h4 id="动态绑定">动态绑定</h4>
 <p>函数的运行版本由实参决定，即在运行时选择函数的版本，叫动态绑定，主要通过虚函数表来实现。</p>
@@ -533,7 +546,7 @@ const，是一个不能修改其值的变量，const定义的常量在内存中�
 </ul>
 <h4 id="malloc的实质">malloc的实质</h4>
 <p>malloc函数有一个将可用的内存块连接为一个链表的空闲链表。调用malloc函数的时候，沿着链表寻找一个大小足以满足用户请求所需要的的内存块。然后将内存块一分为二（一块与用户请求的大小相等，另一块就是剩下的字节）。将分配给用户的内存传给用户，剩下的返回到链表上。调用free时，将用户释放的内存块连接到空闲链表上。到最后，空闲链表就会被切成很多小的内存片段。如果请求一个很大的内存片段，空闲链表上没有可以满足的片段，则malloc请求延时，将空闲链进行整理合并。如果依旧无法满足要求，则返回null。malloc内存不一定分配成功。</p>
-<h4 id="内存泄漏">内存泄漏</h4>
+<h4 id="内存泄漏-1">内存泄漏</h4>
 <p>已动态分配的内存由于某种原因程序未释放或无法释放，造成系统内存的浪费，导致程序运行速度变慢甚至系统崩溃等后果。</p>
 <h5 id="智能指针">智能指针</h5>
 <p>智能指针的行为与常规指针类似，重要的区别是它负责自动的释放所指向的对象。主要有两种智能指针：shared_ptr和unique_ptr。</p>
@@ -645,6 +658,62 @@ class my_shared_ptr{
 <p><strong>参数使用值传递和引用传递的区别</strong>：将a进行值传递，按置传递时，函数体内不能修改传递进来的a的拷贝，因为默认情况下函数是const的，要修改传递进来的拷贝，可以添加<strong>mutable</strong>修饰符；将a进行引用传递，将a的地址进行拷贝传递进。</p>
 <h3 id="服务器编程">服务器编程</h3>
 <h3 id="网络编程">网络编程</h3>
+<h4 id="在浏览器中输入url地址到显示主页的过程">在浏览器中输入url地址到显示主页的过程</h4>
+<ul>
+<li>浏览器查找域名的IP地址（DNS解析）</li>
+<li>（TCP连接）</li>
+<li>浏览器向web服务器发送一个HTTP请求（发送HTTP请求）</li>
+<li>服务器处理请求</li>
+<li>服务器发回一个HTML响应</li>
+<li>浏览器开始显示HTML</li>
+</ul>
+<h4 id="http-和-https-的区别">HTTP 和 HTTPS 的区别</h4>
+<table>
+<thead>
+<tr>
+<th align="center">区别</th>
+<th align="center">HTTP</th>
+<th align="center">HTTPS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">协议</td>
+<td align="center">运行在TCP之上，明文传输，客户端与服务端都无法验证对方的身份</td>
+<td align="center">身披SSL外壳的HTTP，运行在SSL之上，SSL运行在TCP之上，是添加了加密和认证机制的HTTP</td>
+</tr>
+<tr>
+<td align="center">端口</td>
+<td align="center">80</td>
+<td align="center">443</td>
+</tr>
+<tr>
+<td align="center">资源消耗</td>
+<td align="center">较少</td>
+<td align="center">由于加密解密，会消耗更多的CPU和内存资源</td>
+</tr>
+<tr>
+<td align="center">开销</td>
+<td align="center">无需证书</td>
+<td align="center">需要证书，而证书一般需要向认证机构购买</td>
+</tr>
+<tr>
+<td align="center">加密机制</td>
+<td align="center">无</td>
+<td align="center">共享密钥加密和公开密钥加密兵俑的混合加密机制</td>
+</tr>
+<tr>
+<td align="center">安全性</td>
+<td align="center">弱</td>
+<td align="center">由于加密机制，安全性强</td>
+</tr>
+</tbody>
+</table>
+<h4 id="tcp拥塞控制">TCP拥塞控制</h4>
+<p>慢开始：</p>
+<p>拥塞避免：</p>
+<p>快重传：</p>
+<p>快恢复：</p>
 <h4 id="进程通信">进程通信</h4>
 <p>管道、消息队列、共享内存、信号量、socket。</p>
 <h4 id="堆和栈">堆和栈</h4>
