@@ -69,7 +69,7 @@
 <meta itemprop="description" content="面 第一家面 c&#43;&#43;和python的感觉 右值引用 二分(匹配最后一个) 太久没有写面试算法题了，直接发蒙&hellip;&hellip;&helli">
 <meta itemprop="datePublished" content="2021-01-01T17:00:00&#43;08:00" />
 <meta itemprop="dateModified" content="2021-01-01T17:00:00&#43;08:00" />
-<meta itemprop="wordCount" content="2192">
+<meta itemprop="wordCount" content="2585">
 
 
 
@@ -326,8 +326,8 @@
           2021-01-01
         </time>
         
-        <span class="more-meta"> 约 2192 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span class="more-meta"> 约 2585 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
 
         
         
@@ -350,18 +350,20 @@
         <li><a href="#第二家面">第二家面</a></li>
         <li><a href="#tm面">tm面</a></li>
         <li><a href="#tm二面">tm二面</a></li>
+        <li><a href="#jrwl">jrwl</a></li>
       </ul>
     </li>
     <li><a href="#笔试">笔试</a>
       <ul>
         <li><a href="#hkws">hkws</a></li>
-        <li><a href="#jrwl">jrwl</a></li>
+        <li><a href="#jrwl-1">jrwl</a></li>
         <li><a href="#wmsj">wmsj</a></li>
         <li><a href="#xsj">xsj</a></li>
         <li><a href="#tm">tm</a></li>
         <li><a href="#gzsy">gzsy</a></li>
         <li><a href="#dy">dy</a></li>
         <li><a href="#jbtltyx">jbt&amp;ltyx</a></li>
+        <li><a href="#zjtd">zjtd</a></li>
       </ul>
     </li>
   </ul>
@@ -418,6 +420,18 @@ c++内存分配
 问比赛经历，主要负责什么，干了什么，时间分配
 看过stl源码解析，将一下内存那部分是怎么实现的。很尬忘记了只记得负责构造和释放。
 第一次二面感觉有点犯病，确实自己底子很薄，一问就倒。</p>
+<h3 id="jrwl">jrwl</h3>
+<p>c++基础
+虚函数和纯虚函数
+new/malloc
+struct和union
+堆和栈
+tcp和udp的区别
+进程间通信/线程间通信(共享内存?管道?)
+select/poll/epoll
+TCP如何确保可靠的
+keep-alive
+设计一个斗地主需要哪些东西~</p>
 <h2 id="笔试">笔试</h2>
 <h3 id="hkws">hkws</h3>
 <p>linux基础
@@ -428,7 +442,7 @@ c++ 基础语法
 <li>管道及有名管道、信号、消息队列、共享内存、信号量、socket</li>
 </ul>
 <p>编写矩阵乘法</p>
-<h3 id="jrwl">jrwl</h3>
+<h3 id="jrwl-1">jrwl</h3>
 <p>选择题：考查知识的广度
 计算机图形学
 c#类型
@@ -491,6 +505,12 @@ TCP如何保证可靠的传输
 编程题1：一个数的质因数个数
 编程题2：字符串匹配 pattern 长度最大为6 string 最大长度为40 ，使得满足匹配的数量
 例如：ab -&gt; hello 其中a-&gt;h、b-&gt;ello , a-&gt;he、b-&gt;llo ， a-&gt;hel、b-&gt;lo ， a-&gt;hell 、b-&gt;o 共四种</p>
+<h3 id="zjtd">zjtd</h3>
+<p>只有4个编程题
+编程题1：n只松鼠，每只松鼠只能从旁边的洞搬东西，数据保证能均分，问需要搬几次，直接贪心第一个洞需要的直接从第二个洞搬以此类推。
+编程题2：树结构，添加操作：一个结点连接到某一个结点，修改操作：一个结点断开与根节点的连接。问每次修改根节点还有多少个连接（子节点以及子节点的子节点）的总数。
+编程题3：找规律排序。a,b,c,d分别为第一个客户的需求需要的天数，第一个客户的需求推迟一天需要几杯奶茶，第二个客户的需求需要的天数，第二个客户的需求推迟一天需要几杯奶茶。直接a * d与b * c进行比大小，如果相同按顺序。
+编程题4：a[i]=a[i-1]*a[i-2]%2021， n只有1000，o(n3) 暴力。</p>
 
     </div>
 

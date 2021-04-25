@@ -69,7 +69,7 @@
 <meta itemprop="description" content="网络编程 基本TCP socket编程 socket函数 为了执行网络I/O，一个进程必须做的第一件事情就是调用socket函数，指定期望的通信协议">
 <meta itemprop="datePublished" content="2021-03-20T10:46:16&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-20T10:46:16&#43;08:00" />
-<meta itemprop="wordCount" content="11995">
+<meta itemprop="wordCount" content="12004">
 
 
 
@@ -326,7 +326,7 @@
           2021-03-20
         </time>
         
-        <span class="more-meta"> 约 11995 字 </span>
+        <span class="more-meta"> 约 12004 字 </span>
           <span class="more-meta"> 预计阅读 24 分钟 </span>
 
         
@@ -366,7 +366,7 @@
     <li><a href="#阻塞非阻塞同步异步调用方式">阻塞、非阻塞、同步、异步（调用方式）</a></li>
     <li><a href="#io模型">IO模型</a></li>
     <li><a href="#io复用模型selectpollepoll">IO复用模型select、poll、epoll</a></li>
-    <li><a href="#ltet">LT、ET</a></li>
+    <li><a href="#epoll工作模式ltet">Epoll工作模式LT、ET</a></li>
     <li><a href="#reactor模型">Reactor模型</a>
       <ul>
         <li></li>
@@ -617,7 +617,7 @@ DHCP（Dynamic Host Configuration Protocol，动态主机配置协议），动�
 </ul>
 </li>
 </ul>
-<h2 id="ltet">LT、ET</h2>
+<h2 id="epoll工作模式ltet">Epoll工作模式LT、ET</h2>
 <ul>
 <li>LT(level triggered)是缺省的工作方式，<strong>只要缓冲区有数据就会触发</strong>，支持block和no-block socket。
 <ul>
