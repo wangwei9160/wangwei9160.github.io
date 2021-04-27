@@ -69,7 +69,7 @@
 <meta itemprop="description" content="网络编程 基本TCP socket编程 socket函数 为了执行网络I/O，一个进程必须做的第一件事情就是调用socket函数，指定期望的通信协议">
 <meta itemprop="datePublished" content="2021-03-20T10:46:16&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-20T10:46:16&#43;08:00" />
-<meta itemprop="wordCount" content="12004">
+<meta itemprop="wordCount" content="12179">
 
 
 
@@ -326,8 +326,8 @@
           2021-03-20
         </time>
         
-        <span class="more-meta"> 约 12004 字 </span>
-          <span class="more-meta"> 预计阅读 24 分钟 </span>
+        <span class="more-meta"> 约 12179 字 </span>
+          <span class="more-meta"> 预计阅读 25 分钟 </span>
 
         
         
@@ -380,7 +380,7 @@
         <li><a href="#四次挥手后的确认报文要等待2msl的时间释放tcp连接">四次挥手后的确认报文要等待2MSL的时间释放TCP连接</a></li>
         <li><a href="#http协议">HTTP协议</a></li>
         <li><a href="#get-和-post">get 和 post</a></li>
-        <li><a href="#http-和-htpps">HTTP 和 HTPPS</a></li>
+        <li><a href="#http-和-https">HTTP 和 HTTPS</a></li>
         <li><a href="#常用http状态码">常用HTTP状态码</a></li>
         <li><a href="#sessioncookie和token">Session、Cookie和Token</a></li>
         <li><a href="#servlet">Servlet</a></li>
@@ -690,6 +690,9 @@ Reactor模型中定义的三种角色：</p>
 5、Handler通过Read读取数据后，会分发给后面的Worker线程池进行业务处理。
 6、Worker线程池会分配独立的线程完成真正的业务处理，如何将相应结果发送给Handler进行处理。
 7、Handler收到响应结果后通过send将响应结果返回给Client.</p>
+<h4 id="nat">NAT</h4>
+<p>NAT分为SNAT(原地址转换)和DNAT(目标地址转换)</p>
+<p>由于IPv4地址非常稀缺，上网需求庞大，这使得ISP不可能为每一个入网用户都提供一个独立的公网IP，因此通常情况下，ISP会把用户接入局域网，使得多个用户共享同一个公网IP，而每一个用户各分得一个局域网内网IP。而连接公网和局域网的这台路由器，称之为网关，NAT的过程就发生在网关路由器上。</p>
 <h4 id="keepalive">keepalive</h4>
 <p>Keepalive是TCP中一个检测死连接的心跳包保活机制，原理就是TCP在闲了一段时间后会发送数据给对方。
 1、如果对端会发送ACK，那么就认为对端是存活的。
@@ -785,7 +788,7 @@ DELETE：删除服务器数据，相当于删。</p>
 </ul>
 </li>
 </ul>
-<h3 id="http-和-htpps">HTTP 和 HTPPS</h3>
+<h3 id="http-和-https">HTTP 和 HTTPS</h3>
 <h5 id="http的特点">HTTP的特点：</h5>
 <ul>
 <li>无状态。协议对客户端没有状态存储，对事物处理没有“记忆”能力。例，访问一个网站需要反复进行登录操作。</li>

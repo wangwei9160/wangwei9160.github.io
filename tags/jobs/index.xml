@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jobs on Awei</title>
+    <link>https://wangwei9160.github.io/tags/jobs/</link>
+    <description>Recent content in jobs on Awei</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 07 Apr 2021 14:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://wangwei9160.github.io/tags/jobs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>计算机图形学</title>
+      <link>https://wangwei9160.github.io/post/computergraphics/</link>
+      <pubDate>Wed, 07 Apr 2021 14:00:00 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/computergraphics/</guid>
+      <description>计算机图形学CG 三个基本任务：表示、交汇、绘制 openGL</description>
+    </item>
+    
+    <item>
+      <title>面试题</title>
+      <link>https://wangwei9160.github.io/post/interview/</link>
+      <pubDate>Thu, 25 Mar 2021 12:08:09 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/interview/</guid>
+      <description>学习书单 c++: c++ primer 深度探索c++对象模型 effective c++ stl源码解析 算法： 剑指offer leetcode 网络编程： tcp/ip 协议卷 unix环境高级编程 linux高性能服务器编程</description>
+    </item>
+    
+    <item>
+      <title>Shell</title>
+      <link>https://wangwei9160.github.io/post/shell/</link>
+      <pubDate>Thu, 25 Mar 2021 10:35:51 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/shell/</guid>
+      <description>Shell命令 python和shell shell更适合做批处理。shell需要各种命令工具支持。 python是通用语言。强扩展性，可读性更强</description>
+    </item>
+    
+    <item>
+      <title>多线程</title>
+      <link>https://wangwei9160.github.io/post/thread/</link>
+      <pubDate>Sun, 21 Mar 2021 14:00:09 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/thread/</guid>
+      <description>多线程 进程 进程是具有一定独立功能的程序关于某个数据集合的一次运行过程，是系统进行资源分配和调度的一个独立单位。 进程一般由程序、数据集合和进程</description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://wangwei9160.github.io/post/linux/</link>
+      <pubDate>Wed, 20 Jan 2021 00:20:24 +0800</pubDate>
+      
+      <guid>https://wangwei9160.github.io/post/linux/</guid>
+      <description>Linux 杂谈 Linux文件系统的文件都按其作用分门别类地放在相关的目录中，对于外部设备文件，一般应将其放在**/dev**目录中 ls ：用来显示当前目</description>
+    </item>
+    
+  </channel>
+</rss>
